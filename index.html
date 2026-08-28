@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一棟収益物件 判定ツール</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;margin:0;background:#f5f5f7;color:#111}
+main{max-width:760px;margin:auto;padding:16px}
+h1{font-size:22px;margin:4px 0 6px}
+.note{font-size:13px;color:#666;margin-bottom:14px}
+.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:14px;margin:12px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+label{font-size:13px;font-weight:700}
+input,select{width:100%;box-sizing:border-box;font-size:16px;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:9px;background:#fff}
+.result{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:#f1f3f5;border-radius:10px;padding:12px}
+.kpi b{display:block;font-size:20px;margin-top:4px}
+.ok{color:#167332}.ng{color:#b42318}
+.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed #ddd;padding:7px 0;font-size:14px}
+.row:last-child{border-bottom:none}
+.small{font-size:12px;color:#666}
+summary{font-weight:800;cursor:pointer}
+button{font-size:15px;font-weight:700;padding:10px 14px;border:1px solid #ccc;background:#fff;border-radius:9px}
+</style>
+</head>
+<body>
+<main>
+<h1>一棟収益物件 判定ツール</h1>
+<div class="note">概算→実額上書き方式。売価・満室家賃・構造を入れれば一次判定。</div>
+
+<div class="card">
+  <div class="grid">
+    <label>売買価格（万円）<input id="price" type="number" value="5000"></label>
+    <label>満室年間家賃（万円）<input id="rent" type="number" value="500"></label>
+    <label>構造
+      <select id="structure"><option value="M">M：RC等</option><option value="T">T：鉄骨・準耐火等</option><option value="H">H：非耐火木造</option></select>
+    </label>
+    <label>融資割合（%）<input id="loanRatio" type="number" value="90"></label>
+    <label>金利（%）<input id="interest" type="number" step="0.01" value="3.0"></label>
+    <label>期間（年）<input id="years" type="number" value="25"></label>
+  </div>
+</div>
+
+<div class="card">
+  <div id="verdict" style="font-size:25px;font-weight:900">計算中...</div>
+  <div id="reason" class="small" style="margin-top:6px"></div>
+</div>
+
+<div class="result">
+  <div class="kpi">表面利回り<b id="yieldV">-</b></div>
+  <div class="kpi">10%利回り買値<b id="targetV">-</b></div>
+  <div class="kpi">返済比率<b id="repayV">-</b></div>
+  <div class="kpi">経費率<b id="opexV">-</b></div>
+  <div class="kpi">20%消失時CF<b id="stressV">-</b></div>
+  <div class="kpi">取得諸費用<b id="costV">-</b></div>
+</div>
+
+<div class="card">
+<details open>
+<summary>実額で上書きすると精度アップ</summary>
+<div class="grid" style="margin-top:10px">
+<label>年間返済額（万円）<input id="repayOverride" type="number" placeholder="空欄＝自動"></label>
+<label>固都税（万円/年）<input id="taxOverride" type="number" placeholder="空欄＝売価×0.7%"></label>
+<label>火災＋地震保険（万円/年）<input id="insuranceOverride" type="number" placeholder="空欄＝自動"></label>
+<label>物件固有経費（万円/年）<input id="specialOpex" type="number" value="0"></label>
+<label>登録免許税・所有権（万円）<input id="regOverride" type="number" placeholder="空欄＝売価×1.0%"></label>
+<label>抵当・根抵当登録税（万円）<input id="mortgageOverride" type="number" placeholder="空欄＝借入×0.48%"></label>
+<label>司法書士報酬（万円）<input id="judicialOverride" type="number" placeholder="空欄＝自動"></label>
+<label>金融機関費用（万円）<input id="bankOverride" type="number" placeholder="空欄＝20万円"></label>
+<label>不動産取得税（万円）<input id="acqTaxOverride" type="number" placeholder="空欄＝売価×1.5%"></label>
+<label>固都税精算（万円）<input id="settleOverride" type="number" placeholder="空欄＝売価×0.35%"></label>
+</div>
+</details>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">運営経費</h3>
+<div id="opexRows"></div>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">取得諸費用</h3>
+<div id="costRows"></div>
+<div class="row" style="font-weight:900"><span>合計</span><span id="costTotal">-</span></div>
+<div class="row" style="font-weight:900"><span>必要自己資金（9割融資時）</span><span id="cashNeed">-</span></div>
+</div>
+
+<button id="reset">初期値に戻す</button>
+</main>
+
+<script>
+(function(){
+function E(id){return document.getElementById(id)}
+function N(id){var x=parseFloat(E(id).value);return isNaN(x)?0:x}
+function O(id){var s=E(id).value;if(s==="")return null;var x=parseFloat(s);return isNaN(x)?null:x}
+function M(x){return x.toLocaleString("ja-JP",{maximumFractionDigits:1})+"万円"}
+function P(x){return x.toLocaleString("ja-JP",{maximumFractionDigits:2})+"%"}
+function annual(principal,rate,years){var n=years*12,r=rate/100/12;if(r===0)return principal/years;return principal*r/(1-Math.pow(1+r,-n))*12}
+function judicial(p){if(p<=1000)return 12;if(p<=2000)return 14;if(p<=3000)return 15;if(p<=5000)return 17;if(p<=10000)return 20;return 25}
+function saleStamp(p){if(p<=1000)return .5;if(p<=5000)return 1;if(p<=10000)return 3;if(p<=50000)return 6;return 16}
+function loanStamp(l){if(l<=1000)return 1;if(l<=5000)return 2;if(l<=10000)return 6;if(l<=50000)return 10;return 20}
+function broker(p){return (p*0.03+6)*1.10}
+function row(name,amt,note){return '<div class="row"><span>'+name+(note?'<div class="small">'+note+'</div>':'')+'</span><b>'+M(amt)+'</b></div>'}
+function calc(){
+ var price=N("price"),rent=N("rent"),loan=price*N("loanRatio")/100;
+ var y=price>0?rent/price*100:0;
+ var repay=O("repayOverride"); if(repay===null)repay=annual(loan,N("interest"),N("years"));
+ var management=rent*0.08;
+ var fixedTax=O("taxOverride"); if(fixedTax===null)fixedTax=price*0.007;
+ var base=price*0.60, ir=E("structure").value==="M"?0.006:(E("structure").value==="T"?0.008:0.013);
+ var insurance=O("insuranceOverride"); if(insurance===null)insurance=base*ir;
+ var utility=price*0.0015,clean=price*0.0015,fire=price*0.0005,repair=rent*0.04,leasing=rent*0.02,special=N("specialOpex");
+ var opex=management+fixedTax+insurance+utility+clean+fire+repair+leasing+special;
+ var rr=rent>0?repay/rent*100:0, or=rent>0?opex/rent*100:0;
+ var stress=rent*0.80-repay-opex;
+ var ok=y>=10 && rr<=50 && or<=30 && stress>=0;
+ E("verdict").className=ok?"ok":"ng"; E("verdict").innerHTML=ok?"🟢 基準クリア":"🔴 要見直し";
+ var fail=[];if(y<10)fail.push("利回り10%未満");if(rr>50)fail.push("返済比率50%超");if(or>30)fail.push("経費率30%超");if(stress<0)fail.push("20%消失時赤字");
+ E("reason").textContent=ok?"10%・返済50%・経費30%・家賃消失20%をクリア":fail.join(" / ");
+ E("yieldV").textContent=P(y);E("targetV").textContent=M(rent/0.10);E("repayV").textContent=P(rr);E("opexV").textContent=P(or);E("stressV").textContent=M(stress);
+ E("opexRows").innerHTML=[
+ row("管理委託",management,"家賃×8%"),
+ row("固都税",fixedTax,O("taxOverride")===null?"売価×0.7%":"実額"),
+ row("火災＋地震保険",insurance,O("insuranceOverride")===null?"建物保険金額=売価60%仮定":"実額"),
+ row("共用電気・水道",utility,"売価×0.15%"),
+ row("清掃",clean,"売価×0.15%"),
+ row("消防等",fire,"売価×0.05%"),
+ row("修繕・原状回復",repair,"家賃×4%"),
+ row("募集・入替",leasing,"家賃×2%"),
+ row("物件固有費",special,"実額")
+ ].join("");
+ var fees=[];
+ fees.push(["仲介手数料",broker(price),"（売価×3%＋6万）×1.1"]);
+ fees.push(["売買印紙",saleStamp(price),"価格帯自動"]);
+ var reg=O("regOverride");if(reg===null)reg=price*0.01;fees.push(["所有権移転登録税",reg,"売価×1.0%仮置き"]);
+ var mort=O("mortgageOverride");if(mort===null)mort=loan*0.0048;fees.push(["抵当・根抵当登録税",mort,"借入×0.48%仮置き"]);
+ var jud=O("judicialOverride");if(jud===null)jud=judicial(price);fees.push(["司法書士",jud,"価格帯自動"]);
+ var bank=O("bankOverride");if(bank===null)bank=20;fees.push(["金融機関費用",bank,"標準20万円"]);
+ fees.push(["金消印紙",loanStamp(loan),"紙契約"]);
+ var acq=O("acqTaxOverride");if(acq===null)acq=price*0.015;fees.push(["不動産取得税",acq,"売価×1.5%仮置き"]);
+ var set=O("settleOverride");if(set===null)set=price*0.0035;fees.push(["固都税精算",set,"売価×0.35%仮置き"]);
+ fees.push(["雑費",2,"固定"]);
+ var total=0,html="";for(var i=0;i<fees.length;i++){total+=fees[i][1];html+=row(fees[i][0],fees[i][1],fees[i][2])}
+ E("costRows").innerHTML=html;E("costTotal").textContent=M(total);E("costV").textContent=M(total);E("cashNeed").textContent=M((price-loan)+total);
+}
+var inputs=document.querySelectorAll("input,select");for(var i=0;i<inputs.length;i++){inputs[i].addEventListener("input",calc)}
+E("reset").addEventListener("click",function(){location.reload()});
+calc();
+})();
+</script>
+</body>
+</html>

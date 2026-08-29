@@ -2,152 +2,1228 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>一棟収益物件 判定ツール</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="一棟判定">
+<meta name="theme-color" content="#f5f5f7">
+<title>一棟収益物件 判定ツール V5</title>
 <style>
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;margin:0;background:#f5f5f7;color:#111}
-main{max-width:760px;margin:auto;padding:16px}
-h1{font-size:22px;margin:4px 0 6px}
-.note{font-size:13px;color:#666;margin-bottom:14px}
-.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:14px;margin:12px 0}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-@media(max-width:520px){.grid{grid-template-columns:1fr}}
-label{font-size:13px;font-weight:700}
-input,select{width:100%;box-sizing:border-box;font-size:16px;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:9px;background:#fff}
-.result{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kpi{background:#f1f3f5;border-radius:10px;padding:12px}
-.kpi b{display:block;font-size:20px;margin-top:4px}
-.ok{color:#167332}.ng{color:#b42318}
-.row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed #ddd;padding:7px 0;font-size:14px}
-.row:last-child{border-bottom:none}
-.small{font-size:12px;color:#666}
-summary{font-weight:800;cursor:pointer}
-button{font-size:15px;font-weight:700;padding:10px 14px;border:1px solid #ccc;background:#fff;border-radius:9px}
+:root{
+ --bg:#f5f5f7;--card:#fff;--text:#111827;--muted:#667085;--line:#d9dde3;
+ --soft:#f0f2f5;--ok:#087a36;--ng:#c12424;--warn:#a15c00;--accent:#1d4ed8;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}
+main{max-width:860px;margin:0 auto;padding:18px 12px 56px}
+h1{font-size:24px;line-height:1.25;margin:4px 0 6px}
+h2{font-size:17px;margin:0 0 10px}
+.sub{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+.grid2,.grid3,.grid4{display:grid;gap:10px}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:720px){.grid3,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+label{display:block;font-size:13px;font-weight:700;min-width:0}
+input,select,textarea{
+ width:100%;font-size:16px;padding:11px 12px;margin-top:5px;border:1px solid #cfd4dc;border-radius:10px;
+ background:#fff;color:#111827;min-height:44px
+}
+button{min-height:44px;border:1px solid #cfd4dc;border-radius:10px;padding:10px 14px;background:#fff;color:#111827;font-size:14px;font-weight:800}
+button.primary{background:#111827;color:#fff;border-color:#111827}
+button.danger{color:var(--ng)}
+button:disabled{opacity:.45}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.small{font-size:12px;color:var(--muted);line-height:1.5}
+.verdict{font-size:26px;font-weight:900;line-height:1.2}
+.ok{color:var(--ok)} .ng{color:var(--ng)} .warn{color:var(--warn)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--soft);border-radius:12px;padding:12px;min-width:0}
+.kpi .l{font-size:12px;color:var(--muted);line-height:1.3}
+.kpi .v{font-size:20px;font-weight:900;margin-top:4px;word-break:break-word}
+.kpi .s{font-size:11px;color:var(--muted);margin-top:3px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed #e2e5ea;font-size:14px}
+.row:last-child{border-bottom:0}
+.row .left{min-width:0}
+.row .amt{white-space:nowrap;font-weight:800}
+.row .note{font-size:11px;color:var(--muted);margin-top:2px}
+.total{font-size:17px;font-weight:900}
+details>summary{font-weight:900;cursor:pointer;min-height:42px;display:flex;align-items:center}
+hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+.pill{display:inline-block;border-radius:999px;background:var(--soft);padding:4px 8px;font-size:12px;font-weight:700;margin:2px 4px 2px 0}
+.advice{background:#fff8e8;border:1px solid #f1d69d;border-radius:12px;padding:12px}
+.advice strong{font-size:16px}
+.custom-row{display:grid;grid-template-columns:minmax(0,1fr) 120px 44px;gap:7px;margin-top:8px;align-items:end}
+.custom-row input{margin:0}
+.custom-row button{padding:0}
+@media(max-width:420px){.custom-row{grid-template-columns:minmax(0,1fr) 100px 44px}}
+.tabs{display:flex;gap:6px;overflow:auto;padding-bottom:2px}
+.tab{white-space:nowrap}
+.tab.active{background:#111827;color:#fff;border-color:#111827}
+.hidden{display:none!important}
+.statusbar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+.status{border-radius:10px;padding:8px;background:var(--soft);font-size:12px;text-align:center;font-weight:800}
+.status.good{background:#e8f7ed;color:#087a36}
+.status.bad{background:#fdecec;color:#b42318}
+@media(prefers-color-scheme:dark){
+ :root{--bg:#0f1115;--card:#171a20;--text:#f3f4f6;--muted:#9ca3af;--line:#30343b;--soft:#22262d;--accent:#8ab4ff}
+ html,body{background:var(--bg);color:var(--text)}
+ input,select,textarea{background:#11141a;color:#f3f4f6;border-color:#3a3f48}
+ button{background:#171a20;color:#f3f4f6;border-color:#3a3f48}
+ button.primary{background:#f3f4f6;color:#111827;border-color:#f3f4f6}
+ .advice{background:#2a2418;border-color:#5d4a25}
+ .row{border-color:#30343b}
+}
+
+.status.mid{background:#fff3d6;color:#8a5700}
+.grade{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:24px;border-radius:999px;font-size:13px;font-weight:900;margin-right:6px}
+.grade.good{background:#e8f7ed;color:#087a36}
+.grade.mid{background:#fff3d6;color:#8a5700}
+.grade.bad{background:#fdecec;color:#b42318}
+.profit-card{background:linear-gradient(180deg,#ffffff,#f8fafc);border:2px solid #cfd7e3}
+.profit-main{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.profit-box{padding:12px;border-radius:12px;background:var(--soft)}
+.profit-box .label{font-size:12px;color:var(--muted)}
+.profit-box .value{font-size:25px;font-weight:950;margin-top:4px}
+@media(max-width:620px){.profit-main{grid-template-columns:1fr}}
+.formula-card{border:2px solid #111827}
+.formula-title{font-size:18px;font-weight:950;margin-bottom:8px}
+.formula{font-size:16px;line-height:1.75;font-weight:800;word-break:break-word}
+.formula .muted{font-size:12px;font-weight:600;color:var(--muted)}
+.formula hr{margin:10px 0}
+
+
+/* V4 */
+.status.excellent{background:#d9fbe7;color:#046c31;border:1px solid #8cd7a8}
+.grade.excellent{background:#d9fbe7;color:#046c31}
+.rating-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.rating-legend span{font-size:11px;background:var(--soft);border-radius:999px;padding:5px 8px}
+.diagnosis{display:grid;gap:8px}
+.diag-item{border:1px solid var(--line);border-radius:11px;padding:10px;background:var(--card)}
+.diag-title{font-weight:900;font-size:14px}
+.diag-text{font-size:12px;color:var(--muted);line-height:1.5;margin-top:3px}
+.sticky-summary{position:fixed;z-index:80;left:10px;right:70px;bottom:calc(10px + env(safe-area-inset-bottom));background:rgba(17,24,39,.94);color:#fff;border-radius:14px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;box-shadow:0 8px 28px rgba(0,0,0,.25);backdrop-filter:blur(10px);font-size:12px}
+.sticky-summary b{font-size:13px}
+.calc-fab{position:fixed;z-index:100;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));width:52px;height:52px;border-radius:50%;background:#111827;color:#fff;border:0;font-size:24px;box-shadow:0 8px 25px rgba(0,0,0,.28);padding:0}
+.calc-panel{position:fixed;z-index:110;right:10px;bottom:calc(72px + env(safe-area-inset-bottom));width:min(330px,calc(100vw - 20px));background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 15px 45px rgba(0,0,0,.35)}
+.calc-display{font-size:20px!important;text-align:right;font-weight:800}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px}
+.calc-grid button{font-size:17px;padding:8px 4px}
+.calc-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.calc-quick button{font-size:11px;padding:7px 3px;min-height:38px}
+.calc-head{display:flex;justify-content:space-between;align-items:center}
+.calc-head button{min-height:34px;padding:4px 10px}
+.formula-list{display:grid;gap:7px;margin-top:10px}
+.formula-item{background:var(--soft);border-radius:9px;padding:9px;font-size:12px;line-height:1.55}
+#printReport{display:none}
+@media print{
+  body{background:#fff!important;color:#000!important}
+  main,.sticky-summary,.calc-fab,.calc-panel{display:none!important}
+  #printReport{display:block!important;padding:12mm;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;color:#000;background:#fff}
+  #printReport h1{font-size:20pt;margin:0 0 5mm}
+  #printReport h2{font-size:13pt;border-bottom:1px solid #999;padding-bottom:2mm;margin-top:7mm}
+  #printReport table{width:100%;border-collapse:collapse;font-size:9.5pt}
+  #printReport th,#printReport td{border:1px solid #bbb;padding:2.2mm;text-align:left;vertical-align:top}
+  #printReport .print-grade{font-weight:900;font-size:16pt}
+  @page{size:A4;margin:10mm}
+}
+
+
+@media(prefers-color-scheme:dark){
+  .profit-card{background:#171a20!important}
+  .profit-box,.formula-item,.diag-item{background:#22262d}
+  .sticky-summary{background:rgba(243,244,246,.94);color:#111827}
+  .calc-fab{background:#f3f4f6;color:#111827}
+}
+
+
+.portfolio-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+@media(max-width:720px){.portfolio-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.portfolio-stat{background:var(--soft);border-radius:12px;padding:10px}
+.portfolio-stat .l{font-size:11px;color:var(--muted)}
+.portfolio-stat .v{font-size:19px;font-weight:950;margin-top:3px}
+.progress-wrap{height:12px;border-radius:999px;background:var(--soft);overflow:hidden;margin-top:10px}
+.progress-bar{height:100%;width:0;background:var(--ok);transition:width .2s ease}
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;margin-top:10px}
+.compare-table{border-collapse:collapse;width:100%;min-width:760px;font-size:12px}
+.compare-table th,.compare-table td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+.compare-table th:first-child,.compare-table td:first-child,.compare-table th:nth-child(2),.compare-table td:nth-child(2){text-align:left}
+.compare-table th{background:var(--soft);position:sticky;top:0;z-index:1}
+.compare-table tr:last-child td{border-bottom:0}
+.mini-btn{min-height:32px;padding:4px 8px;font-size:12px}
+.backup-box{background:var(--soft);border-radius:12px;padding:10px;margin-top:10px}
+
 </style>
 </head>
 <body>
-<main>
-<h1>一棟収益物件 判定ツール</h1>
-<div class="note">概算→実額上書き方式。売価・満室家賃・構造を入れれば一次判定。</div>
+<main id="app">
+<h1>一棟収益物件 判定ツール <span class="small">V5</span></h1>
+<div class="sub">一棟アパート・一棟マンション専用。最重要判定は「家賃が20%消失しても返済後CFが赤字にならないか」。◎/○/△/×で余裕度まで判定し、利回り・返済・経費・DSCR等は項目ごとに自動診断。入力内容はこの端末に自動保存。</div>
 
 <div class="card">
-  <div class="grid">
-    <label>売買価格（万円）<input id="price" type="number" value="5000"></label>
-    <label>満室年間家賃（万円）<input id="rent" type="number" value="500"></label>
-    <label>構造
-      <select id="structure"><option value="M">M：RC等</option><option value="T">T：鉄骨・準耐火等</option><option value="H">H：非耐火木造</option></select>
+  <div class="grid2">
+    <label>物件名（任意）<input id="propertyName" placeholder="例：○○ハイツ"></label>
+    <label>物件URL（任意）<input id="propertyUrl" type="url" placeholder="SUUMO / at home 等"></label>
+    <label>管理ステータス
+      <select id="caseStage">
+        <option value="検討中">検討中</option>
+        <option value="買付">買付</option>
+        <option value="契約済">契約済</option>
+        <option value="保有">保有</option>
+        <option value="見送り">見送り</option>
+      </select>
     </label>
-    <label>融資割合（%）<input id="loanRatio" type="number" value="90"></label>
-    <label>金利（%）<input id="interest" type="number" step="0.01" value="3.0"></label>
-    <label>期間（年）<input id="years" type="number" value="25"></label>
+    <label>メモ（任意）<input id="propertyMemo" placeholder="値下げ余地・仲介情報など"></label>
+  </div>
+  <div class="grid3" style="margin-top:10px">
+    <label>売買価格（万円）<input id="price" type="number" min="1" step="10" value="5000"></label>
+    <label>満室年間収入（万円）<input id="rent" type="number" min="1" step="1" value="500"><span class="small">賃料＋共益費＋駐車場等</span></label>
+    <label>現況年間収入（万円・任意）<input id="currentRent" type="number" min="0" step="1" placeholder="空欄可"></label>
+    <label>構造
+      <select id="structure">
+        <option value="M">M：RC等</option>
+        <option value="T">T：鉄骨・準耐火等</option>
+        <option value="H">H：非耐火木造</option>
+      </select>
+    </label>
+    <label>建物保険金額（万円・任意）<input id="insuredAmount" type="number" min="0" step="10" placeholder="空欄＝売価60%"></label>
+    <label>10年CAPEX見込（万円・任意）<input id="capex10" type="number" min="0" step="10" placeholder="外壁・屋根・配管等"></label>
   </div>
 </div>
 
 <div class="card">
-  <div id="verdict" style="font-size:25px;font-weight:900">計算中...</div>
-  <div id="reason" class="small" style="margin-top:6px"></div>
-</div>
-
-<div class="result">
-  <div class="kpi">表面利回り<b id="yieldV">-</b></div>
-  <div class="kpi">10%利回り買値<b id="targetV">-</b></div>
-  <div class="kpi">返済比率<b id="repayV">-</b></div>
-  <div class="kpi">経費率<b id="opexV">-</b></div>
-  <div class="kpi">20%消失時CF<b id="stressV">-</b></div>
-  <div class="kpi">取得諸費用<b id="costV">-</b></div>
-</div>
-
-<div class="card">
-<details open>
-<summary>実額で上書きすると精度アップ</summary>
-<div class="grid" style="margin-top:10px">
-<label>年間返済額（万円）<input id="repayOverride" type="number" placeholder="空欄＝自動"></label>
-<label>固都税（万円/年）<input id="taxOverride" type="number" placeholder="空欄＝売価×0.7%"></label>
-<label>火災＋地震保険（万円/年）<input id="insuranceOverride" type="number" placeholder="空欄＝自動"></label>
-<label>物件固有経費（万円/年）<input id="specialOpex" type="number" value="0"></label>
-<label>登録免許税・所有権（万円）<input id="regOverride" type="number" placeholder="空欄＝売価×1.0%"></label>
-<label>抵当・根抵当登録税（万円）<input id="mortgageOverride" type="number" placeholder="空欄＝借入×0.48%"></label>
-<label>司法書士報酬（万円）<input id="judicialOverride" type="number" placeholder="空欄＝自動"></label>
-<label>金融機関費用（万円）<input id="bankOverride" type="number" placeholder="空欄＝20万円"></label>
-<label>不動産取得税（万円）<input id="acqTaxOverride" type="number" placeholder="空欄＝売価×1.5%"></label>
-<label>固都税精算（万円）<input id="settleOverride" type="number" placeholder="空欄＝売価×0.35%"></label>
-</div>
-</details>
+  <h2>融資条件</h2>
+  <div class="grid3">
+    <label>融資割合（%）<input id="loanRatio" type="number" min="0" max="120" step="1" value="90"></label>
+    <label>借入額 実額（万円・任意）<input id="loanOverride" type="number" min="0" step="10" placeholder="空欄＝融資割合から自動"></label>
+    <label>金利（%）<input id="interest" type="number" min="0" max="20" step="0.01" value="3.0"></label>
+    <label>期間（年）<input id="years" type="number" min="1" max="50" step="1" value="25"></label>
+    <label>返済方式
+      <select id="repayMethod">
+        <option value="equal_payment">元利均等</option>
+        <option value="equal_principal">元金均等</option>
+      </select>
+    </label>
+    <label>年間返済額 実額（万円・任意）<input id="repayOverride" type="number" min="0" step="1" placeholder="空欄＝融資条件から自動"></label>
+  </div>
+  <div id="loanSummary" style="margin-top:12px"></div>
 </div>
 
 <div class="card">
-<h3 style="margin-top:0">運営経費</h3>
-<div id="opexRows"></div>
+  <div class="verdict" id="verdict">計算中...</div>
+  <div id="reason" class="small" style="margin-top:7px"></div>
+  <div class="statusbar">
+    <div id="statusYield" class="status">利回り</div>
+    <div id="statusRepay" class="status">返済</div>
+    <div id="statusOpex" class="status">経費</div>
+    <div id="statusStress" class="status">20%ストレス</div>
+  </div>
+  <div class="rating-legend"><span>◎ 大きく余裕</span><span>○ 基準内</span><span>△ ほぼ基準・要確認</span><span>× 基準外</span></div>
+</div>
+
+<div class="card profit-card">
+  <h2>結局、いくら残る？</h2>
+  <div class="profit-main">
+    <div class="profit-box"><div class="label">満室時 月CF</div><div class="value" id="profitMonthlyCF">-</div><div class="small">運営経費＋ローン返済後</div></div>
+    <div class="profit-box"><div class="label">満室時 年CF</div><div class="value" id="profitAnnualCF">-</div><div class="small">税引前キャッシュフロー</div></div>
+    <div class="profit-box"><div class="label">20%家賃消失時 年CF</div><div class="value" id="profitStressCF">-</div><div class="small">ここが0円以上なら基本OK</div></div>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">表面利回り</div><div class="v" id="grossYield">-</div><div class="s">参考目標と比較</div></div>
+  <div class="kpi"><div class="l">実質利回り（NOI）</div><div class="v" id="netYield">-</div><div class="s">NOI ÷（売価＋取得費）</div></div>
+  <div class="kpi"><div class="l">返済後実利回り</div><div class="v" id="afterDebtYield">-</div><div class="s">年間CF ÷（売価＋取得費）</div></div>
+  <div class="kpi"><div class="l">自己資金利回り</div><div class="v" id="coc">-</div><div class="s">年間CF ÷ 必要自己資金</div></div>
+  <div class="kpi"><div class="l">CF率</div><div class="v" id="cfMargin">-</div><div class="s">年間CF ÷ 満室年収</div></div>
+  <div class="kpi"><div class="l">月返済</div><div class="v" id="monthlyDebt">-</div><div class="s" id="monthlyDebtNote"></div></div>
+  <div class="kpi"><div class="l">借入額</div><div class="v" id="loanAmountView">-</div><div class="s" id="ltvView"></div></div>
+  <div class="kpi"><div class="l">DSCR</div><div class="v" id="dscr">-</div><div class="s">NOI ÷ 年間元利返済</div></div>
+  <div class="kpi"><div class="l">損益分岐稼働率</div><div class="v" id="breakEven">-</div><div class="s" id="lossTolerance"></div></div>
+  <div class="kpi"><div class="l">Debt Yield</div><div class="v" id="debtYield">-</div><div class="s">NOI ÷ 借入額</div></div>
+  <div class="kpi"><div class="l">取得諸費用</div><div class="v" id="acqCostView">-</div><div class="s" id="acqCostRatioView"></div></div>
+  <div class="kpi"><div class="l">必要自己資金</div><div class="v" id="cashNeededView">-</div><div class="s">頭金＋取得費＋決済調整</div></div>
+</div>
+
+<div class="card advice">
+  <strong>自動買付アドバイス</strong>
+  <div id="autoAdvice" style="margin-top:8px"></div>
 </div>
 
 <div class="card">
-<h3 style="margin-top:0">取得諸費用</h3>
-<div id="costRows"></div>
-<div class="row" style="font-weight:900"><span>合計</span><span id="costTotal">-</span></div>
-<div class="row" style="font-weight:900"><span>必要自己資金（9割融資時）</span><span id="cashNeed">-</span></div>
+  <h2>自動診断</h2>
+  <div class="small">入力値とこのツールの投資基準から自動評価するルール診断。◎/○/△/×と理由・改善ポイントを自動更新。</div>
+  <div id="autoDiagnosis" class="diagnosis" style="margin-top:10px"></div>
 </div>
 
-<button id="reset">初期値に戻す</button>
+<div class="card">
+  <details open>
+    <summary>運営経費 — 概算 → 実額上書き</summary>
+    <div class="grid3" style="margin-top:10px">
+      <label>管理委託 実額（万円/年）<input id="managementOverride" type="number" min="0" step="0.1" placeholder="空欄＝家賃8%"></label>
+      <label>固都税 実額（万円/年）<input id="taxOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価0.7%"></label>
+      <label>火災＋地震等保険 実額（万円/年）<input id="insuranceOverride" type="number" min="0" step="0.1" placeholder="空欄＝構造別自動"></label>
+      <label>共用電気・水道 実額（万円/年）<input id="utilityOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価0.15%"></label>
+      <label>清掃 実額（万円/年）<input id="cleanOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価0.15%"></label>
+      <label>消防・法定点検 実額（万円/年）<input id="inspectionOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価0.05%"></label>
+      <label>修繕・原状回復 実額（万円/年）<input id="repairOverride" type="number" min="0" step="0.1" placeholder="空欄＝家賃4%"></label>
+      <label>募集・入替 実額（万円/年）<input id="leasingOverride" type="number" min="0" step="0.1" placeholder="空欄＝家賃2%"></label>
+    </div>
+    <div id="opexRows" style="margin-top:10px"></div>
+    <hr>
+    <div class="row total"><span>年間運営経費 合計</span><span id="opexTotal">-</span></div>
+    <div class="row"><span>経費率</span><span id="opexRatio">-</span></div>
+
+    <h2 style="margin-top:16px">追加の年間経費</h2>
+    <div class="small">EV、受水槽、給水ポンプ、浄化槽、ネット、防犯カメラ、ゴミ回収、植栽など。好きな項目を何個でも追加。</div>
+    <div id="customOpex"></div>
+    <button type="button" id="addOpex">＋ 経費を追加</button>
+  </details>
+</div>
+
+<div class="card">
+  <details>
+    <summary>取得諸費用 — 概算 → 実額上書き</summary>
+    <div class="grid3" style="margin-top:10px">
+      <label>仲介手数料 実額（万円）<input id="brokerOverride" type="number" min="0" step="0.1" placeholder="空欄＝自動"></label>
+      <label>所有権移転登録税（万円）<input id="regOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価1.0%"></label>
+      <label>抵当・根抵当登録税（万円）<input id="mortgageOverride" type="number" min="0" step="0.1" placeholder="空欄＝借入0.48%"></label>
+      <label>司法書士報酬（万円）<input id="judicialOverride" type="number" min="0" step="0.1" placeholder="空欄＝価格帯自動"></label>
+      <label>金融機関費用（万円）<input id="bankOverride" type="number" min="0" step="0.1" placeholder="空欄＝20万円"></label>
+      <label>不動産取得税（万円）<input id="acqTaxOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価1.5%"></label>
+      <label>固都税精算（万円）<input id="settleOverride" type="number" min="0" step="0.1" placeholder="空欄＝売価0.35%"></label>
+      <label>決済時調整（万円）<input id="closingAdjustment" type="number" step="0.1" value="0"><span class="small">支出は＋、敷金承継等の受取は－</span></label>
+    </div>
+    <div id="acqRows" style="margin-top:10px"></div>
+    <hr>
+    <div class="row total"><span>取得諸費用 合計</span><span id="acqTotal">-</span></div>
+    <div class="row total"><span>決済時必要自己資金</span><span id="cashNeeded">-</span></div>
+
+    <h2 style="margin-top:16px">追加の取得費</h2>
+    <div class="small">測量・契約関連・追加登記・特殊な融資費用など。必要な物だけ追加。</div>
+    <div id="customAcq"></div>
+    <button type="button" id="addAcq">＋ 取得費を追加</button>
+  </details>
+</div>
+
+<div class="card">
+  <details>
+    <summary>追加指標・ストレステスト</summary>
+    <div class="kpis" style="margin-top:10px">
+      <div class="kpi"><div class="l">満室時NOI</div><div class="v" id="noiView">-</div></div>
+      <div class="kpi"><div class="l">NOI利回り</div><div class="v" id="noiYield">-</div><div class="s">NOI ÷ 売価</div></div>
+      <div class="kpi"><div class="l">ストレス実質利回り</div><div class="v" id="stressNetYield">-</div><div class="s">収入80%時</div></div>
+      <div class="kpi"><div class="l">総投資額</div><div class="v" id="totalInvestment">-</div><div class="s">売価＋取得諸費用</div></div>
+      <div class="kpi"><div class="l">金利＋1%時 月返済</div><div class="v" id="rateStressMonthly">-</div></div>
+      <div class="kpi"><div class="l">金利＋1%時 返済比率</div><div class="v" id="rateStressRatio">-</div></div>
+      <div class="kpi"><div class="l">10年CAPEX年換算</div><div class="v" id="capexAnnualized">-</div></div>
+      <div class="kpi"><div class="l">CAPEX年換算込CF</div><div class="v" id="capexCF">-</div></div>
+    </div>
+    <div id="currentMetrics" style="margin-top:12px"></div>
+  </details>
+</div>
+
+<div class="card">
+  <details>
+    <summary>判定基準・概算率を編集</summary>
+    <div class="grid4" style="margin-top:10px">
+      <label>最低表面利回り %<input id="yieldMin" type="number" step="0.1" value="10"></label>
+      <label>返済比率上限 %<input id="repayMax" type="number" step="0.1" value="50"></label>
+      <label>経費率上限 %<input id="opexMax" type="number" step="0.1" value="30"></label>
+      <label>家賃消失 %<input id="lossRate" type="number" step="0.1" value="20"></label>
+      <label>管理 家賃%<input id="managementRate" type="number" step="0.1" value="8"></label>
+      <label>固都税 売価%<input id="taxRate" type="number" step="0.01" value="0.7"></label>
+      <label>共用光熱 売価%<input id="utilityRate" type="number" step="0.01" value="0.15"></label>
+      <label>清掃 売価%<input id="cleanRate" type="number" step="0.01" value="0.15"></label>
+      <label>消防等 売価%<input id="inspectionRate" type="number" step="0.01" value="0.05"></label>
+      <label>修繕 家賃%<input id="repairRate" type="number" step="0.1" value="4"></label>
+      <label>募集 家賃%<input id="leasingRate" type="number" step="0.1" value="2"></label>
+      <label>保険建物額 売価%<input id="insuredPct" type="number" step="1" value="60"></label>
+      <label>M保険料率 %<input id="insM" type="number" step="0.01" value="0.6"></label>
+      <label>T保険料率 %<input id="insT" type="number" step="0.01" value="0.8"></label>
+      <label>H保険料率 %<input id="insH" type="number" step="0.01" value="1.3"></label>
+      <label>所有権登録税 売価%<input id="regRate" type="number" step="0.01" value="1.0"></label>
+      <label>抵当登録税 借入%<input id="mortgageRate" type="number" step="0.01" value="0.48"></label>
+      <label>取得税 売価%<input id="acqTaxRate" type="number" step="0.01" value="1.5"></label>
+      <label>固都税精算 売価%<input id="settleRate" type="number" step="0.01" value="0.35"></label>
+      <label>銀行費用 万円<input id="bankDefault" type="number" step="1" value="20"></label>
+      <label>雑費 万円<input id="miscDefault" type="number" step="1" value="2"></label>
+    </div>
+  </details>
+</div>
+
+
+<div class="card">
+  <details>
+    <summary>◎ / ○ / △ / × の判定ルール</summary>
+    <div class="small">これは市場全体の絶対基準ではなく、このツールで採用している購入判断ルール。目標利回り・返済比率・経費率は下の設定から変更可能。</div>
+    <div class="formula-list">
+      <div class="formula-item"><b>20%家賃消失時CF</b>：◎ 満室年収の5%以上残る / ○ 0円以上 / △ 0〜▲5% / × ▲5%超</div>
+      <div class="formula-item"><b>表面利回り</b>：◎ 目標＋2pt以上 / ○ 目標以上 / △ 目標−1pt以上 / × それ未満</div>
+      <div class="formula-item"><b>返済比率</b>：◎ 目安の80%以下（50%設定なら40%以下）/ ○ 目安以下 / △ 目安の110%以下 / × それ超</div>
+      <div class="formula-item"><b>経費率</b>：◎ 目安より約5pt以上低い（30%設定なら25%以下）/ ○ 目安以下 / △ 目安の110%以下 / × それ超</div>
+      <div class="formula-item"><b>DSCR</b>：◎ 1.50以上 / ○ 1.30以上 / △ 1.10以上 / × 1.10未満</div>
+      <div class="formula-item"><b>損益分岐稼働率</b>：◎ 75%以下 / ○ 80%以下 / △ 85%以下 / × 85%超</div>
+      <div class="formula-item"><b>取得費率</b>：◎ 7%以下 / ○ 8.5%以下 / △ 10%以下 / × 10%超</div>
+    </div>
+  </details>
+</div>
+
+<div class="card formula-card">
+  <div class="formula-title">大きな式</div>
+  <div id="formulaMain" class="formula">計算中...</div>
+  <details open style="margin-top:12px">
+    <summary>計算式一覧</summary>
+    <div class="formula-list">
+      <div class="formula-item"><b>表面利回り</b> ＝ 満室年間収入 ÷ 売買価格</div>
+      <div class="formula-item"><b>NOI</b> ＝ 満室年間収入 − 年間運営経費</div>
+      <div class="formula-item"><b>実質利回り</b> ＝ NOI ÷（売買価格＋取得諸費用）</div>
+      <div class="formula-item"><b>年間CF</b> ＝ NOI − 年間元利返済額</div>
+      <div class="formula-item"><b>返済後実利回り</b> ＝ 年間CF ÷（売買価格＋取得諸費用）</div>
+      <div class="formula-item"><b>自己資金利回り</b> ＝ 年間CF ÷ 決済時必要自己資金</div>
+      <div class="formula-item"><b>返済比率</b> ＝ 年間元利返済額 ÷ 満室年間収入</div>
+      <div class="formula-item"><b>経費率</b> ＝ 年間運営経費 ÷ 満室年間収入</div>
+      <div class="formula-item"><b>DSCR</b> ＝ NOI ÷ 年間元利返済額</div>
+      <div class="formula-item"><b>損益分岐稼働率</b> ＝（年間運営経費＋年間返済）÷ 満室年間収入</div>
+      <div class="formula-item"><b>Debt Yield</b> ＝ NOI ÷ 借入額</div>
+      <div class="formula-item"><b>20%家賃消失時CF</b> ＝ 満室年間収入×80% − 年間運営経費 − 年間返済</div>
+    </div>
+  </details>
+</div>
+
+
+<div class="card">
+  <h2>5年3,000万円ロードマップ</h2>
+  <div class="grid2">
+    <label>年間家賃収入 目標（万円）<input id="portfolioTarget" type="number" min="1" step="100" value="3000"></label>
+    <div class="small" style="align-self:end;padding-bottom:8px">「保有」の保存物件だけを実績として集計。「契約済」は見込として別表示。</div>
+  </div>
+  <div class="portfolio-stats">
+    <div class="portfolio-stat"><div class="l">保有 年間家賃</div><div class="v" id="ownedRentTotal">0万円</div></div>
+    <div class="portfolio-stat"><div class="l">保有＋契約済</div><div class="v" id="securedRentTotal">0万円</div></div>
+    <div class="portfolio-stat"><div class="l">目標まで残り</div><div class="v" id="targetRemaining">3,000万円</div></div>
+    <div class="portfolio-stat"><div class="l">進捗率</div><div class="v" id="targetProgress">0%</div></div>
+  </div>
+  <div class="progress-wrap"><div id="portfolioProgressBar" class="progress-bar"></div></div>
+  <div class="small" id="pipelineSummary" style="margin-top:8px"></div>
+</div>
+
+<div class="card">
+  <h2>保存物件 比較一覧</h2>
+  <div class="small">保存時点の数値を比較。あとで条件を変えた場合は再保存すると更新される。</div>
+  <div class="table-wrap">
+    <table class="compare-table">
+      <thead><tr><th>状態</th><th>物件</th><th>売価</th><th>満室年収</th><th>表面</th><th>月CF</th><th>20%CF</th><th>判定</th><th></th></tr></thead>
+      <tbody id="comparisonBody"><tr><td colspan="9" style="text-align:center">保存物件なし</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>バックアップ・復元</h2>
+  <div class="backup-box">
+    <div class="small">JSONバックアップなら、入力中の物件・保存物件・目標設定をまとめて保存。iPhoneでは共有シートから「ファイルに保存」→ iCloud Driveを選べる。</div>
+    <div class="actions" style="margin-top:10px">
+      <button type="button" class="primary" id="backupAll">全データを保存</button>
+      <button type="button" id="restoreBackupBtn">バックアップ復元</button>
+      <button type="button" id="exportCsv">保存物件CSV</button>
+      <button type="button" id="shareStateLink">この物件の復元リンク</button>
+    </div>
+    <input id="restoreFile" type="file" accept=".json,application/json" class="hidden">
+  </div>
+</div>
+
+<div class="card">
+  <h2>物件保存・共有</h2>
+  <div class="grid2">
+    <label>保存済み物件
+      <select id="savedCases"><option value="">選択してください</option></select>
+    </label>
+    <div class="actions" style="align-items:end">
+      <button type="button" class="primary" id="saveCase">この物件を保存</button>
+      <button type="button" id="loadCase">読込</button>
+      <button type="button" class="danger" id="deleteCase">削除</button>
+    </div>
+  </div>
+  <div class="actions" style="margin-top:10px">
+    <button type="button" id="shareResult">結果を共有</button>
+    <button type="button" id="copyDiagnosis">AI診断用データをコピー</button>
+    <button type="button" id="printReportBtn">印刷 / PDF</button>
+    <button type="button" id="openProperty">物件ページを開く</button>
+    <button type="button" id="resetAll">初期値に戻す</button>
+  </div>
+  <div class="small" style="margin-top:8px">入力中は自動保存。保存物件はSafari内に保持し、JSONバックアップでiCloud Drive等へ退避できる。</div>
+</div>
+
+<div class="sub">
+  ※税引前の一次判定ツール。大規模修繕は10年CAPEX欄で別管理。減価償却・法人税等は購入一次判定には含めていない。<br>
+  ※「実質利回り」はNOI÷（売価＋取得諸費用）。「返済後実利回り」は税引前年間CF÷（売価＋取得諸費用）という、このツール内の定義。20%ストレス時も年間運営経費は満額固定して安全側に計算。
+</div>
 </main>
+
+<div id="printReport"></div>
+
+<div id="stickySummary" class="sticky-summary">
+  <span id="stickyGrade">判定中</span>
+  <span>月CF <b id="stickyMonthly">—</b></span>
+  <span>20%CF <b id="stickyStress">—</b></span>
+</div>
+<button id="calcFab" class="calc-fab" type="button" aria-label="電卓">🧮</button>
+<div id="calcPanel" class="calc-panel hidden">
+  <div class="calc-head"><b>追従電卓</b><button id="calcClose" type="button">閉じる</button></div>
+  <input id="calcDisplay" class="calc-display" inputmode="decimal" placeholder="例 5000×0.03+6">
+  <div class="calc-quick">
+    <button type="button" data-quick="price">売価</button>
+    <button type="button" data-quick="rent">年収</button>
+    <button type="button" data-quick="cf">年CF</button>
+    <button type="button" data-quick="acq">取得費</button>
+  </div>
+  <div class="calc-grid">
+    <button type="button" data-key="C">C</button><button type="button" data-key="(">(</button><button type="button" data-key=")">)</button><button type="button" data-key="÷">÷</button>
+    <button type="button" data-key="7">7</button><button type="button" data-key="8">8</button><button type="button" data-key="9">9</button><button type="button" data-key="×">×</button>
+    <button type="button" data-key="4">4</button><button type="button" data-key="5">5</button><button type="button" data-key="6">6</button><button type="button" data-key="-">−</button>
+    <button type="button" data-key="1">1</button><button type="button" data-key="2">2</button><button type="button" data-key="3">3</button><button type="button" data-key="+">＋</button>
+    <button type="button" data-key="0">0</button><button type="button" data-key=".">.</button><button type="button" data-key="%">%</button><button type="button" data-key="=">=</button>
+  </div>
+</div>
 
 <script>
 (function(){
-function E(id){return document.getElementById(id)}
-function N(id){var x=parseFloat(E(id).value);return isNaN(x)?0:x}
-function O(id){var s=E(id).value;if(s==="")return null;var x=parseFloat(s);return isNaN(x)?null:x}
-function M(x){return x.toLocaleString("ja-JP",{maximumFractionDigits:1})+"万円"}
-function P(x){return x.toLocaleString("ja-JP",{maximumFractionDigits:2})+"%"}
-function annual(principal,rate,years){var n=years*12,r=rate/100/12;if(r===0)return principal/years;return principal*r/(1-Math.pow(1+r,-n))*12}
-function judicial(p){if(p<=1000)return 12;if(p<=2000)return 14;if(p<=3000)return 15;if(p<=5000)return 17;if(p<=10000)return 20;return 25}
-function saleStamp(p){if(p<=1000)return .5;if(p<=5000)return 1;if(p<=10000)return 3;if(p<=50000)return 6;return 16}
-function loanStamp(l){if(l<=1000)return 1;if(l<=5000)return 2;if(l<=10000)return 6;if(l<=50000)return 10;return 20}
-function broker(p){return (p*0.03+6)*1.10}
-function row(name,amt,note){return '<div class="row"><span>'+name+(note?'<div class="small">'+note+'</div>':'')+'</span><b>'+M(amt)+'</b></div>'}
-function calc(){
- var price=N("price"),rent=N("rent"),loan=price*N("loanRatio")/100;
- var y=price>0?rent/price*100:0;
- var repay=O("repayOverride"); if(repay===null)repay=annual(loan,N("interest"),N("years"));
- var management=rent*0.08;
- var fixedTax=O("taxOverride"); if(fixedTax===null)fixedTax=price*0.007;
- var base=price*0.60, ir=E("structure").value==="M"?0.006:(E("structure").value==="T"?0.008:0.013);
- var insurance=O("insuranceOverride"); if(insurance===null)insurance=base*ir;
- var utility=price*0.0015,clean=price*0.0015,fire=price*0.0005,repair=rent*0.04,leasing=rent*0.02,special=N("specialOpex");
- var opex=management+fixedTax+insurance+utility+clean+fire+repair+leasing+special;
- var rr=rent>0?repay/rent*100:0, or=rent>0?opex/rent*100:0;
- var stress=rent*0.80-repay-opex;
- var ok=y>=10 && rr<=50 && or<=30 && stress>=0;
- E("verdict").className=ok?"ok":"ng"; E("verdict").innerHTML=ok?"🟢 基準クリア":"🔴 要見直し";
- var fail=[];if(y<10)fail.push("利回り10%未満");if(rr>50)fail.push("返済比率50%超");if(or>30)fail.push("経費率30%超");if(stress<0)fail.push("20%消失時赤字");
- E("reason").textContent=ok?"10%・返済50%・経費30%・家賃消失20%をクリア":fail.join(" / ");
- E("yieldV").textContent=P(y);E("targetV").textContent=M(rent/0.10);E("repayV").textContent=P(rr);E("opexV").textContent=P(or);E("stressV").textContent=M(stress);
- E("opexRows").innerHTML=[
- row("管理委託",management,"家賃×8%"),
- row("固都税",fixedTax,O("taxOverride")===null?"売価×0.7%":"実額"),
- row("火災＋地震保険",insurance,O("insuranceOverride")===null?"建物保険金額=売価60%仮定":"実額"),
- row("共用電気・水道",utility,"売価×0.15%"),
- row("清掃",clean,"売価×0.15%"),
- row("消防等",fire,"売価×0.05%"),
- row("修繕・原状回復",repair,"家賃×4%"),
- row("募集・入替",leasing,"家賃×2%"),
- row("物件固有費",special,"実額")
- ].join("");
- var fees=[];
- fees.push(["仲介手数料",broker(price),"（売価×3%＋6万）×1.1"]);
- fees.push(["売買印紙",saleStamp(price),"価格帯自動"]);
- var reg=O("regOverride");if(reg===null)reg=price*0.01;fees.push(["所有権移転登録税",reg,"売価×1.0%仮置き"]);
- var mort=O("mortgageOverride");if(mort===null)mort=loan*0.0048;fees.push(["抵当・根抵当登録税",mort,"借入×0.48%仮置き"]);
- var jud=O("judicialOverride");if(jud===null)jud=judicial(price);fees.push(["司法書士",jud,"価格帯自動"]);
- var bank=O("bankOverride");if(bank===null)bank=20;fees.push(["金融機関費用",bank,"標準20万円"]);
- fees.push(["金消印紙",loanStamp(loan),"紙契約"]);
- var acq=O("acqTaxOverride");if(acq===null)acq=price*0.015;fees.push(["不動産取得税",acq,"売価×1.5%仮置き"]);
- var set=O("settleOverride");if(set===null)set=price*0.0035;fees.push(["固都税精算",set,"売価×0.35%仮置き"]);
- fees.push(["雑費",2,"固定"]);
- var total=0,html="";for(var i=0;i<fees.length;i++){total+=fees[i][1];html+=row(fees[i][0],fees[i][1],fees[i][2])}
- E("costRows").innerHTML=html;E("costTotal").textContent=M(total);E("costV").textContent=M(total);E("cashNeed").textContent=M((price-loan)+total);
+"use strict";
+const $=id=>document.getElementById(id);
+const STORAGE_DRAFT="ichito_checker_v4_draft";
+const STORAGE_CASES="ichito_checker_v4_cases";
+const STORAGE_TARGET="ichito_checker_v5_target";
+
+const scalarIds=[
+"propertyName","propertyUrl","caseStage","propertyMemo","price","rent","currentRent","structure","insuredAmount","capex10",
+"loanRatio","loanOverride","interest","years","repayMethod","repayOverride",
+"managementOverride","taxOverride","insuranceOverride","utilityOverride","cleanOverride","inspectionOverride","repairOverride","leasingOverride",
+"brokerOverride","regOverride","mortgageOverride","judicialOverride","bankOverride","acqTaxOverride","settleOverride","closingAdjustment",
+"yieldMin","repayMax","opexMax","lossRate","managementRate","taxRate","utilityRate","cleanRate","inspectionRate","repairRate","leasingRate",
+"insuredPct","insM","insT","insH","regRate","mortgageRate","acqTaxRate","settleRate","bankDefault","miscDefault"
+];
+
+let customOpex=[];
+let customAcq=[];
+let calcState={};
+
+function n(id){const v=parseFloat($(id).value);return Number.isFinite(v)?v:0}
+function opt(id){const s=$(id).value.trim();if(s==="")return null;const v=parseFloat(s);return Number.isFinite(v)?v:null}
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function money(v){if(!Number.isFinite(v))return "—";return v.toLocaleString("ja-JP",{maximumFractionDigits:1})+"万円"}
+function pct(v){if(!Number.isFinite(v))return "—";return v.toLocaleString("ja-JP",{maximumFractionDigits:2})+"%"}
+function times(v){if(!Number.isFinite(v))return "—";return v.toLocaleString("ja-JP",{maximumFractionDigits:2})+"倍"}
+function row(name,amount,note=""){return '<div class="row"><div class="left"><div>'+esc(name)+'</div>'+(note?'<div class="note">'+esc(note)+'</div>':'')+'</div><div class="amt">'+money(amount)+'</div></div>'}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+function broker(p){
+  if(p<=200)return p*0.05*1.10;
+  if(p<=400)return (p*0.04+2)*1.10;
+  return (p*0.03+6)*1.10;
 }
-var inputs=document.querySelectorAll("input,select");for(var i=0;i<inputs.length;i++){inputs[i].addEventListener("input",calc)}
-E("reset").addEventListener("click",function(){location.reload()});
-calc();
+function saleStamp(p){
+  if(p<=10)return .02;if(p<=50)return .02;if(p<=100)return .05;if(p<=500)return .1;if(p<=1000)return .5;
+  if(p<=5000)return 1;if(p<=10000)return 3;if(p<=50000)return 6;if(p<=100000)return 16;return 32;
+}
+function loanStamp(l){
+  if(l<=10)return .02;if(l<=50)return .04;if(l<=100)return .1;if(l<=500)return .2;if(l<=1000)return 1;
+  if(l<=5000)return 2;if(l<=10000)return 6;if(l<=50000)return 10;if(l<=100000)return 20;return 40;
+}
+function judicial(p){if(p<=1000)return 12;if(p<=2000)return 14;if(p<=3000)return 15;if(p<=5000)return 17;if(p<=10000)return 20;return 25}
+
+function schedule(principal,ratePct,years,method){
+  principal=Math.max(0,principal); years=Math.max(1,Math.round(years));
+  const months=years*12, r=ratePct/100/12;
+  let balance=principal,totalPay=0,totalInterest=0,firstYearPay=0,firstYearInterest=0,firstYearPrincipal=0;
+  let month1=0,month12=0;
+  let constant=0;
+  if(method==="equal_payment"){
+    constant = r===0 ? principal/months : principal*r/(1-Math.pow(1+r,-months));
+  }
+  const fixedPrincipal=principal/months;
+  for(let m=1;m<=months;m++){
+    const interest=balance*r;
+    let principalPay,payment;
+    if(method==="equal_principal"){
+      principalPay=(m===months)?balance:Math.min(balance,fixedPrincipal);
+      payment=principalPay+interest;
+    }else{
+      payment=(m===months)?balance+interest:constant;
+      principalPay=Math.min(balance,payment-interest);
+    }
+    if(m===1)month1=payment;
+    if(m===12)month12=payment;
+    if(m<=12){firstYearPay+=payment;firstYearInterest+=interest;firstYearPrincipal+=principalPay}
+    totalPay+=payment;totalInterest+=interest;balance=Math.max(0,balance-principalPay);
+  }
+  return {month1,month12,firstYearPay,firstYearInterest,firstYearPrincipal,endYear1:Math.max(0,principal-firstYearPrincipal),totalPay,totalInterest};
+}
+function annualDebtFor(principal,rate,years,method){
+  return schedule(principal,rate,years,method).firstYearPay;
+}
+function maxPrincipalForAnnualDebt(cap,rate,years,method){
+  if(cap<=0)return 0;
+  let lo=0,hi=1;
+  while(annualDebtFor(hi,rate,years,method)<cap && hi<1e9)hi*=2;
+  for(let i=0;i<70;i++){let mid=(lo+hi)/2;if(annualDebtFor(mid,rate,years,method)<=cap)lo=mid;else hi=mid}
+  return lo;
+}
+function maxRateForAnnualDebt(principal,cap,years,method){
+  if(principal<=0)return 99;
+  if(annualDebtFor(principal,0,years,method)>cap)return -1;
+  if(annualDebtFor(principal,30,years,method)<=cap)return 30;
+  let lo=0,hi=30;
+  for(let i=0;i<70;i++){let mid=(lo+hi)/2;if(annualDebtFor(principal,mid,years,method)<=cap)lo=mid;else hi=mid}
+  return lo;
+}
+function minYearsForAnnualDebt(principal,rate,cap,method){
+  for(let y=1;y<=50;y++)if(annualDebtFor(principal,rate,y,method)<=cap)return y;
+  return null;
+}
+
+function stdOpex(price,rent,structure){
+  const insured=opt("insuredAmount") ?? price*n("insuredPct")/100;
+  const ir=structure==="M"?n("insM"):(structure==="T"?n("insT"):n("insH"));
+  return {
+    management: opt("managementOverride") ?? rent*n("managementRate")/100,
+    tax: opt("taxOverride") ?? price*n("taxRate")/100,
+    insurance: opt("insuranceOverride") ?? insured*ir/100,
+    utility: opt("utilityOverride") ?? price*n("utilityRate")/100,
+    cleaning: opt("cleanOverride") ?? price*n("cleanRate")/100,
+    inspection: opt("inspectionOverride") ?? price*n("inspectionRate")/100,
+    repair: opt("repairOverride") ?? rent*n("repairRate")/100,
+    leasing: opt("leasingOverride") ?? rent*n("leasingRate")/100
+  };
+}
+function acquisition(price,loan){
+  const custom=customAcq.reduce((s,x)=>s+(Number(x.amount)||0),0);
+  const vals={
+    broker: opt("brokerOverride") ?? broker(price),
+    saleStamp:saleStamp(price),
+    reg:opt("regOverride") ?? price*n("regRate")/100,
+    mortgage:opt("mortgageOverride") ?? loan*n("mortgageRate")/100,
+    judicial:opt("judicialOverride") ?? judicial(price),
+    bank:opt("bankOverride") ?? n("bankDefault"),
+    loanStamp:loanStamp(loan),
+    acqTax:opt("acqTaxOverride") ?? price*n("acqTaxRate")/100,
+    settle:opt("settleOverride") ?? price*n("settleRate")/100,
+    misc:n("miscDefault"),
+    custom
+  };
+  vals.total=Object.values(vals).reduce((s,v)=>s+v,0);
+  return vals;
+}
+function customOpexTotal(){return customOpex.reduce((s,x)=>s+(Number(x.amount)||0),0)}
+
+function metricsAtPrice(testPrice,rent,structure,loanRatio,interest,years,method,useOverrides=true){
+  const loanOv=useOverrides?opt("loanOverride"):null;
+  const loan=loanOv!==null?loanOv:testPrice*loanRatio/100;
+  const debtOv=useOverrides?opt("repayOverride"):null;
+  const debt=debtOv!==null?debtOv:annualDebtFor(loan,interest,years,method);
+  const op=stdOpex(testPrice,rent,structure);
+  const opex=Object.values(op).reduce((s,v)=>s+v,0)+customOpexTotal();
+  const y=testPrice>0?rent/testPrice*100:0;
+  const rr=rent>0?debt/rent*100:999;
+  const or=rent>0?opex/rent*100:999;
+  const stress=rent*(1-n("lossRate")/100)-opex-debt;
+  return {loan,debt,opex,y,rr,or,stress,op};
+}
+function maxPriceByAll(rent,structure,loanRatio,interest,years,method){
+  if(rent<=0)return 0;
+  let lo=0,hi=Math.max(rent/0.03,1000);
+  function ok(p){
+    const m=metricsAtPrice(p,rent,structure,loanRatio,interest,years,method,false);
+    return m.stress>=0;
+  }
+  while(ok(hi)&&hi<1e8)hi*=2;
+  for(let i=0;i<70;i++){let mid=(lo+hi)/2;if(ok(mid))lo=mid;else hi=mid}
+  return lo;
+}
+function minRentByAll(price,structure,loanRatio,interest,years,method){
+  if(price<=0)return 0;
+  let lo=0,hi=Math.max(price*.5,1000);
+  function ok(r){
+    const m=metricsAtPrice(price,r,structure,loanRatio,interest,years,method,true);
+    return m.stress>=0;
+  }
+  while(!ok(hi)&&hi<1e8)hi*=2;
+  for(let i=0;i<70;i++){let mid=(lo+hi)/2;if(ok(mid))hi=mid;else lo=mid}
+  return hi;
+}
+
+function renderCustom(containerId,arr,type){
+  const box=$(containerId);box.innerHTML="";
+  arr.forEach((x,i)=>{
+    const d=document.createElement("div");d.className="custom-row";
+    d.innerHTML='<input aria-label="項目名" placeholder="項目名" value="'+esc(x.name||"")+'"><input aria-label="金額" type="number" step="0.1" placeholder="万円" value="'+esc(x.amount??"")+'"><button type="button" class="danger" aria-label="削除">×</button>';
+    const inputs=d.querySelectorAll("input");
+    inputs[0].addEventListener("input",e=>{arr[i].name=e.target.value;saveDraft();calc()});
+    inputs[1].addEventListener("input",e=>{arr[i].amount=e.target.value;saveDraft();calc()});
+    d.querySelector("button").addEventListener("click",()=>{arr.splice(i,1);renderCustom(containerId,arr,type);saveDraft();calc()});
+    box.appendChild(d);
+  });
+}
+function addCustom(type){
+  const arr=type==="opex"?customOpex:customAcq;
+  arr.push({name:"",amount:""});
+  renderCustom(type==="opex"?"customOpex":"customAcq",arr,type);
+  saveDraft();calc();
+}
+
+function setStatus(id,grade,text){
+  const e=$(id);
+  const mark=grade==="excellent"?"◎":grade==="good"?"○":grade==="mid"?"△":"×";
+  e.textContent=mark+" "+text;
+  e.className="status "+(grade==="excellent"?"excellent":grade==="good"?"good":grade==="mid"?"mid":"bad");
+}
+function gradeHigher(value,target,band=1,excellentGap=2){
+  if(value>=target+excellentGap)return "excellent";
+  if(value>=target)return "good";
+  if(value>=target-band)return "mid";
+  return "bad";
+}
+function gradeLower(value,target,bandPct=0.10,excellentPct=0.20){
+  if(target<=0)return "good";
+  if(value<=target*(1-excellentPct))return "excellent";
+  if(value<=target)return "good";
+  if(value<=target*(1+bandPct))return "mid";
+  return "bad";
+}
+function gradeStress(stressCF,rent){
+  if(rent<=0)return "bad";
+  const margin=stressCF/rent*100;
+  if(margin>=5)return "excellent";
+  if(margin>=0)return "good";
+  if(margin>=-5)return "mid";
+  return "bad";
+}
+function gradeDSCR(v){
+  if(v>=1.5)return "excellent";
+  if(v>=1.3)return "good";
+  if(v>=1.1)return "mid";
+  return "bad";
+}
+function gradeBreakEven(v){
+  if(v<=75)return "excellent";
+  if(v<=80)return "good";
+  if(v<=85)return "mid";
+  return "bad";
+}
+function gradeAcqRatio(v){
+  if(v<=7)return "excellent";
+  if(v<=8.5)return "good";
+  if(v<=10)return "mid";
+  return "bad";
+}
+function gradeBadge(g){
+  return '<span class="grade '+(g==="excellent"?"excellent":g==="good"?"good":g==="mid"?"mid":"bad")+'">'+(g==="excellent"?"◎":g==="good"?"○":g==="mid"?"△":"×")+'</span>';
+}
+function gradeText(g){return g==="excellent"?"◎":g==="good"?"○":g==="mid"?"△":"×"}
+function evalRow(name,amount,note,grade){
+  return '<div class="row"><div class="left"><div>'+gradeBadge(grade)+esc(name)+'</div>'+(note?'<div class="note">'+esc(note)+'</div>':'')+'</div><div class="amt">'+money(amount)+'</div></div>';
+}
+
+function calc(){
+  const price=Math.max(0,n("price")),rent=Math.max(0,n("rent")),structure=$("structure").value;
+  const loanRatio=Math.max(0,n("loanRatio")),interest=Math.max(0,n("interest")),years=Math.max(1,n("years")),method=$("repayMethod").value;
+  const loan=opt("loanOverride") ?? price*loanRatio/100;
+  const sch=schedule(loan,interest,years,method);
+  const annualDebt=opt("repayOverride") ?? sch.firstYearPay;
+  const op=stdOpex(price,rent,structure);
+  const cOpex=customOpexTotal();
+  const opex=Object.values(op).reduce((s,v)=>s+v,0)+cOpex;
+  const acq=acquisition(price,loan);
+  const closingAdj=n("closingAdjustment");
+  const downPayment=Math.max(0,price-loan);
+  const cashNeeded=downPayment+acq.total+closingAdj;
+  const totalInvestment=price+acq.total;
+  const grossYield=price>0?rent/price*100:0;
+  const noi=rent-opex;
+  const noiYield=price>0?noi/price*100:0;
+  const netYield=totalInvestment>0?noi/totalInvestment*100:0;
+  const rr=rent>0?annualDebt/rent*100:0;
+  const or=rent>0?opex/rent*100:0;
+  const cf=noi-annualDebt;
+  const stressIncome=rent*(1-n("lossRate")/100);
+  const stressNoi=stressIncome-opex;
+  const stressCF=stressNoi-annualDebt;
+  const stressNetYield=totalInvestment>0?stressNoi/totalInvestment*100:0;
+  const dscr=annualDebt>0?noi/annualDebt:Infinity;
+  const breakEven=rent>0?(opex+annualDebt)/rent*100:0;
+  const lossTol=100-breakEven;
+  const coc=cashNeeded>0?cf/cashNeeded*100:Infinity;
+  const afterDebtYield=totalInvestment>0?cf/totalInvestment*100:0;
+  const cfMargin=rent>0?cf/rent*100:0;
+  const debtYield=loan>0?noi/loan*100:Infinity;
+  const currentRent=opt("currentRent");
+  const currentCF=currentRent===null?null:currentRent-opex-annualDebt;
+  const currentYield=currentRent===null||price<=0?null:currentRent/price*100;
+  const currentOccupancy=currentRent===null||rent<=0?null:currentRent/rent*100;
+
+  const yGrade=gradeHigher(grossYield,n("yieldMin"),1,2);
+  const rGrade=gradeLower(rr,n("repayMax"),0.10,0.20);
+  const oGrade=gradeLower(or,n("opexMax"),0.10,1/6);
+  const sGrade=gradeStress(stressCF,rent);
+  const dscrGrade=gradeDSCR(dscr);
+  const beGrade=gradeBreakEven(breakEven);
+  const acqRatioNow=price>0?acq.total/price*100:0;
+  const acqGrade=gradeAcqRatio(acqRatioNow);
+  const coreOK=price>0&&rent>0&&stressCF>=-1e-8;
+  const coreNear=price>0&&rent>0&&stressCF<0&&stressCF>=-rent*0.05;
+  const coreMark=sGrade==="excellent"?"◎":sGrade==="good"?"○":sGrade==="mid"?"△":"×";
+  $("verdict").className="verdict "+(sGrade==="excellent"?"ok":sGrade==="good"?"ok":sGrade==="mid"?"warn":"ng");
+  $("verdict").textContent=sGrade==="excellent"?"◎ 強く検討"
+    :sGrade==="good"?"○ 検討可"
+    :sGrade==="mid"?"△ 条件調整"
+    :"× 見送り";
+  $("reason").textContent=sGrade==="excellent"
+    ?"家賃"+pct(n("lossRate"))+"消失後でも年CF "+money(stressCF)+"（満室年収比 "+pct(stressCF/rent*100)+"）を確保。20%耐性に十分な余裕あり。"
+    :sGrade==="good"
+    ?"家賃"+pct(n("lossRate"))+"消失後も赤字にはならず年CF "+money(stressCF)+"。基本条件は合格だが余裕幅は確認。"
+    :sGrade==="mid"
+    ?"家賃"+pct(n("lossRate"))+"消失時は年CF "+money(stressCF)+"。赤字幅は満室年収の5%以内なので、価格・融資条件・経費の調整候補。"
+    :"家賃"+pct(n("lossRate"))+"消失時に年CF "+money(stressCF)+"。この条件のままでは見送りライン。";
+  setStatus("statusYield",yGrade,"利回り "+pct(grossYield)+" / 目標 "+pct(n("yieldMin")));
+  setStatus("statusRepay",rGrade,"返済 "+pct(rr)+" / 目安 "+pct(n("repayMax")));
+  setStatus("statusOpex",oGrade,"経費 "+pct(or)+" / 目安 "+pct(n("opexMax")));
+  setStatus("statusStress",sGrade,"ストレスCF "+money(stressCF));
+
+  $("grossYield").innerHTML=gradeBadge(yGrade)+" "+pct(grossYield);
+  $("netYield").textContent=pct(netYield);
+  $("afterDebtYield").textContent=pct(afterDebtYield);
+  $("cfMargin").textContent=pct(cfMargin);
+  $("loanAmountView").textContent=money(loan);
+  $("ltvView").textContent="LTV "+pct(price>0?loan/price*100:0);
+  $("profitMonthlyCF").textContent=money(cf/12);
+  $("profitAnnualCF").textContent=money(cf);
+  $("profitStressCF").textContent=gradeText(sGrade)+" "+money(stressCF);
+  $("profitStressCF").className="value "+(sGrade==="excellent"?"ok":sGrade==="good"?"ok":sGrade==="mid"?"warn":"ng");
+  $("dscr").innerHTML=gradeBadge(dscrGrade)+" "+(Number.isFinite(dscr)?times(dscr):"∞");
+  $("breakEven").innerHTML=gradeBadge(beGrade)+" "+pct(breakEven);
+  $("lossTolerance").textContent="家賃消失耐性 "+pct(lossTol);
+  $("coc").textContent=Number.isFinite(coc)?pct(coc):"—";
+  $("debtYield").textContent=Number.isFinite(debtYield)?pct(debtYield):"—";
+  $("acqCostView").innerHTML=gradeBadge(acqGrade)+" "+money(acq.total);
+  $("acqCostRatioView").textContent="売価比 "+pct(acqRatioNow);
+  $("cashNeededView").textContent=money(cashNeeded);
+
+  const monthlyOverride=opt("repayOverride")!==null?annualDebt/12:null;
+  if(method==="equal_payment" || monthlyOverride!==null){
+    $("monthlyDebt").textContent=money(monthlyOverride!==null?monthlyOverride:sch.month1);
+    $("monthlyDebtNote").textContent=(opt("repayOverride")!==null?"実額年返済÷12":"元利均等");
+  }else{
+    $("monthlyDebt").textContent=money(sch.month1);
+    $("monthlyDebtNote").textContent="初月 / 12ヶ月目 "+money(sch.month12);
+  }
+  $("loanSummary").innerHTML=
+    '<div class="row"><span>借入額</span><b>'+money(loan)+'</b></div>'+
+    '<div class="row"><span>融資割合（LTV）</span><b>'+pct(price>0?loan/price*100:0)+'</b></div>'+
+    '<div class="row"><span>返済方式</span><b>'+(method==="equal_payment"?"元利均等":"元金均等")+'</b></div>'+
+    '<div class="row"><span>月返済</span><b>'+(method==="equal_payment"?money(sch.month1):money(sch.month1)+" → 12月目 "+money(sch.month12))+'</b></div>'+
+    '<div class="row"><span>初年度 元利返済</span><b>'+money(annualDebt)+'</b></div>'+
+    '<div class="row"><span>初年度 元金 / 利息</span><b>'+money(sch.firstYearPrincipal)+' / '+money(sch.firstYearInterest)+'</b></div>'+
+    '<div class="row"><span>1年後残債</span><b>'+money(sch.endYear1)+'</b></div>'+
+    '<div class="row"><span>総返済 / 総利息</span><b>'+money(sch.totalPay)+' / '+money(sch.totalInterest)+'</b></div>'+
+    '<div class="row"><span>返済比率</span><b>'+pct(rr)+'</b></div>';
+
+  const stdInsured=opt("insuredAmount") ?? price*n("insuredPct")/100;
+  const stdInsRate=structure==="M"?n("insM"):(structure==="T"?n("insT"):n("insH"));
+  const stdMap={
+    management:rent*n("managementRate")/100,
+    tax:price*n("taxRate")/100,
+    insurance:stdInsured*stdInsRate/100,
+    utility:price*n("utilityRate")/100,
+    cleaning:price*n("cleanRate")/100,
+    inspection:price*n("inspectionRate")/100,
+    repair:rent*n("repairRate")/100,
+    leasing:rent*n("leasingRate")/100
+  };
+  $("opexRows").innerHTML=[
+    evalRow("管理委託",op.management,(opt("managementOverride")===null?"基準値 家賃×"+n("managementRate")+"%":"実額 / 基準 "+money(stdMap.management)),gradeLower(op.management,stdMap.management,0.20)),
+    evalRow("固定資産税・都市計画税",op.tax,(opt("taxOverride")===null?"基準値 売価×"+n("taxRate")+"%":"実額 / 基準 "+money(stdMap.tax)),gradeLower(op.tax,stdMap.tax,0.20)),
+    evalRow("火災＋地震等保険",op.insurance,(opt("insuranceOverride")===null?structure+"構造の基準値":"実額 / 基準 "+money(stdMap.insurance)),gradeLower(op.insurance,stdMap.insurance,0.20)),
+    evalRow("共用電気・水道",op.utility,(opt("utilityOverride")===null?"基準値 売価×"+n("utilityRate")+"%":"実額 / 基準 "+money(stdMap.utility)),gradeLower(op.utility,stdMap.utility,0.20)),
+    evalRow("共用部清掃",op.cleaning,(opt("cleanOverride")===null?"基準値 売価×"+n("cleanRate")+"%":"実額 / 基準 "+money(stdMap.cleaning)),gradeLower(op.cleaning,stdMap.cleaning,0.20)),
+    evalRow("消防・法定点検",op.inspection,(opt("inspectionOverride")===null?"基準値 売価×"+n("inspectionRate")+"%":"実額 / 基準 "+money(stdMap.inspection)),gradeLower(op.inspection,stdMap.inspection,0.20)),
+    evalRow("修繕・原状回復",op.repair,(opt("repairOverride")===null?"基準値 家賃×"+n("repairRate")+"%":"実額 / 基準 "+money(stdMap.repair)),gradeLower(op.repair,stdMap.repair,0.20)),
+    evalRow("募集・入替",op.leasing,(opt("leasingOverride")===null?"基準値 家賃×"+n("leasingRate")+"%":"実額 / 基準 "+money(stdMap.leasing)),gradeLower(op.leasing,stdMap.leasing,0.20)),
+    row("追加経費",cOpex,customOpex.length+"項目")
+  ].join("");
+  $("opexTotal").textContent=money(opex);
+  $("opexRatio").textContent=pct(or)+" / 上限 "+pct(n("opexMax"));
+
+  const acqStd={
+    broker:broker(price), reg:price*n("regRate")/100, mortgage:loan*n("mortgageRate")/100,
+    judicial:judicial(price), bank:n("bankDefault"), acqTax:price*n("acqTaxRate")/100, settle:price*n("settleRate")/100
+  };
+  $("acqRows").innerHTML=[
+    evalRow("仲介手数料",acq.broker,(opt("brokerOverride")===null?"法定上限モデル":"実額 / モデル "+money(acqStd.broker)),gradeLower(acq.broker,acqStd.broker,0.10)),
+    row("売買契約印紙",acq.saleStamp,"価格帯自動"),
+    evalRow("所有権移転登録免許税",acq.reg,(opt("regOverride")===null?"売価×"+n("regRate")+"%仮置き":"実額 / 仮置き "+money(acqStd.reg)),gradeLower(acq.reg,acqStd.reg,0.20)),
+    evalRow("抵当・根抵当登録免許税",acq.mortgage,(opt("mortgageOverride")===null?"借入×"+n("mortgageRate")+"%仮置き":"実額 / 仮置き "+money(acqStd.mortgage)),gradeLower(acq.mortgage,acqStd.mortgage,0.20)),
+    evalRow("司法書士報酬",acq.judicial,(opt("judicialOverride")===null?"価格帯自動":"実額 / 目安 "+money(acqStd.judicial)),gradeLower(acq.judicial,acqStd.judicial,0.20)),
+    evalRow("金融機関費用",acq.bank,(opt("bankOverride")===null?"標準"+n("bankDefault")+"万円":"実額 / 目安 "+money(acqStd.bank)),gradeLower(acq.bank,acqStd.bank,0.20)),
+    row("金消契約印紙",acq.loanStamp,"紙契約想定"),
+    evalRow("不動産取得税",acq.acqTax,(opt("acqTaxOverride")===null?"売価×"+n("acqTaxRate")+"%仮置き":"実額 / 仮置き "+money(acqStd.acqTax)),gradeLower(acq.acqTax,acqStd.acqTax,0.20)),
+    evalRow("固都税精算",acq.settle,(opt("settleOverride")===null?"売価×"+n("settleRate")+"%仮置き":"実額 / 仮置き "+money(acqStd.settle)),gradeLower(acq.settle,acqStd.settle,0.20)),
+    row("雑費",acq.misc,"固定"),
+    row("追加取得費",acq.custom,customAcq.length+"項目")
+  ].join("");
+  $("acqTotal").textContent=money(acq.total);
+  $("cashNeeded").textContent=money(cashNeeded)+"（決済調整 "+money(closingAdj)+"含む）";
+
+  $("noiView").textContent=money(noi);
+  $("noiYield").textContent=pct(noiYield);
+  $("stressNetYield").textContent=pct(stressNetYield);
+  $("totalInvestment").textContent=money(totalInvestment);
+  const rateStressSch=schedule(loan,interest+1,years,method);
+  $("rateStressMonthly").textContent=money(rateStressSch.month1);
+  $("rateStressRatio").textContent=pct(rent>0?rateStressSch.firstYearPay/rent*100:0);
+  const capexAnnual=n("capex10")/10;
+  $("capexAnnualized").textContent=money(capexAnnual);
+  $("capexCF").textContent=money(cf-capexAnnual);
+  if(currentRent!==null){
+    $("currentMetrics").innerHTML='<div class="row"><span>現況稼働率（収入ベース）</span><b>'+pct(currentOccupancy)+'</b></div>'+
+      '<div class="row"><span>現況表面利回り</span><b>'+pct(currentYield)+'</b></div>'+
+      '<div class="row"><span>現況CF</span><b>'+money(currentCF)+'</b></div>';
+  }else $("currentMetrics").innerHTML='<div class="small">現況年間収入を入れると、現況稼働率・現況利回り・現況CFも自動表示。</div>';
+
+  const maxPrice=maxPriceByAll(rent,structure,loanRatio,interest,years,method);
+  const yieldPrice=rent>0?rent/(n("yieldMin")/100):0;
+  const minRent=minRentByAll(price,structure,loanRatio,interest,years,method);
+  const stressDebtCap=Math.max(0,rent*(1-n("lossRate")/100)-opex);
+  const maxLoanStress=maxPrincipalForAnnualDebt(stressDebtCap,interest,years,method);
+  const maxLtvStress=price>0?maxLoanStress/price*100:0;
+  const debtBenchmark=rent*n("repayMax")/100;
+  const maxLoanBenchmark=maxPrincipalForAnnualDebt(debtBenchmark,interest,years,method);
+  const maxRate=maxRateForAnnualDebt(loan,stressDebtCap,years,method);
+  const minYears=minYearsForAnnualDebt(loan,interest,stressDebtCap,method);
+  const requiredDiscount=Math.max(0,price-maxPrice);
+  const opexRoom=rent*n("opexMax")/100-opex;
+  let advice='';
+  advice+='<div class="row"><span>20%家賃消失でもCF=0となる最大買値</span><b>'+money(maxPrice)+'</b></div>';
+  advice+='<div class="row"><span>現在価格から必要な値引き</span><b>'+money(requiredDiscount)+'</b></div>';
+  advice+='<div class="row"><span>現価格で20%耐性に必要な最低満室年収</span><b>'+money(minRent)+'</b></div>';
+  advice+='<div class="row"><span>20%耐性で許容できる年間返済上限</span><b>'+money(stressDebtCap)+'</b></div>';
+  advice+='<div class="row"><span>20%耐性での最大借入額</span><b>'+money(maxLoanStress)+'</b></div>';
+  advice+='<div class="row"><span>20%耐性での最大融資割合</span><b>'+pct(maxLtvStress)+'</b></div>';
+  advice+='<div class="row"><span>20%耐性を守れる上限金利</span><b>'+(maxRate<0?"0%でも超過":pct(maxRate))+'</b></div>';
+  advice+='<div class="row"><span>20%耐性を守れる最低返済期間</span><b>'+(minYears?minYears+"年":"50年でも超過")+'</b></div>';
+  advice+='<div class="row"><span>'+n("yieldMin")+'%利回りの参考買値</span><b>'+money(yieldPrice)+'</b></div>';
+  advice+='<div class="row"><span>返済'+n("repayMax")+'%目安での最大借入額</span><b>'+money(maxLoanBenchmark)+'</b></div>';
+  advice+='<div class="row"><span>経費'+n("opexMax")+'%目安までの残り枠</span><b class="'+(opexRoom>=0?"ok":"ng")+'">'+money(opexRoom)+'</b></div>';
+  $("autoAdvice").innerHTML=advice;
+
+  $("formulaMain").innerHTML=
+    '<div>① 満室時 年間CF ＝ '+money(rent)+' − '+money(opex)+' − '+money(annualDebt)+' ＝ <span class="'+(cf>=0?"ok":"ng")+'">'+money(cf)+'</span></div>'+
+    '<div>　満室時 月CF ＝ '+money(cf)+' ÷ 12 ＝ <span class="'+(cf>=0?"ok":"ng")+'">'+money(cf/12)+'</span></div>'+
+    '<hr>'+
+    '<div>② '+n("lossRate")+'%家賃消失時CF ＝ '+money(stressIncome)+' − '+money(opex)+' − '+money(annualDebt)+' ＝ <span class="'+(stressCF>=0?"ok":"ng")+'">'+money(stressCF)+'</span></div>'+
+    '<div class="muted">※ストレス時も運営経費は満額固定して安全側に計算</div>'+
+    '<hr>'+
+    '<div>③ NOI ＝ '+money(rent)+' − '+money(opex)+' ＝ '+money(noi)+'</div>'+
+    '<div>④ 実質利回り ＝ '+money(noi)+' ÷ '+money(totalInvestment)+' ＝ '+pct(netYield)+'</div>'+
+    '<div>⑤ 返済後実利回り ＝ '+money(cf)+' ÷ '+money(totalInvestment)+' ＝ '+pct(afterDebtYield)+'</div>'+
+    '<div>⑥ 自己資金利回り ＝ '+money(cf)+' ÷ '+money(cashNeeded)+' ＝ '+(Number.isFinite(coc)?pct(coc):"—")+'</div>'+
+    '<div>⑦ 返済比率 ＝ '+money(annualDebt)+' ÷ '+money(rent)+' ＝ '+pct(rr)+'</div>'+
+    '<div>⑧ 経費率 ＝ '+money(opex)+' ÷ '+money(rent)+' ＝ '+pct(or)+'</div>'+
+    '<div>⑨ DSCR ＝ '+money(noi)+' ÷ '+money(annualDebt)+' ＝ '+(Number.isFinite(dscr)?times(dscr):"∞")+'</div>'+
+    '<div>⑩ 損益分岐稼働率 ＝（'+money(opex)+'＋'+money(annualDebt)+'）÷ '+money(rent)+' ＝ '+pct(breakEven)+'</div>';
+
+  const diag=[];
+  diag.push({g:sGrade,t:"20%家賃消失耐性",x:sGrade==="excellent"?"20%減収後でも"+money(stressCF)+"残る。最重要条件はかなり強い。":sGrade==="good"?"20%減収後も"+money(stressCF)+"残り、赤字回避。余裕幅は大きくないので実額精査を優先。":sGrade==="mid"?"20%減収後は"+money(stressCF)+"。値下げ・期間延長・金利改善・経費削減で合格圏を狙える。":"20%減収後に"+money(Math.abs(stressCF))+"の赤字。現条件のままでは見送り。"});
+  diag.push({g:rGrade,t:"返済比率",x:"返済比率 "+pct(rr)+"。目安 "+pct(n("repayMax"))+"。"+(rGrade==="excellent"?"返済余力が大きい。":rGrade==="good"?"基準内。":rGrade==="mid"?"やや重い。融資期間・金利を確認。":"返済負担が重い。融資条件の改善が優先。")});
+  diag.push({g:oGrade,t:"運営経費率",x:"経費率 "+pct(or)+"。目安 "+pct(n("opexMax"))+"。"+(oGrade==="excellent"?"経費構造はかなり軽い。":oGrade==="good"?"基準内。":oGrade==="mid"?"少し高め。実額確認で改善余地を探す。":"経費過多。個別経費の高い項目を潰す。")});
+  diag.push({g:yGrade,t:"表面利回り",x:"表面 "+pct(grossYield)+"。参考目標 "+pct(n("yieldMin"))+"。利回り単独では総合合否を決めない。"});
+  diag.push({g:dscrGrade,t:"DSCR",x:"DSCR "+(Number.isFinite(dscr)?times(dscr):"∞")+"。"+(dscrGrade==="excellent"?"返済余力は強い。":dscrGrade==="good"?"返済余力は良好。":dscrGrade==="mid"?"余力は薄め。":"NOIに対して返済が重い。")});
+  diag.push({g:beGrade,t:"損益分岐稼働率",x:"損益分岐は "+pct(breakEven)+"。家賃消失耐性は "+pct(lossTol)+"。"});
+  diag.push({g:acqGrade,t:"取得諸費用",x:"取得費 "+money(acq.total)+"（売価比 "+pct(acqRatioNow)+"）。評価額・金融機関条件が分かれば実額上書き。"});
+  const diagHtml=diag.map(d=>'<div class="diag-item"><div class="diag-title">'+gradeBadge(d.g)+esc(d.t)+'</div><div class="diag-text">'+esc(d.x)+'</div></div>').join("");
+  $("autoDiagnosis").innerHTML=diagHtml;
+
+  $("stickyGrade").textContent=coreMark+" "+(sGrade==="excellent"?"強く検討":sGrade==="good"?"検討可":sGrade==="mid"?"条件調整":"見送り");
+  $("stickyMonthly").textContent=money(cf/12);
+  $("stickyStress").textContent=money(stressCF);
+
+  const printName=$("propertyName").value.trim()||"一棟収益物件";
+  $("printReport").innerHTML=
+    '<h1>'+esc(printName)+'　購入判定レポート</h1>'+
+    '<div class="print-grade">'+coreMark+' '+esc($("verdict").textContent.replace(/^[◎○△×]\s*/,""))+'</div>'+
+    '<p>'+esc($("reason").textContent)+'</p>'+
+    '<h2>主要数値</h2><table>'+
+    '<tr><th>売買価格</th><td>'+money(price)+'</td><th>満室年収</th><td>'+money(rent)+'</td></tr>'+
+    '<tr><th>表面利回り</th><td>'+pct(grossYield)+'</td><th>実質利回り</th><td>'+pct(netYield)+'</td></tr>'+
+    '<tr><th>月CF</th><td>'+money(cf/12)+'</td><th>年間CF</th><td>'+money(cf)+'</td></tr>'+
+    '<tr><th>'+n("lossRate")+'%減収時CF</th><td>'+money(stressCF)+'</td><th>返済後実利</th><td>'+pct(afterDebtYield)+'</td></tr>'+
+    '<tr><th>返済比率</th><td>'+pct(rr)+'</td><th>経費率</th><td>'+pct(or)+'</td></tr>'+
+    '<tr><th>DSCR</th><td>'+(Number.isFinite(dscr)?times(dscr):"∞")+'</td><th>損益分岐稼働率</th><td>'+pct(breakEven)+'</td></tr>'+
+    '<tr><th>借入額</th><td>'+money(loan)+'</td><th>必要自己資金</th><td>'+money(cashNeeded)+'</td></tr>'+
+    '</table>'+
+    '<h2>融資条件</h2><p>'+money(loan)+' / '+pct(interest)+' / '+years+'年 / '+(method==="equal_payment"?"元利均等":"元金均等")+' / 初年度返済 '+money(annualDebt)+'</p>'+
+    '<h2>自動診断</h2>'+diag.map(d=>'<p><b>'+gradeText(d.g)+' '+esc(d.t)+'</b>　'+esc(d.x)+'</p>').join("")+
+    '<h2>大きな式</h2><p>満室時CF = '+money(rent)+' - '+money(opex)+' - '+money(annualDebt)+' = '+money(cf)+'</p>'+
+    '<p>'+n("lossRate")+'%減収時CF = '+money(stressIncome)+' - '+money(opex)+' - '+money(annualDebt)+' = '+money(stressCF)+'</p>'+
+    '<p>実質利回り = '+money(noi)+' ÷ '+money(totalInvestment)+' = '+pct(netYield)+'</p>'+
+    '<p>返済後実利回り = '+money(cf)+' ÷ '+money(totalInvestment)+' = '+pct(afterDebtYield)+'</p>';
+
+  calcState={price,rent,structure,loan,loanRatio,interest,years,method,annualDebt,opex,acq,cashNeeded,totalInvestment,grossYield,netYield,afterDebtYield,cfMargin,noi,noiYield,rr,or,cf,stressCF,dscr,breakEven,lossTol,coc,debtYield,maxPrice,requiredDiscount,sGrade,rGrade,oGrade,yGrade,dscrGrade,beGrade,acqGrade,diag};
+  saveDraft();
+}
+
+function collectState(){
+  const scalar={};scalarIds.forEach(id=>scalar[id]=$(id).value);
+  return {scalar,customOpex,customAcq};
+}
+function normalizeCaseEntry(entry){
+  if(!entry)return null;
+  return entry.state ? entry : {state:entry,snapshot:null,savedAt:null};
+}
+function snapshotCurrent(){
+  const c=calcState||{};
+  return {
+    propertyName:$("propertyName").value.trim()||"物件",
+    propertyUrl:$("propertyUrl").value.trim(),
+    stage:$("caseStage").value||"検討中",
+    memo:$("propertyMemo").value.trim(),
+    price:c.price||0,rent:c.rent||0,grossYield:c.grossYield||0,
+    monthlyCF:(c.cf||0)/12,annualCF:c.cf||0,stressCF:c.stressCF||0,
+    netYield:c.netYield||0,afterDebtYield:c.afterDebtYield||0,
+    cashNeeded:c.cashNeeded||0,grade:c.sGrade||"mid"
+  };
+}
+function applyState(st){
+  if(!st)return;
+  const raw=st.state?st.state:st;
+  if(raw.scalar)scalarIds.forEach(id=>{if(raw.scalar[id]!==undefined&&$(id))$(id).value=raw.scalar[id]});
+  customOpex=Array.isArray(raw.customOpex)?raw.customOpex:[];
+  customAcq=Array.isArray(raw.customAcq)?raw.customAcq:[];
+  renderCustom("customOpex",customOpex,"opex");renderCustom("customAcq",customAcq,"acq");
+  calc();
+}
+function saveDraft(){try{localStorage.setItem(STORAGE_DRAFT,JSON.stringify(collectState()))}catch(e){}}
+function loadDraft(){try{const s=localStorage.getItem(STORAGE_DRAFT);if(s)applyState(JSON.parse(s));else calc()}catch(e){calc()}}
+function getCases(){try{return JSON.parse(localStorage.getItem(STORAGE_CASES)||"{}")}catch(e){return {}}}
+function refreshCases(){
+  const cases=getCases(),sel=$("savedCases"),cur=sel.value;sel.innerHTML='<option value="">選択してください</option>';
+  Object.keys(cases).sort().forEach(k=>{const o=document.createElement("option");o.value=k;o.textContent=k;sel.appendChild(o)});
+  if(cases[cur])sel.value=cur;
+  renderComparison();
+  updatePortfolio();
+}
+function saveCase(){
+  const name=$("propertyName").value.trim()||("物件_"+new Date().toLocaleString("ja-JP").replace(/[/: ]/g,"-"));
+  const cases=getCases();
+  cases[name]={state:collectState(),snapshot:snapshotCurrent(),savedAt:new Date().toISOString()};
+  localStorage.setItem(STORAGE_CASES,JSON.stringify(cases));
+  refreshCases();$("savedCases").value=name;alert("保存したで："+name);
+}
+function loadCase(){
+  const k=$("savedCases").value;if(!k)return;
+  const c=normalizeCaseEntry(getCases()[k]);if(c)applyState(c.state);
+}
+function deleteCase(){
+  const k=$("savedCases").value;if(!k)return;
+  if(!confirm("削除する？ "+k))return;
+  const cs=getCases();delete cs[k];localStorage.setItem(STORAGE_CASES,JSON.stringify(cs));refreshCases();
+}
+function renderComparison(){
+  const body=$("comparisonBody"); if(!body)return;
+  const cases=getCases(),keys=Object.keys(cases).sort();
+  if(!keys.length){body.innerHTML='<tr><td colspan="9" style="text-align:center">保存物件なし</td></tr>';return}
+  body.innerHTML=keys.map(k=>{
+    const e=normalizeCaseEntry(cases[k]),s=e&&e.snapshot;
+    if(!s)return '<tr><td>未分類</td><td>'+esc(k)+'</td><td colspan="6" style="text-align:center">旧保存形式。読み込んで再保存すると比較表示される。</td><td><button class="mini-btn" data-loadcase="'+esc(k)+'">読込</button></td></tr>';
+    const g=gradeText(s.grade||"mid");
+    return '<tr>'+
+      '<td>'+esc(s.stage||"検討中")+'</td>'+
+      '<td>'+(s.propertyUrl?'<a href="'+esc(s.propertyUrl)+'" target="_blank" rel="noopener">'+esc(k)+'</a>':esc(k))+'</td>'+
+      '<td>'+money(s.price)+'</td><td>'+money(s.rent)+'</td><td>'+pct(s.grossYield)+'</td>'+
+      '<td>'+money(s.monthlyCF)+'</td><td class="'+(s.stressCF>=0?"ok":"ng")+'">'+money(s.stressCF)+'</td>'+
+      '<td>'+g+'</td><td><button class="mini-btn" data-loadcase="'+esc(k)+'">読込</button></td></tr>';
+  }).join("");
+  body.querySelectorAll("[data-loadcase]").forEach(b=>b.addEventListener("click",()=>{
+    $("savedCases").value=b.dataset.loadcase; loadCase(); window.scrollTo({top:0,behavior:"smooth"});
+  }));
+}
+function updatePortfolio(){
+  const target=Math.max(1,n("portfolioTarget")||3000);
+  try{localStorage.setItem(STORAGE_TARGET,String(target))}catch(e){}
+  const cases=getCases(); let owned=0,secured=0,pipeline=0,count=0;
+  Object.keys(cases).forEach(k=>{
+    const e=normalizeCaseEntry(cases[k]),s=e&&e.snapshot;if(!s)return;
+    const r=Number(s.rent)||0,stage=s.stage||"検討中";
+    if(stage==="保有"){owned+=r;secured+=r}
+    else if(stage==="契約済"){secured+=r}
+    else if(stage==="検討中"||stage==="買付"){pipeline+=r}
+    count++;
+  });
+  const remain=Math.max(0,target-owned),prog=Math.min(100,owned/target*100);
+  $("ownedRentTotal").textContent=money(owned);
+  $("securedRentTotal").textContent=money(secured);
+  $("targetRemaining").textContent=money(remain);
+  $("targetProgress").textContent=pct(prog);
+  $("portfolioProgressBar").style.width=prog+"%";
+  $("pipelineSummary").textContent="保存物件 "+count+"件 / 検討・買付パイプライン年収 "+money(pipeline)+" / 契約済を含む目標進捗 "+pct(Math.min(100,secured/target*100));
+}
+function share(){
+  const c=calcState;
+  const text=(($("propertyName").value.trim()||"一棟物件")+" 判定\n"+
+    "売価 "+money(c.price)+" / 満室年収 "+money(c.rent)+" / 表面 "+pct(c.grossYield)+"\n"+
+    "借入 "+money(c.loan)+" / 金利 "+pct(c.interest)+" / "+c.years+"年 / "+(c.method==="equal_payment"?"元利均等":"元金均等")+"\n"+
+    "返済比率 "+pct(c.rr)+" / 経費率 "+pct(c.or)+" / DSCR "+times(c.dscr)+"\n"+
+    "実質利回り "+pct(c.netYield)+" / 返済後実利 "+pct(c.afterDebtYield)+"\n"+
+    "年間CF "+money(c.cf)+" / 月CF "+money(c.cf/12)+"\n"+
+    "20%消失時CF "+money(c.stressCF)+"\n"+
+    "取得費 "+money(c.acq.total)+" / 必要自己資金 "+money(c.cashNeeded)+"\n"+
+    "20%耐性の最大買値 "+money(c.maxPrice));
+  if(navigator.share)navigator.share({title:"一棟物件 判定",text}).catch(()=>{});
+  else prompt("コピーして使ってな",text);
+}
+
+function safeFileName(s){return String(s||"backup").replace(/[\\/:*?"<>|]/g,"_").slice(0,80)}
+async function outputFile(file,title){
+  try{
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({files:[file],title:title}); return;
+    }
+  }catch(e){}
+  const url=URL.createObjectURL(file),a=document.createElement("a");
+  a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+async function backupAll(){
+  const payload={version:5,exportedAt:new Date().toISOString(),target:n("portfolioTarget")||3000,draft:collectState(),cases:getCases()};
+  const file=new File([JSON.stringify(payload,null,2)],"ichito_checker_backup_"+new Date().toISOString().slice(0,10)+".json",{type:"application/json"});
+  await outputFile(file,"一棟判定ツール バックアップ");
+}
+function restoreBackup(){ $("restoreFile").click(); }
+function importBackupFile(file){
+  if(!file)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const data=JSON.parse(r.result);
+      if(data.cases)localStorage.setItem(STORAGE_CASES,JSON.stringify(data.cases));
+      if(data.draft)localStorage.setItem(STORAGE_DRAFT,JSON.stringify(data.draft));
+      if(data.target){localStorage.setItem(STORAGE_TARGET,String(data.target));$("portfolioTarget").value=data.target}
+      refreshCases();
+      if(data.draft)applyState(data.draft);
+      alert("バックアップを復元したで");
+    }catch(e){alert("このバックアップは読み込めへんかった")}
+  };
+  r.readAsText(file);
+}
+function csvCell(v){const s=String(v??"");return '"'+s.replace(/"/g,'""')+'"'}
+async function exportCasesCsv(){
+  const cases=getCases();
+  const rows=[["状態","物件名","売価(万円)","満室年収(万円)","表面利回り(%)","月CF(万円)","年CF(万円)","20%CF(万円)","実質利回り(%)","返済後実利(%)","必要自己資金(万円)","判定","URL","保存日時"]];
+  Object.keys(cases).sort().forEach(k=>{
+    const e=normalizeCaseEntry(cases[k]),s=e&&e.snapshot;if(!s)return;
+    rows.push([s.stage,k,s.price,s.rent,s.grossYield,s.monthlyCF,s.annualCF,s.stressCF,s.netYield,s.afterDebtYield,s.cashNeeded,gradeText(s.grade),s.propertyUrl||"",e.savedAt||""]);
+  });
+  const csv="\ufeff"+rows.map(r=>r.map(csvCell).join(",")).join("\r\n");
+  const file=new File([csv],"ichito_checker_cases_"+new Date().toISOString().slice(0,10)+".csv",{type:"text/csv;charset=utf-8"});
+  await outputFile(file,"保存物件一覧 CSV");
+}
+function encodeStateForUrl(st){
+  const bytes=new TextEncoder().encode(JSON.stringify(st));
+  let bin="";for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+function decodeStateFromUrl(s){
+  s=s.replace(/-/g,"+").replace(/_/g,"/");
+  while(s.length%4)s+="=";
+  const bin=atob(s),bytes=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+async function shareStateLink(){
+  const encoded=encodeStateForUrl(collectState());
+  const url=location.origin+location.pathname+"#s="+encoded;
+  const title=($("propertyName").value.trim()||"一棟物件")+" 判定データ";
+  try{
+    if(navigator.share){await navigator.share({title,url});return}
+  }catch(e){}
+  try{await navigator.clipboard.writeText(url);alert("復元リンクをコピーしたで")}
+  catch(e){window.prompt("このリンクを保存してな",url)}
+}
+function loadStateFromHash(){
+  const m=location.hash.match(/^#s=(.+)$/);
+  if(!m)return false;
+  try{
+    const st=decodeStateFromUrl(m[1]);applyState(st);return true;
+  }catch(e){return false}
+}
+
+function openProperty(){const u=$("propertyUrl").value.trim();if(!u){alert("物件URLを入れてな");return}window.open(u,"_blank")}
+async function copyDiagnosis(){
+  const c=calcState;
+  const aiPrompt="以下は一棟収益物件の購入検討データです。20%家賃消失でも赤字にならないことを最重要条件として、数値・前提・経費・融資条件・取得費を厳しく評価し、見落とし・リスク・改善案・買付価格を分析してください。\n\n"+
+    (($("propertyName").value.trim()||"物件")+"\n売価 "+money(c.price)+"\n満室年収 "+money(c.rent)+"\n表面利回り "+pct(c.grossYield)+"\n"+
+    "借入 "+money(c.loan)+" / 金利 "+pct(c.interest)+" / "+c.years+"年 / "+(c.method==="equal_payment"?"元利均等":"元金均等")+"\n"+
+    "年間返済 "+money(c.annualDebt)+" / 返済比率 "+pct(c.rr)+"\n年間運営経費 "+money(c.opex)+" / 経費率 "+pct(c.or)+"\n"+
+    "NOI "+money(c.noi)+" / 実質利回り "+pct(c.netYield)+"\n年間CF "+money(c.cf)+" / 月CF "+money(c.cf/12)+" / 20%減収時CF "+money(c.stressCF)+"\n"+
+    "DSCR "+times(c.dscr)+" / 損益分岐稼働率 "+pct(c.breakEven)+"\n取得費 "+money(c.acq.total)+" / 必要自己資金 "+money(c.cashNeeded)+"\n"+
+    "20%耐性の最大買値 "+money(c.maxPrice));
+  try{await navigator.clipboard.writeText(aiPrompt);alert("AI診断用データをコピーしたで。ChatGPTに貼り付けたら本物のAI診断ができる。")}
+  catch(e){window.prompt("コピーして使ってな",aiPrompt)}
+}
+function safeCalcEval(raw){
+  let expr=String(raw||"").replace(/×/g,"*").replace(/÷/g,"/").replace(/−/g,"-").replace(/＋/g,"+");
+  expr=expr.replace(/(\d+(?:\.\d+)?)%/g,"($1/100)");
+  if(!/^[0-9+\-*/().\s]+$/.test(expr))throw new Error("invalid");
+  const v=Function('"use strict";return ('+expr+')')();
+  if(!Number.isFinite(v))throw new Error("invalid");
+  return v;
+}
+function calcKey(k){
+  const d=$("calcDisplay");
+  if(k==="C"){d.value="";return}
+  if(k==="="){try{d.value=String(Math.round(safeCalcEval(d.value)*1000000)/1000000)}catch(e){d.value="エラー"}return}
+  if(d.value==="エラー")d.value="";
+  d.value+=k;
+}
+function quickInsert(kind){
+  const c=calcState,d=$("calcDisplay");
+  const v=kind==="price"?c.price:kind==="rent"?c.rent:kind==="cf"?c.cf:c.acq.total;
+  if(d.value==="エラー")d.value="";
+  d.value+=String(Math.round((v||0)*100)/100);
+}
+
+$("addOpex").addEventListener("click",()=>addCustom("opex"));
+$("addAcq").addEventListener("click",()=>addCustom("acq"));
+$("saveCase").addEventListener("click",saveCase);
+$("loadCase").addEventListener("click",loadCase);
+$("deleteCase").addEventListener("click",deleteCase);
+$("shareResult").addEventListener("click",share);
+$("copyDiagnosis").addEventListener("click",copyDiagnosis);
+$("printReportBtn").addEventListener("click",()=>window.print());
+$("openProperty").addEventListener("click",openProperty);
+$("resetAll").addEventListener("click",()=>{if(confirm("入力を初期値に戻す？")){localStorage.removeItem(STORAGE_DRAFT);location.reload()}});
+$("backupAll").addEventListener("click",backupAll);
+$("restoreBackupBtn").addEventListener("click",restoreBackup);
+$("restoreFile").addEventListener("change",e=>{importBackupFile(e.target.files&&e.target.files[0]);e.target.value=""});
+$("exportCsv").addEventListener("click",exportCasesCsv);
+$("shareStateLink").addEventListener("click",shareStateLink);
+$("portfolioTarget").addEventListener("input",updatePortfolio);
+$("calcFab").addEventListener("click",()=>$("calcPanel").classList.toggle("hidden"));
+$("calcClose").addEventListener("click",()=>$("calcPanel").classList.add("hidden"));
+document.querySelectorAll("[data-key]").forEach(b=>b.addEventListener("click",()=>calcKey(b.dataset.key)));
+document.querySelectorAll("[data-quick]").forEach(b=>b.addEventListener("click",()=>quickInsert(b.dataset.quick)));
+$("calcDisplay").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();calcKey("=")}});
+
+scalarIds.forEach(id=>{
+ const e=$(id);if(e)e.addEventListener("input",calc);
+});
+try{$("portfolioTarget").value=localStorage.getItem(STORAGE_TARGET)||"3000"}catch(e){}
+refreshCases();
+if(!loadStateFromHash())loadDraft();
+updatePortfolio();
 })();
 </script>
 </body>

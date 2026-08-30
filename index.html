@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="一棟判定"><meta name="theme-color" content="#f3f5f9"><title>一棟収益物件 判定ツール V8.1</title><style>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="一棟判定"><meta name="theme-color" content="#f3f5f9"><title>一棟収益物件 判定ツール V8.4</title><style>
 :root{--bg:#f3f5f9;--card:#fff;--text:#111827;--muted:#697386;--line:#dde3ec;--blue:#2563eb;--blue-soft:#eef5ff;--green:#07833f;--green-soft:#eaf8f0;--amber:#a15c00;--amber-soft:#fff6df;--red:#c62828;--red-soft:#fff0f0;--purple:#6d3bd1;--purple-soft:#f4efff;--teal:#087e7a;--teal-soft:#e9f8f7;--orange:#b54d00;--orange-soft:#fff1e7}
 *{box-sizing:border-box}html{background:var(--bg);-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}main{max-width:760px;margin:0 auto;padding:12px 10px 92px}h1{font-size:21px;line-height:1.25;margin:3px 2px 2px;font-weight:950}.version{font-size:11px;color:var(--muted);font-weight:800}.lead{font-size:11px;color:var(--muted);margin:0 2px 8px;line-height:1.45}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:12px;margin:9px 0;box-shadow:0 1px 1px #1111}.section-head{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:950;margin-bottom:8px}.num{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-size:12px;color:#fff;background:#111827}.section-head .hint{margin-left:auto;font-size:10px;color:var(--muted);font-weight:750}.input-card .num{background:var(--blue)}.decision-card .num{background:var(--green)}.metrics-card .num{background:var(--purple)}.details-card .num{background:#475569}
 .small{font-size:10px;color:var(--muted);line-height:1.45}.muted{color:var(--muted)}.ok{color:var(--green)!important}.warn{color:var(--amber)!important}.ng{color:var(--red)!important}button{min-height:38px;border:1px solid #cbd4e0;border-radius:10px;padding:8px 11px;background:#fff;color:var(--text);font-size:13px;font-weight:850}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}button.danger{color:var(--red)}button:disabled{opacity:.45}.actions{display:flex;flex-wrap:wrap;gap:6px}input,select,textarea{width:100%;min-height:40px;margin-top:4px;border:1px solid #cbd4e0;border-radius:10px;background:#fff;color:var(--text);font-size:16px;padding:8px 9px}label{font-size:11px;font-weight:850;color:#344054}.input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.span2{grid-column:1/-1}@media(max-width:340px){.input-grid{grid-template-columns:1fr}}.linked{grid-column:1/-1;display:grid;grid-template-columns:1fr 28px 1fr;gap:6px;align-items:end;background:linear-gradient(135deg,var(--blue-soft),#fff);border:1px solid #cfe0ff;border-radius:12px;padding:9px}.linked-arrow{display:grid;place-items:center;height:40px;font-size:18px;color:var(--blue);font-weight:900}.linked.loan-link{background:linear-gradient(135deg,var(--orange-soft),#fff);border-color:#f4d2ba}.linked.loan-link .linked-arrow{color:var(--orange)}.source-badge{display:inline-block;font-size:9px;font-weight:850;border-radius:999px;padding:1px 6px;background:#eef1f5;color:#606a78}.source-badge.manual{background:var(--amber-soft);color:#875300}.source-badge.auto{background:var(--blue-soft);color:#194ea3}.source-badge.calc{background:var(--green-soft);color:#0a6b32}.source-badge.saved{background:var(--purple-soft);color:#6240a2}.error-box{display:none;background:var(--red-soft);color:#9d1d1d;border:1px solid #f0bcbc;border-radius:10px;padding:8px;font-size:11px;font-weight:800;margin-top:7px}.extract-box{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:8px}.extract-result{font-size:10px;line-height:1.45}
@@ -12,10 +12,190 @@ details.fold,details.formula{border-top:1px solid var(--line)}details.fold>summa
 .saved-card{border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:7px}.saved-head{display:flex;justify-content:space-between;gap:8px;align-items:center}.saved-name{font-size:12px;font-weight:900}.tag{font-size:8px;border-radius:999px;padding:2px 6px;background:#eef1f5}.saved-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:6px 0}.saved-metrics div{font-size:9px;color:#667085}.saved-metrics b{display:block;font-size:13px;color:#111827}.compare-card{background:#f7f8fa;border-radius:9px;padding:8px;margin-top:6px}.progress{height:8px;background:#e8ebef;border-radius:999px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));width:0%}.save-status{display:flex;justify-content:space-between;gap:10px;align-items:center}.save-status .big{font-size:14px;font-weight:900}
 .sticky{position:fixed;left:50%;transform:translateX(-50%);bottom:8px;z-index:30;width:min(720px,calc(100vw - 20px));background:#111827;color:#fff;border-radius:14px;box-shadow:0 8px 26px #0004;display:grid;grid-template-columns:1.05fr 1fr 1fr 1fr 38px;gap:2px;padding:6px}.sticky-item{text-align:center;min-width:0}.sticky-label{font-size:8px;color:#aeb7c5;white-space:nowrap}.sticky-val{font-size:11px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sticky .ok{color:#63e699!important}.sticky .ng{color:#ff8585!important}.sticky-verdict{font-size:11px;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #calcBtn{position:static;width:34px;height:34px;min-height:34px;align-self:center;border-radius:10px;padding:0;background:#273142;color:#fff;border:0;font-size:17px}#calcPanel{position:fixed;right:12px;bottom:72px;z-index:35;width:min(310px,calc(100vw - 24px));background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px;box-shadow:0 12px 30px #0003;display:none}.calc-display{font-size:21px;font-weight:900;text-align:right;background:#f7f8fa;padding:8px;border-radius:8px;min-height:43px}.calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:6px}.calc-keys button{min-height:36px;padding:5px}.hidden{display:none!important}.footnote{font-size:9px;color:#7b8493;line-height:1.5;margin:10px 2px}
-</style></head><body>
+
+/* V8.2: 大きい文字 + コンパクト + 状態色 */
+.card{padding:10px;margin:7px 0;border-radius:16px}
+h1{font-size:23px}.lead{font-size:12px}.section-head{font-size:18px;margin-bottom:6px}.section-head .hint{font-size:10.5px}.small{font-size:11.5px}
+label{font-size:13.5px;line-height:1.3}input,select,textarea{font-size:17px;min-height:42px}
+details.fold>summary{font-size:14px;padding:8px 1px}.metric-label{font-size:12px}.metric-value{font-size:26px}.metric.cash .metric-value{font-size:32px}.metric-sub{font-size:10.5px}.yield-pill .yl{font-size:11px}.yield-pill .yv{font-size:20px}.quick-box .ql{font-size:11px}.quick-box .qv{font-size:20px}.quick-box .qs{font-size:10px}
+.cost-row{grid-template-columns:minmax(0,1fr) auto 86px;gap:6px;padding:5px 5px;border-radius:9px;border-bottom:1px solid #edf0f4;transition:.15s;background:#fff}
+.cost-name{font-size:14.5px;font-weight:950;line-height:1.25}.cost-value{font-size:17px}.cost-input{min-height:34px!important;font-size:15px!important;padding:5px 6px!important}.mode-badge{font-size:10px;padding:2px 6px;margin-left:5px;font-weight:900}
+.mode-badge.auto-mode{background:#edf1f5;color:#5f6a78}.mode-badge.estimate{background:#fff0cf;color:#9a5a00}.mode-badge.actual,.mode-badge.actual-mix{background:#dff7e9;color:#08783e}.mode-badge.setting-mode{background:#eee7ff;color:#6940c6}
+.cost-value.auto-value{color:#243145}.cost-value.estimate-value{color:#9a5a00}.cost-value.actual-value,.cost-value.actual-mix-value{color:#08783e}.cost-value.setting-value{color:#6940c6}
+.cost-row.row-estimate{box-shadow:inset 3px 0 #efaa2b}.cost-row.row-actual,.cost-row.row-actual-mix{box-shadow:inset 3px 0 #16a05d;background:#f8fffb}.cost-row.row-setting{box-shadow:inset 3px 0 #8b5cf6}
+.cost-row details.formula{margin-top:-2px}.cost-row details.formula>summary{font-size:10.5px;padding:1px 0 2px}.formula-box{font-size:11.5px;padding:8px;line-height:1.55}.cost-tip{font-size:10.5px}.other-head b,.closing-row b{font-size:13px!important}
+.precision-box{margin-top:7px;padding:8px;border:1px solid #d8e0ea;border-radius:10px;background:#f8fafc}.precision-head{font-size:12.5px;font-weight:950;margin-bottom:6px;color:#344054}.precision-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.precision-grid label{font-size:11.5px}.precision-grid input{min-height:37px;font-size:15px;margin-top:3px}
+.mode-legend b:first-child{color:#08783e}.mode-legend b:nth-child(2){color:#9a5a00}
+@media(max-width:430px){main{padding-left:7px;padding-right:7px}.card{padding:9px}.cost-row{grid-template-columns:minmax(105px,1fr) auto 82px}.cost-name{font-size:14px}.cost-value{font-size:16.5px}.cost-input{font-size:15px!important}.precision-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:355px){.cost-row{grid-template-columns:minmax(95px,1fr) auto 74px}.cost-name{font-size:13.2px}.cost-value{font-size:15.5px}.precision-grid{grid-template-columns:1fr}}
+
+/* ===== V8.3 readability pass: iPhone first ===== */
+:root{
+  --fs-xs:12px;--fs-sm:14px;--fs-base:16px;--fs-item:18px;--fs-head:21px;
+  --fs-value:25px;--fs-main:34px;
+}
+html{font-size:16px}
+body{font-size:var(--fs-base);line-height:1.45}
+main{max-width:760px;padding:12px 10px 96px}
+h1{font-size:26px;line-height:1.22;margin:4px 3px 3px;letter-spacing:-.02em}
+.version{font-size:13px;font-weight:900}
+.lead{font-size:14px;line-height:1.55;margin:0 3px 10px}
+.card{padding:13px 12px;margin:9px 0;border-radius:18px}
+.section-head{font-size:21px;gap:9px;margin-bottom:9px;line-height:1.2}
+.num{width:29px;height:29px;border-radius:9px;font-size:14px}
+.section-head .hint{font-size:12px;line-height:1.25;text-align:right}
+.small{font-size:13px;line-height:1.5}
+button{font-size:15px;min-height:42px;padding:8px 12px}
+input,select,textarea{font-size:17px;min-height:44px;padding:8px 10px}
+label{font-size:15px;line-height:1.35}
+.source-badge{font-size:11px;padding:2px 7px;font-weight:900}
+.error-box{font-size:14px;padding:9px}
+.extract-result{font-size:13px}
+
+details.fold>summary{font-size:17px;padding:10px 1px;line-height:1.3}
+details.formula>summary{font-size:13.5px;line-height:1.25;padding:3px 0;font-weight:900}
+.formula-box{font-size:13px;line-height:1.55;padding:8px 9px}
+
+.verdict{font-size:34px;line-height:1.08;margin:3px 0 5px}
+.result-reason{font-size:15px;line-height:1.5}
+.status{font-size:13px;padding:8px 4px;line-height:1.3}
+.comment{font-size:13.5px;line-height:1.5;padding:8px}
+
+.metric{padding:10px 10px;border-radius:13px}
+.metric-label{font-size:14px;line-height:1.25;font-weight:900}
+.metric-value{font-size:30px;line-height:1.02;margin-top:4px}
+.metric.cash .metric-value{font-size:38px}
+.metric-sub{font-size:12.5px;line-height:1.35;margin-top:4px}
+.yield-pill{padding:8px 7px}
+.yield-pill .yl{font-size:12.5px!important;line-height:1.2}
+.yield-pill .yv{font-size:23px!important;line-height:1.05;margin-top:3px}
+.mini-metric{font-size:13.5px;padding:8px 9px}
+.mini-metric b{font-size:19px}
+
+.quick-box{padding:9px 10px;border-radius:12px}
+.quick-box .ql{font-size:13px;line-height:1.25}
+.quick-box .qv{font-size:25px;line-height:1.08;margin-top:3px}
+.quick-box .qs{font-size:12.5px;line-height:1.35;margin-top:3px}
+.subfold{padding:0 10px;margin-top:8px;border-radius:13px}
+.subfold>summary{padding:9px 0!important}
+.subfold-title{font-size:18.5px;line-height:1.25;gap:8px}
+.dot{width:11px;height:11px;flex:0 0 auto}
+
+/* Cost rows: bigger type without turning each item into a tall card */
+.cost-row{
+  grid-template-columns:minmax(0,1fr) auto 96px;
+  gap:6px 7px;
+  padding:8px 0;
+  align-items:center;
+}
+.cost-name{font-size:18px;font-weight:950;line-height:1.22;letter-spacing:-.01em}
+.mode-badge{font-size:11.5px;padding:2px 7px;margin-left:6px;font-weight:950;vertical-align:2px}
+.cost-value{font-size:21px;font-weight:950;line-height:1.05;padding:4px 6px;border-radius:8px;min-width:70px;text-align:right}
+.cost-input{min-height:40px!important;font-size:17px!important;padding:5px 7px!important;border-radius:9px!important;font-weight:850!important}
+.cost-row details{grid-column:1/-1;margin-top:-1px}
+.cost-row details.formula>summary{font-size:13.5px;padding:2px 0}
+.cost-tip{font-size:12.5px;line-height:1.4;margin:5px 0}
+.other-head{margin-top:8px}.other-head b{font-size:16px!important}
+.add-row{grid-template-columns:1fr 96px 48px;gap:6px;margin-top:6px}
+.add-row input{min-height:40px;font-size:16px;padding:5px 7px}.add-row button{min-height:40px;font-size:12px}
+.closing-row{padding:9px}.closing-row b{font-size:16px!important}.closing-row input{min-height:40px;font-size:17px}
+
+/* State is visible from the amount itself, not only the badge */
+.cost-value.auto-value{background:#f1f4f7;color:#263244}
+.cost-value.estimate-value{background:#fff1d6;color:#985800}
+.cost-value.actual-value,.cost-value.actual-mix-value{background:#ddf8e9;color:#06743a}
+.cost-value.setting-value{background:#eee7ff;color:#6840c2}
+.cost-row.row-actual,.cost-row.row-actual-mix{box-shadow:inset 4px 0 #15a15d;background:#f6fff9;padding-left:7px}
+.cost-row.row-estimate{box-shadow:inset 4px 0 #eea524;padding-left:7px}
+.cost-row.row-setting{box-shadow:inset 4px 0 #8257df;padding-left:7px}
+.cost-row.row-actual .cost-input,.cost-row.row-actual-mix .cost-input{border-color:#4fbd83;background:#f0fff6;color:#06743a}
+.cost-row.row-estimate .cost-input{border-color:#e6c678;background:#fffdf7}
+
+.precision-head{font-size:15px!important;line-height:1.4}
+.precision-grid label{font-size:14px}
+.precision-grid input{font-size:16px;min-height:42px}
+
+.saved-name{font-size:16px}.tag{font-size:11px}.saved-metrics div{font-size:12px}.saved-metrics b{font-size:16px}
+.save-status .big{font-size:17px}
+.footnote{font-size:12.5px;line-height:1.55}
+
+.sticky{padding:7px 6px;bottom:7px;border-radius:15px}
+.sticky-label{font-size:10.5px;line-height:1.1}
+.sticky-val,.sticky-verdict{font-size:13.5px;line-height:1.25}
+#calcBtn{font-size:18px;width:36px;height:36px;min-height:36px}
+
+/* Narrow iPhones: protect readability; compress layout instead of shrinking fonts */
+@media(max-width:430px){
+  main{padding-left:9px;padding-right:9px}
+  h1{font-size:24px}
+  .section-head{font-size:20px}
+  .section-head .hint{font-size:11.5px;max-width:42%}
+  .input-grid{gap:7px}
+  .metrics-grid{gap:7px}
+  .metric-value{font-size:29px}.metric.cash .metric-value{font-size:36px}
+  .quick-summary{gap:7px}.quick-box .qv{font-size:23px}
+  .cost-row{grid-template-columns:minmax(0,1fr) auto 90px;gap:6px}
+  .cost-name{font-size:17.5px}.cost-value{font-size:20px;min-width:66px;padding:4px 5px}
+  .cost-input{font-size:16.5px!important;padding:5px 6px!important}
+  .mode-badge{font-size:11px;padding:2px 6px;margin-left:5px}
+}
+@media(max-width:360px){
+  h1{font-size:23px}.lead{font-size:13.5px}
+  .section-head{font-size:19px}
+  .cost-row{grid-template-columns:minmax(0,1fr) 82px;gap:5px 6px}
+  .cost-name{font-size:17px;grid-column:1}.cost-value{font-size:20px;grid-column:2;text-align:right}
+  .cost-input{grid-column:2;min-height:38px!important}.cost-row details{grid-column:1/-1}
+  .mode-badge{display:inline-block;margin-top:2px}
+  .yield-strip{grid-template-columns:1fr}
+}
+</style>
+<style id="v83-final-nudge">
+/* Final V8.3 mobile readability tuning */
+.cost-name{font-size:19px}.cost-value{font-size:22px}.mode-badge{font-size:12px}
+.source-badge{font-size:11.5px}.tag{font-size:11.5px}
+.sticky-label{font-size:11.5px}.sticky-val,.sticky-verdict{font-size:14px}
+@media(max-width:430px){.cost-name{font-size:18.5px}.cost-value{font-size:21px}.mode-badge{font-size:11.5px}}
+@media(max-width:360px){.cost-name{font-size:18px}.cost-value{font-size:21px}}
+</style>
+
+<style id="v84-readability">
+/* V8.4: key labels must be readable at a glance on iPhone.
+   Keep supporting text/formula compact so page height does not balloon. */
+.metric{padding:8px 10px}
+.metric-label{font-size:17px!important;line-height:1.18!important;font-weight:950!important;color:#3f4b5d!important;letter-spacing:-.01em}
+.metric-value{margin-top:4px}
+.metric-sub{font-size:12.5px!important;line-height:1.25!important}
+.yield-pill{padding:7px 7px}
+.yield-pill .yl{font-size:15.5px!important;line-height:1.16!important;font-weight:950!important;color:#445064!important;letter-spacing:-.01em}
+.yield-pill .yv{font-size:25px!important}
+.mini-metric{font-size:15.5px!important;font-weight:850!important;color:#485468!important;padding:7px 9px!important}
+.mini-metric b{font-size:21px!important}
+.quick-box{padding:7px 9px!important}
+.quick-box .ql{font-size:15.5px!important;line-height:1.16!important;font-weight:950!important;color:#465266!important;letter-spacing:-.01em}
+.quick-box .qv{font-size:26px!important;line-height:1.04!important;margin-top:4px!important}
+.quick-box .qs{font-size:12.5px!important;line-height:1.25!important}
+/* formulas are secondary information: intentionally smaller */
+details.formula>summary{font-size:12.5px!important;line-height:1.15!important;padding:3px 0!important}
+.formula-box{font-size:12.5px!important;line-height:1.45!important}
+/* keep cards compact despite larger labels */
+.metrics-grid{gap:6px!important}.yield-strip{gap:5px!important;margin-top:6px!important}.quick-summary{gap:6px!important;margin-bottom:7px!important}
+@media(max-width:430px){
+  .metric-label{font-size:16.5px!important}
+  .yield-pill .yl{font-size:15px!important}
+  .quick-box .ql{font-size:15px!important}
+  .quick-box .qv{font-size:25px!important}
+  .mini-metric{font-size:15px!important}
+}
+@media(max-width:360px){
+  .metric-label{font-size:16px!important}
+  .yield-pill .yl{font-size:14.5px!important}
+  .quick-box .ql{font-size:14.5px!important}
+}
+</style>
+</head><body>
 <main>
-  <h1>一棟収益物件 判定ツール <span class="version">V8.1</span></h1>
-  <div class="lead">スマホ一次判定用。重要数字を先に、細かい根拠は近くの「式▼」で確認。</div>
+  <h1>一棟収益物件 判定ツール <span class="version">V8.4</span></h1>
+  <div class="lead">スマホ一次判定用。重要数字を先に、細かい根拠は近くの「根拠▼」で確認。</div>
 
   <section class="card input-card">
     <div class="section-head"><span class="num">1</span><span>入力</span><span class="hint">必要な時だけ開く</span></div>
@@ -66,47 +246,47 @@ details.fold,details.formula{border-top:1px solid var(--line)}details.fold>summa
   <section class="card metrics-card">
     <div class="section-head"><span class="num">3</span><span>重要な数字</span><span class="hint">ここだけ見ても判断できる</span></div>
     <div class="metrics-grid">
-      <div class="metric cash"><div class="metric-label">購入に必要な現金</div><div class="metric-value" id="cashNeededView">—</div><div class="metric-sub" id="cashBreakdown">頭金＋購入時費用＋決済調整</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaCashNeeded"></div></details></div>
-      <div class="metric cf"><div class="metric-label">満室時 月CF</div><div class="metric-value" id="monthlyCF">—</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaMonthlyCF"></div></details></div>
-      <div class="metric cf"><div class="metric-label">満室時 年CF</div><div class="metric-value" id="annualCF">—</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaAnnualCF"></div></details></div>
-      <div class="metric stress"><div class="metric-label">20%減収時 年CF</div><div class="metric-value" id="stressCF">—</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaStressCF"></div></details></div>
+      <div class="metric cash"><div class="metric-label">購入に必要な現金</div><div class="metric-value" id="cashNeededView">—</div><div class="metric-sub" id="cashBreakdown">頭金＋購入時費用＋決済調整</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCashNeeded"></div></details></div>
+      <div class="metric cf"><div class="metric-label">満室時 月CF</div><div class="metric-value" id="monthlyCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyCF"></div></details></div>
+      <div class="metric cf"><div class="metric-label">満室時 年CF</div><div class="metric-value" id="annualCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAnnualCF"></div></details></div>
+      <div class="metric stress"><div class="metric-label">20%減収時 年CF</div><div class="metric-value" id="stressCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaStressCF"></div></details></div>
     </div>
     <div class="yield-strip">
-      <div class="yield-pill"><div class="yl">表面利回り</div><div class="yv" id="grossYield">—</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaGrossYield"></div></details></div>
-      <div class="yield-pill"><div class="yl">実質利回り</div><div class="yv" id="netYield">—</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaNetYield"></div></details></div>
-      <div class="yield-pill after"><div class="yl">返済後利回り</div><div class="yv" id="afterDebtYield">—</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaAfterDebtYield"></div></details></div>
+      <div class="yield-pill"><div class="yl">表面利回り</div><div class="yv" id="grossYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaGrossYield"></div></details></div>
+      <div class="yield-pill"><div class="yl">実質利回り</div><div class="yv" id="netYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaNetYield"></div></details></div>
+      <div class="yield-pill after"><div class="yl">返済後利回り</div><div class="yv" id="afterDebtYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAfterDebtYield"></div></details></div>
     </div>
-    <div class="mini-metrics"><div class="mini-metric"><span>自己資金利回り</span><b id="coc">—</b><details class="formula"><summary>式</summary><div class="formula-box" id="formulaCoc"></div></details></div></div>
+    <div class="mini-metrics"><div class="mini-metric"><span>自己資金利回り</span><b id="coc">—</b><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCoc"></div></details></div></div>
   </section>
 
   <section class="card details-card">
-    <div class="section-head"><span class="num">4</span><span>詳細</span><span class="hint">合計は常に見える</span></div>
+    <div class="section-head"><span class="num">4</span><span>詳細</span><span class="hint mode-legend"><b>緑</b>=実額　<b>橙</b>=概算　灰=自動</span></div>
     <div class="quick-summary">
-      <div class="quick-box expense"><div class="ql">年間経費</div><div class="qv" id="opexTotal">—</div><div class="qs">経費率 <span id="opexRatio">—</span></div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaOpexTotal"></div></details></div>
-      <div class="quick-box cost"><div class="ql">購入時費用</div><div class="qv" id="acqTotal">—</div><div class="qs">決済調整は別</div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaAcqCost"></div></details></div>
-      <div class="quick-box loan"><div class="ql">月返済</div><div class="qv" id="monthlyDebt">—</div><div class="qs" id="monthlyDebtNote"></div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaMonthlyDebt"></div></details></div>
-      <div class="quick-box loan"><div class="ql">借入額</div><div class="qv" id="loanAmountView">—</div><div class="qs" id="ltvView"></div><details class="formula"><summary>式</summary><div class="formula-box" id="formulaLoan"></div></details></div>
+      <div class="quick-box expense"><div class="ql">年間経費</div><div class="qv" id="opexTotal">—</div><div class="qs">経費率 <span id="opexRatio">—</span></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaOpexTotal"></div></details></div>
+      <div class="quick-box cost"><div class="ql">購入時費用</div><div class="qv" id="acqTotal">—</div><div class="qs">決済調整は別</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAcqCost"></div></details></div>
+      <div class="quick-box loan"><div class="ql">月返済</div><div class="qv" id="monthlyDebt">—</div><div class="qs" id="monthlyDebtNote"></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyDebt"></div></details></div>
+      <div class="quick-box loan"><div class="ql">借入額</div><div class="qv" id="loanAmountView">—</div><div class="qs" id="ltvView"></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaLoan"></div></details></div>
     </div>
 
     <details class="fold subfold"><summary><span class="subfold-title"><i class="dot expense"></i>年間経費の内訳</span><span class="small">計算値の横で実額修正</span></summary>
-      <div class="cost-row"><div class="cost-name">管理費<span id="managementMode" class="mode-badge auto-mode">自動</span></div><div id="managementValue" class="cost-value">—</div><input id="managementOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="管理費の実額"><details class="formula"><summary>式</summary><div id="formulaManagement" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">固定資産税<span id="taxMode" class="mode-badge auto-mode">自動</span></div><div id="taxValue" class="cost-value">—</div><input id="taxOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="固定資産税の実額"><details class="formula"><summary>式</summary><div id="formulaTax" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">保険料<span id="insuranceMode" class="mode-badge auto-mode">自動</span></div><div id="insuranceValue" class="cost-value">—</div><input id="insuranceOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="保険料の実額"><details class="formula"><summary>式</summary><div id="formulaInsurance" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">共用部費<span id="commonMode" class="mode-badge auto-mode">自動</span></div><div id="commonValue" class="cost-value">—</div><input id="commonOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="共用部費の実額"><details class="formula"><summary>式</summary><div id="formulaCommon" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">修繕費<span id="repairMode" class="mode-badge auto-mode">自動</span></div><div id="repairValue" class="cost-value">—</div><input id="repairOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="修繕費の実額"><details class="formula"><summary>式</summary><div id="formulaRepair" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">募集費<span id="leasingMode" class="mode-badge auto-mode">自動</span></div><div id="leasingValue" class="cost-value">—</div><input id="leasingOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="募集費の実額"><details class="formula"><summary>式</summary><div id="formulaLeasing" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">管理費<span id="managementMode" class="mode-badge auto-mode">自動</span></div><div id="managementValue" class="cost-value">—</div><input id="managementOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="管理費の実額"><details class="formula"><summary>根拠</summary><div id="formulaManagement" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">固定資産税<span id="taxMode" class="mode-badge auto-mode">自動</span></div><div id="taxValue" class="cost-value">—</div><input id="taxOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="固定資産税の実額"><details class="formula"><summary>根拠</summary><div id="formulaTax" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">保険料<span id="insuranceMode" class="mode-badge auto-mode">自動</span></div><div id="insuranceValue" class="cost-value">—</div><input id="insuranceOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="保険料の実額"><details class="formula"><summary>根拠</summary><div id="formulaInsurance" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">共用部費<span id="commonMode" class="mode-badge auto-mode">自動</span></div><div id="commonValue" class="cost-value">—</div><input id="commonOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="共用部費の実額"><details class="formula"><summary>根拠</summary><div id="formulaCommon" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">修繕費<span id="repairMode" class="mode-badge auto-mode">自動</span></div><div id="repairValue" class="cost-value">—</div><input id="repairOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="修繕費の実額"><details class="formula"><summary>根拠</summary><div id="formulaRepair" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">募集費<span id="leasingMode" class="mode-badge auto-mode">自動</span></div><div id="leasingValue" class="cost-value">—</div><input id="leasingOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="募集費の実額"><details class="formula"><summary>根拠</summary><div id="formulaLeasing" class="formula-box"></div></details></div>
       <div class="other-head"><b style="font-size:11px">その他経費</b><button id="addOpex" type="button">＋追加</button></div><div class="cost-tip">EV・ネット・浄化槽・ゴミ回収など。何件でも追加。</div><div id="customOpex"></div>
       <div id="opexRows" class="hidden"></div>
     </details>
 
     <details class="fold subfold"><summary><span class="subfold-title"><i class="dot cost"></i>購入時費用の内訳</span><span class="small">計算値の横で実額修正</span></summary>
-      <div class="cost-row"><div class="cost-name">仲介手数料<span id="brokerMode" class="mode-badge auto-mode">自動</span></div><div id="brokerValue" class="cost-value">—</div><input id="brokerOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="仲介手数料の実額"><details class="formula"><summary>式</summary><div id="formulaBroker" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">登記費用<span id="registrationMode" class="mode-badge auto-mode">自動</span></div><div id="registrationValue" class="cost-value">—</div><input id="registrationOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="登記費用の実額"><details class="formula"><summary>式</summary><div id="formulaRegistration" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">印紙代<span id="stampMode" class="mode-badge auto-mode">自動</span></div><div id="stampValue" class="cost-value">—</div><input id="stampOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="印紙代の実額"><details class="formula"><summary>式</summary><div id="formulaStamp" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">銀行費用<span id="bankMode" class="mode-badge auto-mode">自動</span></div><div id="bankValue" class="cost-value">—</div><input id="bankOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="銀行費用の実額"><details class="formula"><summary>式</summary><div id="formulaBank" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">不動産取得税<span id="acqTaxMode" class="mode-badge auto-mode">自動</span></div><div id="acqTaxValue" class="cost-value">—</div><input id="acqTaxOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="不動産取得税の実額"><details class="formula"><summary>式</summary><div id="formulaAcqTax" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">固定資産税の精算<span id="settleMode" class="mode-badge auto-mode">自動</span></div><div id="settleValue" class="cost-value">—</div><input id="settleOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額(万)" aria-label="固定資産税の精算の実額"><details class="formula"><summary>式</summary><div id="formulaSettle" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">雑費<span id="miscMode" class="mode-badge auto-mode">自動</span></div><div id="miscValue" class="cost-value">—</div><input id="miscDefault" class="cost-input" type="number" min="0" step="0.1" value="2" placeholder="設定(万)" aria-label="雑費の実額"><details class="formula"><summary>式</summary><div id="formulaMisc" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">仲介手数料<span id="brokerMode" class="mode-badge auto-mode">自動</span></div><div id="brokerValue" class="cost-value">—</div><input id="brokerOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="仲介手数料の実額"><details class="formula"><summary>根拠</summary><div id="formulaBroker" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">登記費用<span id="registrationMode" class="mode-badge auto-mode">概算</span></div><div id="registrationValue" class="cost-value">—</div><input id="registrationOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="合計実額" aria-label="登記費用の合計実額"><details class="formula"><summary>根拠・精度UP</summary><div id="formulaRegistration" class="formula-box"></div><div class="precision-box"><div class="precision-head">登記費用を「税金」と「報酬」に分けて精度を上げる</div><div class="precision-grid"><label>登録免許税 実額（万円）<input id="registrationTaxOverride" type="number" min="0" step="0.1" placeholder="空欄＝概算"></label><label>司法書士報酬 実額（万円）<input id="judicialOverride" type="number" min="0" step="0.1" placeholder="空欄＝概算"></label></div><div class="cost-tip">上の「合計実額」が入っている場合は合計実額を最優先。空欄なら、ここで入力した税金・報酬を合計に反映。</div></div></details></div>
+      <div class="cost-row"><div class="cost-name">印紙代<span id="stampMode" class="mode-badge auto-mode">自動</span></div><div id="stampValue" class="cost-value">—</div><input id="stampOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="印紙代の実額"><details class="formula"><summary>根拠</summary><div id="formulaStamp" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">銀行費用<span id="bankMode" class="mode-badge auto-mode">自動</span></div><div id="bankValue" class="cost-value">—</div><input id="bankOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="銀行費用の実額"><details class="formula"><summary>根拠</summary><div id="formulaBank" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">不動産取得税<span id="acqTaxMode" class="mode-badge auto-mode">自動</span></div><div id="acqTaxValue" class="cost-value">—</div><input id="acqTaxOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="不動産取得税の実額"><details class="formula"><summary>根拠</summary><div id="formulaAcqTax" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">固都税精算<span id="settleMode" class="mode-badge auto-mode">自動</span></div><div id="settleValue" class="cost-value">—</div><input id="settleOverride" class="cost-input" type="number" min="0" step="0.1" placeholder="実額" aria-label="固定資産税の精算の実額"><details class="formula"><summary>根拠</summary><div id="formulaSettle" class="formula-box"></div></details></div>
+      <div class="cost-row"><div class="cost-name">雑費<span id="miscMode" class="mode-badge auto-mode">自動</span></div><div id="miscValue" class="cost-value">—</div><input id="miscDefault" class="cost-input" type="number" min="0" step="0.1" value="2" placeholder="設定(万)" aria-label="雑費の実額"><details class="formula"><summary>根拠</summary><div id="formulaMisc" class="formula-box"></div></details></div>
       <div class="closing-row"><div><b style="font-size:11px">決済時の追加・戻り</b><div class="small">追加支出＋ / 敷金等の受取－</div></div><input id="closingAdjustment" type="number" step="0.1" value="0" aria-label="決済時の追加・戻り"></div>
       <div class="other-head"><b style="font-size:11px">その他費用</b><button id="addAcq" type="button">＋追加</button></div><div id="customAcq"></div><div id="acqRows" class="hidden"></div>
     </details>
@@ -134,7 +314,7 @@ const STORAGE_DRAFT="ichito_checker_v7_draft",STORAGE_CASES="ichito_checker_v7_c
 let calcState=null,customOpex=[],customAcq=[],savedCases=[],compareIds=[],programmatic=false,loanPrimary="ratio";
 let fieldSources={price:"default",rent:"default",listingYield:"calc",loanRatio:"default",loanOverride:"calc",propertyName:"empty",currentRent:"empty",structure:"default"};
 const tracked=["price","rent","listingYield","loanRatio","loanOverride","propertyName","currentRent","structure"];
-const inputIds=["propertyUrl","propertyName","price","rent","listingYield","currentRent","structure","loanRatio","interest","years","repayMethod","loanOverride","repayOverride","insuredAmount","managementOverride","taxOverride","insuranceOverride","commonOverride","repairOverride","leasingOverride","brokerOverride","registrationOverride","stampOverride","bankOverride","acqTaxOverride","settleOverride","closingAdjustment","caseStage","propertyMemo","portfolioTarget","yieldMin","repayMax","opexMax","lossRate","managementRate","taxRate","commonRate","repairRate","leasingRate","insuredPct","insM","insT","insH","ownershipRegRate","mortgageRate","acqTaxRate","settleRate","bankDefault","miscDefault"];
+const inputIds=["propertyUrl","propertyName","price","rent","listingYield","currentRent","structure","loanRatio","interest","years","repayMethod","loanOverride","repayOverride","insuredAmount","managementOverride","taxOverride","insuranceOverride","commonOverride","repairOverride","leasingOverride","brokerOverride","registrationOverride","registrationTaxOverride","judicialOverride","stampOverride","bankOverride","acqTaxOverride","settleOverride","closingAdjustment","caseStage","propertyMemo","portfolioTarget","yieldMin","repayMax","opexMax","lossRate","managementRate","taxRate","commonRate","repairRate","leasingRate","insuredPct","insM","insT","insH","ownershipRegRate","mortgageRate","acqTaxRate","settleRate","bankDefault","miscDefault"];
 function n(id){const v=parseFloat($(id).value);return Number.isFinite(v)?v:0}function opt(id){const s=$(id).value.trim();if(s==="")return null;const v=parseFloat(s);return Number.isFinite(v)?v:null}
 function money(v){if(!Number.isFinite(v))return "—";return v.toLocaleString("ja-JP",{maximumFractionDigits:1})+"万円"}function pct(v){if(!Number.isFinite(v))return "—";return v.toLocaleString("ja-JP",{maximumFractionDigits:2})+"%"}function times(v){return Number.isFinite(v)?v.toLocaleString("ja-JP",{maximumFractionDigits:2})+"倍":"—"}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -154,14 +334,14 @@ function schedule(principal,ratePct,years,method){principal=Number(principal);ra
 function opexModel(price,rent,structure){const insured=opt("insuredAmount")??price*n("insuredPct")/100;const ir=structure==="M"?n("insM"):structure==="T"?n("insT"):n("insH");return{management:opt("managementOverride")??rent*n("managementRate")/100,tax:opt("taxOverride")??price*n("taxRate")/100,insurance:opt("insuranceOverride")??insured*ir/100,common:opt("commonOverride")??price*n("commonRate")/100,repair:opt("repairOverride")??rent*n("repairRate")/100,leasing:opt("leasingOverride")??rent*n("leasingRate")/100}}
 function customTotal(arr){return arr.reduce((s,x)=>{const v=Number(x.amount);return s+(Number.isFinite(v)&&v>0?v:0)},0)}
 function registrationTax(baseMan,ratePct){baseMan=Number(baseMan);ratePct=Number(ratePct);if(!Number.isFinite(baseMan)||!Number.isFinite(ratePct)||baseMan<=0||ratePct<=0)return 0;let baseYen=Math.floor(baseMan*10000/1000)*1000;if(baseYen<1000)baseYen=1000;let taxYen=Math.floor((baseYen*ratePct/100)/100)*100;if(taxYen<1000)taxYen=1000;return taxYen/10000}
-function acquisition(price,loan){const ownership=price*n("ownershipRegRate")/100,mortgage=registrationTax(loan,n("mortgageRate")),jud=judicial(price);const registrationDefault=ownership+mortgage+jud;const stampDefault=saleStamp(price)+loanStamp(loan);const vals={broker:opt("brokerOverride")??broker(price),registration:opt("registrationOverride")??registrationDefault,stamps:opt("stampOverride")??stampDefault,bank:opt("bankOverride")??n("bankDefault"),acqTax:opt("acqTaxOverride")??price*n("acqTaxRate")/100,settle:opt("settleOverride")??price*n("settleRate")/100,misc:n("miscDefault"),custom:customTotal(customAcq),ownership,mortgage,jud,registrationDefault,saleStamp:saleStamp(price),loanStamp:loanStamp(loan),stampDefault};vals.total=vals.broker+vals.registration+vals.stamps+vals.bank+vals.acqTax+vals.settle+vals.misc+vals.custom;return vals}
+function acquisition(price,loan){const ownership=price*n("ownershipRegRate")/100,mortgage=registrationTax(loan,n("mortgageRate")),registrationTaxDefault=ownership+mortgage,registrationTaxUsed=opt("registrationTaxOverride")??registrationTaxDefault,judDefault=judicial(price),jud=opt("judicialOverride")??judDefault,registrationDefault=registrationTaxUsed+jud,stampDefault=saleStamp(price)+loanStamp(loan);const vals={broker:opt("brokerOverride")??broker(price),registration:opt("registrationOverride")??registrationDefault,stamps:opt("stampOverride")??stampDefault,bank:opt("bankOverride")??n("bankDefault"),acqTax:opt("acqTaxOverride")??price*n("acqTaxRate")/100,settle:opt("settleOverride")??price*n("settleRate")/100,misc:n("miscDefault"),custom:customTotal(customAcq),ownership,mortgage,registrationTaxDefault,registrationTax:registrationTaxUsed,judDefault,jud,registrationDefault,saleStamp:saleStamp(price),loanStamp:loanStamp(loan),stampDefault};vals.total=vals.broker+vals.registration+vals.stamps+vals.bank+vals.acqTax+vals.settle+vals.misc+vals.custom;return vals}
 
 function gradeHigher(v,target){if(v>=target+1.5)return"excellent";if(v>=target)return"good";if(v>=target-1)return"mid";return"bad"}function gradeLower(v,target){if(v<=target*.8)return"excellent";if(v<=target)return"good";if(v<=target*1.1)return"mid";return"bad"}function gradeStress(cf,rent){if(rent<=0)return"bad";const m=cf/rent*100;if(m>=5)return"excellent";if(cf>=0)return"good";if(m>=-5)return"mid";return"bad"}function mark(g){return g==="excellent"?"◎":g==="good"?"○":g==="mid"?"△":"×"}function setStatus(id,g,text){const e=$(id);e.className="status "+g;e.textContent=mark(g)+" "+text}
 function fbox(rule,sub,note=""){return '<b>式：</b>'+esc(rule)+'<br><b>代入：</b>'+esc(sub)+(note?'<br><span class="muted">'+esc(note)+'</span>':'')}
 function detailLine(name,amount,note,formulaHtml){return '<div class="detail-row"><div class="row"><div class="left"><div class="name">'+esc(name)+'</div><div class="note">'+esc(note||"")+'</div></div><div class="amt">'+money(amount)+'</div></div><details class="formula"><summary>計算式</summary><div class="formula-box">'+formulaHtml+'</div></details></div>'}
-function setEditRow(key,amount,mode,formulaHtml){const v=$(key+"Value"),m=$(key+"Mode"),f=$("formula"+key.charAt(0).toUpperCase()+key.slice(1));if(v)v.textContent=money(amount);if(m){m.textContent=mode;m.className="mode-badge "+(mode==="実額"?"actual":"auto-mode")}if(f)f.innerHTML=formulaHtml}
+function setEditRow(key,amount,mode,formulaHtml){const v=$(key+"Value"),m=$(key+"Mode"),f=$("formula"+key.charAt(0).toUpperCase()+key.slice(1)),row=v?.closest?.(".cost-row");let cls="auto-mode",vcls="auto-value",rcls="";if(mode==="実額"){cls="actual";vcls="actual-value";rcls="row-actual"}else if(mode==="実額反映"){cls="actual-mix";vcls="actual-mix-value";rcls="row-actual-mix"}else if(mode==="概算"){cls="estimate";vcls="estimate-value";rcls="row-estimate"}else if(mode==="設定"){cls="setting-mode";vcls="setting-value";rcls="row-setting"}if(v){v.textContent=money(amount);v.className="cost-value "+vcls}if(m){m.textContent=mode;m.className="mode-badge "+cls}if(row){row.classList.remove("row-actual","row-actual-mix","row-estimate","row-setting");if(rcls)row.classList.add(rcls)}if(f)f.innerHTML=formulaHtml}
 function rawNum(id){const e=$(id);if(!e)return null;const t=String(e.value??"").trim();if(t==="")return null;const v=Number(t);return Number.isFinite(v)?v:NaN}
-function validateInputs(){const errs=[];const p=rawNum("price"),r=rawNum("rent"),y=rawNum("listingYield"),lr=rawNum("loanRatio"),ir=rawNum("interest"),yrs=rawNum("years"),loss=rawNum("lossRate"),closing=rawNum("closingAdjustment");if(p===null||Number.isNaN(p)||p<=0)errs.push("売買価格は0より大きい金額を入力");if((r===null||Number.isNaN(r)||r<0)&&(y===null||Number.isNaN(y)||y<0))errs.push("年間家賃か表面利回りを入力");if(r!==null&&(Number.isNaN(r)||r<0))errs.push("年間家賃は0以上");if(y!==null&&(Number.isNaN(y)||y<0))errs.push("表面利回りは0以上");if(lr===null||Number.isNaN(lr)||lr<0||lr>120)errs.push("融資割合は0〜120%");if(ir===null||Number.isNaN(ir)||ir<0||ir>20)errs.push("金利は0〜20%");if(yrs===null||Number.isNaN(yrs)||yrs<1||yrs>50)errs.push("融資期間は1〜50年");if(loss===null||Number.isNaN(loss)||loss<0||loss>100)errs.push("減収テストは0〜100%");if(closing!==null&&Number.isNaN(closing))errs.push("決済時の追加・戻りは数値で入力");const nonNeg=["currentRent","loanOverride","repayOverride","insuredAmount","managementOverride","taxOverride","insuranceOverride","commonOverride","repairOverride","leasingOverride","brokerOverride","registrationOverride","stampOverride","bankOverride","acqTaxOverride","settleOverride","yieldMin","repayMax","opexMax","managementRate","taxRate","commonRate","repairRate","leasingRate","insuredPct","insM","insT","insH","ownershipRegRate","mortgageRate","acqTaxRate","settleRate","bankDefault","miscDefault"];for(const id of nonNeg){const v=rawNum(id);if(v!==null&&(Number.isNaN(v)||v<0)){const label=$(id)?.closest?.("label")?.childNodes?.[0]?.textContent?.trim()||id;errs.push(label+"は0以上")}}if(customOpex.some(x=>!Number.isFinite(Number(x.amount))||Number(x.amount)<0))errs.push("その他経費は有限の0以上の数値");if(customAcq.some(x=>!Number.isFinite(Number(x.amount))||Number(x.amount)<0))errs.push("その他費用は有限の0以上の数値");return errs}
+function validateInputs(){const errs=[];const p=rawNum("price"),r=rawNum("rent"),y=rawNum("listingYield"),lr=rawNum("loanRatio"),ir=rawNum("interest"),yrs=rawNum("years"),loss=rawNum("lossRate"),closing=rawNum("closingAdjustment");if(p===null||Number.isNaN(p)||p<=0)errs.push("売買価格は0より大きい金額を入力");if((r===null||Number.isNaN(r)||r<0)&&(y===null||Number.isNaN(y)||y<0))errs.push("年間家賃か表面利回りを入力");if(r!==null&&(Number.isNaN(r)||r<0))errs.push("年間家賃は0以上");if(y!==null&&(Number.isNaN(y)||y<0))errs.push("表面利回りは0以上");if(lr===null||Number.isNaN(lr)||lr<0||lr>120)errs.push("融資割合は0〜120%");if(ir===null||Number.isNaN(ir)||ir<0||ir>20)errs.push("金利は0〜20%");if(yrs===null||Number.isNaN(yrs)||yrs<1||yrs>50)errs.push("融資期間は1〜50年");if(loss===null||Number.isNaN(loss)||loss<0||loss>100)errs.push("減収テストは0〜100%");if(closing!==null&&Number.isNaN(closing))errs.push("決済時の追加・戻りは数値で入力");const nonNeg=["currentRent","loanOverride","repayOverride","insuredAmount","managementOverride","taxOverride","insuranceOverride","commonOverride","repairOverride","leasingOverride","brokerOverride","registrationOverride","registrationTaxOverride","judicialOverride","stampOverride","bankOverride","acqTaxOverride","settleOverride","yieldMin","repayMax","opexMax","managementRate","taxRate","commonRate","repairRate","leasingRate","insuredPct","insM","insT","insH","ownershipRegRate","mortgageRate","acqTaxRate","settleRate","bankDefault","miscDefault"];for(const id of nonNeg){const v=rawNum(id);if(v!==null&&(Number.isNaN(v)||v<0)){const label=$(id)?.closest?.("label")?.childNodes?.[0]?.textContent?.trim()||id;errs.push(label+"は0以上")}}if(customOpex.some(x=>!Number.isFinite(Number(x.amount))||Number(x.amount)<0))errs.push("その他経費は有限の0以上の数値");if(customAcq.some(x=>!Number.isFinite(Number(x.amount))||Number(x.amount)<0))errs.push("その他費用は有限の0以上の数値");return errs}
 function invalidateCalc(title,msg){calcState=null;$("decisionCard").dataset.grade="mid";$("verdict").className="verdict warn";$("verdict").textContent=title;$("reason").textContent=msg;$("overallComment").textContent="入力を直すと自動で再計算します。";["cashNeededView","monthlyCF","annualCF","stressCF","grossYield","netYield","afterDebtYield","coc","loanAmountView","monthlyDebt","opexTotal","opexRatio","acqTotal"].forEach(id=>{if($(id))$(id).textContent="—"});["stickyCash","stickyMonthly","stickyStress"].forEach(id=>{if($(id))$(id).textContent="—"});if($("stickyVerdict"))$("stickyVerdict").textContent="入力確認";["statusStress","statusRepay","statusOpex","statusYield"].forEach(id=>{if($(id)){$(id).className="status";$(id).textContent="—"}})}
 function calc(){const conflict=hasRentYieldConflict();$("rentYieldError").style.display=conflict?"block":"none";if(conflict){$("coreInputError").style.display="none";invalidateCalc("⚠️ 入力エラー","年間家賃か表面利回りのどちらか一方を手入力にしてください。");return}const errs=validateInputs();$("coreInputError").style.display=errs.length?"block":"none";$("coreInputError").textContent=errs.length?"⚠️ "+errs.join(" / "):"";if(errs.length){invalidateCalc("⚠️ 入力エラー",errs[0]);return}
  const price=n("price"),rent=Math.max(0,n("rent")),structure=$("structure").value,loanRatio=n("loanRatio"),interest=n("interest"),years=n("years"),method=$("repayMethod").value;const loan=Math.max(0,loanPrimary==="amount"?n("loanOverride"):price*loanRatio/100);const sch=schedule(loan,interest,years,method);const annualDebt=Math.max(0,opt("repayOverride")??sch.firstYearPay);const op=opexModel(price,rent,structure),cOpex=customTotal(customOpex),opex=Object.values(op).reduce((s,v)=>s+v,0)+cOpex;const acq=acquisition(price,loan),closing=n("closingAdjustment"),down=Math.max(0,price-loan),cashBeforeFloor=price+acq.total+closing-loan,cashNeeded=Math.max(0,cashBeforeFloor),totalInvestment=price+acq.total;const gross=price>0?rent/price*100:0,noi=rent-opex,netYield=totalInvestment>0?noi/totalInvestment*100:0,cf=noi-annualDebt,afterDebtYield=totalInvestment>0?cf/totalInvestment*100:0,coc=cashNeeded>0?cf/cashNeeded*100:NaN,rr=rent>0?annualDebt/rent*100:NaN,or=rent>0?opex/rent*100:NaN,stressIncome=rent*(1-n("lossRate")/100),stressCF=stressIncome-opex-annualDebt,dscr=annualDebt>0?noi/annualDebt:Infinity,breakEven=rent>0?(opex+annualDebt)/rent*100:NaN,debtYield=loan>0?noi/loan*100:NaN,currentRent=opt("currentRent"),currentCF=currentRent===null?null:currentRent-opex-annualDebt,currentOccupancy=currentRent===null||rent<=0?null:currentRent/rent*100;const yg=gradeHigher(gross,n("yieldMin")),rg=gradeLower(rr,n("repayMax")),og=gradeLower(or,n("opexMax")),sg=gradeStress(stressCF,rent);$("decisionCard").dataset.grade=sg;$("verdict").className="verdict "+(sg==="bad"?"ng":sg==="mid"?"warn":"ok");$("verdict").textContent=sg==="excellent"?"◎ 強く検討":sg==="good"?"○ 検討可":sg==="mid"?"△ 条件調整":"× 見送り";$("reason").textContent=sg==="excellent"?n("lossRate")+"%減収後でも年CF "+money(stressCF)+"。十分な余裕あり。":sg==="good"?n("lossRate")+"%減収後も年CF "+money(stressCF)+"で赤字を回避。":sg==="mid"?n("lossRate")+"%減収後は "+money(stressCF)+"。価格・融資条件・経費の調整候補。":n("lossRate")+"%減収後に "+money(stressCF)+"。現条件では見送りライン。";setStatus("statusStress",sg,n("lossRate")+"%減収 "+money(stressCF));setStatus("statusRepay",rg,"返済 "+pct(rr));setStatus("statusOpex",og,"経費 "+pct(or));setStatus("statusYield",yg,"利回り "+pct(gross));const caut=[];if(rg==="bad"||rg==="mid")caut.push("返済負担を確認");if(og==="bad"||og==="mid")caut.push("年間経費を精査");if(yg==="bad"||yg==="mid")caut.push("利回りは低め");$("overallComment").innerHTML='<b>'+mark(sg)+' 総合：</b> '+(sg==="excellent"?"20%減収耐性が強い。実額確認へ進めたい。":sg==="good"?"20%減収でも黒字。実額を埋めて最終確認したい。":sg==="mid"?"条件を動かせば合格圏。改善余地を詰めたい。":"20%減収耐性が不足。買値か融資条件の改善が必要。")+(caut.length?'<br><span class="small">注意：'+esc(caut.join("・"))+'</span>':'');
@@ -178,9 +358,9 @@ function calc(){const conflict=hasRentYieldConflict();$("rentYieldError").style.
  setEditRow("repair",op.repair,opt("repairOverride")===null?"概算":"実額",fbox("満室年間家賃×"+n("repairRate")+"%",opt("repairOverride")===null?money(rent)+"×"+pct(n("repairRate"))+"＝"+money(op.repair):"手入力＝"+money(op.repair)));
  setEditRow("leasing",op.leasing,opt("leasingOverride")===null?"概算":"実額",fbox("満室年間家賃×"+n("leasingRate")+"%",opt("leasingOverride")===null?money(rent)+"×"+pct(n("leasingRate"))+"＝"+money(op.leasing):"手入力＝"+money(op.leasing)));
  //購入時費用
- const bRule=price>400?"（売買価格×3%＋6万円）×1.10":price>200?"（売買価格×4%＋2万円）×1.10":"売買価格×5%×1.10";const bSub=opt("brokerOverride")===null?(price>400?"（"+money(price)+"×3%＋6万円）×1.10＝"+money(acq.broker):"価格帯計算＝"+money(acq.broker)):"手入力＝"+money(acq.broker);const regSub=opt("registrationOverride")===null?"所有権移転概算 "+money(acq.ownership)+"＋抵当権設定 "+money(acq.mortgage)+"＋司法書士 "+money(acq.jud)+"＝"+money(acq.registration):"手入力＝"+money(acq.registration);const regNote=opt("registrationOverride")===null?"所有権移転は評価額不明のため売価×"+n("ownershipRegRate")+"%で仮置き。実額が分かれば上書き。抵当権は通常、債権額×"+n("mortgageRate")+"%。":"";const stampSub=opt("stampOverride")===null?"売買契約 "+money(acq.saleStamp)+"＋融資契約 "+money(acq.loanStamp)+"＝"+money(acq.stamps):"手入力＝"+money(acq.stamps);
+ const bRule=price>400?"（売買価格×3%＋6万円）×1.10":price>200?"（売買価格×4%＋2万円）×1.10":"売買価格×5%×1.10";const bSub=opt("brokerOverride")===null?(price>400?"（"+money(price)+"×3%＋6万円）×1.10＝"+money(acq.broker):"価格帯計算＝"+money(acq.broker)):"手入力＝"+money(acq.broker);const regTotalActual=opt("registrationOverride")!==null,regTaxActual=opt("registrationTaxOverride")!==null,judActual=opt("judicialOverride")!==null;const regSub=regTotalActual?"合計実額＝"+money(acq.registration):"登録免許税 "+money(acq.registrationTax)+"＋司法書士報酬 "+money(acq.jud)+"＝"+money(acq.registration);const regNote=regTotalActual?"合計実額を最優先。":"登録免許税の内訳：所有権移転 "+money(acq.ownership)+"＋抵当権設定 "+money(acq.mortgage)+"。税金・司法書士報酬は下の欄で個別に実額反映できます。";const stampSub=opt("stampOverride")===null?"売買契約 "+money(acq.saleStamp)+"＋融資契約 "+money(acq.loanStamp)+"＝"+money(acq.stamps):"手入力＝"+money(acq.stamps);
  setEditRow("broker",acq.broker,opt("brokerOverride")===null?"自動":"実額",fbox(bRule,bSub,"通常上限の一次判定。実際の仲介手数料が分かれば実額入力"));
- setEditRow("registration",acq.registration,opt("registrationOverride")===null?"概算":"実額",fbox("所有権移転＋抵当権設定＋司法書士",regSub,regNote));
+ setEditRow("registration",acq.registration,regTotalActual?"実額":(regTaxActual||judActual?"実額反映":"概算"),fbox("登録免許税（税金）＋司法書士報酬",regSub,regNote));
  setEditRow("stamp",acq.stamps,opt("stampOverride")===null?"自動":"実額",fbox("売買契約印紙＋融資契約印紙",stampSub,"電子契約等で不要なら実額0を入力"));
  setEditRow("bank",acq.bank,opt("bankOverride")===null?"概算":"実額",fbox("金融機関費用",opt("bankOverride")===null?"仮置き "+money(acq.bank):"手入力＝"+money(acq.bank)));
  setEditRow("acqTax",acq.acqTax,opt("acqTaxOverride")===null?"概算":"実額",fbox("売買価格×"+n("acqTaxRate")+"%（評価額不明時の概算）",opt("acqTaxOverride")===null?money(price)+"×"+pct(n("acqTaxRate"))+"＝"+money(acq.acqTax):"手入力＝"+money(acq.acqTax),"実際は固定資産評価額等で計算"));
@@ -200,7 +380,7 @@ function applyExtract(o){const results=[];const clearField=(id,val="",source="em
 async function autoExtract(){const url=$("propertyUrl").value.trim();if(!/^https?:\/\//i.test(url)){alert("物件URLを入れてな");return}$("extractStatus").textContent="読み取り中…";$("autoExtractBtn").disabled=true;try{const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),25000);const r=await fetch("https://r.jina.ai/"+url,{signal:ctl.signal,headers:{Accept:"text/plain"}});clearTimeout(tm);if(!r.ok)throw new Error("HTTP "+r.status);applyExtract(parseListingText(await r.text()));$("extractStatus").textContent="自動入力完了。手入力項目は変更していません。"}catch(e){$("extractStatus").textContent="URLから取得できませんでした。下の本文貼り付けを使えます。"}finally{$("autoExtractBtn").disabled=false}}
 
 /* 保存 */
-function snapshot(){if(!calcState)return null;const f={};inputIds.forEach(id=>{const e=$(id);if(e)f[id]=e.value});return{version:8.1,fields:f,sources:{...fieldSources},loanPrimary,customOpex:JSON.parse(JSON.stringify(customOpex)),customAcq:JSON.parse(JSON.stringify(customAcq)),summary:{price:calcState.price,rent:calcState.rent,cash:calcState.cashNeeded,monthlyCF:calcState.cf/12,annualCF:calcState.cf,stressCF:calcState.stressCF,gross:calcState.gross,afterDebtYield:calcState.afterDebtYield,grade:mark(calcState.sg)},savedAt:new Date().toISOString()}}
+function snapshot(){if(!calcState)return null;const f={};inputIds.forEach(id=>{const e=$(id);if(e)f[id]=e.value});return{version:8.2,fields:f,sources:{...fieldSources},loanPrimary,customOpex:JSON.parse(JSON.stringify(customOpex)),customAcq:JSON.parse(JSON.stringify(customAcq)),summary:{price:calcState.price,rent:calcState.rent,cash:calcState.cashNeeded,monthlyCF:calcState.cf/12,annualCF:calcState.cf,stressCF:calcState.stressCF,gross:calcState.gross,afterDebtYield:calcState.afterDebtYield,grade:mark(calcState.sg)},savedAt:new Date().toISOString()}}
 function applySnapshot(s){if(!s)return;programmatic=true;Object.entries(s.fields||{}).forEach(([id,v])=>{if($(id))$(id).value=v});programmatic=false;fieldSources={...fieldSources,...(s.sources||{})};loanPrimary=s.loanPrimary||(fieldSources.loanOverride==="manual"?"amount":"ratio");customOpex=s.customOpex||[];customAcq=s.customAcq||[];customRender("opex");customRender("acq");syncLoanPair("price");badges();calc()}
 function saveDraft(){const s=snapshot();if(!s)return;localStorage.setItem(STORAGE_DRAFT,JSON.stringify(s));const d=new Date();$("saveState").textContent="自動保存済み";$("lastSaved").textContent=d.toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"})}
 function saveCase(){const s=snapshot();if(!s){alert("入力エラーを直してから保存してな");return;}s.id=Date.now();s.name=$("propertyName").value.trim()||"無題の物件";s.stage=$("caseStage").value;s.memo=$("propertyMemo").value;savedCases.push(s);localStorage.setItem(STORAGE_CASES,JSON.stringify(savedCases));renderManagement()}
@@ -213,11 +393,11 @@ async function ensureXLSX(){if(window.XLSX)return;await new Promise((res,rej)=>{
 function aoaSheet(rows,widths=[18,22,20,60]){const ws=XLSX.utils.aoa_to_sheet(rows);ws["!cols"]=widths.map(w=>({wch:w}));return ws}
 async function exportExcel(){if(!calcState){alert("入力エラーを直してからExcel出力してな");return;}try{await ensureXLSX();const s=calcState,name=$("propertyName").value.trim()||"一棟物件",wb=XLSX.utils.book_new();const summary=[[name+" 判定サマリー"],["最重要"],["項目","数値","計算式・代入"],["総合判定",$("verdict").textContent,$("reason").textContent],["購入に必要な現金",s.cashNeeded,"max(0, 売買価格 "+money(s.price)+" + 購入時費用 "+money(s.acq.total)+" + 決済調整 "+money(s.closing)+" - 借入額 "+money(s.loan)+")"],["満室時 月CF",s.cf/12,"("+money(s.rent)+" - "+money(s.opex)+" - "+money(s.annualDebt)+") / 12"],["満室時 年CF",s.cf,money(s.rent)+" - "+money(s.opex)+" - "+money(s.annualDebt)],[n("lossRate")+"%減収時 年CF",s.stressCF,money(s.stressIncome)+" - "+money(s.opex)+" - "+money(s.annualDebt)],[],["主要利回り"],["表面利回り",s.gross/100,money(s.rent)+" / "+money(s.price)],["実質利回り",s.netYield/100,money(s.noi)+" / "+money(s.totalInvestment)],["返済後利回り",s.afterDebtYield/100,money(s.cf)+" / "+money(s.totalInvestment)],["自己資金利回り",Number.isFinite(s.coc)?s.coc/100:"",money(s.cf)+" / "+money(s.cashNeeded)],[],["融資"],["借入額",s.loan],["月返済",opt("repayOverride")!==null?s.annualDebt/12:s.sch.month1],["年間返済",s.annualDebt],["金利",s.interest/100],["期間",s.years+"年"],["返済方法",s.method==="equal_payment"?"元利均等":"元金均等"]];const ws1=aoaSheet(summary,[22,24,70]);["B11","B12","B13","B14","B20"].forEach(c=>{if(ws1[c])ws1[c].z="0.00%"});XLSX.utils.book_append_sheet(wb,ws1,"判定サマリー");
  const opRows=[["年間経費","金額(万円)","計算根拠"],["合計",s.opex,"満室年間家賃に対する経費率 "+pct(s.or)],["管理費",s.op.management,"家賃×"+n("managementRate")+"% または実額"],["固定資産税",s.op.tax,"売価×"+n("taxRate")+"% または実額"],["保険料",s.op.insurance,"建物保険金額×構造別料率 または実額"],["共用部費",s.op.common,"売価×"+n("commonRate")+"% または実額"],["修繕費",s.op.repair,"家賃×"+n("repairRate")+"% または実額"],["募集費",s.op.leasing,"家賃×"+n("leasingRate")+"% または実額"],...customOpex.map(x=>[x.name||"その他",Number(x.amount)||0,"追加経費"])];XLSX.utils.book_append_sheet(wb,aoaSheet(opRows,[22,16,55]),"年間経費");
- const a=s.acq;const acqRows=[["購入時の費用","金額(万円)","計算根拠"],["合計",a.total,"購入に必要な現金＝max(0, 売買価格＋この合計＋決済調整－借入額)"],["仲介手数料",a.broker,"標準上限式または実額"],["登記費用",a.registration,"所有権移転概算＋抵当権設定＋司法書士 または実額"],["印紙代",a.stamps,"売買契約＋融資契約 または実額"],["銀行費用",a.bank,"実額または20万円仮置き"],["不動産取得税",a.acqTax,"評価額不明時の概算係数または実額"],["固定資産税の精算",a.settle,"概算または実額"],["雑費",a.misc,"固定仮置き"],...customAcq.map(x=>[x.name||"その他",Number(x.amount)||0,"追加費用"]),[],["決済時の追加・戻り",s.closing,"支出＋ / 受取－"],["頭金",s.down],["購入に必要な現金",s.cashNeeded]];XLSX.utils.book_append_sheet(wb,aoaSheet(acqRows,[24,16,60]),"購入時費用");
+ const a=s.acq;const acqRows=[["購入時の費用","金額(万円)","計算根拠"],["合計",a.total,"購入に必要な現金＝max(0, 売買価格＋この合計＋決済調整－借入額)"],["仲介手数料",a.broker,"標準上限式または実額"],["登記費用 合計",a.registration,"登録免許税＋司法書士報酬。合計実額があれば最優先"],["　登録免許税（税金）",a.registrationTax,"所有権移転＋抵当権設定。実額入力可"],["　司法書士報酬",a.jud,"価格帯概算または実額"],["印紙代",a.stamps,"売買契約＋融資契約 または実額"],["銀行費用",a.bank,"実額または20万円仮置き"],["不動産取得税",a.acqTax,"評価額不明時の概算係数または実額"],["固定資産税の精算",a.settle,"概算または実額"],["雑費",a.misc,"固定仮置き"],...customAcq.map(x=>[x.name||"その他",Number(x.amount)||0,"追加費用"]),[],["決済時の追加・戻り",s.closing,"支出＋ / 受取－"],["頭金",s.down],["購入に必要な現金",s.cashNeeded]];XLSX.utils.book_append_sheet(wb,aoaSheet(acqRows,[24,16,60]),"購入時費用");
  const info=[["物件情報","内容"],["物件名",name],["URL",$("propertyUrl").value],["売買価格(万円)",s.price],["満室年間家賃(万円)",s.rent],["表面利回り",s.gross/100],["今の年間家賃(万円)",s.currentRent??""],["構造",$("structure").selectedOptions[0].text],["状態",$("caseStage").value],["メモ",$("propertyMemo").value]];const ws4=aoaSheet(info,[24,70]);if(ws4.B6)ws4.B6.z="0.00%";XLSX.utils.book_append_sheet(wb,ws4,"物件情報");
  const rateStress=schedule(s.loan,s.interest+1,s.years,s.method);const refs=[["参考データ","値","意味"],["NOI",s.noi,"満室年間家賃－年間経費"],["NOI利回り",s.price>0?s.noi/s.price:"","NOI÷売買価格"],["DSCR",Number.isFinite(s.dscr)?s.dscr:"","NOI÷年間返済"],["Debt Yield",Number.isFinite(s.debtYield)?s.debtYield/100:"","NOI÷借入額"],["損益分岐稼働率",Number.isFinite(s.breakEven)?s.breakEven/100:"","(年間経費＋年間返済)÷満室年間家賃"],["返済比率",Number.isFinite(s.rr)?s.rr/100:"","年間返済÷満室年間家賃"],["経費率",Number.isFinite(s.or)?s.or/100:"","年間経費÷満室年間家賃"],["金利+1% 初月返済",rateStress.month1,"ストレス参考"],["金利+1% 初年度返済",rateStress.firstYearPay,"ストレス参考"],["1年後残債",s.sch.endYear1],["総利息",s.sch.totalInterest]];const ws5=aoaSheet(refs,[24,18,60]);["B3","B5","B6","B7","B8"].forEach(c=>{if(ws5[c])ws5[c].z="0.00%"});XLSX.utils.book_append_sheet(wb,ws5,"参考データ");const out=XLSX.write(wb,{bookType:"xlsx",type:"array"});const file=new File([out],name.replace(/[\\/:*?"<>|]/g,"_")+"_判定.xlsx",{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:file.name})}else{const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=file.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}}catch(e){alert("Excel出力に失敗："+(e.message||e))}}
 
-function backup(){const data={version:8.1,draft:snapshot(),cases:savedCases,target:n("portfolioTarget")};const file=new File([JSON.stringify(data,null,2)],"ichito_checker_v8_1_backup.json",{type:"application/json"});if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:file.name}).catch(()=>{})}else{const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=file.name;a.click()}}
+function backup(){const data={version:8.2,draft:snapshot(),cases:savedCases,target:n("portfolioTarget")};const file=new File([JSON.stringify(data,null,2)],"ichito_checker_v8_2_backup.json",{type:"application/json"});if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:file.name}).catch(()=>{})}else{const a=document.createElement("a");a.href=URL.createObjectURL(file);a.download=file.name;a.click()}}
 function restore(file){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);savedCases=d.cases||[];localStorage.setItem(STORAGE_CASES,JSON.stringify(savedCases));if(d.target)$("portfolioTarget").value=d.target;if(d.draft)applySnapshot(d.draft);renderManagement()}catch(e){alert("バックアップを読めません")}};r.readAsText(file)}
 
 /* 電卓 */

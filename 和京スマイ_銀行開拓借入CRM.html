@@ -446,9 +446,19 @@ body{
 @media(max-width:600px){.screen-head h2{font-size:24px}.screen-head p{font-size:13px}.app-nav-inner{grid-template-columns:repeat(6,minmax(0,1fr));padding:5px 3px}.nav-btn{font-size:9px;min-height:56px}.nav-btn .ico{font-size:18px}.focus-count{font-size:38px}.alert-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.interaction-form{grid-template-columns:1fr}.interaction-form .wide{grid-column:auto}.relationship-map{grid-template-columns:1fr}.rel-arrow{transform:rotate(90deg)}.maturity-bars{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 .hero .toolbar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.hero .toolbar::-webkit-scrollbar{display:none}.hero .toolbar .btn{flex:none}
+
+/* ===== iPhone interaction hardening ===== */
+button,summary,label,input,select,textarea,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.app-nav{pointer-events:auto!important}
+.app-nav-inner,.nav-btn{pointer-events:auto!important}
+.vault-overlay.hidden{display:none!important;pointer-events:none!important;visibility:hidden!important}
+.app-screen{position:relative}
+#runtimeErrorBanner{display:none;position:fixed;left:10px;right:10px;top:max(10px,env(safe-area-inset-top));z-index:9999;background:#fff0f0;border:2px solid #e5a0a0;color:#8d2525;border-radius:14px;padding:10px 12px;font-size:12px;font-weight:800;box-shadow:0 8px 30px rgba(0,0,0,.15)}
+#runtimeErrorBanner.show{display:block}
+
 </style>
 </head>
-<body>
+<body><div id="runtimeErrorBanner"></div>
 <div class="container">
 <header class="hero">
   <div class="hero-top">
@@ -1288,5 +1298,75 @@ if(safariBtn)safariBtn.onclick=()=>{
 await initializeVault();render();switchScreen(ui.screen||'home');save();
 })();
 </script>
+
+<script>
+(function(){
+  'use strict';
+  const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  let lastTap=0;
+  function safeSwitch(name){
+    qa('.app-screen').forEach(s=>s.classList.toggle('active',s.dataset.screen===name));
+    qa('[data-screen-btn]').forEach(b=>b.classList.toggle('active',b.dataset.screenBtn===name));
+    try{ if(typeof window.switchScreen==='function') window.switchScreen(name); }catch(e){}
+    try{ window.scrollTo(0,0); }catch(e){}
+  }
+  function activateBankTab(btn){
+    const bank=btn.closest('.bank'); if(!bank)return;
+    const name=btn.dataset.tab;
+    qa('.tab',bank).forEach(x=>x.classList.toggle('active',x===btn));
+    qa('.pane',bank).forEach(x=>x.classList.toggle('active',x.dataset.pane===name));
+    bank.open=true;
+  }
+  function activateLoanTab(btn){
+    const loan=btn.closest('.loan'); if(!loan)return;
+    const name=btn.dataset.ltab;
+    qa('.loan-tab',loan).forEach(x=>x.classList.toggle('active',x===btn));
+    qa('.loan-pane',loan).forEach(x=>x.classList.toggle('active',x.dataset.lpane===name));
+    loan.open=true;
+  }
+  function routeTap(e){
+    const now=Date.now();
+    const nav=e.target.closest && e.target.closest('[data-screen-btn]');
+    if(nav){ e.preventDefault(); e.stopPropagation(); safeSwitch(nav.dataset.screenBtn); lastTap=now; return; }
+    const tab=e.target.closest && e.target.closest('.tab[data-tab]');
+    if(tab){ e.preventDefault(); e.stopPropagation(); activateBankTab(tab); lastTap=now; return; }
+    const ltab=e.target.closest && e.target.closest('.loan-tab[data-ltab]');
+    if(ltab){ e.preventDefault(); e.stopPropagation(); activateLoanTab(ltab); lastTap=now; return; }
+  }
+  // Capturing phase: works even if a child handler later stops propagation.
+  document.addEventListener('pointerup',routeTap,true);
+  document.addEventListener('touchend',function(e){
+    if(Date.now()-lastTap<450)return;
+    routeTap(e);
+  },{capture:true,passive:false});
+  document.addEventListener('click',function(e){
+    if(Date.now()-lastTap<450)return;
+    routeTap(e);
+  },true);
+
+  // Keep bank open while manipulating checks, regardless of application rerenders.
+  document.addEventListener('change',function(e){
+    const cb=e.target.closest && e.target.closest('[data-stage],[data-doc]');
+    if(!cb)return;
+    const bank=cb.closest('.bank');
+    if(bank){ bank.open=true; setTimeout(()=>{bank.open=true},0); setTimeout(()=>{bank.open=true},120); }
+  },true);
+
+  // If the main app throws, show a small diagnostic instead of silently dying.
+  window.addEventListener('error',function(ev){
+    const b=q('#runtimeErrorBanner'); if(!b)return;
+    b.textContent='一部機能でエラーを検出。基本ナビはフォールバックで操作可能。再読込しても続く場合はスクショを送って。';
+    b.classList.add('show');
+    setTimeout(()=>b.classList.remove('show'),6500);
+  });
+  window.addEventListener('unhandledrejection',function(){
+    const b=q('#runtimeErrorBanner'); if(!b)return;
+    b.textContent='保存処理の一部でエラーを検出。画面操作は継続できる。';
+    b.classList.add('show');
+    setTimeout(()=>b.classList.remove('show'),6500);
+  });
+})();
+</script>
+
 </body>
 </html>

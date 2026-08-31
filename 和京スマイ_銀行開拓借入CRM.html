@@ -855,7 +855,7 @@ function overviewPane(b){
 }
 function peoplePane(b){return `<div class="cols2"><div class="card"><h3>支店長・融資担当者</h3><div class="cols2">${personField('支店長名','manager',b)}${personField('支店長確認日','managerChecked',b,'date')}${personField('融資担当者','officer',b)}${personField('役職','title',b)}${personField('直通電話','direct',b,'tel')}${personField('メール','email',b,'email')}${personField('紹介元','introducer',b)}${personField('温度感','temperature',b,'text','A/B/C・積極/普通/消極')}</div></div><div class="card"><h3>人物相関</h3><div class="relationship-map"><div class="rel-node"><div class="small">紹介元</div><b>${esc(b.people.introducer||'未登録')}</b></div><div class="rel-arrow">→</div><div class="rel-node main"><div class="small">${esc(b.branch)}</div><b>${esc(b.name)}</b><div class="small" style="margin-top:4px">支店長 ${esc(b.people.manager||'未登録')} / 担当 ${esc(b.people.officer||'未登録')}</div></div></div><div class="contact-list">${b.people.contacts.length?b.people.contacts.map(c=>`<div class="contact-card"><div class="role">${esc(c.role)}・${esc(c.status)}</div><div class="person">${esc(c.name)}</div><div class="relation">${esc(c.relation)}</div><div class="small">${esc(c.phone)} ${esc(c.email)}</div><button class="btn danger" data-del-contact="${c.id}" style="min-height:30px;margin-top:5px">削除</button></div>`).join(''):'<div class="small">追加人物なし</div>'}</div><form data-contact-form class="cols2" style="margin-top:8px"><label class="field">氏名<input name="name" required></label><label class="field">役割<input name="role" placeholder="旧担当/融資課長/紹介者"></label><label class="field">関係<input name="relation" placeholder="担当者様の上司、税理士紹介など"></label><label class="field">状態<select name="status"><option>現任</option><option>旧担当</option><option>外部紹介者</option></select></label><button class="btn soft" style="grid-column:1/-1">人物追加</button></form></div><div class="card"><h3>接触・キーパーソン</h3><div class="cols2">${personField('初回接触日','firstContact',b,'date')}${personField('最終接触日','lastContact',b,'date')}${personField('次回接触予定','nextContact',b,'date')}${personField('決裁キーパーソン','decisionMaker',b)}</div><label class="field" style="margin-top:7px">人物・関係性メモ<textarea data-person="memo">${esc(b.people.memo)}</textarea></label></div><div class="card"><h3>主観評価（1〜5）</h3><div class="cols3"><label class="field">レスポンス<input data-performance="responsiveness" type="number" min="1" max="5" value="${esc(b.performance.responsiveness)}"></label><label class="field">柔軟性<input data-performance="flexibility" type="number" min="1" max="5" value="${esc(b.performance.flexibility)}"></label><label class="field">関係性<input data-performance="relationship" type="number" min="1" max="5" value="${esc(b.performance.relationship)}"></label></div><div class="info" style="margin-top:7px">実績スコアは案件承認/実行・期間・LTVと、この主観評価を「入力済み項目だけ」で正規化する。</div></div></div>`}
 function progressPane(b){return `<div class="cols2">
- <div class="card"><div class="section-actions"><h3 style="margin:0">開拓チェック 20項目</h3><b data-stage-count>${b.stages.filter(Boolean).length}/20</b></div><div class="check-grid">${STAGES.map((s,i)=>`<label class="check"><input data-stage="${i}" type="checkbox" ${b.stages[i]?'checked':''}><span>${esc(s)}</span></label>`).join('')}</div><div class="info" style="margin-top:7px">チェックしても銀行は閉じない・タブも変わらない仕様。</div></div>
+ <div class="card"><div class="section-actions"><h3 style="margin:0">開拓チェック 20項目</h3><b data-stage-count>${b.stages.filter(Boolean).length}/20</b></div><div class="check-grid">${STAGES.map((s,i)=>`<label class="check"><input data-stage="${i}" type="checkbox" ${b.stages[i]?'checked':''}><span>${esc(s)}</span></label>`).join('')}</div><div class="info" style="margin-top:7px">チェックはその場で即保存。銀行・タブ・スクロール位置は固定したまま連続入力できる。</div></div>
  <div class="card"><div class="section-actions"><h3 style="margin:0">提出資料</h3><b data-doc-count>${b.docs.filter(Boolean).length}/${DOCS.length}</b></div><div class="check-grid">${DOCS.map((d,i)=>`<label class="check"><input data-doc="${i}" type="checkbox" ${b.docs[i]?'checked':''}><span>${esc(d)}</span></label>`).join('')}</div></div>
  </div>`}
 
@@ -931,7 +931,7 @@ function bankPerformance(b){const decided=b.deals.filter(d=>['承認','否決','
 function meetingPack(b){const p=bankPerformance(b),loans=b.loans.filter(l=>l.status!=='取消'),deals=b.deals.filter(d=>!['否決','辞退'].includes(d.status)),ints=[...b.timeline].sort((a,z)=>(z.date||'').localeCompare(a.date||'')).slice(0,5),docs=documents.filter(d=>!d.bankId||d.bankId===b.id);const w=window.open('','_blank');if(!w){alert('ポップアップがブロックされた。Safariの設定を確認して。');return}w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(b.name)} 面談パック</title><style>body{font-family:-apple-system,BlinkMacSystemFont,"Yu Gothic",sans-serif;color:#172235;margin:28px;line-height:1.5}h1{font-size:24px}h2{font-size:16px;border-bottom:2px solid #17365d;padding-bottom:5px;margin-top:22px}table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid #d8e1eb;padding:6px;text-align:left}.box{background:#f5f8fc;border:1px solid #d8e1eb;border-radius:8px;padding:10px;margin:6px 0}.print{position:fixed;right:20px;top:20px;padding:10px 15px}@media print{.print{display:none}}</style><button class="print" onclick="print()">印刷 / PDF</button><h1>${esc(b.name)}｜銀行面談パック</h1><div class="box"><b>支店</b> ${esc(b.branch)}　<b>担当</b> ${esc(b.people.officer||'未登録')}　<b>支店長</b> ${esc(b.people.manager||'未登録')}　<b>実績スコア</b> ${p?p.score+'点':'未算出'}</div><h2>次アクション</h2><div class="box">${esc(b.nextAction||'未設定')} ${esc(b.nextDate||'')}</div><h2>融資条件</h2><table>${[['金利',b.criteria.rate],['期間',b.criteria.term],['LTV',b.criteria.ltv],['自己資金',b.criteria.equity],['築年数',b.criteria.maxAge],['構造',b.criteria.structures],['評価',b.criteria.valuation],['対象エリア',b.criteria.areas]].map(x=>`<tr><th>${x[0]}</th><td>${esc(x[1]||'未確認')}</td></tr>`).join('')}</table><h2>既存借入</h2><table><tr><th>借入</th><th>残債</th><th>金利</th><th>次回返済</th></tr>${loans.map(l=>`<tr><td>${esc(l.name)}</td><td>${yen(loanBalance(l)?.amount)}</td><td>${loanRate(l)?pctFmt(loanRate(l).rate):'—'}</td><td>${yen(loanPlanPay(l,l.nextPaymentDate||TODAY)?.amount)}</td></tr>`).join('')}</table><h2>進行案件</h2>${deals.map(d=>`<div class="box">${esc(projects.find(p=>p.id===d.projectId)?.name||d.name)}｜${esc(d.status)}｜${esc(d.nextAction||'')}</div>`).join('')||'なし'}<h2>直近の銀行発言</h2>${ints.map(x=>`<div class="box"><b>${esc(x.date)} ${esc(x.subject||x.kind)}</b><br>${esc(x.bankStatement||x.memo||'')}<br><small>次：${esc(x.next||'')}</small></div>`).join('')||'なし'}<h2>提出・期限</h2>${docs.map(d=>`<div class="box">${esc(d.name)}｜${esc(d.status)}｜期限 ${esc(d.dueDate||'—')}</div>`).join('')||'なし'}<p style="font-size:10px;color:#6d7b8e">作成 ${new Date().toLocaleString('ja-JP')}｜和京スマイ 銀行開拓・借入統合CRM</p>`);w.document.close()}
 function bankBlock(b){
  const p=bankProgress(b),bal=bankBalance(b),pay=bankNextPay(b),miss=missing(b),actualCount=b.loans.reduce((s,l)=>s+l.actualRepayments.length,0);
- return `<details class="bank bank-rank-${b.rank.toLowerCase()}" data-id="${b.id}"><summary class="bank-summary"><div class="summary-top"><div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集履歴あり</span>':''}${bankPerformance(b)?`<span class="score-chip">実績 ${bankPerformance(b).score}点</span>`:''}</div><div class="sub"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span>${esc(bankStatus(b))}</span><span>開拓 ${p}%</span></div></div><span class="arrow">▼</span></div><div class="progress"><i style="width:${p}%"></i></div>
+ return `<details class="bank bank-rank-${b.rank.toLowerCase()}" data-id="${b.id}"><summary class="bank-summary"><div class="summary-top"><div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集履歴あり</span>':''}${bankPerformance(b)?`<span class="score-chip">実績 ${bankPerformance(b).score}点</span>`:''}</div><div class="sub"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span data-bank-status>${esc(bankStatus(b))}</span><span data-bank-progress-text>開拓 ${p}%</span></div></div><span class="arrow">▼</span></div><div class="progress"><i style="width:${p}%"></i></div>
  ${b.loans.length?`<div class="quick"><div class="q green"><span>残債</span><b>${yen(bal)}</b></div><div class="q amber"><span>次回返済</span><b>${yen(pay)}</b></div><div class="q purple"><span>借入</span><b>${b.loans.length}件</b></div><div class="q blue"><span>返済実績</span><b>${actualCount}件</b></div><div class="q"><span>担当者</span><b>${esc(b.people.officer||'未登録')}</b></div></div>`:''}
  ${miss?`<div class="warn" style="margin-top:6px;padding:5px 7px">未確認重要項目 ${miss}件</div>`:''}
  </summary><div class="bank-body"><div class="tabs">
@@ -1076,11 +1076,40 @@ function activateLoanTab(det,tab){
  det.querySelectorAll('.loan-tab').forEach(x=>x.classList.toggle('active',x.dataset.ltab===tab));det.querySelectorAll('.loan-pane').forEach(x=>x.classList.toggle('active',x.dataset.lpane===tab));ui.loanTabs[det.dataset.loanid]=tab;saveUi()
 }
 function refreshSummary(b,det){
- const p=bankProgress(b); const pr=det.querySelector('.progress i');if(pr)pr.style.width=p+'%';
+ const p=bankProgress(b);
+ const pr=det.querySelector('.progress i');if(pr)pr.style.width=p+'%';
+ const pText=det.querySelector('[data-bank-progress-text]');if(pText)pText.textContent='開拓 '+p+'%';
+ const sText=det.querySelector('[data-bank-status]');if(sText)sText.textContent=bankStatus(b);
  const stageCount=det.querySelector('[data-stage-count]');if(stageCount)stageCount.textContent=b.stages.filter(Boolean).length+'/20';
  const docCount=det.querySelector('[data-doc-count]');if(docCount)docCount.textContent=b.docs.filter(Boolean).length+'/'+DOCS.length;
  updateStats();
 }
+function pinBankOpen(det,b){
+ if(!det||!b)return;
+ const activeTab=det.querySelector('.tab.active')?.dataset.tab||ui.activeTabs[b.id]||'progress';
+ det.dataset.keepOpen='1';
+ if(!det.open)det.open=true;
+ ui.openBanks.add(b.id);
+ ui.activeTabs[b.id]=activeTab;
+ saveUi();
+}
+function releaseBankOpenPin(det,b,scrollY){
+ const reopen=()=>{
+  if(!det||!b)return;
+  if(!det.open)det.open=true;
+  ui.openBanks.add(b.id);
+  const activeTab=ui.activeTabs[b.id]||'progress';
+  activateBankTab(det,activeTab);
+  saveUi();
+  if(Number.isFinite(scrollY))window.scrollTo(0,scrollY);
+ };
+ requestAnimationFrame(reopen);
+ setTimeout(()=>{
+  reopen();
+  if(det)delete det.dataset.keepOpen;
+ },160);
+}
+
 function updateStats(){const bal=banks.reduce((s,b)=>s+bankBalance(b),0),pay=banks.reduce((s,b)=>s+bankNextPay(b),0);const set=(id,v)=>{const e=$(id);if(e)e.textContent=v};set('#statBanks',banks.length);set('#statBalance',yen(bal));set('#statNextPay',yen(pay));set('#statMissing',banks.reduce((s,b)=>s+missing(b),0))}
 function render(){
  const list=filtered();$('#emptyState').style.display=list.length?'none':'block';$('#bankContainer').innerHTML=list.map(bankBlock).join('');
@@ -1099,7 +1128,16 @@ function loanLabel(field){return ({status:'借入状態',contractNo:'契約番�
 function bind(){
  $$('.bank').forEach(det=>{
   const b=banks.find(x=>x.id===det.dataset.id);
-  det.addEventListener('toggle',()=>{if(det.open)ui.openBanks.add(b.id);else ui.openBanks.delete(b.id);saveUi()});
+  det.addEventListener('toggle',()=>{
+   if(det.dataset.keepOpen==='1'&&!det.open){
+    det.open=true;
+    ui.openBanks.add(b.id);
+    saveUi();
+    return;
+   }
+   if(det.open)ui.openBanks.add(b.id);else ui.openBanks.delete(b.id);
+   saveUi()
+  });
   det.querySelectorAll('.tab').forEach(t=>t.onclick=e=>{e.preventDefault();e.stopPropagation();activateBankTab(det,t.dataset.tab)});
   det.querySelectorAll('.loan').forEach(ld=>{
    ld.addEventListener('toggle',()=>{if(ld.open)ui.openLoans.add(ld.dataset.loanid);else ui.openLoans.delete(ld.dataset.loanid);saveUi()});
@@ -1121,11 +1159,39 @@ function bind(){
   det.querySelectorAll('[data-criteria]').forEach(el=>el.onchange=e=>{
    const f=e.target.dataset.criteria,old=b.criteria[f],nv=e.target.value;b.criteria[f]=nv;addChangeAndSave(b,'融資条件',criteriaLabel(f),old,nv,{kind:'criteria',field:f},e.target);updateStats();
   });
-  det.querySelectorAll('[data-stage]').forEach(el=>el.onchange=e=>{
-   const i=Number(e.target.dataset.stage),old=b.stages[i],nv=e.target.checked;b.stages[i]=nv;addChangeAndSave(b,'開拓チェック',STAGES[i],old,nv,{kind:'stage',index:i});refreshSummary(b,det);
+  det.querySelectorAll('.check').forEach(label=>{
+   label.addEventListener('pointerdown',e=>{
+    if(e.target.closest('[data-stage],[data-doc]'))pinBankOpen(det,b)
+   },{passive:true});
+   label.addEventListener('click',e=>e.stopPropagation());
   });
-  det.querySelectorAll('[data-doc]').forEach(el=>el.onchange=e=>{
-   const i=Number(e.target.dataset.doc),old=b.docs[i],nv=e.target.checked;b.docs[i]=nv;addChangeAndSave(b,'提出資料',DOCS[i],old,nv,{kind:'doc',index:i});refreshSummary(b,det);
+  det.querySelectorAll('[data-stage]').forEach(el=>{
+   el.addEventListener('pointerdown',e=>{e.stopPropagation();pinBankOpen(det,b)},{passive:true});
+   el.addEventListener('click',e=>{e.stopPropagation();pinBankOpen(det,b)});
+   el.onchange=e=>{
+    e.stopPropagation();
+    const y=window.scrollY;
+    pinBankOpen(det,b);
+    const i=Number(e.target.dataset.stage),old=b.stages[i],nv=e.target.checked;
+    b.stages[i]=nv;
+    addChangeAndSave(b,'開拓チェック',STAGES[i],old,nv,{kind:'stage',index:i});
+    refreshSummary(b,det);
+    releaseBankOpenPin(det,b,y);
+   }
+  });
+  det.querySelectorAll('[data-doc]').forEach(el=>{
+   el.addEventListener('pointerdown',e=>{e.stopPropagation();pinBankOpen(det,b)},{passive:true});
+   el.addEventListener('click',e=>{e.stopPropagation();pinBankOpen(det,b)});
+   el.onchange=e=>{
+    e.stopPropagation();
+    const y=window.scrollY;
+    pinBankOpen(det,b);
+    const i=Number(e.target.dataset.doc),old=b.docs[i],nv=e.target.checked;
+    b.docs[i]=nv;
+    addChangeAndSave(b,'提出資料',DOCS[i],old,nv,{kind:'doc',index:i});
+    refreshSummary(b,det);
+    releaseBankOpenPin(det,b,y);
+   }
   });
   det.querySelectorAll('[data-loan-field]').forEach(el=>el.onchange=e=>{
    const l=findLoan(b,e.target.dataset.loanId),f=e.target.dataset.loanField;if(!l)return;const numeric=e.target.dataset.numeric==='1',old=l[f],nv=numeric?Number(e.target.value):e.target.value;l[f]=nv;

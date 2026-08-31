@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>和京スマイ｜銀行開拓・借入統合CRM</title>
+<style>
+:root{
+  --bg:#f3f7fb; --panel:#ffffff; --panel2:#f7fafc; --text:#162235; --muted:#6d7a8c;
+  --border:#d9e2ec; --navy:#17365d; --blue:#2f6fed; --cyan:#0ea5e9; --green:#168a55;
+  --green-bg:#eaf8f1; --amber:#a46500; --amber-bg:#fff4d8; --red:#b93838; --red-bg:#fdeaea;
+  --purple:#7446d3; --purple-bg:#f0eaff; --shadow:0 8px 30px rgba(20,55,95,.08);
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;color:var(--text);background:linear-gradient(180deg,#eef5fb 0,#f7fafc 220px,#f3f7fb 100%);font-size:15px}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.container{max-width:1180px;margin:0 auto;padding:14px 12px 90px}
+.hero{background:linear-gradient(135deg,#17365d,#275d97 62%,#3c78ba);color:#fff;border-radius:22px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.07);right:-50px;top:-70px}
+.hero h1{font-size:23px;line-height:1.25;margin:0 0 4px;font-weight:900;letter-spacing:.01em}
+.hero p{margin:0;color:#dce9f7;font-size:13px}
+.toolbar{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+.btn{min-height:42px;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:0 13px;background:rgba(255,255,255,.12);color:#fff;font-weight:800}
+.btn.light{background:#fff;color:var(--navy);border-color:#fff}
+.btn.outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn.blue{background:var(--blue);color:#fff;border:1px solid var(--blue)}
+.btn.green{background:var(--green);color:#fff;border:1px solid var(--green)}
+.btn.red{background:#fff;color:var(--red);border:1px solid #f0baba}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:12px 0}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:11px;box-shadow:0 2px 8px rgba(30,60,90,.03)}
+.stat .label{font-size:11px;color:var(--muted);font-weight:700}
+.stat .value{font-size:20px;font-weight:900;margin-top:3px;font-variant-numeric:tabular-nums}
+.stat.green{background:var(--green-bg);border-color:#bce4ce}
+.stat.amber{background:var(--amber-bg);border-color:#f0d28d}
+.stat.purple{background:var(--purple-bg);border-color:#d3c2f6}
+.panel{background:rgba(255,255,255,.88);border:1px solid var(--border);border-radius:18px;padding:12px;box-shadow:0 3px 12px rgba(30,60,90,.03);margin-bottom:10px}
+.panel-title{font-weight:900;margin-bottom:8px}
+.filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.field{display:block;font-size:11px;color:var(--muted);font-weight:800}
+.field input,.field select,.field textarea{margin-top:5px;width:100%;min-height:42px;border:1px solid var(--border);border-radius:11px;background:#fff;padding:9px 10px;color:var(--text);outline:none}
+.field textarea{min-height:82px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#8bb4f7;box-shadow:0 0 0 3px rgba(47,111,237,.1)}
+.edited{background:#eef4ff!important;border-color:#7aa4f8!important}
+.bank{background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin:9px 0;box-shadow:0 2px 10px rgba(20,55,95,.04)}
+.bank[open]{border-color:#97b9e8;box-shadow:0 5px 18px rgba(38,89,145,.08)}
+.bank>summary{list-style:none;padding:12px 13px;cursor:pointer}
+.bank>summary::-webkit-details-marker{display:none}
+.summary-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.bank-name{font-weight:900;font-size:16px}
+.subline{font-size:11px;color:var(--muted);margin-top:3px;display:flex;flex-wrap:wrap;gap:7px}
+.badges{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.badge{border:1px solid var(--border);padding:4px 7px;border-radius:9px;font-size:11px;font-weight:900;background:#f8fafc}
+.badge.s{background:#e9f8ef;color:#17693d;border-color:#aadbc0}
+.badge.a{background:#fff3d8;color:#8a5b00;border-color:#e9cf92}
+.badge.green{background:var(--green-bg);color:var(--green);border-color:#bce4ce}
+.badge.amber{background:var(--amber-bg);color:var(--amber);border-color:#ead291}
+.badge.purple{background:var(--purple-bg);color:var(--purple);border-color:#d3c2f6}
+.badge.red{background:var(--red-bg);color:var(--red);border-color:#efbcbc}
+.arrow{font-size:16px;color:var(--muted);transition:.2s}
+.bank[open] .arrow{transform:rotate(180deg)}
+.progress{height:7px;border-radius:999px;background:#e8edf3;overflow:hidden;margin-top:9px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#2f6fed,#19a779);border-radius:999px}
+.loan-quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:8px}
+.q{border-radius:10px;padding:7px 8px;font-size:11px;border:1px solid var(--border);background:#f8fafc}
+.q b{display:block;font-size:13px;margin-top:2px;font-variant-numeric:tabular-nums}
+.q.green{background:var(--green-bg);border-color:#bce4ce}.q.amber{background:var(--amber-bg);border-color:#ead291}.q.purple{background:var(--purple-bg);border-color:#d3c2f6}
+.bank-body{border-top:1px solid var(--border);padding:10px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.tab{white-space:nowrap;border:1px solid var(--border);background:#fff;min-height:40px;border-radius:11px;padding:0 11px;font-size:12px;font-weight:800}
+.tab.active{background:#eaf2ff;border-color:#7faaf5;color:#1d55b7}
+.pane{display:none;padding-top:10px}.pane.active{display:block}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.cols4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.card{background:var(--panel2);border:1px solid #e6edf4;border-radius:14px;padding:11px}
+.card h3{font-size:13px;margin:0 0 8px;font-weight:900}
+.info-box{background:#edf6ff;border:1px solid #c8e0fa;border-radius:11px;padding:9px;font-size:12px;line-height:1.55}
+.warn-box{background:var(--amber-bg);border:1px solid #ecd298;border-radius:11px;padding:9px;font-size:12px;line-height:1.55}
+.error-box{background:var(--red-bg);border:1px solid #efbcbc;border-radius:11px;padding:9px;font-size:12px;line-height:1.55}
+.links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.link-btn{min-height:40px;display:flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #c9dbef;border-radius:10px;background:#fff;color:#215c9f;font-size:12px;font-weight:900;padding:6px}
+.check-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.check{display:flex;align-items:center;gap:7px;min-height:43px;border:1px solid var(--border);border-radius:10px;padding:7px 8px;background:#fff;font-size:12px;font-weight:700}
+.check input{width:18px;height:18px;accent-color:var(--blue)}
+.loan{background:#fff;border:1px solid var(--border);border-radius:14px;margin:7px 0;overflow:hidden}
+.loan summary{list-style:none;cursor:pointer;padding:10px}
+.loan summary::-webkit-details-marker{display:none}
+.loan-body{border-top:1px solid var(--border);padding:10px}
+.history-box{max-height:160px;overflow:auto;display:flex;flex-direction:column;gap:5px;margin-top:7px}
+.hrow{background:#f6f9fc;border-radius:9px;padding:6px 7px;font-size:11px}
+.hrow .top{display:flex;justify-content:space-between;gap:8px}.hrow strong{font-variant-numeric:tabular-nums}
+.timeline{max-height:410px;overflow:auto;display:flex;flex-direction:column;gap:7px}
+.event{border:1px solid var(--border);border-left:4px solid #8bb4f7;background:#fff;border-radius:11px;padding:9px}
+.event .meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.event .memo{font-size:12px;line-height:1.5;margin-top:4px}
+.next{margin-top:6px;background:#edf6ff;border-radius:8px;padding:6px 7px;font-size:11px;font-weight:800}
+.small{font-size:11px;color:var(--muted)}
+.section-actions{display:flex;justify-content:space-between;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.inline-form{display:grid;grid-template-columns:1.15fr 1fr auto;gap:5px;margin-top:6px}
+.inline-form input,.inline-form button{min-height:38px;border-radius:9px;border:1px solid var(--border);padding:6px 8px;background:#fff}
+.inline-form button{background:#eaf2ff;font-weight:900;color:#1d55b7}
+.sticky-bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));pointer-events:none}
+.bottom-inner{max-width:1180px;margin:0 auto;background:rgba(17,32,53,.95);backdrop-filter:blur(10px);color:#fff;border-radius:17px;padding:9px 13px;box-shadow:0 8px 30px rgba(0,0,0,.18);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;text-align:center;pointer-events:auto}
+.bottom-inner .l{font-size:10px;color:#b7c4d4}.bottom-inner .v{font-weight:900;font-size:13px;margin-top:1px}
+@media(max-width:800px){
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats .stat:last-child{grid-column:span 2}
+ .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cols2,.cols3,.cols4{grid-template-columns:1fr}
+ .check-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .links{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .loan-quick{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:430px){
+ .container{padding-left:8px;padding-right:8px}.hero{border-radius:17px;padding:15px}.hero h1{font-size:20px}
+ .summary-mid{display:none}
+ .bottom-inner{grid-template-columns:repeat(4,minmax(0,1fr));padding:8px}.bottom-inner .v{font-size:12px}
+ .check-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero">
+    <h1>和京スマイ｜銀行開拓・借入統合CRM</h1>
+    <p>銀行開拓、人脈、融資条件、活動履歴、借入残高・金利・返済額の履歴を銀行ごとに一元管理</p>
+    <div class="toolbar">
+      <button class="btn light" id="expandAll">全部展開</button>
+      <button class="btn" id="closeAll">全部閉じる</button>
+      <button class="btn" id="saveNow">保存</button>
+      <button class="btn" id="exportJson">JSONバックアップ</button>
+      <label class="btn" style="display:flex;align-items:center">JSON読込<input id="importJson" type="file" accept=".json,application/json" hidden></label>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><div class="label">対象金融機関</div><div class="value" id="statBanks">—</div></div>
+    <div class="stat green"><div class="label">登録借入残債</div><div class="value" id="statBalance">—</div></div>
+    <div class="stat purple"><div class="label">次回返済合計</div><div class="value" id="statNextPay">—</div></div>
+    <div class="stat amber"><div class="label">未確認重要項目</div><div class="value" id="statMissing">—</div></div>
+    <div class="stat"><div class="label">最終保存</div><div class="value" style="font-size:13px" id="statSaved">—</div></div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-title">開拓フィルター</div>
+    <div class="filters">
+      <label class="field">物件エリア
+        <select id="regionFilter"><option value="all">関西すべて</option><option>京都府</option><option>滋賀県</option><option>大阪府</option><option>奈良県</option><option>兵庫県</option><option>和歌山県</option></select>
+      </label>
+      <label class="field">ランク
+        <select id="rankFilter"><option value="all">S・A</option><option>S</option><option>A</option></select>
+      </label>
+      <label class="field">種類
+        <select id="typeFilter"><option value="all">すべて</option><option>地方銀行</option><option>第二地方銀行</option><option>信用金庫</option><option>信用組合</option><option>専門系銀行</option></select>
+      </label>
+      <label class="field">進捗
+        <select id="statusFilter"><option value="all">すべて</option><option>未連絡</option><option>既存接点あり</option><option>電話済</option><option>面談済</option><option>案件持込可</option><option>稟議中</option><option>融資実行あり</option></select>
+      </label>
+      <label class="field">検索
+        <input id="searchFilter" type="search" placeholder="銀行・支店・担当者">
+      </label>
+    </div>
+  </section>
+
+  <div id="bankContainer"></div>
+  <div id="emptyState" class="panel" style="display:none;text-align:center;color:var(--muted)">条件に合う金融機関がない。</div>
+</div>
+
+<div class="sticky-bottom">
+  <div class="bottom-inner">
+    <div><div class="l">Sランク</div><div class="v" id="bottomS">—</div></div>
+    <div><div class="l">接触済</div><div class="v" id="bottomContact">—</div></div>
+    <div><div class="l">借入件数</div><div class="v" id="bottomLoans">—</div></div>
+    <div><div class="l">残債合計</div><div class="v" id="bottomBalance">—</div></div>
+  </div>
+</div>
+
+<script>
+(()=>{
+const KEY='wakyo_bank_crm_html_v1';
+const TODAY='2026-08-31';
+const STAGES=['初回電話','融資担当接触','担当者名確認','支店長名確認','初回面談','会社概要説明','決算書提出','借入一覧提出','保有物件一覧提出','個人属性資料提出','営業エリア確認','対象物件確認','融資条件確認','連絡先取得','次回案件持込許可','定期フォロー設定','案件持込','稟議','承認','融資実行'];
+const DOCS=['会社概要','事業計画書','決算書3期分','法人借入一覧','保有物件一覧','物件別収支・CF','レントロール','個人確定申告書','源泉徴収票3年分','個人資産・負債一覧','履歴事項全部証明書','法人印鑑証明書'];
+const blankPeople=()=>({manager:'',managerChecked:'',officer:'',title:'',direct:'',email:'',introducer:'',firstContact:'',lastContact:'',nextContact:'',temperature:'',decisionMaker:'',memo:''});
+const blankCriteria=()=>({newCustomer:'',propertyTypes:'',areas:'',structures:'',maxAge:'',loanMin:'',loanMax:'',rate:'',term:'',ltv:'',equity:'',repayment:'',valuation:'',dscr:'',icr:'',debtYears:'',equityRatio:'',guarantor:'',collateral:'',decisionFlow:'',leadTime:'',fees:'',sweetSpot:'',ng:''});
+const loanNorthNagai={
+ id:'loan-naganagai',name:'奈良市北永井町',purpose:'設備資金／収益不動産取得',principal:7000000,
+ startDate:'2024-10-11',firstPaymentDate:'2024-10-31',maturity:'2047-09-30',
+ repaymentMethod:'元利均等返済',rateType:'変動金利（新長プラ即時連動）',nextPaymentDate:'2026-09-30',
+ source:'Gmail添付「事業性ローン電子契約書類一式.pdf」',
+ balanceSnapshots:[
+  {date:'2024-10-11',amount:7000000,quality:'実績',note:'契約時借入額'},
+  {date:'2026-08-31',amount:6557764,quality:'概算',note:'金利2.5％・月33,374円が継続した仮定。最新明細で要更新'}
+ ],
+ rateHistory:[{date:'2024-10-11',rate:2.5,note:'契約時'}],
+ paymentHistory:[{date:'2024-10-31',amount:33374,note:'契約書記載の毎回返済額'}],
+ notes:'最新返済明細が未確認。残債は概算表示。最新明細を得たら「残高履歴」に実績を追加し、過去データは消さない。'
+};
+const loanKitagoyo={
+ id:'loan-kitagoyo',name:'神戸市北区 北五葉パーキング',purpose:'設備資金／月極駐車場取得',principal:5700000,
+ startDate:'2026-07-13',firstPaymentDate:'2026-07-31',maturity:'2051-06-30',
+ repaymentMethod:'毎月返済（返済予定表ベース）',rateType:'変動金利',nextPaymentDate:'2026-09-30',
+ source:'Gmail添付「北五葉（駐車場）返済予定表.pdf」',
+ balanceSnapshots:[
+  {date:'2026-07-13',amount:5700000,quality:'実績',note:'融資額'},
+  {date:'2026-07-31',amount:5688174,quality:'実績',note:'第1回返済後'},
+  {date:'2026-08-31',amount:5676313,quality:'実績',note:'返済予定表記載'}
+ ],
+ rateHistory:[
+  {date:'2026-07-13',rate:3.55,note:'返済予定表'},
+  {date:'2027-02-01',rate:3.8,note:'返済予定表に記載された予定変更'}
+ ],
+ paymentHistory:[
+  {date:'2026-07-31',amount:22359,note:'初回返済'},
+  {date:'2026-08-31',amount:28688,note:'通常返済額'},
+  {date:'2027-02-01',amount:29447,note:'予定変更後の返済額'}
+ ],
+ notes:'2027-02-01から金利3.800％・返済額29,447円への予定変更を登録。将来変更は履歴追加で管理。'
+};
+const initial=[
+{id:'chushin',name:'京都中央信用金庫',type:'信用金庫',rank:'S',regions:{'京都府':'S','滋賀県':'A','大阪府':'A','奈良県':'A'},branch:'久世支店',address:'京都市南区久世殿城町427-1',phone:'075-934-1321',official:'https://www.chushin.co.jp/',productUrl:'https://www.chushin.co.jp/business/service/fudosantanpo/',branchUrl:'https://www.chushin.co.jp/about/network/',feeUrl:'https://www.chushin.co.jp/fee/loan/',product:'不動産担保ローン／賃貸不動産融資',facts:'賃貸不動産などの購入資金を公式明記。不動産関連資金は最長35年、一定条件で最大3億円。',nextAction:'坂本様と一棟融資の自己資金・築年数・評価目線を深掘り',people:Object.assign(blankPeople(),{officer:'坂本様',lastContact:'2026-08-03'}),stages:[true,true,true,false,true,true,true,true,true,false,true,false,false,true,true,true,true,true,true,true],docs:[true,true,true,true,true,false,false,false,false,false,true,true],criteria:Object.assign(blankCriteria(),{loanMax:'不動産関連資金 最大3億円',term:'不動産関連資金 最長35年'}),loans:[loanNorthNagai,loanKitagoyo],timeline:[
+ {date:'2024-10-11',kind:'融資契約',person:'京都中央信用金庫 久世支店',memo:'奈良市北永井町向け事業性ローン7,000,000円を契約。契約時金利2.500％、元利均等。',next:''},
+ {date:'2026-04-14',kind:'案件持込',person:'坂本様',memo:'神戸市北区北五葉駐車場案件の資料を送付。',next:'審査進捗確認'},
+ {date:'2026-05-14',kind:'進捗確認',person:'坂本様',memo:'北五葉案件は審査中。神戸市が営業エリア外のためワンクッションある旨を確認。',next:'審査結果待ち'},
+ {date:'2026-07-13',kind:'融資実行',person:'京都中央信用金庫 久世支店',memo:'北五葉パーキング取得。融資5,700,000円。',next:'返済予定表保管'},
+ {date:'2026-08-03',kind:'資料提出',person:'坂本様',memo:'3期目決算書および決算分析資料を送付。',next:'次案件相談'}
+],dirty:false},
+{id:'kyotobank',name:'京都銀行',type:'地方銀行',rank:'S',regions:{'京都府':'S','滋賀県':'S','大阪府':'S','奈良県':'S','兵庫県':'S'},branch:'久世支店',address:'京都市南区久世殿城町32',phone:'075-932-5511',official:'https://www.kyotobank.co.jp/',productUrl:'https://www.kyotobank.co.jp/houjin/next/',branchUrl:'https://www.kyotobank.co.jp/branch/',feeUrl:'https://www.kyotobank.co.jp/tesuryo/',product:'京銀マンションローン～ネクスト～',facts:'不動産賃貸業を営む個人・法人向け。賃貸用住宅の購入・建築・増改築・修繕・借換え。返済期間2年以上35年以内。',nextAction:'久世支店へ法人一棟購入融資の初回相談',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:Object.assign(blankCriteria(),{term:'2年以上35年以内'}),loans:[],timeline:[],dirty:false},
+{id:'kyotoshinkin',name:'京都信用金庫',type:'信用金庫',rank:'S',regions:{'京都府':'S','滋賀県':'A','大阪府':'A'},branch:'既存口座店を優先',address:'最寄候補：桂川支店 向日市寺戸町八ノ坪126',phone:'075-934-0011',official:'https://www.kyoto-shinkin.co.jp/',productUrl:'https://www.kyoto-shinkin.co.jp/_tesuryo/',branchUrl:'https://map.kyoto-shinkin.co.jp/kyoto-shinkin/spot/detail?code=0047',feeUrl:'https://www.kyoto-shinkin.co.jp/_tesuryo/',product:'賃貸不動産取得・建設資金融資',facts:'公式手数料表に賃貸不動産の取得・建設資金を明記。京都・滋賀・大阪に正式営業地区。',nextAction:'既存口座店へ法人融資担当との面談を依頼',people:blankPeople(),stages:[false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,false,false,false,false,false],docs:Array(12).fill(false),criteria:blankCriteria(),loans:[],timeline:[],dirty:false},
+{id:'keiji',name:'京滋信用組合',type:'信用組合',rank:'S',regions:{'京都府':'S','滋賀県':'S'},branch:'伏見支店',address:'京都市伏見区竹田七瀬川町20',phone:'075-642-3131',official:'https://www.keiji-shinkumi.net/',productUrl:'https://www.keiji-shinkumi.net/fee.html',branchUrl:'https://www.keiji-shinkumi.net/branch/fushimi.html',feeUrl:'https://www.keiji-shinkumi.net/fee.html',product:'収益不動産融資',facts:'公式手数料表に収益不動産融資を明記。京都府・滋賀県全域が営業地区。',nextAction:'伏見支店へ新規法人の収益不動産融資を相談',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:Object.assign(blankCriteria(),{fees:'収益不動産融資：原則 融資額×0.5％＋所定手数料'}),loans:[],timeline:[],dirty:false},
+{id:'shigagin',name:'滋賀銀行',type:'地方銀行',rank:'S',regions:{'滋賀県':'S','京都府':'A'},branch:'九条支店',address:'京都市南区吉祥院九条町38',phone:'075-691-9141',official:'https://www.shigagin.com/',productUrl:'https://www.shigagin.com/news/service/3215',branchUrl:'https://www.shigagin.com/network/',feeUrl:'https://www.shigagin.com/tesuryo/',product:'賃貸不動産融資',facts:'アパート・テナント等収益物件の建築・購入向け賃貸不動産融資を公式設定。',nextAction:'九条支店で京都法人の京都・滋賀案件の取扱いを確認',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:blankCriteria(),loans:[],timeline:[],dirty:false},
+{id:'senshu',name:'池田泉州銀行',type:'地方銀行',rank:'S',regions:{'大阪府':'S','兵庫県':'S','京都府':'A','和歌山県':'A'},branch:'京都支店等／取扱店確認',address:'京都市内拠点あり',phone:'要公式店舗確認',official:'https://www.sihd-bk.jp/',productUrl:'https://www.sihd-bk.jp/corporation/fees/',branchUrl:'https://www.sihd-bk.jp/tenpo/',feeUrl:'https://www.sihd-bk.jp/corporation/fees/',product:'収益物件融資',facts:'公式に収益物件融資を区分。大阪府全域、兵庫東部・神戸、京都市、和歌山市等をエリア内として明記。',nextAction:'京都法人で新規相談できる担当店を確定',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:blankCriteria(),loans:[],timeline:[],dirty:false},
+{id:'nanto',name:'南都銀行',type:'地方銀行',rank:'S',regions:{'奈良県':'S','京都府':'A','大阪府':'A'},branch:'京都南支店',address:'京都市伏見区京町4丁目155-1 京阪桃山ビル3階',phone:'0742-81-7924',official:'https://www.nantobank.co.jp/',productUrl:'https://www.nantobank.co.jp/investor/message/',branchUrl:'https://www.nantobank.co.jp/shop/',feeUrl:'https://www.nantobank.co.jp/tesuryo/',product:'事業性融資／不動産領域強化',facts:'2026年に不動産領域への取組強化を公式表明。奈良案件の本命。',nextAction:'奈良一棟の融資目線を京都南支店の法人担当から取得',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:blankCriteria(),loans:[],timeline:[],dirty:false},
+{id:'minato',name:'みなと銀行',type:'第二地方銀行',rank:'S',regions:{'兵庫県':'S','大阪府':'A'},branch:'兵庫案件所在地の取扱店',address:'本店：神戸市中央区三宮町2-1-1',phone:'078-331-8141',official:'https://www.minatobk.co.jp/',productUrl:'https://www.minatobk.co.jp/hojin/hojin/ordermade/',branchUrl:'https://www.minatobk.co.jp/branch/',feeUrl:'https://www.minatobk.co.jp/fee/',product:'「お誂え」収益不動産版',facts:'対象は収益不動産を購入する法人。融資額原則3,000万円以上。',nextAction:'神戸案件の取扱支店・LTV・期間を確認',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:Object.assign(blankCriteria(),{loanMin:'原則3,000万円'}),loans:[],timeline:[],dirty:false},
+{id:'kiyo',name:'紀陽銀行',type:'地方銀行',rank:'S',regions:{'和歌山県':'S','大阪府':'S'},branch:'リアルエステートファイナンス推進室',address:'大阪市北区堂島2-1-43 紀陽大阪ビル7階',phone:'06-6136-6320',official:'https://www.kiyobank.co.jp/',productUrl:'https://www.kiyobank.co.jp/business/get_pdf.php?f=00002749',branchUrl:'https://www.kiyobank.co.jp/branch/',feeUrl:'https://www.kiyobank.co.jp/tesuryo/',product:'リアルエステートファイナンス',facts:'不動産業向け貸出に特化した専門部署を設置。和歌山・大阪の本命。',nextAction:'中古一棟購入のLTV・期間・対象地域を専門部署へ確認',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:blankCriteria(),loans:[],timeline:[],dirty:false},
+{id:'kansaimirai',name:'関西みらい銀行',type:'地方銀行',rank:'A',regions:{'京都府':'A','滋賀県':'A','大阪府':'A','奈良県':'A','兵庫県':'A','和歌山県':'A'},branch:'京都支店',address:'京都市下京区新町通五条下る蛭子町105 CROSS五条ビル8階',phone:'075-371-2130',official:'https://www.kansaimiraibank.co.jp/',productUrl:'https://www.kansaimiraibank.co.jp/pdf/syohingaiyo/apart_loan.pdf',branchUrl:'https://www.kansaimiraibank.co.jp/hojin/tenpo/',feeUrl:'https://www.kansaimiraibank.co.jp/kojin/kinri_tesuryo/',product:'アパート・マンションローン等',facts:'関西広域の補完候補。公開商品は適用主体条件の確認が必要。',nextAction:'和京スマイで使える一般法人向け収益不動産融資を確認',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:blankCriteria(),loans:[],timeline:[],dirty:false},
+{id:'orix',name:'オリックス銀行',type:'専門系銀行',rank:'A',regions:{'京都府':'A','滋賀県':'A','大阪府':'A','奈良県':'A','兵庫県':'A','和歌山県':'A'},branch:'WEB相談／住宅ローンプラザ',address:'WEB相談中心',phone:'0120-094-256',official:'https://www.orixbank.co.jp/',productUrl:'https://www.orixbank.co.jp/personal/property/',branchUrl:'https://www.orixbank.co.jp/personal/property/consult.html',feeUrl:'https://www.orixbank.co.jp/personal/property/',product:'不動産投資ローン',facts:'近畿圏の投資用不動産。2,000万円以上2億円以下、最長35年。立地・築年数・構造条件あり。',nextAction:'法人名義の適用条件と対象物件立地を確認',people:blankPeople(),stages:Array(20).fill(false),docs:Array(12).fill(false),criteria:Object.assign(blankCriteria(),{loanMin:'2,000万円',loanMax:'2億円',term:'最長35年'}),loans:[],timeline:[],dirty:false}
+];
+
+let banks=load();
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const yen=n=>Number.isFinite(Number(n))?'¥'+Math.round(Number(n)).toLocaleString('ja-JP'):'—';
+function load(){try{const s=localStorage.getItem(KEY);if(s){const o=JSON.parse(s);if(Array.isArray(o.banks))return o.banks}}catch(e){} return JSON.parse(JSON.stringify(initial))}
+function save(){localStorage.setItem(KEY,JSON.stringify({version:1,savedAt:new Date().toISOString(),banks}));$('#statSaved').textContent=new Date().toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});}
+function latest(arr,date=TODAY){return [...(arr||[])].filter(x=>x.date<=date).sort((a,b)=>b.date.localeCompare(a.date))[0]||null}
+function future(arr,date=TODAY){return [...(arr||[])].filter(x=>x.date>date).sort((a,b)=>a.date.localeCompare(b.date))[0]||null}
+function loanBalance(l){return latest(l.balanceSnapshots)}
+function loanRate(l){return latest(l.rateHistory)}
+function loanPay(l){return latest(l.paymentHistory)}
+function bankBalance(b){return (b.loans||[]).reduce((s,l)=>s+(loanBalance(l)?.amount||0),0)}
+function bankNextPay(b){return (b.loans||[]).reduce((s,l)=>s+(loanPay(l)?.amount||0),0)}
+function progress(b){return Math.round(b.stages.filter(Boolean).length/STAGES.length*100)}
+function status(b){if((b.loans||[]).length)return b.stages[19]?'融資実行あり':(b.stages[14]?'案件持込可':'既存接点あり');if(b.stages[17])return'稟議中';if(b.stages[14])return'案件持込可';if(b.stages[4])return'面談済';if(b.stages[0])return'電話済';return'未連絡'}
+function missing(b){let n=0;if(b.rank==='S'&&!b.people.manager)n++;if(b.rank==='S'&&!b.people.officer)n++;if(!b.criteria.rate)n++;if(!b.criteria.term)n++;if(!b.criteria.equity)n++;return n}
+function rankClass(r){return r==='S'?'s':'a'}
+function filtered(){
+ const reg=$('#regionFilter').value,rank=$('#rankFilter').value,type=$('#typeFilter').value,st=$('#statusFilter').value,q=$('#searchFilter').value.trim().toLowerCase();
+ return banks.filter(b=>(reg==='all'||b.regions[reg])&&(rank==='all'||b.rank===rank)&&(type==='all'||b.type===type)&&(st==='all'||status(b)===st)&&(!q||`${b.name} ${b.branch} ${b.people.officer} ${b.people.manager}`.toLowerCase().includes(q)))
+}
+function pf(label,key,val,type='text',ph='未登録'){return `<label class="field">${label}<input data-person="${key}" type="${type}" value="${esc(val)}" placeholder="${esc(ph)}"></label>`}
+function cf(label,key,val,ph='未確認'){return `<label class="field">${label}<input data-criteria="${key}" value="${esc(val)}" placeholder="${esc(ph)}"></label>`}
+function overview(b){
+ const regs=Object.entries(b.regions).map(([r,k])=>`<span class="badge ${rankClass(k)}">${r} ${k}</span>`).join('');
+ const links=[['公式サイト',b.official],['融資商品・根拠',b.productUrl],['店舗検索',b.branchUrl],['手数料・関連',b.feeUrl]].filter(x=>x[1]);
+ return `<div class="cols2">
+  <div class="card"><h3>基本情報</h3><div class="small">推奨窓口</div><b>${esc(b.branch)}</b><div class="small" style="margin-top:7px">所在地</div><div>${esc(b.address)}</div><div class="small" style="margin-top:7px">電話</div><b>${esc(b.phone)}</b><div class="small" style="margin-top:7px">商品・特徴</div><b>${esc(b.product)}</b><div class="badges" style="margin-top:9px">${regs}</div></div>
+  <div class="card"><h3>外部情報・URL</h3><div class="links">${links.map(x=>`<a class="link-btn" href="${esc(x[1])}" target="_blank" rel="noopener">${esc(x[0])} ↗</a>`).join('')}</div><div class="info-box" style="margin-top:9px">${esc(b.facts)}</div></div>
+ </div>
+ <div class="card" style="margin-top:9px"><div class="cols3"><label class="field">次アクション<input data-bank="nextAction" value="${esc(b.nextAction)}"></label><label class="field">期限<input data-bank="nextDate" type="date" value="${esc(b.nextDate||'')}"></label><label class="field">銀行全体メモ<input data-bank="bankMemo" value="${esc(b.bankMemo||'')}"></label></div></div>`
+}
+function peoplePane(b){return `<div class="cols2">
+ <div class="card"><h3>支店長・担当者台帳</h3><div class="cols2">${pf('支店長名','manager',b.people.manager)}${pf('支店長確認日','managerChecked',b.people.managerChecked,'date')}${pf('融資担当者','officer',b.people.officer)}${pf('役職','title',b.people.title)}${pf('直通電話','direct',b.people.direct,'tel')}${pf('メール','email',b.people.email,'email')}${pf('紹介元','introducer',b.people.introducer)}${pf('温度感','temperature',b.people.temperature,'text','A / B / C')}</div></div>
+ <div class="card"><h3>接触・人間関係</h3><div class="cols2">${pf('初回接触日','firstContact',b.people.firstContact,'date')}${pf('最終接触日','lastContact',b.people.lastContact,'date')}${pf('次回接触予定','nextContact',b.people.nextContact,'date')}${pf('決裁キーパーソン','decisionMaker',b.people.decisionMaker)}</div><label class="field" style="margin-top:7px">人物・関係メモ<textarea data-person="memo">${esc(b.people.memo)}</textarea></label></div>
+ </div>`}
+function progressPane(b){return `<div class="cols2">
+ <div class="card"><div class="section-actions"><h3 style="margin:0">開拓20チェック</h3><b>${b.stages.filter(Boolean).length}/20</b></div><div class="check-grid">${STAGES.map((s,i)=>`<label class="check"><input data-stage="${i}" type="checkbox" ${b.stages[i]?'checked':''}><span>${esc(s)}</span></label>`).join('')}</div></div>
+ <div class="card"><div class="section-actions"><h3 style="margin:0">提出資料</h3><b>${b.docs.filter(Boolean).length}/${DOCS.length}</b></div><div class="check-grid">${DOCS.map((d,i)=>`<label class="check"><input data-doc="${i}" type="checkbox" ${b.docs[i]?'checked':''}><span>${esc(d)}</span></label>`).join('')}</div></div>
+ </div>`}
+function criteriaPane(b){const c=b.criteria;return `<div class="card"><h3>融資条件・審査目線</h3><div class="cols4">${cf('新規法人','newCustomer',c.newCustomer)}${cf('対象物件','propertyTypes',c.propertyTypes,'一棟/戸建/駐車場')}${cf('融資額下限','loanMin',c.loanMin)}${cf('融資額上限','loanMax',c.loanMax)}${cf('金利目線','rate',c.rate,'例 1.5〜2.5%')}${cf('期間','term',c.term,'例 最長30年')}${cf('LTV','ltv',c.ltv)}${cf('必要自己資金','equity',c.equity)}${cf('返済方法','repayment',c.repayment)}${cf('構造','structures',c.structures)}${cf('築年数','maxAge',c.maxAge)}${cf('評価方法','valuation',c.valuation,'積算/収益還元')}${cf('DSCR','dscr',c.dscr)}${cf('ICR','icr',c.icr)}${cf('債務償還年数','debtYears',c.debtYears)}${cf('自己資本比率','equityRatio',c.equityRatio)}${cf('保証','guarantor',c.guarantor)}${cf('担保','collateral',c.collateral)}${cf('決裁期間','leadTime',c.leadTime)}${cf('手数料','fees',c.fees)}</div><div class="cols3" style="margin-top:9px"><label class="field">対象エリア<textarea data-criteria="areas">${esc(c.areas)}</textarea></label><label class="field">得意案件<textarea data-criteria="sweetSpot">${esc(c.sweetSpot)}</textarea></label><label class="field">NG・嫌う案件<textarea data-criteria="ng">${esc(c.ng)}</textarea></label></div></div>`}
+function historyRows(arr,type){return `<div class="history-box">${[...(arr||[])].sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="hrow"><div class="top"><span>${x.date}</span><strong>${type==='rate'?Number(x.rate).toFixed(3)+'%':yen(x.amount)}</strong></div>${x.note?`<div class="small">${esc(x.note)}</div>`:''}</div>`).join('')}</div>`}
+function balanceRows(arr){return `<div class="history-box">${[...(arr||[])].sort((a,b)=>b.date.localeCompare(a.date)).map(x=>`<div class="hrow"><div class="top"><span>${x.date}</span><strong>${yen(x.amount)}</strong></div><div class="small" style="color:${x.quality==='概算'?'var(--amber)':'var(--muted)'}">${esc(x.quality)}${x.note?'・'+esc(x.note):''}</div></div>`).join('')}</div>`}
+function loanCard(b,l){
+ const bal=loanBalance(l),rate=loanRate(l),pay=loanPay(l),fr=future(l.rateHistory),fp=future(l.paymentHistory);
+ return `<details class="loan"><summary><div class="summary-top"><div><b>${esc(l.name)}</b><div class="small">${esc(l.purpose)}</div></div><div class="badges"><span class="badge green">残債 ${yen(bal?.amount)}</span><span class="badge purple">金利 ${rate?Number(rate.rate).toFixed(3)+'%':'—'}</span><span class="badge a">返済 ${yen(pay?.amount)}</span></div></div>${bal?`<div class="${bal.quality==='概算'?'warn-box':'info-box'}" style="margin-top:8px;padding:6px 8px">残高基準 ${bal.date}・${bal.quality}${bal.note?' ｜ '+esc(bal.note):''}</div>`:''}</summary>
+ <div class="loan-body">
+  <div class="cols4">
+   <div class="q"><span>当初借入</span><b>${yen(l.principal)}</b></div><div class="q"><span>借入日</span><b>${l.startDate||'—'}</b></div><div class="q"><span>最終期限</span><b>${l.maturity||'—'}</b></div>
+   <label class="field">次回返済日<input data-loan-nextdate="${l.id}" type="date" value="${esc(l.nextPaymentDate||'')}"></label>
+  </div>
+  <div class="cols3" style="margin-top:9px">
+   <div class="card"><h3>金利履歴</h3>${historyRows(l.rateHistory,'rate')}<form class="inline-form" data-rate-form="${l.id}"><input name="date" type="date" required><input name="value" type="number" step="0.001" placeholder="%"><button>追加</button></form>${fr?`<div class="warn-box" style="margin-top:6px">予定変更 ${fr.date} → ${Number(fr.rate).toFixed(3)}%</div>`:''}</div>
+   <div class="card"><h3>返済額履歴</h3>${historyRows(l.paymentHistory,'amount')}<form class="inline-form" data-pay-form="${l.id}"><input name="date" type="date" required><input name="value" type="number" step="1" placeholder="円"><button>追加</button></form>${fp?`<div class="warn-box" style="margin-top:6px">予定変更 ${fp.date} → ${yen(fp.amount)}</div>`:''}</div>
+   <div class="card"><h3>残高履歴</h3>${balanceRows(l.balanceSnapshots)}<form class="inline-form" data-bal-form="${l.id}"><input name="date" type="date" required><input name="value" type="number" step="1" placeholder="残高"><button>実績追加</button></form></div>
+  </div>
+  <div class="small" style="margin-top:8px">返済方式：${esc(l.repaymentMethod)} ｜ 金利種別：${esc(l.rateType)} ｜ 出典：${esc(l.source)}</div>
+  <label class="field" style="margin-top:7px">借入メモ<textarea data-loan-note="${l.id}">${esc(l.notes||'')}</textarea></label>
+ </div></details>`
+}
+function loanPane(b){return `<div class="section-actions"><div><b>現在の借入</b><div class="small">金利・返済額・残債は「履歴追加」。過去値を消さない。</div></div><button class="btn outline" data-add-loan>＋ 借入追加</button></div>${b.loans.length?b.loans.map(l=>loanCard(b,l)).join(''):`<div class="card" style="text-align:center;color:var(--muted)">この銀行の借入は未登録</div>`}`}
+function timelinePane(b){const h=[...(b.timeline||[])].sort((a,z)=>z.date.localeCompare(a.date));return `<div class="cols2">
+ <form class="card" data-timeline-form><h3>活動を記録</h3><div class="cols2"><label class="field">日付<input name="date" type="date" required value="${TODAY}"></label><label class="field">種類<select name="kind"><option>電話</option><option>メール</option><option>面談</option><option>訪問</option><option>資料提出</option><option>案件持込</option><option>進捗確認</option><option>稟議</option><option>承認</option><option>否決</option><option>融資契約</option><option>融資実行</option></select></label></div><label class="field" style="margin-top:7px">相手<input name="person" placeholder="坂本様、支店長など"></label><label class="field" style="margin-top:7px">何をした・何を言われた<textarea name="memo" required></textarea></label><label class="field" style="margin-top:7px">次にすること<input name="next"></label><button class="btn blue" style="width:100%;margin-top:9px">時系列へ追加</button></form>
+ <div class="card"><h3>時系列</h3><div class="timeline">${h.length?h.map(x=>`<div class="event"><div class="meta"><span>${esc(x.date)}・${esc(x.kind)}</span><span>${esc(x.person)}</span></div><div class="memo">${esc(x.memo)}</div>${x.next?`<div class="next">次 → ${esc(x.next)}</div>`:''}</div>`).join(''):`<div class="small">まだ記録なし</div>`}</div></div>
+ </div>`}
+function bankBlock(b){
+ const p=progress(b),bal=bankBalance(b),pay=bankNextPay(b),miss=missing(b);
+ return `<details class="bank" data-id="${b.id}">
+ <summary>
+  <div class="summary-top">
+   <div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="bank-name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集済</span>':''}</div><div class="subline"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span>${esc(status(b))}</span><span>進捗 ${p}%</span></div></div>
+   <div class="arrow">▼</div>
+  </div>
+  <div class="progress"><i style="width:${p}%"></i></div>
+  ${b.loans.length?`<div class="loan-quick"><div class="q green"><span>残債</span><b>${yen(bal)}</b></div><div class="q amber"><span>次回返済合計</span><b>${yen(pay)}</b></div><div class="q purple"><span>借入</span><b>${b.loans.length}件</b></div><div class="q"><span>担当者</span><b>${esc(b.people.officer||'未登録')}</b></div></div>`:''}
+  ${miss?`<div class="warn-box" style="margin-top:7px;padding:6px 8px">未確認重要項目 ${miss}件</div>`:''}
+ </summary>
+ <div class="bank-body">
+  <div class="tabs">
+   <button class="tab active" data-tab="overview">概要・URL</button><button class="tab" data-tab="people">担当者・支店長</button><button class="tab" data-tab="progress">開拓・資料</button><button class="tab" data-tab="loans">借入・残債</button><button class="tab" data-tab="criteria">融資条件</button><button class="tab" data-tab="timeline">時系列</button>
+  </div>
+  <div class="pane active" data-pane="overview">${overview(b)}</div>
+  <div class="pane" data-pane="people">${peoplePane(b)}</div>
+  <div class="pane" data-pane="progress">${progressPane(b)}</div>
+  <div class="pane" data-pane="loans">${loanPane(b)}</div>
+  <div class="pane" data-pane="criteria">${criteriaPane(b)}</div>
+  <div class="pane" data-pane="timeline">${timelinePane(b)}</div>
+ </div></details>`
+}
+function render(){
+ const list=filtered(); $('#emptyState').style.display=list.length?'none':'block'; $('#bankContainer').innerHTML=list.map(bankBlock).join('');
+ const balance=banks.reduce((s,b)=>s+bankBalance(b),0),next=banks.reduce((s,b)=>s+bankNextPay(b),0),loans=banks.reduce((s,b)=>s+b.loans.length,0),contacts=banks.filter(b=>status(b)!=='未連絡').length;
+ $('#statBanks').textContent=banks.length;$('#statBalance').textContent=yen(balance);$('#statNextPay').textContent=yen(next);$('#statMissing').textContent=banks.reduce((s,b)=>s+missing(b),0);
+ $('#bottomS').textContent=banks.filter(b=>b.rank==='S').length;$('#bottomContact').textContent=contacts;$('#bottomLoans').textContent=loans;$('#bottomBalance').textContent=yen(balance);
+ bind();
+}
+function mark(b,el){b.dirty=true;if(el)el.classList.add('edited');save()}
+function bind(){
+ $$('.bank').forEach(det=>{
+  const b=banks.find(x=>x.id===det.dataset.id);
+  det.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{det.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));det.querySelectorAll('.pane').forEach(x=>x.classList.remove('active'));t.classList.add('active');det.querySelector(`[data-pane="${t.dataset.tab}"]`).classList.add('active')});
+  det.querySelectorAll('[data-person]').forEach(x=>x.onchange=e=>{b.people[e.target.dataset.person]=e.target.value;mark(b,e.target);render()});
+  det.querySelectorAll('[data-bank]').forEach(x=>x.onchange=e=>{b[e.target.dataset.bank]=e.target.value;mark(b,e.target);render()});
+  det.querySelectorAll('[data-stage]').forEach(x=>x.onchange=e=>{b.stages[+e.target.dataset.stage]=e.target.checked;mark(b);render()});
+  det.querySelectorAll('[data-doc]').forEach(x=>x.onchange=e=>{b.docs[+e.target.dataset.doc]=e.target.checked;mark(b);render()});
+  det.querySelectorAll('[data-criteria]').forEach(x=>x.onchange=e=>{b.criteria[e.target.dataset.criteria]=e.target.value;mark(b,e.target);render()});
+  det.querySelectorAll('[data-loan-nextdate]').forEach(x=>x.onchange=e=>{const l=b.loans.find(z=>z.id===e.target.dataset.loanNextdate);l.nextPaymentDate=e.target.value;mark(b,e.target);render()});
+  det.querySelectorAll('[data-loan-note]').forEach(x=>x.onchange=e=>{const l=b.loans.find(z=>z.id===e.target.dataset.loanNote);l.notes=e.target.value;mark(b,e.target);render()});
+  det.querySelectorAll('[data-rate-form]').forEach(f=>f.onsubmit=e=>{e.preventDefault();const l=b.loans.find(z=>z.id===f.dataset.rateForm),d=new FormData(f);l.rateHistory.push({date:String(d.get('date')),rate:Number(d.get('value')),note:'手入力追加'});mark(b);render()});
+  det.querySelectorAll('[data-pay-form]').forEach(f=>f.onsubmit=e=>{e.preventDefault();const l=b.loans.find(z=>z.id===f.dataset.payForm),d=new FormData(f);l.paymentHistory.push({date:String(d.get('date')),amount:Number(d.get('value')),note:'手入力追加'});mark(b);render()});
+  det.querySelectorAll('[data-bal-form]').forEach(f=>f.onsubmit=e=>{e.preventDefault();const l=b.loans.find(z=>z.id===f.dataset.balForm),d=new FormData(f);l.balanceSnapshots.push({date:String(d.get('date')),amount:Number(d.get('value')),quality:'実績',note:'最新明細・通帳等から入力'});mark(b);render()});
+  const tf=det.querySelector('[data-timeline-form]');if(tf)tf.onsubmit=e=>{e.preventDefault();const d=new FormData(tf);b.timeline.push({date:String(d.get('date')),kind:String(d.get('kind')),person:String(d.get('person')),memo:String(d.get('memo')),next:String(d.get('next'))});if(d.get('next'))b.nextAction=String(d.get('next'));mark(b);render()};
+  const add=det.querySelector('[data-add-loan]');if(add)add.onclick=()=>{const name=prompt('借入名・対象物件名');if(!name)return;const principal=Number(prompt('当初借入額（円）')||0);b.loans.push({id:'loan-'+Date.now(),name,purpose:'',principal,startDate:TODAY,firstPaymentDate:'',maturity:'',repaymentMethod:'',rateType:'',nextPaymentDate:'',source:'手入力',balanceSnapshots:principal?[{date:TODAY,amount:principal,quality:'実績',note:'登録時残高'}]:[],rateHistory:[],paymentHistory:[],notes:''});mark(b);render()}
+ })
+}
+['regionFilter','rankFilter','typeFilter','statusFilter'].forEach(id=>$('#'+id).onchange=render);$('#searchFilter').oninput=render;
+$('#expandAll').onclick=()=>$$('.bank').forEach(x=>x.open=true);$('#closeAll').onclick=()=>$$('.bank').forEach(x=>x.open=false);
+$('#saveNow').onclick=()=>{save();alert('保存した。次回このHTMLを同じブラウザで開けば内容を保持する。')};
+$('#exportJson').onclick=()=>{const blob=new Blob([JSON.stringify({version:1,asOf:TODAY,banks},null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='wakyo_bank_crm_backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
+$('#importJson').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(String(r.result));if(!Array.isArray(o.banks))throw new Error();banks=o.banks;save();render();alert('バックアップを読み込んだ。')}catch(_){alert('読み込めないJSONです。')}e.target.value=''};r.readAsText(f)};
+render();save();
+})();
+</script>
+</body>
+</html>

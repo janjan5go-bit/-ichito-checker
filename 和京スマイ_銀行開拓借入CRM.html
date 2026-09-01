@@ -513,6 +513,28 @@ button,summary,label,input,select,textarea,a{touch-action:manipulation;-webkit-t
  .manual-task-filter{grid-template-columns:1fr 1fr}
 }
 
+
+/* ===== Route from Banks -> consolidated task hub ===== */
+.bank-task-route{
+  min-height:40px;border:1px solid #bfd2ee;border-radius:12px;background:#eef5ff;color:#1f5dbb;
+  padding:0 11px;font-size:12px;font-weight:950;display:inline-flex;align-items:center;gap:5px;white-space:nowrap
+}
+.bank-task-route.has-overdue{background:#fff0f0;border-color:#efbaba;color:#b63232}
+.bank-task-route.empty{background:#f7f9fc;border-color:#d8e1eb;color:#6b788b}
+.bank-screen-task-btn{
+  min-height:46px;border:1px solid #bfd2ee;border-radius:13px;background:#eef5ff;color:#1f5dbb;
+  padding:0 14px;font-size:13px;font-weight:950
+}
+.task-route-banner{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;
+  margin-bottom:9px;padding:9px 10px;border:1px solid #cbdcf2;border-radius:12px;background:#f6f9ff
+}
+.task-route-banner .task-route-title{font-size:12px;font-weight:900;color:#214f8f}
+@media(max-width:600px){
+ .bank-task-route{min-height:38px;font-size:11px;padding:0 9px}
+ .bank-screen-task-btn{min-height:42px;font-size:12px}
+}
+
 </style>
 </head>
 <body><div id="runtimeErrorBanner"></div>
@@ -554,7 +576,7 @@ button,summary,label,input,select,textarea,a{touch-action:manipulation;-webkit-t
  </section>
 
  <section class="app-screen" id="screen-banks" data-screen="banks">
-  <div class="screen-head"><div><h2><span class="screen-num" style="background:#078b45">2</span>銀行</h2><p>銀行カルテ・人脈・開拓・面談履歴を一元管理</p></div></div>
+  <div class="screen-head"><div><h2><span class="screen-num" style="background:#078b45">2</span>銀行</h2><p>銀行カルテ・人脈・開拓・面談履歴を一元管理</p></div><button class="bank-screen-task-btn" id="openAllBankTasks" type="button">📌 全銀行タスク</button></div>
   <section class="panel" id="bankFilterPanel"><div class="panel-title">銀行を絞る</div><div class="filters">
    <label class="field">物件エリア<select id="regionFilter"><option value="all">関西すべて</option><option>京都府</option><option>滋賀県</option><option>大阪府</option><option>奈良県</option><option>兵庫県</option><option>和歌山県</option></select></label>
    <label class="field">ランク<select id="rankFilter"><option value="all">S・A</option><option>S</option><option>A</option></select></label>
@@ -1039,7 +1061,7 @@ function bankTaskItem(t){
 }
 function bankTasksPane(b){
  const rows=[...b.manualTasks].sort(manualTaskSort),open=rows.filter(t=>!t.completed),done=rows.filter(t=>t.completed),c=bankTaskCounts(b);
- return `<div class="cols2">
+ return `<div class="task-route-banner"><div><div class="task-route-title">${esc(b.name)} の個別タスク</div><div class="small">ホームの集約ボードでも同じタスクを確認できます</div></div><button type="button" class="bank-task-route" data-task-pane-to-hub="${b.id}">集約タスクで見る →</button></div><div class="cols2">
   <form class="card bank-task-compose" data-bank-task-form>
    <h3>この銀行の個別タスク</h3>
    <div class="small" style="margin-bottom:7px">付箋メモ感覚で追加。期限と優先度は必要なときだけ。</div>
@@ -1110,6 +1132,8 @@ function renderManualTasksHub(){
  })
 }
 function bindBankTaskPane(det,b){
+ const hubBtn=det.querySelector('[data-task-pane-to-hub]');
+ if(hubBtn)hubBtn.onclick=e=>{e.preventDefault();e.stopPropagation();openTaskHub(b.id)};
  const form=det.querySelector('[data-bank-task-form]');if(form)form.onsubmit=e=>{
   e.preventDefault();e.stopPropagation();const d=new FormData(form),task={id:uid('task'),text:String(d.get('text')).trim(),dueDate:String(d.get('dueDate')||''),priority:String(d.get('priority')||'中'),completed:false,createdAt:nowIso(),completedAt:'',updatedAt:nowIso()};if(!task.text)return;
   b.manualTasks.push(task);recordChange(b,'個別タスク','タスク追加','—',task.text,{kind:'append'});markBank(b);const pane=det.querySelector('[data-pane="tasks"]');pane.innerHTML=bankTasksPane(b);bindBankTaskPane(det,b);refreshSummary(b,det);renderManualTasksHub();renderGlobalTasks();renderHomeExtras()
@@ -1135,7 +1159,12 @@ function bankPerformance(b){const decided=b.deals.filter(d=>['承認','否決','
 function meetingPack(b){const p=bankPerformance(b),loans=b.loans.filter(l=>l.status!=='取消'),deals=b.deals.filter(d=>!['否決','辞退'].includes(d.status)),ints=[...b.timeline].sort((a,z)=>(z.date||'').localeCompare(a.date||'')).slice(0,5),docs=documents.filter(d=>!d.bankId||d.bankId===b.id);const w=window.open('','_blank');if(!w){alert('ポップアップがブロックされた。Safariの設定を確認して。');return}w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(b.name)} 面談パック</title><style>body{font-family:-apple-system,BlinkMacSystemFont,"Yu Gothic",sans-serif;color:#172235;margin:28px;line-height:1.5}h1{font-size:24px}h2{font-size:16px;border-bottom:2px solid #17365d;padding-bottom:5px;margin-top:22px}table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid #d8e1eb;padding:6px;text-align:left}.box{background:#f5f8fc;border:1px solid #d8e1eb;border-radius:8px;padding:10px;margin:6px 0}.print{position:fixed;right:20px;top:20px;padding:10px 15px}@media print{.print{display:none}}</style><button class="print" onclick="print()">印刷 / PDF</button><h1>${esc(b.name)}｜銀行面談パック</h1><div class="box"><b>支店</b> ${esc(b.branch)}　<b>担当</b> ${esc(b.people.officer||'未登録')}　<b>支店長</b> ${esc(b.people.manager||'未登録')}　<b>実績スコア</b> ${p?p.score+'点':'未算出'}</div><h2>次アクション</h2><div class="box">${esc(b.nextAction||'未設定')} ${esc(b.nextDate||'')}</div><h2>融資条件</h2><table>${[['金利',b.criteria.rate],['期間',b.criteria.term],['LTV',b.criteria.ltv],['自己資金',b.criteria.equity],['築年数',b.criteria.maxAge],['構造',b.criteria.structures],['評価',b.criteria.valuation],['対象エリア',b.criteria.areas]].map(x=>`<tr><th>${x[0]}</th><td>${esc(x[1]||'未確認')}</td></tr>`).join('')}</table><h2>既存借入</h2><table><tr><th>借入</th><th>残債</th><th>金利</th><th>次回返済</th></tr>${loans.map(l=>`<tr><td>${esc(l.name)}</td><td>${yen(loanBalance(l)?.amount)}</td><td>${loanRate(l)?pctFmt(loanRate(l).rate):'—'}</td><td>${yen(loanPlanPay(l,l.nextPaymentDate||TODAY)?.amount)}</td></tr>`).join('')}</table><h2>進行案件</h2>${deals.map(d=>`<div class="box">${esc(projects.find(p=>p.id===d.projectId)?.name||d.name)}｜${esc(d.status)}｜${esc(d.nextAction||'')}</div>`).join('')||'なし'}<h2>直近の銀行発言</h2>${ints.map(x=>`<div class="box"><b>${esc(x.date)} ${esc(x.subject||x.kind)}</b><br>${esc(x.bankStatement||x.memo||'')}<br><small>次：${esc(x.next||'')}</small></div>`).join('')||'なし'}<h2>提出・期限</h2>${docs.map(d=>`<div class="box">${esc(d.name)}｜${esc(d.status)}｜期限 ${esc(d.dueDate||'—')}</div>`).join('')||'なし'}<p style="font-size:10px;color:#6d7b8e">作成 ${new Date().toLocaleString('ja-JP')}｜和京スマイ 銀行開拓・借入統合CRM</p>`);w.document.close()}
 function bankBlock(b){
  const p=bankProgress(b),bal=bankBalance(b),pay=bankNextPay(b),miss=missing(b),actualCount=b.loans.reduce((s,l)=>s+l.actualRepayments.length,0);
- return `<details class="bank bank-rank-${b.rank.toLowerCase()}" data-id="${b.id}"><summary class="bank-summary"><div class="summary-top"><div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集履歴あり</span>':''}${bankPerformance(b)?`<span class="score-chip">実績 ${bankPerformance(b).score}点</span>`:''}</div><div class="sub"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span data-bank-status>${esc(bankStatus(b))}</span><span data-bank-progress-text>開拓 ${p}%</span>${bankTaskCounts(b).open?`<span class="bank-task-summary ${bankTaskCounts(b).overdue?'overdue':''}" data-bank-task-summary>タスク ${bankTaskCounts(b).open}件${bankTaskCounts(b).overdue?`・超過${bankTaskCounts(b).overdue}`:''}</span>`:`<span class="bank-task-summary" data-bank-task-summary style="display:none"></span>`}</div></div><span class="arrow">▼</span></div><div class="progress"><i style="width:${p}%"></i></div>
+ return `<details class="bank bank-rank-${b.rank.toLowerCase()}" data-id="${b.id}"><summary class="bank-summary"><div class="summary-top"><div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集履歴あり</span>':''}${bankPerformance(b)?`<span class="score-chip">実績 ${bankPerformance(b).score}点</span>`:''}</div><div class="sub"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span data-bank-status>${esc(bankStatus(b))}</span><span data-bank-progress-text>開拓 ${p}%</span>${bankTaskCounts(b).open?`<span class="bank-task-summary ${bankTaskCounts(b).overdue?'overdue':''}" data-bank-task-summary>タスク ${bankTaskCounts(b).open}件${bankTaskCounts(b).overdue?`・超過${bankTaskCounts(b).overdue}`:''}</span>`:`<span class="bank-task-summary" data-bank-task-summary style="display:none"></span>`}</div></div><div style="display:flex;align-items:center;gap:7px">
+  <button type="button" class="bank-task-route ${bankTaskCounts(b).overdue?'has-overdue':bankTaskCounts(b).open?'':'empty'}" data-go-task-hub="${b.id}">
+   📌 ${bankTaskCounts(b).open?`タスク ${bankTaskCounts(b).open}`:'タスク'}
+  </button>
+  <span class="arrow">▼</span>
+ </div></div><div class="progress"><i style="width:${p}%"></i></div>
  ${b.loans.length?`<div class="quick"><div class="q green"><span>残債</span><b>${yen(bal)}</b></div><div class="q amber"><span>次回返済</span><b>${yen(pay)}</b></div><div class="q purple"><span>借入</span><b>${b.loans.length}件</b></div><div class="q blue"><span>返済実績</span><b>${actualCount}件</b></div><div class="q"><span>担当者</span><b>${esc(b.people.officer||'未登録')}</b></div></div>`:''}
  ${miss?`<div class="warn" style="margin-top:6px;padding:5px 7px">未確認重要項目 ${miss}件</div>`:''}
  </summary><div class="bank-body"><div class="tabs">
@@ -1243,6 +1272,18 @@ function renderRecoveryNotice(){
 }
 function renderHomeExtras(){renderRecoveryNotice();const focus=$('#homeFocusBody'),alerts=$('#homeAlertsBody');if(!focus||!alerts)return;const taskData=collectTasks(),over=taskData.filter(t=>{const d=daysFromToday(t.date);return d!=null&&d<0}).length,today=taskData.filter(t=>daysFromToday(t.date)===0).length,soon=taskData.filter(t=>{const d=daysFromToday(t.date);return d!=null&&d>0&&d<=7}).length,wait=banks.reduce((s,b)=>s+b.deals.filter(d=>['電話相談','面談','案件持込','稟議中','条件提示'].includes(d.status)&&daysFromToday(d.date)!=null&&daysFromToday(d.date)<=-Number(settings.responseWaitDays||7)).length,0);focus.innerHTML=`<div class="home-focus"><div class="focus-main"><div class="focus-title">今日の優先</div><div class="focus-count">${over+today+soon}</div><div class="focus-sub">期限超過 ${over}件 / 今日 ${today}件 / 7日以内 ${soon}件</div></div><div class="alert-grid"><div class="alert-card red"><div class="small">期限超過</div><strong>${over}</strong></div><div class="alert-card amber"><div class="small">今日</div><strong>${today}</strong></div><div class="alert-card purple"><div class="small">回答待ち</div><strong>${wait}</strong></div><div class="alert-card blue"><div class="small">7日以内</div><strong>${soon}</strong></div></div></div>`;const stale=banks.filter(b=>b.people.lastContact&&daysFromToday(b.people.lastContact)<=-Number(settings.followupDays||60));const changes=[];allLoans().forEach(({bank,loan})=>{const r=futureByDate(loan.rateHistory,TODAY);if(r&&daysFromToday(r.date)<=365)changes.push({bank,loan,r})});alerts.innerHTML=`<div class="cols2" style="margin-top:10px"><div class="panel"><div class="panel-title">関係維持フォロー</div>${stale.length?stale.map(b=>`<button class="task-card" data-home-bank="${b.id}"><div class="task-meta"><span>${esc(b.name)}</span><span>最終 ${esc(b.people.lastContact)}</span></div><div class="task-main">${Math.abs(daysFromToday(b.people.lastContact))}日接触なし</div></button>`).join(''):'<div class="small">長期未接触なし</div>'}</div><div class="panel"><div class="panel-title">金利変更ウォッチ</div>${changes.length?changes.map(x=>`<div class="doc-card soon"><div><div class="doc-title">${esc(x.bank.name)}｜${esc(x.loan.name)}</div><div class="doc-meta">${x.r.date} → ${pctFmt(x.r.rate)}</div></div></div>`).join(''):'<div class="small">12か月以内の登録変更なし</div>'}</div></div>`;alerts.querySelectorAll('[data-home-bank]').forEach(x=>x.onclick=()=>openBank(x.dataset.homeBank,'timeline'))}
 function collectTasks(){const tasks=[];banks.forEach(b=>{b.manualTasks.filter(t=>!t.completed).forEach(t=>tasks.push({bank:b,date:t.dueDate||'',kind:'個別タスク',text:t.text,manualTaskId:t.id,priority:t.priority}));if(b.nextAction)tasks.push({bank:b,date:b.nextDate||b.people.nextContact||'',kind:'銀行',text:b.nextAction});if(b.rank==='S'&&!b.people.officer)tasks.push({bank:b,date:'',kind:'不足',text:'融資担当者名を確認'});if(b.rank==='S'&&!b.people.manager)tasks.push({bank:b,date:'',kind:'不足',text:'支店長名を確認'});if(!b.criteria.rate)tasks.push({bank:b,date:'',kind:'不足',text:'金利目線を確認'});if(!b.criteria.equity)tasks.push({bank:b,date:'',kind:'不足',text:'必要自己資金を確認'});b.deals.forEach(d=>{if(d.nextAction)tasks.push({bank:b,date:d.nextDate||'',kind:'案件',text:`${projects.find(p=>p.id===d.projectId)?.name||d.name||'案件'}：${d.nextAction}`})});b.loans.filter(l=>l.status==='返済中').forEach(l=>{if(l.nextPaymentDate)tasks.push({bank:b,date:l.nextPaymentDate,kind:'返済',text:`${l.name} 次回返済 ${yen(loanPlanPay(l,l.nextPaymentDate)?.amount)}`})})});documents.filter(d=>d.status!=='提出済'&&d.status!=='不要').forEach(d=>tasks.push({bank:banks.find(b=>b.id===d.bankId)||null,date:d.dueDate||'',kind:'書類',text:`${d.name}｜${d.status}`}));return tasks.sort((a,z)=>{if(!a.date&&!z.date)return 0;if(!a.date)return 1;if(!z.date)return-1;return a.date.localeCompare(z.date)})}
+function openTaskHub(bankId='all'){
+ manualTaskHubFilter.status='open';
+ manualTaskHubFilter.bank=bankId||'all';
+ ui.screen='home';
+ saveUi();
+ switchScreen('home');
+ renderManualTasksHub();
+ setTimeout(()=>{
+  const el=document.getElementById('manualTasksHub');
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'})
+ },40)
+}
 function openBank(id,tab='overview'){ui.screen='banks';ui.openBanks.add(id);ui.activeTabs[id]=tab;saveUi();switchScreen('banks');render();setTimeout(()=>{const el=document.querySelector(`.bank[data-id="${CSS.escape(id)}"]`);if(el){el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'})}},30)}
 function buildSearchIndex(){const rows=[];banks.forEach(b=>{rows.push({cat:'銀行',title:b.name,text:[b.name,b.branch,b.product,b.facts,b.bankMemo,b.nextAction].join(' '),bankId:b.id,tab:'overview'});rows.push({cat:'人物',title:`${b.name} 人物`,text:Object.values(b.people).filter(v=>typeof v==='string').join(' ')+' '+b.people.contacts.map(c=>Object.values(c).join(' ')).join(' '),bankId:b.id,tab:'people'});rows.push({cat:'融資条件',title:`${b.name} 融資条件`,text:Object.values(b.criteria).join(' ')+' '+JSON.stringify(b.criteriaEvidence),bankId:b.id,tab:'criteria'});b.manualTasks.forEach(t=>rows.push({cat:'個別タスク',title:`${b.name}｜${t.text}`,text:[t.text,t.priority,t.dueDate,t.completed?'完了':'未完了'].join(' '),date:t.dueDate,bankId:b.id,tab:'tasks'}));b.timeline.forEach(t=>rows.push({cat:'銀行発言',title:`${b.name}｜${t.subject||t.kind}`,text:Object.values(t).join(' '),date:t.date,bankId:b.id,tab:'timeline'}));b.deals.forEach(d=>rows.push({cat:'案件',title:`${b.name}｜${projects.find(p=>p.id===d.projectId)?.name||d.name}`,text:Object.values(d).join(' '),date:d.date,bankId:b.id,tab:'deals'}));b.loans.forEach(l=>rows.push({cat:'借入',title:`${b.name}｜${l.name}`,text:JSON.stringify(l),bankId:b.id,tab:'loans'}));b.changeHistory.forEach(c=>rows.push({cat:'変更履歴',title:`${b.name}｜${c.label}`,text:JSON.stringify(c),date:c.at,bankId:b.id,tab:'audit'}))});projects.forEach(p=>rows.push({cat:'物件',title:p.name,text:Object.values(p).join(' '),screen:'deals'}));documents.forEach(d=>rows.push({cat:'書類',title:d.name,text:Object.values(d).join(' '),bankId:d.bankId||'',screen:'finance'}));return rows}
 function renderSearch(){const host=$('#searchResultsBody'),q=$('#globalSearchInput')?.value.trim().toLowerCase()||'';if(!host)return;if(!q){host.innerHTML='<div class="panel"><div class="small">キーワードを入れると、銀行発言・担当者・融資条件・案件・借入・変更履歴・書類を横断検索する。</div></div>';return}const rows=buildSearchIndex().filter(r=>(r.title+' '+r.text).toLowerCase().includes(q)).slice(0,100);host.innerHTML=rows.length?rows.map((r,i)=>{const txt=String(r.text).replace(/\s+/g,' '),pos=txt.toLowerCase().indexOf(q),snip=pos>=0?txt.slice(Math.max(0,pos-45),pos+120):txt.slice(0,150);return`<button class="search-result" data-search-i="${i}" style="width:100%;text-align:left"><div class="cat">${esc(r.cat)} ${esc(r.date||'')}</div><div class="title">${esc(r.title)}</div><div class="snippet">${esc(snip)}</div></button>`}).join(''):'<div class="panel">該当なし</div>';host.querySelectorAll('[data-search-i]').forEach(x=>x.onclick=()=>{const r=rows[Number(x.dataset.searchI)];if(r.bankId)openBank(r.bankId,r.tab||'overview');else switchScreen(r.screen||'search')})}
@@ -1315,6 +1356,7 @@ function refreshSummary(b,det){
  const stageCount=det.querySelector('[data-stage-count]');if(stageCount)stageCount.textContent=b.stages.filter(Boolean).length+'/20';
  const docCount=det.querySelector('[data-doc-count]');if(docCount)docCount.textContent=b.docs.filter(Boolean).length+'/'+DOCS.length;
  const tc=bankTaskCounts(b),chip=det.querySelector('[data-bank-task-summary]');if(chip){chip.style.display=tc.open?'inline-flex':'none';chip.textContent=tc.open?`タスク ${tc.open}件${tc.overdue?`・超過${tc.overdue}`:''}`:'';chip.classList.toggle('overdue',tc.overdue>0)}
+ const route=det.querySelector('[data-go-task-hub]');if(route){route.textContent=tc.open?`📌 タスク ${tc.open}`:'📌 タスク';route.classList.toggle('has-overdue',tc.overdue>0);route.classList.toggle('empty',tc.open===0)}
  updateStats();
 }
 function pinBankOpen(det,b){
@@ -1372,6 +1414,11 @@ function bind(){
    saveUi()
   });
   det.querySelectorAll('.tab').forEach(t=>t.onclick=e=>{e.preventDefault();e.stopPropagation();activateBankTab(det,t.dataset.tab)});
+  const taskRoute=det.querySelector('[data-go-task-hub]');
+  if(taskRoute){
+   ['pointerdown','touchstart','click'].forEach(ev=>taskRoute.addEventListener(ev,e=>e.stopPropagation(),{passive:ev!=='click'}));
+   taskRoute.onclick=e=>{e.preventDefault();e.stopPropagation();openTaskHub(taskRoute.dataset.goTaskHub)}
+  }
   det.querySelectorAll('.loan').forEach(ld=>{
    ld.addEventListener('toggle',()=>{if(ld.open)ui.openLoans.add(ld.dataset.loanid);else ui.openLoans.delete(ld.dataset.loanid);saveUi()});
    ld.querySelectorAll('.loan-tab').forEach(t=>t.onclick=e=>{e.preventDefault();e.stopPropagation();activateLoanTab(ld,t.dataset.ltab)});
@@ -1502,6 +1549,7 @@ const gs=$('#globalSearchInput');if(gs)gs.oninput=renderSearch;
 
 
 ['regionFilter','rankFilter','typeFilter','statusFilter'].forEach(id=>$('#'+id).addEventListener('change',rerenderPreserve));$('#searchFilter').addEventListener('input',rerenderPreserve);
+const allBankTasksBtn=$('#openAllBankTasks');if(allBankTasksBtn)allBankTasksBtn.onclick=()=>openTaskHub('all');
 $('#expandAll').onclick=()=>{switchScreen('banks');$$('.bank').forEach(x=>{x.open=true;ui.openBanks.add(x.dataset.id)});saveUi()};$('#closeAll').onclick=()=>{$$('.bank').forEach(x=>{x.open=false;ui.openBanks.delete(x.dataset.id)});saveUi()};
 $('#saveNow').onclick=async()=>{await saveNowSecure();alert('保存した。次回もPINなしでそのまま開ける。')};
 $('#exportJson').onclick=()=>downloadJson('和京スマイ_銀行CRM_バックアップ.json',{version:8,banks,company,projects,documents,settings});

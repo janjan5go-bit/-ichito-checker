@@ -4,11 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>和京スマイ｜銀行開拓・借入統合CRM</title>
-<link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#f3f6fb">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="銀行CRM">
 
 <style>
 :root{
@@ -535,6 +531,126 @@ button,summary,label,input,select,textarea,a{touch-action:manipulation;-webkit-t
  .bank-screen-task-btn{min-height:42px;font-size:12px}
 }
 
+
+/* ===== Desktop layout / PC optimization ===== */
+@media (min-width:1100px){
+  html,body{min-height:100%}
+  body{
+    font-size:16px;
+    background:
+      radial-gradient(circle at 78% 0%,rgba(39,103,232,.055),transparent 28%),
+      #f3f6fb;
+  }
+  .container{
+    max-width:none;
+    width:calc(100% - 150px);
+    margin:0 0 0 150px;
+    padding:24px 34px 54px;
+  }
+  .hero{
+    padding:8px 2px 16px;
+    max-width:1560px;
+    margin:0 auto;
+  }
+  .hero-top{align-items:flex-start}
+  .hero h1{font-size:31px;line-height:1.2}
+  .hero p{font-size:15px;max-width:900px;margin-top:5px}
+  .safari-btn{display:none!important}
+  .toolbar{gap:8px;margin-top:14px}
+  .btn.heroBtn{min-height:44px;font-size:13px}
+  #appMain{
+    max-width:1560px;
+    margin:0 auto;
+  }
+
+  /* left desktop navigation */
+  .app-nav{
+    position:fixed;
+    z-index:80;
+    left:18px;
+    top:128px;
+    bottom:auto;
+    right:auto;
+    width:112px;
+    padding:0;
+    pointer-events:auto;
+  }
+  .app-nav-inner{
+    width:112px;
+    max-width:none;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    grid-template-columns:none;
+    gap:5px;
+    border-radius:24px;
+    padding:8px;
+    background:rgba(16,30,51,.97);
+    box-shadow:0 14px 38px rgba(18,40,72,.22);
+  }
+  .nav-btn{
+    min-height:69px;
+    width:100%;
+    border-radius:16px;
+    font-size:12px;
+    gap:3px;
+  }
+  .nav-btn .ico{font-size:21px}
+  .nav-btn.active{box-shadow:0 3px 11px rgba(0,0,0,.12)}
+
+  .app-screen{padding-bottom:10px}
+  .screen-head{margin:11px 2px 15px}
+  .screen-head h2{font-size:27px}
+  .screen-head p{font-size:14px}
+
+  .stats{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:12px;
+  }
+  .stat{min-height:102px;padding:15px 16px}
+  .stat .l{font-size:12px}
+  .stat .v{font-size:25px}
+  .filters{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .field input,.field select,.field textarea{font-size:15px}
+  .home-focus{grid-template-columns:1.4fr .9fr;gap:12px}
+  .task-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .task-quick-form{grid-template-columns:1.3fr .6fr .55fr;gap:9px}
+  .manual-task-filter{grid-template-columns:280px 280px;justify-content:start}
+  .cols2{gap:12px}
+  .cols3{gap:11px}
+  .cols4,.cols5{gap:10px}
+  .kpi-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .coverage{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .links{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .check-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .bank{margin:10px 0}
+  .bank>summary{padding:14px 16px}
+  .bank-body{padding:13px 15px 16px}
+  .tabs{overflow:visible;flex-wrap:wrap}
+  .tab{min-height:43px}
+  .quick{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .table-wrap{max-height:520px}
+  .data-table{font-size:12px}
+  .panel{padding:16px}
+  .panel-title{font-size:17px}
+
+  /* compact and correct empty-state notice on desktop */
+  .recovery-card{
+    margin:10px 0 14px;
+    padding:16px 18px;
+    border-radius:18px;
+  }
+  .recovery-card h3{font-size:18px;margin-bottom:5px}
+  .recovery-card p{font-size:13px;line-height:1.6}
+  .recovery-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .recovery-meta{font-size:10px}
+}
+@media (min-width:1500px){
+  .container{width:calc(100% - 166px);margin-left:166px;padding-left:42px;padding-right:42px}
+  .app-nav{left:26px;width:116px}
+  .app-nav-inner{width:116px}
+}
+
 </style>
 </head>
 <body><div id="runtimeErrorBanner"></div>
@@ -637,6 +753,8 @@ const KEY='wakyo_bank_crm_html_v1';
 const SECURE_KEY='wakyo_bank_crm_secure_v1';
 const BACKUP_KEY='wakyo_bank_crm_secure_backups_v1';
 const PLAIN_BACKUP_KEY='wakyo_bank_crm_plain_backups_v1';
+const LAST_GOOD_KEY='wakyo_bank_crm_last_good_v1';
+const DATA_GUARD_VERSION='v1';
 const UI_KEY=KEY+'_ui_v6';
 const TODAY=(()=>{const d=new Date(),y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`})();
 const PREFS=['京都府','滋賀県','大阪府','奈良県','兵庫県','和歌山県'];
@@ -742,56 +860,79 @@ function applyState(s){banks=(s.banks||deepClone(initial)).map(normalizeBank);co
 function showVault(mode,message){const o=$('#vaultOverlay'),title=$('#vaultTitle'),msg=$('#vaultMessage'),p2=$('#vaultPin2'),sub=$('#vaultSubmit'),err=$('#vaultError');o.classList.remove('hidden');document.querySelector('.container')?.classList.add('locked-body');err.textContent='';$('#vaultPin').value='';p2.value='';if(mode==='unlock'){title.textContent='銀行CRMを解除';msg.textContent=message||'PIN / パスフレーズで暗号化データを解除する。';p2.style.display='none';sub.textContent='解除'}else if(mode==='migrate'){title.textContent='旧データを安全化';msg.textContent='旧版の平文データを検出。PINを設定してAES-GCM暗号化へ移行する。移行後は平文保存を削除する。';p2.style.display='block';sub.textContent='暗号化して移行'}else{title.textContent='安全な保管を設定';msg.textContent='公開GitHubには実データを埋め込まない。PINを設定し、この端末内に暗号化保存する。';p2.style.display='block';sub.textContent='暗号化を開始'}}
 function hideVault(){document.querySelector('.container')?.classList.remove('locked-body');$('#vaultOverlay').classList.add('hidden')}
 async function requestVault(mode){showVault(mode);return new Promise(resolve=>{$('#vaultForm').onsubmit=async e=>{e.preventDefault();const pin=$('#vaultPin').value,pin2=$('#vaultPin2').value,err=$('#vaultError');if(pin.length<4){err.textContent='4文字以上で設定して。';return}if(mode!=='unlock'&&pin!==pin2){err.textContent='確認用が一致しない。';return}resolve(pin)}})}
-async function initializeVault(){
- const plainRaw=localStorage.getItem(KEY);
- const secureRaw=localStorage.getItem(SECURE_KEY);
- encryptedDataDetected=Boolean(secureRaw);
- if(plainRaw){
-  try{applyState(JSON.parse(plainRaw))}catch(e){applyState(defaultState())}
- }else{
-  applyState(defaultState());
- }
- settings.securityMode='plain';
- vaultReady=true;
- hideVault();
+async function safeParse(raw){try{return raw?JSON.parse(raw):null}catch(e){return null}}
+function stateHealth(s){
+ const bs=Array.isArray(s?.banks)?s.banks:[];
+ let loanCount=0,totalBalance=0,people=0,stageCount=0,activity=0,taskCount=0;
+ bs.forEach(b=>{
+  const loans=Array.isArray(b.loans)?b.loans:[];loanCount+=loans.length;
+  loans.forEach(l=>{const snaps=Array.isArray(l.balanceSnapshots)?l.balanceSnapshots:[];const vals=snaps.map(x=>Number(x.amount||0)).filter(Number.isFinite);if(vals.length)totalBalance+=Math.max(...vals)});
+  if(b.people?.officer)people++;if(b.people?.manager)people++;if(b.people?.email||b.people?.direct)people++;
+  stageCount+=(b.stages||[]).filter(Boolean).length;
+  activity+=(b.timeline||[]).length+(b.deals||[]).length+(b.changeHistory||[]).length;
+  taskCount+=(b.manualTasks||[]).length;
+ });
+ const projectsCount=(s?.projects||[]).length,docsCount=(s?.documents||[]).length;
+ const c=s?.company||{};const companyFields=['totalAssets','netAssets','cash','interestDebt','sales','rentRevenue','operatingProfit','ordinaryProfit','annualNOI'];
+ const companyCount=companyFields.filter(k=>c[k]!==''&&c[k]!=null&&Number(c[k])!==0).length;
+ const score=loanCount*1000+(totalBalance>0?700:0)+people*70+taskCount*45+activity*18+projectsCount*80+docsCount*20+companyCount*30+stageCount*2;
+ return{score,loanCount,totalBalance,people,taskCount,activity,projectsCount,docsCount,stageCount}
+}
+function currentStateObject(){return{version:9,banks,company,projects,documents,settings:Object.assign({},settings,{securityMode:'plain'})}}
+function mergeUsefulExtras(base,extra){
+ const out=deepClone(base||{});if(!Array.isArray(out.banks))out.banks=[];
+ const byId=new Map(out.banks.map(b=>[b.id,b]));
+ (extra?.banks||[]).forEach(eb=>{const ob=byId.get(eb.id);if(!ob)return;
+  const existingTaskIds=new Set((ob.manualTasks||[]).map(t=>t.id));
+  (eb.manualTasks||[]).forEach(t=>{if(!existingTaskIds.has(t.id))(ob.manualTasks||(ob.manualTasks=[])).push(deepClone(t))});
+  const existingTimelineIds=new Set((ob.timeline||[]).map(t=>t.id));
+  (eb.timeline||[]).forEach(t=>{if(!existingTimelineIds.has(t.id))(ob.timeline||(ob.timeline=[])).push(deepClone(t))});
+ });
+ return out
+}
+function storedCandidates(){
+ const rows=[];
+ const primary=safeParse(localStorage.getItem(KEY));if(primary)rows.push({source:'通常保存',state:primary});
+ const last=safeParse(localStorage.getItem(LAST_GOOD_KEY));if(last)rows.push({source:'最終正常',state:last});
+ const backups=safeParse(localStorage.getItem(PLAIN_BACKUP_KEY));if(Array.isArray(backups))backups.forEach((r,i)=>{if(r?.state)rows.push({source:`世代バックアップ${i+1}`,state:r.state})});
+ return rows.map(r=>({...r,health:stateHealth(r.state)})).sort((a,z)=>z.health.score-a.health.score)
+}
+function writeProtectedState(state){
+ const raw=JSON.stringify(state);localStorage.setItem(KEY,raw);
+ const h=stateHealth(state);if(h.score>=100||h.loanCount>0||h.taskCount>0||h.people>0)localStorage.setItem(LAST_GOOD_KEY,raw)
+}
+function initializeVault(){
+ const candidates=storedCandidates();
+ const primary=safeParse(localStorage.getItem(KEY));const primaryHealth=stateHealth(primary);
+ const best=candidates[0]||null;
+ let chosen=primary;
+ if(best&&best.health.score>primaryHealth.score+20){chosen=mergeUsefulExtras(best.state,primary)}
+ if(chosen){applyState(chosen)}else{applyState(defaultState())}
+ const chosenHealth=stateHealth(currentStateObject());
+ if(chosenHealth.score>=100||chosenHealth.loanCount>0||chosenHealth.taskCount>0||chosenHealth.people>0){writeProtectedState(currentStateObject())}
+ settings.securityMode='plain';vaultReady=true;hideVault();
 }
 function shouldMakePlainBackup(){
- try{
-  const rows=JSON.parse(localStorage.getItem(PLAIN_BACKUP_KEY)||'[]');
-  if(!rows.length)return true;
-  return Date.now()-new Date(rows[0].savedAt).getTime()>6*3600*1000
- }catch(e){return true}
+ try{const rows=JSON.parse(localStorage.getItem(PLAIN_BACKUP_KEY)||'[]');if(!rows.length)return true;return Date.now()-new Date(rows[0].savedAt).getTime()>6*3600*1000}catch(e){return true}
 }
 function storePlainBackup(raw){
- try{
-  if(!raw)return;
-  const rows=JSON.parse(localStorage.getItem(PLAIN_BACKUP_KEY)||'[]');
-  rows.unshift({savedAt:nowIso(),state:JSON.parse(raw)});
-  localStorage.setItem(PLAIN_BACKUP_KEY,JSON.stringify(rows.slice(0,Number(settings.backupGenerations||7))))
- }catch(e){}
+ try{if(!raw)return;const state=JSON.parse(raw);if(stateHealth(state).score<20)return;const rows=JSON.parse(localStorage.getItem(PLAIN_BACKUP_KEY)||'[]');rows.unshift({savedAt:nowIso(),state});localStorage.setItem(PLAIN_BACKUP_KEY,JSON.stringify(rows.slice(0,Number(settings.backupGenerations||7))))}catch(e){}
 }
 function persistPlain(forceBackup=false){
- const prev=localStorage.getItem(KEY);
- if(prev&&(forceBackup||shouldMakePlainBackup()))storePlainBackup(prev);
- const state={version:8,banks,company,projects,documents,settings:Object.assign({},settings,{securityMode:'plain'})};
- localStorage.setItem(KEY,JSON.stringify(state));
- const e=$('#statSaved');if(e)e.textContent=new Date().toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
+ const state=currentStateObject();const h=stateHealth(state);const last=safeParse(localStorage.getItem(LAST_GOOD_KEY));const lh=stateHealth(last);
+ // DATA GUARD: never replace a materially richer known state with an accidental empty/reset state.
+ if(h.score<20&&lh.score>=100){
+  applyState(last);localStorage.setItem(KEY,JSON.stringify(last));
+  const e=$('#statSaved');if(e)e.textContent='自動保護復元';
+  setTimeout(()=>{try{render();switchScreen(ui.screen||'home')}catch(_){ }},0);return false
+ }
+ const prev=localStorage.getItem(KEY);if(prev&&(forceBackup||shouldMakePlainBackup()))storePlainBackup(prev);
+ writeProtectedState(state);
+ const e=$('#statSaved');if(e)e.textContent=new Date().toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});return true
 }
-async function persistEncryptedBackup(password){
- if(!crypto?.subtle)throw new Error('WebCrypto unavailable');
- const blob=await encryptState({version:8,banks,company,projects,documents,settings},password);
- localStorage.setItem(SECURE_KEY,JSON.stringify(blob));
- encryptedDataDetected=true;
- return blob;
-}
-function save(){
- clearTimeout(saveTimer);
- saveTimer=setTimeout(()=>persistPlain(false),180)
-}
-async function saveNowSecure(){
- clearTimeout(saveTimer);
- persistPlain(true)
-}
+async function persistEncryptedBackup(password){if(!crypto?.subtle)throw new Error('WebCrypto unavailable');const blob=await encryptState(currentStateObject(),password);localStorage.setItem(SECURE_KEY,JSON.stringify(blob));encryptedDataDetected=true;return blob}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>persistPlain(false),180)}
+async function saveNowSecure(){clearTimeout(saveTimer);persistPlain(true)}
 function recordChange(b,scope,label,oldValue,newValue,meta={}){
  if(JSON.stringify(oldValue)===JSON.stringify(newValue))return;
  b.changeHistory.push({id:uid('chg'),at:nowIso(),scope,label,oldValue:deepClone(oldValue),newValue:deepClone(newValue),meta:deepClone(meta)});
@@ -1255,8 +1396,33 @@ function renderRecoveryNotice(){
  let blob=null;if(raw){try{blob=JSON.parse(raw)}catch(e){blob=null}}
  const urgent=currentStateLooksEmpty();
  if(!urgent&&!blob){host.innerHTML='';return}
- const when=blob?.updatedAt?new Date(blob.updatedAt).toLocaleString('ja-JP'):'このSafari内には暗号化データなし';
- host.innerHTML=`<div class="recovery-card"><h3>${urgent?'⚠️ 旧データの復元が必要':'🔐 以前の暗号化データがあります'}</h3><p>${urgent?'現在の「残債0円」は旧データを引き継げていない状態。<b>復元ファイルを1回読み込めば、中信の借入・残債・担当者・開拓チェック等を戻せる。</b>':'必要なら以前の暗号化データを取り込める。'}<br>復元後は通常どおり自動保存し、PINは不要。</p><div class="recovery-actions">${blob?'<button class="btn primary" id="recoverPreviousData">旧PINから復元</button>':''}<label class="btn primary" style="display:flex;align-items:center;justify-content:center">旧データ復元ファイルを選ぶ<input id="restoreLegacyFile" type="file" accept=".json,application/json" hidden></label><button class="btn soft" id="hideRecoveryNotice">今は閉じる</button></div><div class="recovery-meta">暗号化領域：${esc(when)} ／ 復元前に現在の0円側データも世代バックアップへ保存</div></div>`;
+ const isDesktop=window.matchMedia&&window.matchMedia('(min-width:1100px)').matches;
+ const when=blob?.updatedAt?new Date(blob.updatedAt).toLocaleString('ja-JP'):'暗号化データなし';
+
+ if(isDesktop&&urgent&&!blob){
+  host.innerHTML=`<div class="recovery-card"><h3>💻 このPCはまだデータ未同期</h3>
+   <p>iPhoneのSafariとはブラウザ保存領域が別なので、このPCでは残債・担当者・タスク等がまだ入っていない。<b>iPhone側で「JSONバックアップ」を保存 → このPCで下のボタンから読み込む</b>と同じデータを使える。</p>
+   <div class="recovery-actions">
+    <label class="btn primary" style="display:flex;align-items:center;justify-content:center">バックアップをこのPCへ読込<input id="restoreLegacyFile" type="file" accept=".json,application/json" hidden></label>
+    <button class="btn soft" id="hideRecoveryNotice">今は閉じる</button>
+   </div>
+   <div class="recovery-meta">※ 現状は端末ごとのローカル保存。自動同期ではない。</div></div>`;
+  const file=$('#restoreLegacyFile');if(file)file.onchange=e=>{
+   const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{
+    const state=JSON.parse(String(r.result));
+    if(state.format==='wakyo-secure-v1'){alert('暗号化バックアップは上部の「バックアップ読込」から読み込んで。');return}
+    if(!Array.isArray(state.banks))throw new Error();
+    if(!confirm('iPhone側のバックアップをこのPCへ読み込む？'))return;
+    persistPlain(true);applyState(state);settings=Object.assign(blankSettings(),settings||{},{securityMode:'plain'});persistPlain(true);recoveryNoticeHidden=true;render();switchScreen('home');
+    alert('PCへデータを読み込んだ。残債・担当者・タスク等を確認して。')
+   }catch(err){alert('このバックアップは読み込めない。')}e.target.value=''};r.readAsText(f)
+  };
+  const hide=$('#hideRecoveryNotice');if(hide)hide.onclick=()=>{recoveryNoticeHidden=true;renderRecoveryNotice()};
+  return
+ }
+
+ const title=urgent?'⚠️ 旧データの復元が必要':'🔐 以前の暗号化データがあります';
+ host.innerHTML=`<div class="recovery-card"><h3>${title}</h3><p>${urgent?'現在の「残債0円」は旧データを引き継げていない状態。<b>復元ファイルを1回読み込めば、中信の借入・残債・担当者・開拓チェック等を戻せる。</b>':'必要なら以前の暗号化データを取り込める。'}<br>復元後は通常どおり自動保存し、PINは不要。</p><div class="recovery-actions">${blob?'<button class="btn primary" id="recoverPreviousData">旧PINから復元</button>':''}<label class="btn primary" style="display:flex;align-items:center;justify-content:center">旧データ復元ファイルを選ぶ<input id="restoreLegacyFile" type="file" accept=".json,application/json" hidden></label><button class="btn soft" id="hideRecoveryNotice">今は閉じる</button></div><div class="recovery-meta">暗号化領域：${esc(when)} ／ 復元前に現在の0円側データも世代バックアップへ保存</div></div>`;
  const recover=$('#recoverPreviousData');if(recover)recover.onclick=async()=>{
   const pin=prompt('前のPIN / パスフレーズを入力（この1回だけ）');if(!pin)return;
   try{
@@ -1300,6 +1466,7 @@ async function renderSecurity(){
    <label class="field">回答待ち警告（日）<input id="responseWaitDays" type="number" min="1" value="${settings.responseWaitDays}"></label>
   </div>
   <div class="toolbar">
+   <button class="btn soft" id="restoreLastGood">最終正常データへ戻す</button>
    <button class="btn soft" id="makeEncryptedBackup">PIN付き暗号化バックアップ</button>
    <button class="btn soft" id="exportPlain">通常JSONバックアップ</button>
    ${secureExists?'<button class="btn soft" id="loadEncryptedLocal">以前のデータを復元（旧PINは1回だけ）</button>':''}
@@ -1309,6 +1476,7 @@ async function renderSecurity(){
   ${plainBackups.length?plainBackups.map((r,i)=>`<div class="backup-row"><div><b>${new Date(r.savedAt).toLocaleString('ja-JP')}</b><div class="small">通常スナップショット</div></div><button class="btn soft" data-restore-plain="${i}" style="min-height:34px">復元</button></div>`).join(''):'<div class="small">まだ世代バックアップなし</div>'}
  </div>`;
  ['backupGenerations','followupDays','responseWaitDays'].forEach(k=>$('#'+k).onchange=e=>{settings[k]=Number(e.target.value);save()});
+ const restoreLast=$('#restoreLastGood');if(restoreLast)restoreLast.onclick=()=>{const s=safeParse(localStorage.getItem(LAST_GOOD_KEY));if(!s){alert('最終正常データはまだない。');return}if(!confirm('最終正常データへ戻す？ 現在状態は先に世代バックアップへ保存する。'))return;persistPlain(true);applyState(s);writeProtectedState(s);render();switchScreen('home');alert('最終正常データへ戻した。')};
  $('#exportPlain').onclick=()=>downloadJson('和京スマイ_銀行CRM_バックアップ.json',{version:8,banks,company,projects,documents,settings});
  $('#makeEncryptedBackup').onclick=async()=>{
   if(!crypto?.subtle){alert('暗号化バックアップはSafari最新版などで利用して。');return}
@@ -1557,10 +1725,16 @@ $('#importJson').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)re
 $('#exportBankCsv').onclick=exportBanksCsv;
 
 
-if('serviceWorker' in navigator&&location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+async function removeOldPwaCache(){
+ try{if('serviceWorker' in navigator){const regs=await navigator.serviceWorker.getRegistrations();for(const r of regs)await r.unregister()}}catch(e){}
+ try{if('caches' in window){const keys=await caches.keys();for(const k of keys){if(k.startsWith('wakyo-bank-crm'))await caches.delete(k)}}}catch(e){}
+}
+if(location.protocol.startsWith('http'))window.addEventListener('load',()=>removeOldPwaCache());
 
 const PUBLIC_APP_URL='https://janjan5go-bit.github.io/-ichito-checker/%E5%92%8C%E4%BA%AC%E3%82%B9%E3%83%9E%E3%82%A4_%E9%8A%80%E8%A1%8C%E9%96%8B%E6%8B%93%E5%80%9F%E5%85%A5CRM.html';
+const isIOSDevice=/iPad|iPhone|iPod/.test(navigator.userAgent)||((navigator.platform==='MacIntel')&&navigator.maxTouchPoints>1);
 const safariBtn=$('#openSafari');
+if(safariBtn&&!isIOSDevice)safariBtn.style.display='none';
 if(safariBtn)safariBtn.onclick=()=>{
   const here=String(location.href||'');
   const target=(/^https?:/i.test(here)&&!here.includes('chatgpt.com')&&!here.includes('sandbox'))?here:PUBLIC_APP_URL;

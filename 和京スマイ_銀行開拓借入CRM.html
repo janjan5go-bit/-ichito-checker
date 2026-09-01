@@ -463,6 +463,56 @@ button,summary,label,input,select,textarea,a{touch-action:manipulation;-webkit-t
 .recovery-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.recovery-actions .btn{min-height:46px}.recovery-meta{margin-top:7px;font-size:11px;color:#8a7042}
 @media(max-width:600px){.recovery-card h3{font-size:17px}.recovery-card p{font-size:12px}.recovery-actions .btn{width:100%}}
 
+
+/* ===== Bank individual task memo ===== */
+.task-hub-panel{border-left:7px solid #2767e8}
+.task-hub-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.task-hub-head h3{margin:0;font-size:18px;font-weight:950}
+.task-hub-stats{display:flex;gap:6px;flex-wrap:wrap}
+.task-hub-stat{border-radius:10px;padding:5px 8px;font-size:11px;font-weight:900;border:1px solid var(--border);background:#fff}
+.task-hub-stat.red{background:var(--red2);border-color:#efbaba;color:var(--red)}
+.task-hub-stat.amber{background:var(--amber2);border-color:#efd18a;color:var(--amber)}
+.task-hub-stat.green{background:var(--green2);border-color:#b8dfc9;color:var(--green)}
+.task-quick-form{display:grid;grid-template-columns:1.35fr .75fr .65fr;gap:7px;align-items:end}
+.task-quick-form .wide{grid-column:1/-1}
+.task-quick-form textarea{min-height:72px}
+.manual-task-filter{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0}
+.manual-task-list{display:flex;flex-direction:column;gap:7px}
+.manual-task-card{border:1px solid #d8e1eb;border-radius:14px;background:#fff;padding:10px;box-shadow:0 2px 7px rgba(25,55,90,.035)}
+.manual-task-card.priority-high{border-left:6px solid #d54545;background:#fff7f7}
+.manual-task-card.priority-medium{border-left:6px solid #e29a00;background:#fffaf0}
+.manual-task-card.priority-low{border-left:6px solid #4b8ce8;background:#f7fbff}
+.manual-task-card.completed{opacity:.67;background:#f5f7fa;border-left-color:#9ba8b8}
+.manual-task-main{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:start}
+.manual-task-check{width:22px;height:22px;margin-top:2px;accent-color:#2767e8;flex:none}
+.manual-task-text{font-size:14px;font-weight:850;line-height:1.45;overflow-wrap:anywhere}
+.manual-task-card.completed .manual-task-text{text-decoration:line-through;color:#738095}
+.manual-task-bank{border:0;background:transparent;padding:0;color:#1e5cb7;font-size:11px;font-weight:900;text-align:left}
+.manual-task-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;color:var(--muted);font-size:11px}
+.manual-task-chip{border-radius:8px;padding:3px 6px;border:1px solid var(--border);background:#f8fafc;font-weight:800}
+.manual-task-chip.overdue{background:var(--red2);border-color:#efbaba;color:var(--red)}
+.manual-task-chip.today{background:var(--amber2);border-color:#efd18a;color:var(--amber)}
+.manual-task-actions{display:flex;gap:5px;align-items:center}
+.manual-task-actions button{min-height:34px;padding:0 8px;font-size:11px}
+.bank-task-compose{background:#f8fbff;border-color:#cbdcf2}
+.bank-task-list{display:flex;flex-direction:column;gap:7px}
+.bank-task-item{border:1px solid var(--border);border-radius:13px;background:#fff;padding:9px}
+.bank-task-item.completed{opacity:.64;background:#f6f8fa}
+.bank-task-row{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:start}
+.bank-task-item textarea{min-height:64px;font-size:14px;font-weight:800;line-height:1.45}
+.bank-task-fields{display:grid;grid-template-columns:1fr .8fr;gap:6px;margin-top:7px}
+.bank-task-item.completed textarea{text-decoration:line-through;color:#738095}
+.bank-task-summary{display:inline-flex;align-items:center;gap:4px}
+.bank-task-summary.overdue{color:var(--red);font-weight:900}
+.bank-task-empty{padding:16px;text-align:center;color:var(--muted);font-size:12px}
+.completed-tasks{margin-top:9px;border-top:1px solid #e2e8ef;padding-top:7px}
+.completed-tasks summary{cursor:pointer;font-size:12px;font-weight:900;color:#68768a}
+@media(max-width:700px){
+ .task-quick-form{grid-template-columns:1fr 1fr}
+ .task-quick-form .wide{grid-column:1/-1}
+ .manual-task-filter{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body><div id="runtimeErrorBanner"></div>
@@ -498,7 +548,8 @@ button,summary,label,input,select,textarea,a{touch-action:manipulation;-webkit-t
   </section>
   <div id="recoveryNotice"></div>
   <div id="homeFocusBody"></div>
-  <div class="panel"><div class="panel-title">今日・近日のアクション</div><div id="globalTasksBody"></div></div>
+  <div id="manualTasksHub"></div>
+  <div class="panel"><div class="panel-title">自動アクション・期限</div><div id="globalTasksBody"></div></div>
   <div id="homeAlertsBody"></div>
  </section>
 
@@ -640,6 +691,16 @@ function normalizeBank(b){
  b.changeHistory=b.changeHistory||[]; b.nextAction=b.nextAction||''; b.nextDate=b.nextDate||''; b.bankMemo=b.bankMemo||''; b.newsUrl=b.newsUrl||b.official||'';
  b.deals=(b.deals||[]).map(d=>Object.assign(blankDeal(),d,{id:d.id||uid('deal'),projectId:d.projectId||'',decisionDate:d.decisionDate||''}));
  b.references=(b.references||[]).map(r=>({id:r.id||uid('ref'),title:r.title||'',url:r.url||'',category:r.category||'資料',note:r.note||'',addedAt:r.addedAt||nowIso()}));
+ b.manualTasks=(b.manualTasks||[]).map(t=>({
+  id:t.id||uid('task'),
+  text:t.text||'',
+  dueDate:t.dueDate||'',
+  priority:t.priority||'中',
+  completed:Boolean(t.completed),
+  createdAt:t.createdAt||nowIso(),
+  completedAt:t.completedAt||'',
+  updatedAt:t.updatedAt||t.createdAt||nowIso()
+ }));
  b.dirty=Boolean(b.dirty); return b;
 }
 let banks=[],company=blankCompany(),projects=[],documents=[],settings=blankSettings();
@@ -696,7 +757,7 @@ function persistPlain(forceBackup=false){
 }
 async function persistEncryptedBackup(password){
  if(!crypto?.subtle)throw new Error('WebCrypto unavailable');
- const blob=await encryptState({version:7,banks,company,projects,documents,settings},password);
+ const blob=await encryptState({version:8,banks,company,projects,documents,settings},password);
  localStorage.setItem(SECURE_KEY,JSON.stringify(blob));
  encryptedDataDetected=true;
  return blob;
@@ -940,6 +1001,131 @@ function dealField(label,field,d,type='text',numeric=false){return `<label class
 function dealCard(b,d){const pr=projects.find(p=>p.id===d.projectId),price=Number(pr?.price||d.price||0),rent=Number(pr?.annualRent||d.annualRent||0),y=price&&rent?rent/price*100:Number(d.surfaceYield||0);return `<details class="deal"><summary><div class="summary-top"><div><div class="badges"><span class="badge ${dealStatusClass(d.status)}">${esc(d.status)}</span><b>${esc(pr?.name||d.name||'案件名未入力')}</b></div><div class="sub"><span>${esc(d.date||'')}</span><span>${esc(pr?`${pr.pref} ${pr.city}`:`${d.pref||''} ${d.city||''}`)}</span>${y?`<span>表面 ${y.toFixed(2)}%</span>`:''}</div></div><span class="arrow">▼</span></div></summary><div class="deal-body"><div class="cols5"><label class="field">物件マスター<select data-deal-field="projectId" data-deal-id="${d.id}"><option value="">単独案件</option>${projects.map(p=>`<option value="${p.id}" ${d.projectId===p.id?'selected':''}>${esc(p.name||'名称未入力')}</option>`).join('')}</select></label>${dealField('案件日','date',d,'date')}${dealField('案件名','name',d)}${dealField('希望融資額','requestedAmount',d,'number',true)}${dealField('希望期間','requestedTerm',d)}${dealField('希望金利','requestedRate',d)}${dealField('自己資金','selfFunds',d,'number',true)}<label class="field">ステータス<select data-deal-field="status" data-deal-id="${d.id}">${['検討','電話相談','面談','案件持込','稟議中','条件提示','承認','否決','辞退','融資実行'].map(s=>`<option ${d.status===s?'selected':''}>${s}</option>`).join('')}</select></label>${dealField('回答/決裁日','decisionDate',d,'date')}${dealField('結果・回答','result',d)}${dealField('承認額','approvedAmount',d,'number',true)}${dealField('承認金利','approvedRate',d)}${dealField('承認期間','approvedTerm',d)}${dealField('担当者','contactPerson',d)}${dealField('次アクション','nextAction',d)}${dealField('次回日','nextDate',d,'date')}${dealField('否決理由','rejectReason',d)}</div><label class="field" style="margin-top:7px">案件メモ<textarea data-deal-field="memo" data-deal-id="${d.id}">${esc(d.memo||'')}</textarea></label><div class="section-actions" style="margin-top:7px"><span class="small">変更は履歴に残る</span><button class="btn danger" data-delete-deal="${d.id}">案件を削除</button></div></div></details>`}
 function dealsPane(b){return `<div class="cols2"><form class="card" data-deal-form><h3>この銀行へ案件を持ち込む</h3><div class="cols2"><label class="field">物件マスター<select name="projectId"><option value="">単独案件</option>${projects.map(p=>`<option value="${p.id}">${esc(p.name||'名称未入力')}</option>`).join('')}</select></label><label class="field">日付<input name="date" type="date" value="${TODAY}" required></label><label class="field">案件名<input name="name" placeholder="単独案件の場合"></label><label class="field">希望融資額<input name="requestedAmount" type="number"></label></div><button class="btn primary" style="width:100%;margin-top:7px">案件追加</button></form><div class="card"><div class="section-actions"><div><h3 style="margin:0">案件一覧</h3><div class="small">${b.deals.length}件</div></div><button class="btn soft" data-export-deals>CSV</button></div><div style="max-height:580px;overflow:auto">${b.deals.length?b.deals.map(d=>dealCard(b,d)).join(''):'<div class="small">案件持込履歴なし</div>'}</div></div></div>`}
 function timelinePane(b){const h=[...(b.timeline||[])].sort((a,z)=>(z.date||'').localeCompare(a.date||''));return `<div class="cols2"><form class="card" data-timeline-form><h3>Interaction Summaryを追加</h3><div class="interaction-form"><label class="field">日付<input name="date" type="date" required value="${TODAY}"></label><label class="field">種類<select name="kind"><option>電話</option><option>メール</option><option>面談</option><option>訪問</option><option>資料提出</option><option>案件持込</option><option>進捗確認</option><option>稟議</option><option>承認</option><option>否決</option><option>融資契約</option><option>融資実行</option><option>その他</option></select></label><label class="field wide">件名<input name="subject" placeholder="例：京都市5,000万円一棟 初回相談"></label><label class="field">参加者<input name="participants" placeholder="担当者様、融資課長○○様"></label><label class="field">温度感<input name="temperature" placeholder="A / B / C・積極など"></label><label class="field wide">銀行が言ったこと<textarea name="bankStatement" required></textarea></label><label class="field wide">こちらから聞いた/依頼したこと<textarea name="ourAsk"></textarea></label><label class="field wide">確認できた融資条件<textarea name="confirmedConditions"></textarea></label><label class="field">銀行側の約束<input name="bankPromise"></label><label class="field">こちらの宿題<input name="homework"></label><label class="field">次にすること<input name="next"></label><label class="field">タグ<input name="tags" placeholder="築古,自己資金,木造"></label></div><button class="btn primary" style="width:100%;margin-top:8px">記録を追加</button></form><div class="card"><h3>Interaction History</h3><div class="event-list">${h.length?h.map(x=>`<div class="event interaction"><div class="meta"><span>${esc(x.date)}・${esc(x.kind)}</span><span>${esc(x.participants||x.person)}</span></div><div class="event-title">${esc(x.subject||x.kind)}</div>${x.bankStatement?`<div class="event-block"><b>銀行が言ったこと</b>${esc(x.bankStatement)}</div>`:''}${x.confirmedConditions?`<div class="event-block"><b>確認条件</b>${esc(x.confirmedConditions)}</div>`:''}${x.bankPromise?`<div class="event-block"><b>銀行側の約束</b>${esc(x.bankPromise)}</div>`:''}${x.homework?`<div class="event-block"><b>こちらの宿題</b>${esc(x.homework)}</div>`:''}${x.next?`<div class="next">次 → ${esc(x.next)}</div>`:''}${x.tags?`<div class="event-tags">${x.tags.split(',').map(t=>`<span class="event-tag">${esc(t.trim())}</span>`).join('')}</div>`:''}</div>`).join(''):'<div class="small">まだ記録なし</div>'}</div></div></div>`}
+
+function taskPriorityWeight(p){return p==='高'?0:p==='中'?1:2}
+function taskDays(t){return t.dueDate?daysFromToday(t.dueDate):null}
+function manualTaskSort(a,z){
+ if(Boolean(a.completed)!==Boolean(z.completed))return a.completed?1:-1;
+ if(!a.dueDate&&!z.dueDate)return taskPriorityWeight(a.priority)-taskPriorityWeight(z.priority)||(a.createdAt||'').localeCompare(z.createdAt||'');
+ if(!a.dueDate)return 1;if(!z.dueDate)return-1;
+ return a.dueDate.localeCompare(z.dueDate)||taskPriorityWeight(a.priority)-taskPriorityWeight(z.priority)
+}
+function bankTaskCounts(b){
+ const open=b.manualTasks.filter(t=>!t.completed),over=open.filter(t=>taskDays(t)!=null&&taskDays(t)<0);
+ return{open:open.length,overdue:over.length,done:b.manualTasks.filter(t=>t.completed).length}
+}
+function taskDueChip(t){
+ if(!t.dueDate)return'<span class="manual-task-chip">期限なし</span>';
+ const d=taskDays(t);
+ const cls=d<0?'overdue':d===0?'today':'';
+ const tail=d<0?`・${Math.abs(d)}日超過`:d===0?'・今日':d<=7?`・${d}日後`:'';
+ return `<span class="manual-task-chip ${cls}">${esc(t.dueDate)}${tail}</span>`
+}
+function bankTaskItem(t){
+ return `<div class="bank-task-item priority-${t.priority==='高'?'high':t.priority==='低'?'low':'medium'} ${t.completed?'completed':''}" data-bank-task-item="${t.id}">
+  <div class="bank-task-row">
+   <input class="manual-task-check" data-bank-task-complete="${t.id}" type="checkbox" ${t.completed?'checked':''} aria-label="完了">
+   <div>
+    <textarea data-bank-task-text="${t.id}" aria-label="タスク内容">${esc(t.text)}</textarea>
+    <div class="bank-task-fields">
+     <label class="field">期限<input data-bank-task-date="${t.id}" type="date" value="${esc(t.dueDate)}"></label>
+     <label class="field">優先度<select data-bank-task-priority="${t.id}"><option ${t.priority==='高'?'selected':''}>高</option><option ${t.priority==='中'?'selected':''}>中</option><option ${t.priority==='低'?'selected':''}>低</option></select></label>
+    </div>
+    <div class="manual-task-meta">${taskDueChip(t)}<span class="manual-task-chip">優先 ${esc(t.priority)}</span>${t.completedAt?`<span class="manual-task-chip">完了 ${esc(t.completedAt.slice(0,10))}</span>`:''}</div>
+   </div>
+  </div>
+  <div class="section-actions" style="justify-content:flex-end;margin-top:6px;margin-bottom:0"><button class="btn danger" data-bank-task-delete="${t.id}" style="min-height:34px">削除</button></div>
+ </div>`
+}
+function bankTasksPane(b){
+ const rows=[...b.manualTasks].sort(manualTaskSort),open=rows.filter(t=>!t.completed),done=rows.filter(t=>t.completed),c=bankTaskCounts(b);
+ return `<div class="cols2">
+  <form class="card bank-task-compose" data-bank-task-form>
+   <h3>この銀行の個別タスク</h3>
+   <div class="small" style="margin-bottom:7px">付箋メモ感覚で追加。期限と優先度は必要なときだけ。</div>
+   <label class="field">タスク<textarea name="text" required placeholder="例：坂本様に一棟融資の自己資金目線を聞く"></textarea></label>
+   <div class="cols2" style="margin-top:7px">
+    <label class="field">期限（任意）<input name="dueDate" type="date"></label>
+    <label class="field">優先度<select name="priority"><option>高</option><option selected>中</option><option>低</option></select></label>
+   </div>
+   <button class="btn primary" style="width:100%;margin-top:8px">＋ タスク追加</button>
+  </form>
+  <div class="card">
+   <div class="section-actions"><div><h3 style="margin:0">未完了タスク</h3><div class="small">${c.open}件${c.overdue?`・期限超過 ${c.overdue}件`:''}</div></div></div>
+   <div class="bank-task-list" data-bank-task-list>${open.length?open.map(bankTaskItem).join(''):'<div class="bank-task-empty">未完了タスクなし</div>'}</div>
+   <details class="completed-tasks" ${done.length&&done.length<=2?'open':''}><summary>完了済み ${done.length}件</summary><div class="bank-task-list" style="margin-top:7px">${done.length?done.map(bankTaskItem).join(''):'<div class="bank-task-empty">完了済みなし</div>'}</div></details>
+  </div>
+ </div>`
+}
+function allManualTasks(){
+ const rows=[];banks.forEach(b=>b.manualTasks.forEach(t=>rows.push({bank:b,task:t})));
+ return rows.sort((a,z)=>manualTaskSort(a.task,z.task))
+}
+let manualTaskHubFilter={status:'open',bank:'all'};
+function renderManualTasksHub(){
+ const host=$('#manualTasksHub');if(!host)return;
+ const all=allManualTasks(),open=all.filter(x=>!x.task.completed),done=all.filter(x=>x.task.completed);
+ const overdue=open.filter(x=>taskDays(x.task)!=null&&taskDays(x.task)<0),today=open.filter(x=>taskDays(x.task)===0),soon=open.filter(x=>{const d=taskDays(x.task);return d!=null&&d>0&&d<=7});
+ let rows=all;
+ if(manualTaskHubFilter.status==='open')rows=open;
+ else if(manualTaskHubFilter.status==='overdue')rows=overdue;
+ else if(manualTaskHubFilter.status==='today')rows=today;
+ else if(manualTaskHubFilter.status==='soon')rows=soon;
+ else if(manualTaskHubFilter.status==='nodate')rows=open.filter(x=>!x.task.dueDate);
+ else if(manualTaskHubFilter.status==='done')rows=done;
+ if(manualTaskHubFilter.bank!=='all')rows=rows.filter(x=>x.bank.id===manualTaskHubFilter.bank);
+ host.innerHTML=`<div class="panel task-hub-panel">
+  <div class="task-hub-head"><div><h3>銀行個別タスク</h3><div class="small">各銀行のメモタスクをここで一括管理</div></div><div class="task-hub-stats"><span class="task-hub-stat">${open.length}件 未完了</span>${overdue.length?`<span class="task-hub-stat red">${overdue.length}件 超過</span>`:''}${today.length?`<span class="task-hub-stat amber">${today.length}件 今日</span>`:''}<span class="task-hub-stat green">${done.length}件 完了</span></div></div>
+  <form class="task-quick-form" id="manualTaskQuickForm">
+   <label class="field">銀行<select name="bankId" required><option value="">銀行を選ぶ</option>${banks.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select></label>
+   <label class="field">期限（任意）<input name="dueDate" type="date"></label>
+   <label class="field">優先度<select name="priority"><option>高</option><option selected>中</option><option>低</option></select></label>
+   <label class="field wide">メモタスク<textarea name="text" required placeholder="例：京銀へ電話して木造30年の目線を確認"></textarea></label>
+   <button class="btn primary wide">＋ タスク追加</button>
+  </form>
+  <div class="manual-task-filter">
+   <label class="field">表示<select id="manualTaskStatusFilter"><option value="open" ${manualTaskHubFilter.status==='open'?'selected':''}>未完了</option><option value="overdue" ${manualTaskHubFilter.status==='overdue'?'selected':''}>期限超過</option><option value="today" ${manualTaskHubFilter.status==='today'?'selected':''}>今日</option><option value="soon" ${manualTaskHubFilter.status==='soon'?'selected':''}>7日以内</option><option value="nodate" ${manualTaskHubFilter.status==='nodate'?'selected':''}>期限なし</option><option value="done" ${manualTaskHubFilter.status==='done'?'selected':''}>完了</option><option value="all" ${manualTaskHubFilter.status==='all'?'selected':''}>すべて</option></select></label>
+   <label class="field">銀行<select id="manualTaskBankFilter"><option value="all">全銀行</option>${banks.map(b=>`<option value="${b.id}" ${manualTaskHubFilter.bank===b.id?'selected':''}>${esc(b.name)}</option>`).join('')}</select></label>
+  </div>
+  <div class="manual-task-list">${rows.length?rows.map(({bank,task})=>`<div class="manual-task-card priority-${task.priority==='高'?'high':task.priority==='低'?'low':'medium'} ${task.completed?'completed':''}" data-hub-task="${task.id}" data-hub-bank="${bank.id}">
+   <div class="manual-task-main">
+    <input class="manual-task-check" data-hub-task-complete="${task.id}" data-hub-bankid="${bank.id}" type="checkbox" ${task.completed?'checked':''}>
+    <div><button class="manual-task-bank" data-hub-open-bank="${bank.id}">${esc(bank.name)}</button><div class="manual-task-text">${esc(task.text)}</div><div class="manual-task-meta">${taskDueChip(task)}<span class="manual-task-chip">優先 ${esc(task.priority)}</span></div></div>
+    <div class="manual-task-actions"><button class="btn soft" data-hub-open-bank="${bank.id}">開く</button></div>
+   </div>
+  </div>`).join(''):'<div class="bank-task-empty">該当タスクなし</div>'}</div>
+ </div>`;
+ const q=$('#manualTaskQuickForm');if(q)q.onsubmit=e=>{
+  e.preventDefault();const d=new FormData(q),b=banks.find(x=>x.id===String(d.get('bankId')));if(!b)return;
+  const task={id:uid('task'),text:String(d.get('text')).trim(),dueDate:String(d.get('dueDate')||''),priority:String(d.get('priority')||'中'),completed:false,createdAt:nowIso(),completedAt:'',updatedAt:nowIso()};
+  if(!task.text)return;b.manualTasks.push(task);recordChange(b,'個別タスク','タスク追加','—',task.text,{kind:'append'});markBank(b);renderManualTasksHub();renderGlobalTasks();renderHomeExtras();updateStats()
+ };
+ const sf=$('#manualTaskStatusFilter');if(sf)sf.onchange=e=>{manualTaskHubFilter.status=e.target.value;renderManualTasksHub()};
+ const bf=$('#manualTaskBankFilter');if(bf)bf.onchange=e=>{manualTaskHubFilter.bank=e.target.value;renderManualTasksHub()};
+ host.querySelectorAll('[data-hub-open-bank]').forEach(x=>x.onclick=()=>openBank(x.dataset.hubOpenBank,'tasks'));
+ host.querySelectorAll('[data-hub-task-complete]').forEach(x=>x.onchange=e=>{
+  const b=banks.find(v=>v.id===e.target.dataset.hubBankid),t=b?.manualTasks.find(v=>v.id===e.target.dataset.hubTaskComplete);if(!t)return;
+  const old=t.completed;t.completed=e.target.checked;t.completedAt=t.completed?nowIso():'';t.updatedAt=nowIso();
+  recordChange(b,'個別タスク',`${t.text}｜完了`,old,t.completed,{kind:'append'});markBank(b);renderManualTasksHub();renderGlobalTasks();renderHomeExtras();updateStats()
+ })
+}
+function bindBankTaskPane(det,b){
+ const form=det.querySelector('[data-bank-task-form]');if(form)form.onsubmit=e=>{
+  e.preventDefault();e.stopPropagation();const d=new FormData(form),task={id:uid('task'),text:String(d.get('text')).trim(),dueDate:String(d.get('dueDate')||''),priority:String(d.get('priority')||'中'),completed:false,createdAt:nowIso(),completedAt:'',updatedAt:nowIso()};if(!task.text)return;
+  b.manualTasks.push(task);recordChange(b,'個別タスク','タスク追加','—',task.text,{kind:'append'});markBank(b);const pane=det.querySelector('[data-pane="tasks"]');pane.innerHTML=bankTasksPane(b);bindBankTaskPane(det,b);refreshSummary(b,det);renderManualTasksHub();renderGlobalTasks();renderHomeExtras()
+ };
+ det.querySelectorAll('[data-bank-task-complete]').forEach(x=>{
+  x.addEventListener('click',e=>e.stopPropagation());x.onchange=e=>{
+   e.stopPropagation();pinBankOpen(det,b);const t=b.manualTasks.find(v=>v.id===e.target.dataset.bankTaskComplete);if(!t)return;const old=t.completed;t.completed=e.target.checked;t.completedAt=t.completed?nowIso():'';t.updatedAt=nowIso();
+   recordChange(b,'個別タスク',`${t.text}｜完了`,old,t.completed,{kind:'append'});markBank(b);const y=window.scrollY,pane=det.querySelector('[data-pane="tasks"]');pane.innerHTML=bankTasksPane(b);bindBankTaskPane(det,b);refreshSummary(b,det);renderManualTasksHub();renderGlobalTasks();renderHomeExtras();releaseBankOpenPin(det,b,y)
+  }
+ });
+ det.querySelectorAll('[data-bank-task-text]').forEach(x=>x.onchange=e=>{const t=b.manualTasks.find(v=>v.id===e.target.dataset.bankTaskText);if(!t)return;const old=t.text,tv=e.target.value.trim();t.text=tv;t.updatedAt=nowIso();recordChange(b,'個別タスク','タスク内容',old,tv,{kind:'append'});markBank(b);renderManualTasksHub();renderGlobalTasks();renderHomeExtras()});
+ det.querySelectorAll('[data-bank-task-date]').forEach(x=>x.onchange=e=>{const t=b.manualTasks.find(v=>v.id===e.target.dataset.bankTaskDate);if(!t)return;const old=t.dueDate;t.dueDate=e.target.value;t.updatedAt=nowIso();recordChange(b,'個別タスク',`${t.text}｜期限`,old,t.dueDate,{kind:'append'});markBank(b);renderManualTasksHub();renderGlobalTasks();renderHomeExtras();refreshSummary(b,det)});
+ det.querySelectorAll('[data-bank-task-priority]').forEach(x=>x.onchange=e=>{const t=b.manualTasks.find(v=>v.id===e.target.dataset.bankTaskPriority);if(!t)return;const old=t.priority;t.priority=e.target.value;t.updatedAt=nowIso();recordChange(b,'個別タスク',`${t.text}｜優先度`,old,t.priority,{kind:'append'});markBank(b);renderManualTasksHub();renderGlobalTasks();renderHomeExtras()});
+ det.querySelectorAll('[data-bank-task-delete]').forEach(x=>x.onclick=e=>{e.preventDefault();e.stopPropagation();const i=b.manualTasks.findIndex(v=>v.id===x.dataset.bankTaskDelete);if(i<0)return;const t=b.manualTasks[i];if(!confirm(`「${t.text}」を削除する？`))return;b.manualTasks.splice(i,1);recordChange(b,'個別タスク','タスク削除',t.text,'削除',{kind:'append'});markBank(b);const y=window.scrollY,pane=det.querySelector('[data-pane="tasks"]');pane.innerHTML=bankTasksPane(b);bindBankTaskPane(det,b);refreshSummary(b,det);renderManualTasksHub();renderGlobalTasks();renderHomeExtras();releaseBankOpenPin(det,b,y)})
+}
+
 function auditPane(b){
  const h=[...(b.changeHistory||[])].sort((a,z)=>z.at.localeCompare(a.at));
  return `<div class="card"><div class="section-actions"><div><h3 style="margin:0">変更履歴｜編集前の記録を残す</h3><div class="small">銀行・担当者・融資条件・借入基本項目・チェック状態を自動記録。</div></div><button class="btn soft" data-export-audit>変更履歴CSV</button></div><div class="audit">${h.length?h.map(e=>`<div class="audit-row"><div class="meta"><span>${new Date(e.at).toLocaleString('ja-JP')}・${esc(e.scope)}</span><span>${esc(e.label)}</span></div><div class="audit-change"><div class="old">${esc(fmtVal(e.oldValue))}</div><div class="audit-arrow">→</div><div class="new">${esc(fmtVal(e.newValue))}</div></div>${e.meta&&e.meta.kind!=='append'?`<button class="btn soft" data-revert="${e.id}" style="min-height:32px;margin-top:5px">この旧値に戻す</button>`:''}</div>`).join(''):'<div class="small">変更履歴なし</div>'}</div></div>`
@@ -949,13 +1135,13 @@ function bankPerformance(b){const decided=b.deals.filter(d=>['承認','否決','
 function meetingPack(b){const p=bankPerformance(b),loans=b.loans.filter(l=>l.status!=='取消'),deals=b.deals.filter(d=>!['否決','辞退'].includes(d.status)),ints=[...b.timeline].sort((a,z)=>(z.date||'').localeCompare(a.date||'')).slice(0,5),docs=documents.filter(d=>!d.bankId||d.bankId===b.id);const w=window.open('','_blank');if(!w){alert('ポップアップがブロックされた。Safariの設定を確認して。');return}w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(b.name)} 面談パック</title><style>body{font-family:-apple-system,BlinkMacSystemFont,"Yu Gothic",sans-serif;color:#172235;margin:28px;line-height:1.5}h1{font-size:24px}h2{font-size:16px;border-bottom:2px solid #17365d;padding-bottom:5px;margin-top:22px}table{border-collapse:collapse;width:100%;font-size:12px}td,th{border:1px solid #d8e1eb;padding:6px;text-align:left}.box{background:#f5f8fc;border:1px solid #d8e1eb;border-radius:8px;padding:10px;margin:6px 0}.print{position:fixed;right:20px;top:20px;padding:10px 15px}@media print{.print{display:none}}</style><button class="print" onclick="print()">印刷 / PDF</button><h1>${esc(b.name)}｜銀行面談パック</h1><div class="box"><b>支店</b> ${esc(b.branch)}　<b>担当</b> ${esc(b.people.officer||'未登録')}　<b>支店長</b> ${esc(b.people.manager||'未登録')}　<b>実績スコア</b> ${p?p.score+'点':'未算出'}</div><h2>次アクション</h2><div class="box">${esc(b.nextAction||'未設定')} ${esc(b.nextDate||'')}</div><h2>融資条件</h2><table>${[['金利',b.criteria.rate],['期間',b.criteria.term],['LTV',b.criteria.ltv],['自己資金',b.criteria.equity],['築年数',b.criteria.maxAge],['構造',b.criteria.structures],['評価',b.criteria.valuation],['対象エリア',b.criteria.areas]].map(x=>`<tr><th>${x[0]}</th><td>${esc(x[1]||'未確認')}</td></tr>`).join('')}</table><h2>既存借入</h2><table><tr><th>借入</th><th>残債</th><th>金利</th><th>次回返済</th></tr>${loans.map(l=>`<tr><td>${esc(l.name)}</td><td>${yen(loanBalance(l)?.amount)}</td><td>${loanRate(l)?pctFmt(loanRate(l).rate):'—'}</td><td>${yen(loanPlanPay(l,l.nextPaymentDate||TODAY)?.amount)}</td></tr>`).join('')}</table><h2>進行案件</h2>${deals.map(d=>`<div class="box">${esc(projects.find(p=>p.id===d.projectId)?.name||d.name)}｜${esc(d.status)}｜${esc(d.nextAction||'')}</div>`).join('')||'なし'}<h2>直近の銀行発言</h2>${ints.map(x=>`<div class="box"><b>${esc(x.date)} ${esc(x.subject||x.kind)}</b><br>${esc(x.bankStatement||x.memo||'')}<br><small>次：${esc(x.next||'')}</small></div>`).join('')||'なし'}<h2>提出・期限</h2>${docs.map(d=>`<div class="box">${esc(d.name)}｜${esc(d.status)}｜期限 ${esc(d.dueDate||'—')}</div>`).join('')||'なし'}<p style="font-size:10px;color:#6d7b8e">作成 ${new Date().toLocaleString('ja-JP')}｜和京スマイ 銀行開拓・借入統合CRM</p>`);w.document.close()}
 function bankBlock(b){
  const p=bankProgress(b),bal=bankBalance(b),pay=bankNextPay(b),miss=missing(b),actualCount=b.loans.reduce((s,l)=>s+l.actualRepayments.length,0);
- return `<details class="bank bank-rank-${b.rank.toLowerCase()}" data-id="${b.id}"><summary class="bank-summary"><div class="summary-top"><div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集履歴あり</span>':''}${bankPerformance(b)?`<span class="score-chip">実績 ${bankPerformance(b).score}点</span>`:''}</div><div class="sub"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span data-bank-status>${esc(bankStatus(b))}</span><span data-bank-progress-text>開拓 ${p}%</span></div></div><span class="arrow">▼</span></div><div class="progress"><i style="width:${p}%"></i></div>
+ return `<details class="bank bank-rank-${b.rank.toLowerCase()}" data-id="${b.id}"><summary class="bank-summary"><div class="summary-top"><div><div class="badges"><span class="badge ${rankClass(b.rank)}">${b.rank}</span><span class="name">${esc(b.name)}</span>${b.dirty?'<span class="badge purple">編集履歴あり</span>':''}${bankPerformance(b)?`<span class="score-chip">実績 ${bankPerformance(b).score}点</span>`:''}</div><div class="sub"><span>${esc(b.type)}</span><span>${esc(b.branch)}</span><span data-bank-status>${esc(bankStatus(b))}</span><span data-bank-progress-text>開拓 ${p}%</span>${bankTaskCounts(b).open?`<span class="bank-task-summary ${bankTaskCounts(b).overdue?'overdue':''}" data-bank-task-summary>タスク ${bankTaskCounts(b).open}件${bankTaskCounts(b).overdue?`・超過${bankTaskCounts(b).overdue}`:''}</span>`:`<span class="bank-task-summary" data-bank-task-summary style="display:none"></span>`}</div></div><span class="arrow">▼</span></div><div class="progress"><i style="width:${p}%"></i></div>
  ${b.loans.length?`<div class="quick"><div class="q green"><span>残債</span><b>${yen(bal)}</b></div><div class="q amber"><span>次回返済</span><b>${yen(pay)}</b></div><div class="q purple"><span>借入</span><b>${b.loans.length}件</b></div><div class="q blue"><span>返済実績</span><b>${actualCount}件</b></div><div class="q"><span>担当者</span><b>${esc(b.people.officer||'未登録')}</b></div></div>`:''}
  ${miss?`<div class="warn" style="margin-top:6px;padding:5px 7px">未確認重要項目 ${miss}件</div>`:''}
  </summary><div class="bank-body"><div class="tabs">
-  <button class="tab active" data-tab="overview">概要・URL</button><button class="tab" data-tab="people">担当者・支店長</button><button class="tab" data-tab="progress">開拓・資料</button><button class="tab" data-tab="deals">案件持込</button><button class="tab" data-tab="loans">借入・返済</button><button class="tab" data-tab="criteria">融資条件</button><button class="tab" data-tab="timeline">時系列</button><button class="tab" data-tab="audit">変更履歴</button>
+  <button class="tab active" data-tab="overview">概要・URL</button><button class="tab" data-tab="tasks">個別タスク</button><button class="tab" data-tab="people">担当者・支店長</button><button class="tab" data-tab="progress">開拓・資料</button><button class="tab" data-tab="deals">案件持込</button><button class="tab" data-tab="loans">借入・返済</button><button class="tab" data-tab="criteria">融資条件</button><button class="tab" data-tab="timeline">時系列</button><button class="tab" data-tab="audit">変更履歴</button>
  </div>
- <div class="pane active" data-pane="overview">${overviewPane(b)}</div><div class="pane" data-pane="people">${peoplePane(b)}</div><div class="pane" data-pane="progress">${progressPane(b)}</div><div class="pane" data-pane="deals">${dealsPane(b)}</div><div class="pane" data-pane="loans">${loansPane(b)}</div><div class="pane" data-pane="criteria">${criteriaPane(b)}</div><div class="pane" data-pane="timeline">${timelinePane(b)}</div><div class="pane" data-pane="audit">${auditPane(b)}</div>
+ <div class="pane active" data-pane="overview">${overviewPane(b)}</div><div class="pane" data-pane="tasks">${bankTasksPane(b)}</div><div class="pane" data-pane="people">${peoplePane(b)}</div><div class="pane" data-pane="progress">${progressPane(b)}</div><div class="pane" data-pane="deals">${dealsPane(b)}</div><div class="pane" data-pane="loans">${loansPane(b)}</div><div class="pane" data-pane="criteria">${criteriaPane(b)}</div><div class="pane" data-pane="timeline">${timelinePane(b)}</div><div class="pane" data-pane="audit">${auditPane(b)}</div>
  </div></details>`
 }
 
@@ -1013,7 +1199,7 @@ function renderGlobalFinance(){
 function daysFromToday(date){
  if(!date)return null;const a=parseDate(TODAY),b=parseDate(date);return Math.round((b-a)/86400000);
 }
-function renderGlobalTasks(){const host=$('#globalTasksBody');if(!host)return;const tasks=collectTasks();const badge=$('#globalTaskCountBadge');if(badge)badge.textContent=`${tasks.length}件`;host.innerHTML=`<div class="task-list">${tasks.slice(0,40).map(t=>{const d=daysFromToday(t.date),cls=d!=null&&d<0?'overdue':(d!=null&&d<=14?'soon':'');return`<button class="task-card ${cls}" data-task-bank="${t.bank?.id||''}" data-task-kind="${esc(t.kind)}"><div class="task-meta"><span>${esc(t.kind)}${t.bank?'・'+esc(t.bank.name):''}</span><span>${esc(t.date||'期限未設定')}${d!=null?(d<0?` (${Math.abs(d)}日超過)`:d===0?' (今日)':` (${d}日後)`):''}</span></div><div class="task-main">${esc(t.text)}</div></button>`}).join('')}</div>`;host.querySelectorAll('[data-task-bank]').forEach(x=>x.onclick=()=>{if(x.dataset.taskBank)openBank(x.dataset.taskBank,x.dataset.taskKind==='返済'?'loans':'overview');else if(x.dataset.taskKind==='書類')switchScreen('finance')})}
+function renderGlobalTasks(){const host=$('#globalTasksBody');if(!host)return;const tasks=collectTasks();const badge=$('#globalTaskCountBadge');if(badge)badge.textContent=`${tasks.length}件`;host.innerHTML=`<div class="task-list">${tasks.slice(0,40).map(t=>{const d=daysFromToday(t.date),cls=d!=null&&d<0?'overdue':(d!=null&&d<=14?'soon':'');return`<button class="task-card ${cls}" data-task-bank="${t.bank?.id||''}" data-task-kind="${esc(t.kind)}"><div class="task-meta"><span>${esc(t.kind)}${t.bank?'・'+esc(t.bank.name):''}</span><span>${esc(t.date||'期限未設定')}${d!=null?(d<0?` (${Math.abs(d)}日超過)`:d===0?' (今日)':` (${d}日後)`):''}</span></div><div class="task-main">${esc(t.text)}</div></button>`}).join('')}</div>`;host.querySelectorAll('[data-task-bank]').forEach(x=>x.onclick=()=>{if(x.dataset.taskBank)openBank(x.dataset.taskBank,x.dataset.taskKind==='返済'?'loans':x.dataset.taskKind==='個別タスク'?'tasks':'overview');else if(x.dataset.taskKind==='書類')switchScreen('finance')})}
 function renderGlobalCoverage(){
  const host=$('#globalCoverageBody');if(!host)return;
  host.innerHTML=`<div class="coverage">${PREFS.map(pref=>{const s=banks.filter(b=>b.regions[pref]==='S'),a=banks.filter(b=>b.regions[pref]==='A');return`<div class="coverage-card"><h4>${pref}</h4><div class="small">Sランク</div><div class="badges" style="margin:4px 0 7px">${s.length?s.map(b=>`<span class="badge s">${esc(b.name)}</span>`).join(''):'<span class="small">なし</span>'}</div><div class="small">Aランク</div><div class="badges" style="margin-top:4px">${a.length?a.map(b=>`<span class="badge a">${esc(b.name)}</span>`).join(''):'<span class="small">なし</span>'}</div></div>`}).join('')}</div>
@@ -1056,9 +1242,9 @@ function renderRecoveryNotice(){
  const hide=$('#hideRecoveryNotice');if(hide)hide.onclick=()=>{recoveryNoticeHidden=true;renderRecoveryNotice()};
 }
 function renderHomeExtras(){renderRecoveryNotice();const focus=$('#homeFocusBody'),alerts=$('#homeAlertsBody');if(!focus||!alerts)return;const taskData=collectTasks(),over=taskData.filter(t=>{const d=daysFromToday(t.date);return d!=null&&d<0}).length,today=taskData.filter(t=>daysFromToday(t.date)===0).length,soon=taskData.filter(t=>{const d=daysFromToday(t.date);return d!=null&&d>0&&d<=7}).length,wait=banks.reduce((s,b)=>s+b.deals.filter(d=>['電話相談','面談','案件持込','稟議中','条件提示'].includes(d.status)&&daysFromToday(d.date)!=null&&daysFromToday(d.date)<=-Number(settings.responseWaitDays||7)).length,0);focus.innerHTML=`<div class="home-focus"><div class="focus-main"><div class="focus-title">今日の優先</div><div class="focus-count">${over+today+soon}</div><div class="focus-sub">期限超過 ${over}件 / 今日 ${today}件 / 7日以内 ${soon}件</div></div><div class="alert-grid"><div class="alert-card red"><div class="small">期限超過</div><strong>${over}</strong></div><div class="alert-card amber"><div class="small">今日</div><strong>${today}</strong></div><div class="alert-card purple"><div class="small">回答待ち</div><strong>${wait}</strong></div><div class="alert-card blue"><div class="small">7日以内</div><strong>${soon}</strong></div></div></div>`;const stale=banks.filter(b=>b.people.lastContact&&daysFromToday(b.people.lastContact)<=-Number(settings.followupDays||60));const changes=[];allLoans().forEach(({bank,loan})=>{const r=futureByDate(loan.rateHistory,TODAY);if(r&&daysFromToday(r.date)<=365)changes.push({bank,loan,r})});alerts.innerHTML=`<div class="cols2" style="margin-top:10px"><div class="panel"><div class="panel-title">関係維持フォロー</div>${stale.length?stale.map(b=>`<button class="task-card" data-home-bank="${b.id}"><div class="task-meta"><span>${esc(b.name)}</span><span>最終 ${esc(b.people.lastContact)}</span></div><div class="task-main">${Math.abs(daysFromToday(b.people.lastContact))}日接触なし</div></button>`).join(''):'<div class="small">長期未接触なし</div>'}</div><div class="panel"><div class="panel-title">金利変更ウォッチ</div>${changes.length?changes.map(x=>`<div class="doc-card soon"><div><div class="doc-title">${esc(x.bank.name)}｜${esc(x.loan.name)}</div><div class="doc-meta">${x.r.date} → ${pctFmt(x.r.rate)}</div></div></div>`).join(''):'<div class="small">12か月以内の登録変更なし</div>'}</div></div>`;alerts.querySelectorAll('[data-home-bank]').forEach(x=>x.onclick=()=>openBank(x.dataset.homeBank,'timeline'))}
-function collectTasks(){const tasks=[];banks.forEach(b=>{if(b.nextAction)tasks.push({bank:b,date:b.nextDate||b.people.nextContact||'',kind:'銀行',text:b.nextAction});if(b.rank==='S'&&!b.people.officer)tasks.push({bank:b,date:'',kind:'不足',text:'融資担当者名を確認'});if(b.rank==='S'&&!b.people.manager)tasks.push({bank:b,date:'',kind:'不足',text:'支店長名を確認'});if(!b.criteria.rate)tasks.push({bank:b,date:'',kind:'不足',text:'金利目線を確認'});if(!b.criteria.equity)tasks.push({bank:b,date:'',kind:'不足',text:'必要自己資金を確認'});b.deals.forEach(d=>{if(d.nextAction)tasks.push({bank:b,date:d.nextDate||'',kind:'案件',text:`${projects.find(p=>p.id===d.projectId)?.name||d.name||'案件'}：${d.nextAction}`})});b.loans.filter(l=>l.status==='返済中').forEach(l=>{if(l.nextPaymentDate)tasks.push({bank:b,date:l.nextPaymentDate,kind:'返済',text:`${l.name} 次回返済 ${yen(loanPlanPay(l,l.nextPaymentDate)?.amount)}`})})});documents.filter(d=>d.status!=='提出済'&&d.status!=='不要').forEach(d=>tasks.push({bank:banks.find(b=>b.id===d.bankId)||null,date:d.dueDate||'',kind:'書類',text:`${d.name}｜${d.status}`}));return tasks.sort((a,z)=>{if(!a.date&&!z.date)return 0;if(!a.date)return 1;if(!z.date)return-1;return a.date.localeCompare(z.date)})}
+function collectTasks(){const tasks=[];banks.forEach(b=>{b.manualTasks.filter(t=>!t.completed).forEach(t=>tasks.push({bank:b,date:t.dueDate||'',kind:'個別タスク',text:t.text,manualTaskId:t.id,priority:t.priority}));if(b.nextAction)tasks.push({bank:b,date:b.nextDate||b.people.nextContact||'',kind:'銀行',text:b.nextAction});if(b.rank==='S'&&!b.people.officer)tasks.push({bank:b,date:'',kind:'不足',text:'融資担当者名を確認'});if(b.rank==='S'&&!b.people.manager)tasks.push({bank:b,date:'',kind:'不足',text:'支店長名を確認'});if(!b.criteria.rate)tasks.push({bank:b,date:'',kind:'不足',text:'金利目線を確認'});if(!b.criteria.equity)tasks.push({bank:b,date:'',kind:'不足',text:'必要自己資金を確認'});b.deals.forEach(d=>{if(d.nextAction)tasks.push({bank:b,date:d.nextDate||'',kind:'案件',text:`${projects.find(p=>p.id===d.projectId)?.name||d.name||'案件'}：${d.nextAction}`})});b.loans.filter(l=>l.status==='返済中').forEach(l=>{if(l.nextPaymentDate)tasks.push({bank:b,date:l.nextPaymentDate,kind:'返済',text:`${l.name} 次回返済 ${yen(loanPlanPay(l,l.nextPaymentDate)?.amount)}`})})});documents.filter(d=>d.status!=='提出済'&&d.status!=='不要').forEach(d=>tasks.push({bank:banks.find(b=>b.id===d.bankId)||null,date:d.dueDate||'',kind:'書類',text:`${d.name}｜${d.status}`}));return tasks.sort((a,z)=>{if(!a.date&&!z.date)return 0;if(!a.date)return 1;if(!z.date)return-1;return a.date.localeCompare(z.date)})}
 function openBank(id,tab='overview'){ui.screen='banks';ui.openBanks.add(id);ui.activeTabs[id]=tab;saveUi();switchScreen('banks');render();setTimeout(()=>{const el=document.querySelector(`.bank[data-id="${CSS.escape(id)}"]`);if(el){el.open=true;el.scrollIntoView({behavior:'smooth',block:'start'})}},30)}
-function buildSearchIndex(){const rows=[];banks.forEach(b=>{rows.push({cat:'銀行',title:b.name,text:[b.name,b.branch,b.product,b.facts,b.bankMemo,b.nextAction].join(' '),bankId:b.id,tab:'overview'});rows.push({cat:'人物',title:`${b.name} 人物`,text:Object.values(b.people).filter(v=>typeof v==='string').join(' ')+' '+b.people.contacts.map(c=>Object.values(c).join(' ')).join(' '),bankId:b.id,tab:'people'});rows.push({cat:'融資条件',title:`${b.name} 融資条件`,text:Object.values(b.criteria).join(' ')+' '+JSON.stringify(b.criteriaEvidence),bankId:b.id,tab:'criteria'});b.timeline.forEach(t=>rows.push({cat:'銀行発言',title:`${b.name}｜${t.subject||t.kind}`,text:Object.values(t).join(' '),date:t.date,bankId:b.id,tab:'timeline'}));b.deals.forEach(d=>rows.push({cat:'案件',title:`${b.name}｜${projects.find(p=>p.id===d.projectId)?.name||d.name}`,text:Object.values(d).join(' '),date:d.date,bankId:b.id,tab:'deals'}));b.loans.forEach(l=>rows.push({cat:'借入',title:`${b.name}｜${l.name}`,text:JSON.stringify(l),bankId:b.id,tab:'loans'}));b.changeHistory.forEach(c=>rows.push({cat:'変更履歴',title:`${b.name}｜${c.label}`,text:JSON.stringify(c),date:c.at,bankId:b.id,tab:'audit'}))});projects.forEach(p=>rows.push({cat:'物件',title:p.name,text:Object.values(p).join(' '),screen:'deals'}));documents.forEach(d=>rows.push({cat:'書類',title:d.name,text:Object.values(d).join(' '),bankId:d.bankId||'',screen:'finance'}));return rows}
+function buildSearchIndex(){const rows=[];banks.forEach(b=>{rows.push({cat:'銀行',title:b.name,text:[b.name,b.branch,b.product,b.facts,b.bankMemo,b.nextAction].join(' '),bankId:b.id,tab:'overview'});rows.push({cat:'人物',title:`${b.name} 人物`,text:Object.values(b.people).filter(v=>typeof v==='string').join(' ')+' '+b.people.contacts.map(c=>Object.values(c).join(' ')).join(' '),bankId:b.id,tab:'people'});rows.push({cat:'融資条件',title:`${b.name} 融資条件`,text:Object.values(b.criteria).join(' ')+' '+JSON.stringify(b.criteriaEvidence),bankId:b.id,tab:'criteria'});b.manualTasks.forEach(t=>rows.push({cat:'個別タスク',title:`${b.name}｜${t.text}`,text:[t.text,t.priority,t.dueDate,t.completed?'完了':'未完了'].join(' '),date:t.dueDate,bankId:b.id,tab:'tasks'}));b.timeline.forEach(t=>rows.push({cat:'銀行発言',title:`${b.name}｜${t.subject||t.kind}`,text:Object.values(t).join(' '),date:t.date,bankId:b.id,tab:'timeline'}));b.deals.forEach(d=>rows.push({cat:'案件',title:`${b.name}｜${projects.find(p=>p.id===d.projectId)?.name||d.name}`,text:Object.values(d).join(' '),date:d.date,bankId:b.id,tab:'deals'}));b.loans.forEach(l=>rows.push({cat:'借入',title:`${b.name}｜${l.name}`,text:JSON.stringify(l),bankId:b.id,tab:'loans'}));b.changeHistory.forEach(c=>rows.push({cat:'変更履歴',title:`${b.name}｜${c.label}`,text:JSON.stringify(c),date:c.at,bankId:b.id,tab:'audit'}))});projects.forEach(p=>rows.push({cat:'物件',title:p.name,text:Object.values(p).join(' '),screen:'deals'}));documents.forEach(d=>rows.push({cat:'書類',title:d.name,text:Object.values(d).join(' '),bankId:d.bankId||'',screen:'finance'}));return rows}
 function renderSearch(){const host=$('#searchResultsBody'),q=$('#globalSearchInput')?.value.trim().toLowerCase()||'';if(!host)return;if(!q){host.innerHTML='<div class="panel"><div class="small">キーワードを入れると、銀行発言・担当者・融資条件・案件・借入・変更履歴・書類を横断検索する。</div></div>';return}const rows=buildSearchIndex().filter(r=>(r.title+' '+r.text).toLowerCase().includes(q)).slice(0,100);host.innerHTML=rows.length?rows.map((r,i)=>{const txt=String(r.text).replace(/\s+/g,' '),pos=txt.toLowerCase().indexOf(q),snip=pos>=0?txt.slice(Math.max(0,pos-45),pos+120):txt.slice(0,150);return`<button class="search-result" data-search-i="${i}" style="width:100%;text-align:left"><div class="cat">${esc(r.cat)} ${esc(r.date||'')}</div><div class="title">${esc(r.title)}</div><div class="snippet">${esc(snip)}</div></button>`}).join(''):'<div class="panel">該当なし</div>';host.querySelectorAll('[data-search-i]').forEach(x=>x.onclick=()=>{const r=rows[Number(x.dataset.searchI)];if(r.bankId)openBank(r.bankId,r.tab||'overview');else switchScreen(r.screen||'search')})}
 async function renderSecurity(){
  const host=$('#securityBody');if(!host)return;
@@ -1082,7 +1268,7 @@ async function renderSecurity(){
   ${plainBackups.length?plainBackups.map((r,i)=>`<div class="backup-row"><div><b>${new Date(r.savedAt).toLocaleString('ja-JP')}</b><div class="small">通常スナップショット</div></div><button class="btn soft" data-restore-plain="${i}" style="min-height:34px">復元</button></div>`).join(''):'<div class="small">まだ世代バックアップなし</div>'}
  </div>`;
  ['backupGenerations','followupDays','responseWaitDays'].forEach(k=>$('#'+k).onchange=e=>{settings[k]=Number(e.target.value);save()});
- $('#exportPlain').onclick=()=>downloadJson('和京スマイ_銀行CRM_バックアップ.json',{version:7,banks,company,projects,documents,settings});
+ $('#exportPlain').onclick=()=>downloadJson('和京スマイ_銀行CRM_バックアップ.json',{version:8,banks,company,projects,documents,settings});
  $('#makeEncryptedBackup').onclick=async()=>{
   if(!crypto?.subtle){alert('暗号化バックアップはSafari最新版などで利用して。');return}
   const p1=prompt('バックアップ用PIN / パスフレーズ（4文字以上）');if(!p1||p1.length<4)return;
@@ -1113,7 +1299,7 @@ async function renderSecurity(){
 function setupAutoLock(){}
 function resetAutoLock(){}
 function lockVaultNow(){}
-function renderGlobal(){renderGlobalLoans();renderGlobalDeals();renderGlobalFinance();renderGlobalTasks();renderGlobalCoverage();renderProjects();renderMaturityWall();renderConcentration();renderTransactionReport();renderDocuments();renderHomeExtras();renderSearch();renderSecurity()}
+function renderGlobal(){renderGlobalLoans();renderGlobalDeals();renderGlobalFinance();renderGlobalTasks();renderGlobalCoverage();renderProjects();renderMaturityWall();renderConcentration();renderTransactionReport();renderDocuments();renderHomeExtras();renderManualTasksHub();renderSearch();renderSecurity()}
 
 function activateBankTab(det,tab){
  det.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));det.querySelectorAll('.pane').forEach(x=>x.classList.toggle('active',x.dataset.pane===tab));ui.activeTabs[det.dataset.id]=tab;saveUi()
@@ -1128,6 +1314,7 @@ function refreshSummary(b,det){
  const sText=det.querySelector('[data-bank-status]');if(sText)sText.textContent=bankStatus(b);
  const stageCount=det.querySelector('[data-stage-count]');if(stageCount)stageCount.textContent=b.stages.filter(Boolean).length+'/20';
  const docCount=det.querySelector('[data-doc-count]');if(docCount)docCount.textContent=b.docs.filter(Boolean).length+'/'+DOCS.length;
+ const tc=bankTaskCounts(b),chip=det.querySelector('[data-bank-task-summary]');if(chip){chip.style.display=tc.open?'inline-flex':'none';chip.textContent=tc.open?`タスク ${tc.open}件${tc.overdue?`・超過${tc.overdue}`:''}`:'';chip.classList.toggle('overdue',tc.overdue>0)}
  updateStats();
 }
 function pinBankOpen(det,b){
@@ -1189,6 +1376,8 @@ function bind(){
    ld.addEventListener('toggle',()=>{if(ld.open)ui.openLoans.add(ld.dataset.loanid);else ui.openLoans.delete(ld.dataset.loanid);saveUi()});
    ld.querySelectorAll('.loan-tab').forEach(t=>t.onclick=e=>{e.preventDefault();e.stopPropagation();activateLoanTab(ld,t.dataset.ltab)});
   });
+
+  bindBankTaskPane(det,b);
 
   det.querySelectorAll('[data-bank-field]').forEach(el=>el.onchange=e=>{
    const f=e.target.dataset.bankField,old=b[f],nv=e.target.value;if(f==='rank'||f==='type'){} b[f]=nv;addChangeAndSave(b,'銀行基本',bankLabel(f),old,nv,{kind:'bank',field:f},e.target);
@@ -1315,7 +1504,7 @@ const gs=$('#globalSearchInput');if(gs)gs.oninput=renderSearch;
 ['regionFilter','rankFilter','typeFilter','statusFilter'].forEach(id=>$('#'+id).addEventListener('change',rerenderPreserve));$('#searchFilter').addEventListener('input',rerenderPreserve);
 $('#expandAll').onclick=()=>{switchScreen('banks');$$('.bank').forEach(x=>{x.open=true;ui.openBanks.add(x.dataset.id)});saveUi()};$('#closeAll').onclick=()=>{$$('.bank').forEach(x=>{x.open=false;ui.openBanks.delete(x.dataset.id)});saveUi()};
 $('#saveNow').onclick=async()=>{await saveNowSecure();alert('保存した。次回もPINなしでそのまま開ける。')};
-$('#exportJson').onclick=()=>downloadJson('和京スマイ_銀行CRM_バックアップ.json',{version:7,banks,company,projects,documents,settings});
+$('#exportJson').onclick=()=>downloadJson('和京スマイ_銀行CRM_バックアップ.json',{version:8,banks,company,projects,documents,settings});
 $('#importJson').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const o=JSON.parse(String(r.result));if(o.format==='wakyo-secure-v1'){const pin=prompt('この暗号化バックアップのPIN / パスフレーズ');if(!pin)return;const state=await decryptState(o,pin);if(!confirm('このバックアップを読み込む？ 現在状態は先に世代バックアップへ保存する。'))return;persistPlain(true);applyState(state);settings.securityMode='plain';persistPlain(true);render();alert('暗号化バックアップを読み込んだ。今後の起動にPINは不要。')}else if(Array.isArray(o.banks)){if(!confirm('バックアップを読み込む？ 現在状態は先に世代バックアップへ保存する。'))return;persistPlain(true);applyState(o);settings.securityMode='plain';persistPlain(true);render();alert('バックアップを読み込んだ。')}else throw new Error()}catch(_){alert('読み込めないバックアップ。')}e.target.value=''};r.readAsText(f)};
 $('#exportBankCsv').onclick=exportBanksCsv;
 

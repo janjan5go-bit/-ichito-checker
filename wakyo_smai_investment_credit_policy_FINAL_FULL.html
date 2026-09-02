@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17324d">
+<title>和京スマイ株式会社｜一棟収益不動産 投資・融資・財務管理基準 完全版</title>
+<meta name="description" content="和京スマイ株式会社 一棟収益不動産 投資・融資・財務管理基準 完全統合マスター 2026年9月2日基準">
+<style>
+:root{
+  --bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#dde4ee;
+  --navy:#17324d;--blue:#2463eb;--blue2:#0f6fae;--blueSoft:#eaf2ff;
+  --red:#b42318;--redSoft:#fff0ee;--green:#137a49;--greenSoft:#eaf8f0;
+  --amber:#9a6700;--amberSoft:#fff6d9;--purple:#6b4eff;--purpleSoft:#f1edff;
+  --graySoft:#f2f4f7;--teal:#087f8c;--tealSoft:#e7f8fa;
+  --shadow:0 9px 28px rgba(23,50,77,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP","Segoe UI",sans-serif;line-height:1.78;-webkit-text-size-adjust:100%;font-size:16px}
+body.dark{
+ --bg:#0f141b;--card:#171e27;--text:#eef2f7;--muted:#abb5c1;--line:#2d3744;
+ --navy:#dceaff;--blue:#82a9ff;--blue2:#7bc4ee;--blueSoft:#182a46;
+ --red:#ff8d86;--redSoft:#3d2020;--green:#78d6a7;--greenSoft:#17382a;
+ --amber:#ffd276;--amberSoft:#3b3118;--purple:#b6a8ff;--purpleSoft:#2b2548;
+ --graySoft:#202832;--teal:#7cdce5;--tealSoft:#15383b;
+}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+button{font:inherit}
+.hero{background:linear-gradient(135deg,#10263a 0%,#174d74 58%,#2463eb 100%);color:white;padding:28px 16px 24px}
+.hero-in{max-width:1180px;margin:auto}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.1em;opacity:.8}
+h1{font-size:clamp(28px,7vw,51px);line-height:1.18;letter-spacing:-.03em;margin:7px 0 9px}
+.hero p{max-width:920px;margin:0;color:#eaf1fa;font-size:14px}
+.hero-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.hero-badge{padding:6px 10px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.11);border-radius:999px;font-size:11px;font-weight:900}
+.toolbar{position:sticky;top:0;z-index:90;background:color-mix(in srgb,var(--card) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.toolbar-in{max-width:1180px;margin:auto;display:flex;align-items:center;gap:7px;padding:7px 9px}
+.scroller{display:flex;gap:6px;overflow:auto;scrollbar-width:none;flex:1}.scroller::-webkit-scrollbar{display:none}
+.nav{white-space:nowrap;background:var(--card);border:1px solid var(--line);color:var(--text);font-size:11px;font-weight:900;border-radius:999px;padding:7px 10px}
+.tbtn{width:36px;height:36px;flex:0 0 36px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);display:grid;place-items:center;font-weight:900}
+main{max-width:1180px;margin:auto;padding:16px 10px 70px}
+.top-actions{display:flex;gap:7px;flex-wrap:wrap;margin:4px 0 15px}
+.action{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:8px 11px;font-size:12px;font-weight:850}
+.panel,.card,details.sec{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.panel{padding:15px;margin:10px 0}
+.panel h2,.panel h3{margin-top:0}
+h2.st{font-size:23px;line-height:1.35;color:var(--navy);margin:28px 2px 11px}
+h3{font-size:17px;color:var(--navy);margin:19px 0 7px}h4{font-size:15px;margin:15px 0 5px}
+p{margin:8px 0}
+.grid{display:grid;gap:10px}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){.g3,.g2{grid-template-columns:1fr}}
+.kcard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px;box-shadow:var(--shadow);border-top:5px solid var(--blue)}
+.kcard.red{border-top-color:var(--red)}.kcard.green{border-top-color:var(--green)}.kcard.amber{border-top-color:var(--amber)}
+.klabel{font-size:11px;font-weight:900;color:var(--muted)}.knum{font-size:31px;font-weight:950;line-height:1.1;margin:5px 0}.kdesc{font-size:13px;color:var(--muted)}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:950}
+.abs{color:var(--red);background:var(--redSoft)}.target{color:var(--green);background:var(--greenSoft)}
+.ref{color:var(--blue);background:var(--blueSoft)}.warn{color:var(--amber);background:var(--amberSoft)}
+.internal{color:var(--purple);background:var(--purpleSoft)}.support{color:var(--teal);background:var(--tealSoft)}
+details.sec{margin:9px 0;overflow:hidden}
+details.sec>summary{cursor:pointer;list-style:none;padding:14px 15px;display:flex;gap:10px;align-items:flex-start;font-size:16px;font-weight:950}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::after{content:"＋";margin-left:auto;color:var(--muted);font-size:22px;line-height:1}
+details.sec[open]>summary::after{content:"−"}
+.body{padding:0 15px 16px}
+.call{border-left:5px solid var(--blue);background:var(--blueSoft);padding:11px 12px;border-radius:10px;margin:10px 0}
+.call.red{border-left-color:var(--red);background:var(--redSoft)}.call.green{border-left-color:var(--green);background:var(--greenSoft)}
+.call.amber{border-left-color:var(--amber);background:var(--amberSoft)}.call.purple{border-left-color:var(--purple);background:var(--purpleSoft)}
+.formula{background:var(--graySoft);border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-weight:900;overflow:auto;margin:8px 0}
+.formula small{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:4px}
+.tw{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:9px 0}
+table{border-collapse:collapse;width:100%;min-width:690px;background:var(--card)}
+th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;color:var(--muted);font-weight:950;background:var(--graySoft);position:sticky;top:0}
+td{font-size:12.5px}tr:last-child td{border-bottom:0}
+ul,ol{padding-left:1.3em}li{margin:4px 0}
+.small{font-size:11.5px;color:var(--muted)}
+.bigline{font-size:20px;font-weight:950;color:var(--navy);line-height:1.45}
+.metric-head{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:0 0 8px}
+.metric-head .name{font-size:21px;font-weight:950;color:var(--navy)}
+.metric-head .en{font-size:11px;color:var(--muted)}
+.mini-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:9px 0}
+@media(max-width:650px){.mini-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mini{border:1px solid var(--line);background:var(--graySoft);border-radius:11px;padding:9px;text-align:center}
+.mini b{display:block;font-size:18px}.mini span{font-size:10px;color:var(--muted)}
+.quote{border:1px dashed var(--line);border-radius:12px;padding:13px;background:var(--card);font-size:13px}
+.source{font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px;margin-top:12px}
+.source b{color:var(--text)}
+.rank{font-weight:950;color:var(--navy)}
+mark{background:var(--amberSoft);color:var(--text);padding:0 .15em}
+#searchBox{width:100%;padding:11px 12px;border-radius:11px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:14px}
+.search-note{font-size:11px;color:var(--muted);margin-top:5px}
+.hiddenBySearch{display:none!important}
+.footer{padding:22px 8px;text-align:center;color:var(--muted);font-size:11px}
+@media(max-width:480px){
+ body{font-size:15px}.hero{padding:23px 13px 20px}main{padding-left:8px;padding-right:8px}
+ details.sec>summary{padding:13px;font-size:15.5px}.body{padding:0 13px 14px}h2.st{font-size:20px}
+ table{min-width:640px}.panel{padding:13px}
+}
+@media print{
+ .toolbar,.top-actions,#searchWrap{display:none!important}.hero{background:#fff;color:#000;border-bottom:2px solid #000}.hero p{color:#333}
+ body{background:#fff;color:#000}details.sec,.panel,.kcard{box-shadow:none}details.sec .body{display:block!important}
+ details.sec>summary::after{display:none}a{color:#000;text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+<div class="hero-in">
+ <div class="eyebrow">WAKYO SUMAI CO., LTD.｜INVESTMENT & CREDIT POLICY</div>
+ <h1>一棟収益不動産<br>投資・融資・財務管理基準</h1>
+ <p>完全統合マスター｜2026年9月2日基準。これまでの会話・投資基準早見表・銀行融資用事業計画書・一棟判定ツール・銀行指標資料を再監査し、後発の決定を優先して統合。</p>
+ <div class="hero-badges">
+   <span class="hero-badge">20％空室ストレス＝絶対</span>
+   <span class="hero-badge">返済比率50％以下＝絶対</span>
+   <span class="hero-badge">OER30％＝目標・超過可</span>
+   <span class="hero-badge">完済まで資金ショートなし</span>
+   <span class="hero-badge">実質自己資本25％以上</span>
+ </div>
+</div>
+</header>
+
+<div class="toolbar">
+ <div class="toolbar-in">
+  <div class="scroller">
+   <a class="nav" href="#executive">結論</a><a class="nav" href="#policy">経営方針</a>
+   <a class="nav" href="#definitions">定義</a><a class="nav" href="#core">20・30・50</a>
+   <a class="nav" href="#metrics-property">物件指標</a><a class="nav" href="#uw">UW審査</a>
+   <a class="nav" href="#expenses">経費</a><a class="nav" href="#debt">残債</a>
+   <a class="nav" href="#finance">法人財務</a><a class="nav" href="#longterm">長期CF</a>
+   <a class="nav" href="#exit">担保・出口</a><a class="nav" href="#dd">DD</a>
+   <a class="nav" href="#management">取得後</a><a class="nav" href="#banktext">銀行説明</a>
+   <a class="nav" href="#master">一覧</a><a class="nav" href="#sources">根拠</a>
+  </div>
+  <button class="tbtn" id="fontBtn" title="文字サイズ">A</button>
+  <button class="tbtn" id="themeBtn" title="ダークモード">◐</button>
+ </div>
+</div>
+
+<main>
+<div class="top-actions">
+ <button class="action" id="openAll">すべて開く</button>
+ <button class="action" id="closeAll">すべて閉じる</button>
+ <button class="action" onclick="window.print()">印刷 / PDF</button>
+ <a class="action" href="#sources">根拠資料へ</a>
+</div>
+
+<div class="panel" id="searchWrap">
+ <b>ページ内検索</b>
+ <input id="searchBox" placeholder="例：Debt Yield / 役員借入 / 20％ / 出口 / 修繕">
+ <div class="search-note">入力すると、該当する章だけを残して表示する。</div>
+</div>
+
+<section id="executive">
+<h2 class="st">0｜最終結論</h2>
+<div class="grid g3">
+ <div class="kcard red"><div class="klabel">ABSOLUTE｜最重要</div><div class="knum">20%</div><div class="kdesc">満室想定年間賃料の20％が消失しても、物件単体で元利返済を継続できること。</div></div>
+ <div class="kcard amber"><div class="klabel">TARGET｜効率目標</div><div class="knum">30%</div><div class="kdesc">OER（満室想定）。30％を超えても、それだけで買わないとはしない。</div></div>
+ <div class="kcard red"><div class="klabel">ABSOLUTE｜借入規律</div><div class="knum">50%</div><div class="kdesc">年間元利返済額÷満室想定年間賃料。家賃の半分以上を毎年返済に固定しない。</div></div>
+</div>
+
+<div class="panel">
+ <div class="bigline">和京スマイの本質は「高利回り物件を買う会社」ではなく、<br><mark>20％空室になっても返済を止めず、買った後も次の融資を受けられる会社</mark>にすること。</div>
+ <div class="badges">
+   <span class="badge abs">絶対条件</span><span class="badge target">目標</span>
+   <span class="badge ref">銀行参考</span><span class="badge warn">警戒</span>
+   <span class="badge internal">和京独自</span><span class="badge support">補助指標</span>
+ </div>
+</div>
+
+<details class="sec" open>
+<summary>今回の再監査で「前のHTMLから追加・修正したもの」</summary>
+<div class="body">
+<ul>
+ <li><b>OER30％を絶対条件から正式に外し、目標へ変更。</b>返済比率が軽く、20％空室Stressに耐えれば取得可能。</li>
+ <li><b>絶対ストレスを「20％空室のみ」と「金利＋CapExの複合ストレス」に分離。</b>混同しない。</li>
+ <li>満室ベースの簡易NOIと、通常空室を織り込むUW NOIを完全分離。</li>
+ <li>簡易DSCR1.40、BER80％、満室CF率20％、簡易NOI率70％は「20・30・50」から導かれる派生指標として整理。</li>
+ <li>Debt Yieldを物件単体の主たる残債指標にし、物件版の年数は「NOI単純償還年数」と改名。</li>
+ <li>「債務償還年数」の名称は法人全体中心で使用。中小機構の公的定義も併記。</li>
+ <li>築年数だけのNG基準を廃止。完済時築年数70年を<b>社内標準目標・警戒線</b>として使用。</li>
+ <li>実質自己資本比率25％を最低Gate、30％以上を目標。会計自己資本と資本性役員借入を分けて開示。</li>
+ <li>通常時のCF目標としてUW返済後CF率10％、CapEx積立後CF0以上を設定。</li>
+ <li>自由現預金の最低・目標、担保価値、Exit Debt Coverageを追加。</li>
+ <li>Cap Rate、CoC、IRR、NPV、NCF、収益還元価格、積算価格、稼働率など、過去の銀行指標資料に入っていた補助指標も全収録。</li>
+ <li>年間経費、購入時費用、法務・建物DD、銀行説明文、資料更新ルールまで統合。</li>
+</ul>
+</div>
+</details>
+</section>
+
+<section id="policy">
+<h2 class="st">1｜経営方針・審査思想</h2>
+
+<details class="sec" open>
+<summary>和京スマイの最上位経営方針</summary>
+<div class="body">
+<div class="quote">
+<b>当社は、表面利回りのみを基準とした一棟収益不動産の取得を行わない。</b><br><br>
+取得時には、年間元利返済額を満室想定年間賃料の50％以下とすることを自社の絶対的な借入規律とし、さらに空室・滞納・賃料低下等により満室想定年間賃料の20％が失われた場合でも、対象物件から生じる収益のみで元利返済を継続できることを必須条件とする。<br><br>
+通常運営経費はOER（満室想定）30％以下を目標とするが、30％超を機械的な取得不可条件とはしない。経費が高い場合には、返済負担の軽さと20％空室耐性で補完可能かを確認し、安全性を損なわない範囲で運営効率を改善する。<br><br>
+一次審査後は、実際の契約賃料・正常空室・入金実績・市場賃料・実額経費を反映したUnderwritten NOIを算定し、UW DSCR、Debt Yield、LTC、銀行評価LTV等で再審査する。<br><br>
+取得時点の単年度収支のみで判断せず、融資完済まで賃料、空室、金利、大規模修繕、残債、現預金、出口をシミュレーションし、必要な修繕を実施しても資金ショートしないことを確認する。<br><br>
+物件取得後も次の融資につながるBSを重視し、実質自己資本比率25％以上、十分な自由現預金、債務償還力を維持しながら拡大する。
+</div>
+<div class="source"><b>外部根拠：</b>金融庁の投資用不動産向け融資調査は、対象物件CF、賃料・空室ストレス、合理的耐用期間、完済までの収支確認の重要性を整理。日銀もDSCR・LTV・賃料・入居率・修繕等を与信管理の主要論点としている。</div>
+</div>
+</details>
+
+<details class="sec">
+<summary>「絶対」「目標」「銀行参考」「診断」を混ぜない</summary>
+<div class="body">
+<div class="tw"><table>
+<thead><tr><th>区分</th><th>意味</th><th>例</th></tr></thead>
+<tbody>
+<tr><td><span class="badge abs">絶対</span></td><td>割れば原則取得しないGate。点数で救済しない。</td><td>20％空室Stress、返済比率50％、再建築、全期間資金ショート、実質自己資本25％</td></tr>
+<tr><td><span class="badge target">目標</span></td><td>到達を目指すが、他の余力で補完できる。</td><td>OER30％、UW CF率10％、Debt Yield6.7～7％、自己資本30％</td></tr>
+<tr><td><span class="badge ref">銀行参考</span></td><td>銀行が重視するが、和京の購入Gateにはしない。</td><td>LTV、担保余力、銀行評価</td></tr>
+<tr><td><span class="badge support">診断・派生</span></td><td>説明や状態把握には有効だが重複採点しない。</td><td>簡易DSCR、BER、満室CF率、簡易NOI率、NOI単純償還年数</td></tr>
+<tr><td><span class="badge warn">警戒</span></td><td>即NGではないが、改善や追加確認が必要。</td><td>OER40％超、完済時築年70年超、会計自己資本20％未満</td></tr>
+</tbody></table></div>
+</div>
+</details>
+
+<details class="sec">
+<summary>銀行の審査順と、和京の審査順</summary>
+<div class="body">
+<ol>
+<li><b>情報の真正性</b>：レントロール、契約、入金、税、保険、工事、融資条件。</li>
+<li><b>法務・物理Gate</b>：再建築、接道、遵法性、災害、建物状態。</li>
+<li><b>20・30・50一次判定</b>：20％空室Stress、OER、返済比率。</li>
+<li><b>UW実質審査</b>：EGI、UW NOI、UW DSCR、通常CF。</li>
+<li><b>レバレッジ・担保</b>：Debt Yield、LTC、LTV、担保余力。</li>
+<li><b>全期間CF</b>：金利、CapEx、残債、自由現預金、資金ショート。</li>
+<li><b>出口</b>：売却手取、残債、収益還元、積算。</li>
+<li><b>法人全体</b>：自己資本、債務償還、ICR、現預金、利益・純資産推移。</li>
+</ol>
+<div class="call green"><b>銀行員へ見せたい姿：</b>「満室なら儲かります」ではなく、「通常→20％空室→金利上昇→修繕→完済→出口まで数値化しています」。</div>
+</div>
+</details>
+</section>
+
+<section id="definitions">
+<h2 class="st">2｜用語・会計区分を完全固定</h2>
+
+<details class="sec" open><summary>PGR｜Potential Gross Rent｜満室想定年間賃料</summary><div class="body">
+<div class="formula">PGR = 全戸・付帯収入が正常な賃料水準で12か月稼働した場合の潜在年間収入</div>
+<p>現在契約賃料の12倍を機械的に使わず、現契約、新規募集、周辺募集・成約、間取り、設備、立地、需要から妥当性を確認する。</p>
+<p><b>駐車場・自販機・アンテナ等のその他収入</b>は、PGRに既に含めるか、安定その他収入として別表示するかを統一し、二重計上しない。</p>
+</div></details>
+
+<details class="sec"><summary>EGI｜Effective Gross Income｜有効総収入</summary><div class="body">
+<div class="formula">EGI = PGR − 正常空室・滞納・貸倒等 + 継続的その他収入</div>
+<p>通常時の実効収入。正常家賃消失率は一律5％・10％ではなく、現況実績・過去稼働・周辺市場・戸数・間取り・賃料水準から個別設定する。</p>
+<div class="call amber"><b>20％Stressとの関係：</b>通常EGIからさらに20％引かない。Core StressはPGRの20％消失へ「置き換える」。現況の実際の賃料消失が20％を超える場合は、実態の悪い方を優先する。</div>
+</div></details>
+
+<details class="sec"><summary>OPEX｜通常運営経費</summary><div class="body">
+<p>物件の通常運営に必要な経費。後述の「年間経費完全リスト」を参照。</p>
+<div class="call red"><b>NOIに入れないもの：</b>元金返済、支払利息、減価償却、法人税、購入諸費用、資本的支出（CapEx）は原則としてOPEX/NOIから分離する。</div>
+</div></details>
+
+<details class="sec"><summary>CapEx｜Capital Expenditure｜資本的支出</summary><div class="body">
+<p>外壁、防水、屋根、配管、EV大規模更新、大型設備更新、躯体補修等。日常修繕と区別し、長期CFで別管理する。</p>
+<div class="formula">NCF ≒ UW NOI − 年間化CapEx準備額（必要に応じその他調整）</div>
+</div></details>
+
+<details class="sec"><summary>簡易NOI / UW NOI / NCF / 返済後CF</summary><div class="body">
+<div class="tw"><table>
+<thead><tr><th>名称</th><th>計算</th><th>用途</th></tr></thead>
+<tbody>
+<tr><td><b>簡易NOI</b></td><td>PGR − 一次判定OPEX</td><td>高速スクリーニング</td></tr>
+<tr><td><b>UW NOI</b></td><td>EGI − 正常化OPEX</td><td>本審査、Debt Yield、UW DSCR</td></tr>
+<tr><td><b>NCF</b></td><td>UW NOI − CapEx準備等</td><td>設備更新込みの収益力</td></tr>
+<tr><td><b>返済後CF</b></td><td>UW NOI − 年間元利返済</td><td>通常時の手残り</td></tr>
+<tr><td><b>CapEx後CF</b></td><td>UW NOI − 年間元利返済 − CapEx</td><td>長期資金耐久力</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec"><summary>金額単位・資料更新ルール</summary><div class="body">
+<ul>
+<li><b>財務計算・保存は原則1円単位。</b>「万円」は表示上の補助に留める。</li>
+<li>Actual（実績）、UW（通常査定）、Stress（悪化時）を色・列で分ける。</li>
+<li>更新時に既存保存データを消さない。基準変更時は旧データとの互換・版数・更新日を残す。</li>
+<li>実額が判明した項目は概算より実額を優先。</li>
+<li>根拠資料・基準日・URLを残す。</li>
+</ul>
+</div></details>
+</section>
+
+<section id="core">
+<h2 class="st">3｜20・30・50の最終ルール</h2>
+
+<details class="sec" open><summary>20％空室Stress｜和京の最上位Gate</summary><div class="body">
+<div class="metric-head"><span class="name">20％空室Stress</span><span class="badge abs">絶対</span><span class="badge internal">和京独自</span></div>
+<div class="formula">Core Stress Revenue = PGR × 80%</div>
+<div class="formula">Core Stress CF = PGR × 80% − Stress時OPEX − 現行年間元利返済額</div>
+<div class="formula">Core Stress DSCR = Core Stress NOI ÷ 現行年間元利返済額</div>
+<p><b>絶対基準：</b>Core Stress CF ≥ 0円、すなわちCore Stress DSCR ≥ 1.00。</p>
+<p>ここでいう「20％空室」は、戸数20％ではなく<b>満室想定年間賃料20％消失換算</b>。空室、滞納、貸倒れ、フリーレント、募集期間、賃料低下をまとめて扱う。</p>
+<div class="call green"><b>現況がすでに悪い場合：</b>実際の賃料消失率が20％超なら20％に戻して甘く見ず、実態の悪い方を使用する。</div>
+<div class="source"><b>根拠：</b>金融庁・日銀は投資用/貸家融資で賃料・空室等のストレス確認を重視。20％という数値自体は銀行統一値ではなく、和京スマイの独自防衛線。</div>
+</div></details>
+
+<details class="sec" open><summary>返済比率｜50％以下を絶対にする理由</summary><div class="body">
+<div class="metric-head"><span class="name">返済比率</span><span class="en">Debt Service / PGR</span><span class="badge abs">絶対</span></div>
+<div class="formula">返済比率 = 年間元利返済額 ÷ PGR × 100</div>
+<p><b>絶対：50％以下。</b></p>
+<p>20％Stressだけなら、OER20％・返済60％でも理論上はトントン。しかし家賃の60％が毎年金融機関返済に固定される構造は、税・保険・修繕・金利上昇への柔軟性が低い。</p>
+<div class="call red"><b>経営規律：</b>「満室家賃の半分以上を借金返済に持っていかれる経営をしない」。</div>
+</div></details>
+
+<details class="sec" open><summary>OER（満室想定）｜30％は目標、超過しても買える</summary><div class="body">
+<div class="metric-head"><span class="name">OER（満室想定）</span><span class="en">Operating Expense Ratio - PGR basis</span><span class="badge target">目標</span></div>
+<div class="formula">OER（満室想定・和京式） = 通常OPEX ÷ PGR × 100</div>
+<p><b>目標：30％以下。</b>30％超は即NGではない。返済比率が軽く、20％空室Stressに耐えるなら取得できる。</p>
+<div class="tw"><table>
+<thead><tr><th>OER</th><th>返済比率</th><th>20％Stress後</th><th>判断</th></tr></thead>
+<tbody>
+<tr><td>30％</td><td>50％</td><td>0％</td><td>基準モデル</td></tr>
+<tr><td>35％</td><td>40％</td><td>＋5％</td><td>取得可。OER改善努力</td></tr>
+<tr><td>40％</td><td>40％</td><td>0％</td><td>絶対条件クリア。ただし高コスト精査</td></tr>
+<tr><td>35％</td><td>50％</td><td>▲5％</td><td>20％Stress不合格</td></tr>
+</tbody></table></div>
+<p>一般的なOERは運営収益を分母とする場合があるため、銀行資料では<b>「OER（満室想定・当社定義）」</b>と明記する。</p>
+</div></details>
+
+<details class="sec"><summary>数学的な本質｜OER＋返済比率≤80％</summary><div class="body">
+<div class="formula">PGR80% − OER − 返済比率 ≥ 0　⇔　OER + 返済比率 ≤ 80%</div>
+<p>一次判定でStress時OPEXを満額固定すると、20％空室に耐える条件はこの式になる。</p>
+<p>ただし最終審査では固定費・変動費・金利・CapExを分けるため、最終合否は実額Stress CF/DSCRで判定する。</p>
+</div></details>
+
+<details class="sec"><summary>派生指標｜簡易DSCR1.40・BER80％・満室CF率20％・簡易NOI率70％</summary><div class="body">
+<div class="mini-grid">
+<div class="mini"><b>1.40</b><span>簡易DSCR</span></div><div class="mini"><b>80%</b><span>BER</span></div>
+<div class="mini"><b>20%</b><span>満室返済後CF率</span></div><div class="mini"><b>70%</b><span>簡易NOI率</span></div>
+</div>
+<p>OER30％・返済50％の基準モデルから自動的に導かれる。</p>
+<ul>
+<li>簡易NOI率 = 100 − OER = 70％</li>
+<li>簡易DSCR = 70 ÷ 50 = 1.40</li>
+<li>BER = 30 + 50 = 80％</li>
+<li>満室返済後CF率 = 100 − 30 − 50 = 20％</li>
+</ul>
+<div class="call amber"><b>重複採点禁止：</b>同じ安全余力を4～5回加点しない。表示・説明には残す。</div>
+</div></details>
+
+<details class="sec"><summary>Core Stressと複合Stressを混同しない</summary><div class="body">
+<h3>① Core Stress｜絶対Gate</h3>
+<p>PGR20％消失＋予定OPEX満額＋現行返済。<b>1.00以上絶対。</b></p>
+<h3>② 金利Stress｜別診断</h3>
+<p>通常収入＋金利＋0.5/1.0/1.5/2.0％等。返済額を再計算。</p>
+<h3>③ 複合Stress｜最終耐久</h3>
+<p>20％以上の賃料消失＋金利上昇＋CapEx準備/修繕＋必要経費。全期間で資金ショートしないこと。</p>
+<div class="call red"><b>重要：</b>「20％空室Stress DSCR1.00」という絶対基準に、勝手に金利＋1％やCapExを足して定義を変えない。複合Stressは別指標として管理する。</div>
+</div></details>
+</section>
+
+<section id="metrics-property">
+<h2 class="st">4｜物件単体の全指標</h2>
+
+<details class="sec" open><summary>DSCR｜Debt Service Coverage Ratio</summary><div class="body">
+<div class="metric-head"><span class="name">DSCR</span><span class="en">デット・サービス・カバレッジ・レシオ</span><span class="badge ref">銀行主要</span></div>
+<div class="formula">DSCR = NOI / NCF等の返済原資 ÷ 年間元利返済額</div>
+<p>物件収益が元利返済額の何倍あるかを見る代表的な返済能力指標。</p>
+<h3>和京での使い分け</h3>
+<ul><li><b>簡易DSCR：</b>簡易NOI÷返済。基準モデルで1.40。</li><li><b>UW DSCR：</b>UW NOI（必要ならNCF）÷返済。本審査。</li><li><b>Core Stress DSCR：</b>20％空室後。1.00以上絶対。</li><li><b>複合Stress DSCR：</b>金利・CapEx等も反映。耐久診断。</li></ul>
+<div class="call amber"><b>弱点：</b>融資期間を長くすれば返済額が下がり数値が改善する。Debt Yield・残債推移と必ずセット。</div>
+</div></details>
+
+<details class="sec"><summary>UW DSCR｜通常運営の本審査</summary><div class="body">
+<div class="formula">UW DSCR = UW NOI ÷ 年間元利返済額</div>
+<div class="tw"><table><thead><tr><th>UW DSCR</th><th>社内診断</th></tr></thead><tbody>
+<tr><td>≥1.40</td><td>非常に強い</td></tr><tr><td>1.30～1.39</td><td>良好</td></tr>
+<tr><td>1.20～1.29</td><td>注意</td></tr><tr><td>&lt;1.20</td><td>要精査</td></tr>
+</tbody></table></div>
+<p>独立絶対Gateにはせず、20％Core Stressを上位条件とする。</p>
+</div></details>
+
+<details class="sec"><summary>BER｜Break-Even Ratio / Occupancy</summary><div class="body">
+<div class="formula">BER =（通常OPEX + 年間元利返済）÷ PGR</div>
+<p>何％の家賃回収で運営費と返済を賄えるか。BER80％なら20％の収入消失余力。Core Stressの直感的な説明用。</p>
+<p><b>独立採点しない。</b></p>
+</div></details>
+
+<details class="sec"><summary>稼働率｜Occupancy Rate</summary><div class="body">
+<p>物理稼働率（戸数）と経済稼働率（収入）を分ける。高稼働でも滞納・フリーレント・低賃料なら実態は弱い。</p>
+<div class="call green"><b>和京方針：</b>現況入居率そのものを独立した足切り条件にしない。20％空室StressとUW査定で吸収する。</div>
+</div></details>
+
+<details class="sec"><summary>表面利回り｜Gross Rental Yield</summary><div class="body">
+<div class="formula">表面利回り = PGR ÷ 購入価格 × 100</div>
+<p><b>目標：10％以上。</b>入口スクリーニング用。絶対条件ではない。</p>
+<p>高いほど良いとは限らず、高経費・高修繕・低需要・法務リスクの裏返しの場合もある。</p>
+</div></details>
+
+<details class="sec"><summary>実質利回り・NOI Yield</summary><div class="body">
+<h3>一次実質利回り（和京）</h3><div class="formula">簡易実質利回り = 簡易NOI ÷ 総取得費 × 100</div>
+<p><b>目安：7％以上。</b>表面10％・OER30％モデルと整合。</p>
+<h3>NOI Yield（購入価格ベース）</h3><div class="formula">NOI Yield = UW NOI ÷ 購入価格 × 100</div>
+<p>市場価格・収益還元との比較に使う。一次7％と混同せず別表示すると精度が上がる。</p>
+</div></details>
+
+<details class="sec"><summary>返済後利回り</summary><div class="body">
+<div class="formula">返済後利回り = 年間返済後CF ÷ 総取得費 × 100</div>
+<p><b>既存目安：3％以上。</b>総取得費に対して借入返済後にどれだけ現金が残るかを見る。</p>
+</div></details>
+
+<details class="sec"><summary>UW返済後CF率｜新しい平時目標</summary><div class="body">
+<div class="formula">UW返済後CF率 =（UW NOI − 年間元利返済）÷ PGR × 100</div>
+<p><b>目標：10％以上。</b>これは銀行統一基準ではなく、20％防衛線まで平時に一定の余裕を持たせる社内目標。</p>
+<div class="tw"><table><thead><tr><th>率</th><th>評価</th></tr></thead><tbody>
+<tr><td>≥15％</td><td>強い</td></tr><tr><td>≥10％</td><td>目標</td></tr><tr><td>5～10％</td><td>注意</td></tr><tr><td>&lt;5％</td><td>平時余力が薄い</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec"><summary>NCF｜Net Cash Flow</summary><div class="body">
+<div class="formula">NCF = UW NOI − CapEx準備等（定義は資料内で固定）</div>
+<p>NOIでは見えない長期設備更新を反映。築古や設備の多い物件ほど重要。</p>
+<p><b>和京方針：</b>NCFがNOIから大きく痩せる物件は警戒。CapExゼロ前提にしない。</p>
+</div></details>
+
+<details class="sec"><summary>Cap Rate｜還元利回り</summary><div class="body">
+<div class="formula">Cap Rate = NOI ÷ 物件価格　/　物件価格 = NOI ÷ 市場Cap Rate</div>
+<p>固定の和京閾値は置かない。立地・用途・築年・市場取引と比較し、収益還元価格を出すために使う。</p>
+</div></details>
+
+<details class="sec"><summary>CCR / CoC｜Cash-on-Cash Return</summary><div class="body">
+<div class="formula">CoC = 年間税引前CF ÷ 投下自己資金 × 100</div>
+<p>自己資金効率。<b>固定基準は未設定。</b>高レバレッジで数値が跳ねるため、安全性指標として単独使用しない。</p>
+</div></details>
+
+<details class="sec"><summary>IRR / NPV｜長期投資採算</summary><div class="body">
+<h3>IRR</h3><p>保有中CFと売却を含めた内部収益率。固定閾値は未設定。出口前提が甘いと大きくズレる。</p>
+<h3>NPV</h3><p>将来CFを要求利回りで現在価値化した投資価値。固定基準は未設定。詳細比較用。</p>
+<div class="call amber">一次購入Gateではなく、売却戦略・詳細投資分析の補助。</div>
+</div></details>
+</section>
+
+<section id="uw">
+<h2 class="st">5｜UW審査・賃料・市場</h2>
+<details class="sec" open><summary>正常家賃消失率の決め方</summary><div class="body">
+<p>一律5％ではなく、次を確認して物件ごとに設定する。</p>
+<ul><li>現況経済稼働率</li><li>過去入居・退去履歴</li><li>現地募集件数・募集期間</li><li>周辺同等物件賃料</li><li>戸数・間取り・設備・築年</li><li>人口・世帯・交通・雇用・学校等の需要源</li><li>競合供給</li></ul>
+<div class="formula">採用通常家賃消失率 = 市場・実績から正常化した率（現況が明らかに悪ければ実態を軽視しない）</div>
+</div></details>
+
+<details class="sec"><summary>市場賃料と現契約賃料の扱い</summary><div class="body">
+<ul><li><b>現賃料＞市場：</b>退去・更新時の下落をUWへ反映。</li><li><b>現賃料＜市場：</b>全戸即値上げできる前提にしない。入替時期・契約条件を踏まえる。</li><li><b>満室想定家賃：</b>ポータル掲載額だけでなく、成約可能性と募集期間まで確認。</li></ul>
+</div></details>
+
+<details class="sec"><summary>レントロール・入金実績</summary><div class="body">
+<p>契約賃料、共益費、駐車場、入居日、契約期間、保証会社、滞納、敷金、更新、現況入居率を確認。さらに<b>実際の入金実績</b>で裏取りする。</p>
+<div class="call red">レントロール100万円でも、実入金が90万円なら実態は90万円。販売資料だけを信用しない。</div>
+</div></details>
+
+<details class="sec"><summary>市場・エリア分析の必須項目</summary><div class="body">
+<div class="tw"><table><thead><tr><th>項目</th><th>確認内容</th></tr></thead><tbody>
+<tr><td>人口・世帯</td><td>現在・将来傾向、年齢構成</td></tr>
+<tr><td>賃料</td><td>募集・成約・面積単価・間取り別</td></tr>
+<tr><td>空室</td><td>競合募集、掲載期間、供給量</td></tr>
+<tr><td>交通</td><td>駅、バス、道路、通勤利便</td></tr>
+<tr><td>需要源</td><td>大学、病院、企業、工場、行政等</td></tr>
+<tr><td>地価</td><td>公示・基準・取引傾向</td></tr>
+<tr><td>競合</td><td>新築供給、築浅、設備差</td></tr>
+<tr><td>災害</td><td>水害、土砂、地震等</td></tr>
+</tbody></table></div>
+</div></details>
+</section>
+
+<section id="expenses">
+<h2 class="st">6｜年間経費・購入費用を漏らさない</h2>
+
+<details class="sec" open><summary>年間OPEX｜完全チェックリスト</summary><div class="body">
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>項目</th><th>一次概算・扱い</th></tr></thead>
+<tbody>
+<tr><td>管理</td><td>管理委託料</td><td>一次概算はPGR×8％。契約見積で上書き。</td></tr>
+<tr><td>税</td><td>固定資産税・都市計画税</td><td>納税通知実額優先。一次概算は売価×0.7％を使用していた。</td></tr>
+<tr><td>保険</td><td>火災・地震・施設賠償等</td><td>見積実額優先。旧一次概算：M0.6％/T0.8％/H1.3％×建物保険金額。</td></tr>
+<tr><td>共用</td><td>電気・水道・ガス</td><td>実績・請求書。旧概算売価×0.15％。</td></tr>
+<tr><td>清掃</td><td>共用部清掃・除草等</td><td>契約/実額。</td></tr>
+<tr><td>法定</td><td>消防点検、建築設備、EV等</td><td>設備に応じて追加。</td></tr>
+<tr><td>修繕</td><td>日常修繕・原状回復オーナー負担</td><td>一次目安PGR×4％。履歴で上書き。</td></tr>
+<tr><td>募集</td><td>AD・仲介・募集委託・入替</td><td>一次目安PGR×2％。</td></tr>
+<tr><td>設備</td><td>EV保守、ネット、CATV、防犯、機械設備</td><td>契約実額。</td></tr>
+<tr><td>環境</td><td>浄化槽、ゴミ回収、受水槽、ポンプ等</td><td>物件該当時。</td></tr>
+<tr><td>土地</td><td>地代・借地料・私道負担等</td><td>該当時。</td></tr>
+<tr><td>その他</td><td>町内会負担、植栽、除雪等</td><td>地域・物件別。</td></tr>
+</tbody></table></div>
+<div class="call amber"><b>物件OPEXと法人販管費を混同しない：</b>税理士報酬、会社事務所費、法人全体の通信費等は法人PLで管理し、物件NOIに入れるかは定義を固定する。</div>
+</div></details>
+
+<details class="sec"><summary>Stress時OPEX｜固定費と変動費を分ける</summary><div class="body">
+<div class="tw"><table><thead><tr><th>性質</th><th>例</th><th>Stress時</th></tr></thead><tbody>
+<tr><td>固定</td><td>固都税、保険、法定点検</td><td>原則減らさない</td></tr>
+<tr><td>半固定</td><td>清掃、共用費、日常修繕</td><td>個別</td></tr>
+<tr><td>変動</td><td>賃料比例の管理委託</td><td>実収入連動</td></tr>
+<tr><td>悪化時増加</td><td>募集費、原状回復</td><td>退去増ならむしろ増える</td></tr>
+</tbody></table></div>
+<p><b>Core 20％Stress：</b>一次判定では年間OPEXを満額固定して保守的に計算。<br><b>長期/複合Stress：</b>費目別に固定・変動を設定。</p>
+</div></details>
+
+<details class="sec"><summary>購入時費用｜完全チェックリスト</summary><div class="body">
+<ul>
+<li>仲介手数料</li>
+<li>所有権移転・抵当権設定等の登録免許税</li>
+<li>司法書士報酬</li>
+<li>売買契約・金銭消費貸借契約等の印紙</li>
+<li>銀行事務手数料・保証料等</li>
+<li>不動産取得税</li>
+<li>固定資産税・都市計画税精算</li>
+<li>敷金・保証金等の決済調整</li>
+<li>測量・境界・DD・調査費用</li>
+<li>初期保険料</li>
+<li>取得時必須修繕、原状回復、大規模改修</li>
+<li>解体、残置物、伐採、造成、外構等</li>
+<li>融資関連の鑑定・評価費用等</li>
+<li>その他雑費・決済時調整</li>
+</ul>
+<div class="formula">総取得費 = 売買価格 + 購入諸費用 + 取得時必須工事（定義を固定）</div>
+<p>LTC・実質利回り・必要自己資金の分母に使うため、工事費を抜かない。</p>
+</div></details>
+</section>
+
+<section id="debt">
+<h2 class="st">7｜Debt Yield・LTC・LTV・担保</h2>
+
+<details class="sec" open><summary>Debt Yield｜物件単体の残債規律</summary><div class="body">
+<div class="metric-head"><span class="name">Debt Yield</span><span class="badge target">取得目標</span><span class="badge support">日本では補完指標</span></div>
+<div class="formula">Debt Yield = UW NOI ÷ 借入残高 × 100</div>
+<p>金利・融資期間・返済方式に左右されず、借入そのものに対するNOIの厚みを見る。</p>
+<div class="tw"><table><thead><tr><th>Debt Yield</th><th>和京の扱い</th></tr></thead><tbody>
+<tr><td>≤5％</td><td><b>原則見送り・かなり警戒</b></td></tr>
+<tr><td>5～6.7％</td><td>警戒</td></tr>
+<tr><td>6.7～7％以上</td><td><b>取得目標</b></td></tr>
+<tr><td>≥8％</td><td>良好</td></tr>
+<tr><td>≥10％</td><td>強い</td></tr>
+<tr><td>≥15％</td><td>保有中の長期理想</td></tr>
+</tbody></table></div>
+<div class="call amber"><b>根拠の区別：</b>日本の銀行共通基準として7％を主張しない。DSCR・LTVほど日本の公的貸家融資資料には登場しないため、和京独自の残債管理指標として使う。</div>
+</div></details>
+
+<details class="sec"><summary>NOI単純償還年数｜Debt Yieldの逆数</summary><div class="body">
+<div class="formula">NOI単純償還年数 = 借入残高 ÷ UW NOI = 1 ÷ Debt Yield</div>
+<div class="tw"><table><thead><tr><th>Debt Yield</th><th>年数</th></tr></thead><tbody>
+<tr><td>5％</td><td>20.0年</td></tr><tr><td>6.0％</td><td>16.7年</td></tr><tr><td>6.67％</td><td>約15年</td></tr>
+<tr><td>7％</td><td>14.3年</td></tr><tr><td>8％</td><td>12.5年</td></tr><tr><td>10％</td><td>10年</td></tr><tr><td>15％</td><td>6.7年</td></tr>
+</tbody></table></div>
+<p>「債務償還年数」という名称は法人財務で使うため、物件単体はこの名称に統一。</p>
+<h3>15年超の救済</h3>
+<p><b>返済比率40％以下 かつ Core Stress DSCR1.25以上</b>なら救済審査。年数だけで機械的に落とさない。</p>
+</div></details>
+
+<details class="sec"><summary>「残債表面利回り」とDebt Yieldを混同しない</summary><div class="body">
+<p>PGR÷借入残高は直感的な参考値だが、標準的なDebt Yieldの分子は<b>NOI</b>。表示する場合は「残債表面利回り」等の別名にする。</p>
+</div></details>
+
+<details class="sec"><summary>LTC｜Loan to Cost</summary><div class="body">
+<div class="formula">LTC = 借入額 ÷ 総取得費 × 100</div>
+<p>常時計算。固定上限は置かない。フルローンを一律排除しない。</p>
+<p>ただし高LTCは、自己資本・現預金・Debt Yield・Stress耐性をより厳しく確認する。</p>
+<div class="call amber">旧ツールの70/80％評価帯は内部参考であり、現在の最終Gateではない。</div>
+</div></details>
+
+<details class="sec"><summary>LTV｜Loan to Value</summary><div class="body">
+<div class="formula">LTV = 借入残高 ÷ 金融機関評価額 × 100</div>
+<p><b>銀行目線では重要。和京の購入Gateからは外す。</b></p>
+<p>Valueは金融機関の土地・建物評価、収益還元、掛目等で変わるため、「購入価格だけ」でLTVを判断しない。</p>
+<div class="formula">担保余力（参考） = 金融機関評価額 − 借入残高</div>
+</div></details>
+
+<details class="sec"><summary>収益還元価格・積算価格</summary><div class="body">
+<h3>収益還元価格</h3><div class="formula">収益還元価格 ≒ UW NOI ÷ 市場Cap Rate</div>
+<h3>積算価格</h3><div class="formula">積算価格 = 土地評価 + 建物評価</div>
+<p><b>積算≧購入価格を絶対条件にはしない。</b>担保・回収可能性の重要参考。収益還元と積算が大きく乖離する場合は理由を説明する。</p>
+</div></details>
+</section>
+
+<section id="finance">
+<h2 class="st">8｜法人財務・銀行から買い続けるBS</h2>
+
+<details class="sec" open><summary>自己資本比率｜会計と実質を2本立て</summary><div class="body">
+<h3>会計自己資本比率</h3><div class="formula">会計自己資本比率 = 純資産 ÷ 総資産 × 100</div>
+<h3>実質自己資本比率（和京式）</h3><div class="formula">実質自己資本比率 =（純資産 + 適格資本性役員借入金）÷ 総資産 × 100</div>
+<div class="tw"><table><thead><tr><th>実質自己資本比率</th><th>和京判定</th></tr></thead><tbody>
+<tr><td>&lt;25％</td><td><b>新規取得停止</b></td></tr><tr><td>25～29.9％</td><td>最低基準内・改善</td></tr>
+<tr><td>≥30％</td><td><b>通常目標</b></td></tr><tr><td>≥35％</td><td>強い</td></tr><tr><td>38～40％以上</td><td>業界平均圏の参考・非常に強い</td></tr>
+</tbody></table></div>
+<p><b>会計上債務超過は新規取得停止。</b>会計自己資本20％未満は強い警戒。</p>
+<div class="source"><b>根拠：</b>中小機構は自己資本比率を純資産÷総資産と定義。中小企業庁資料では20％以上が金融機関利用例の一つ。2024年度の中小企業「不動産業・物品賃貸業」は約38％台という公的統計を参考に、借入拡大型の和京では25％を最低、30％を目標とする社内ルール。</div>
+</div></details>
+
+<details class="sec"><summary>役員借入金｜「役員貸」ではなく正確に表示</summary><div class="body">
+<p>会社が代表者から借りている資金は<b>役員借入金</b>。役員貸付金は逆の意味。</p>
+<p>会計上は負債のままでも、次の条件を満たす部分は社内の<b>適格資本性役員借入金</b>として別表示する。</p>
+<ul><li>5年以上原則返済しない</li><li>金融機関借入の返済を優先</li><li>財務悪化時は返済しない</li><li>短期的な出し入れ資金ではない</li><li>覚書等で返済条件を明文化</li></ul>
+<div class="call red"><b>重要：</b>役員借入金なら何でも100％純資産扱いするわけではない。銀行が資本類似性を認めるかは銀行判断。会計自己資本比率は必ず併記する。</div>
+</div></details>
+
+<details class="sec" open><summary>法人債務償還年数｜日本では一般的な会社指標</summary><div class="body">
+<p>物件単体のDebt Yieldより、「債務償還年数」は日本の中小企業金融・財務診断で一般的。</p>
+<h3>公的な簡易定義</h3><div class="formula">（短期借入金 + 長期借入金）÷（営業利益 + 減価償却費）</div>
+<h3>和京の銀行実態管理</h3><p>銀行ごとに算式が異なるため、別途「金融機関借入－自由現預金」「経常利益＋減価償却－税」等の調整版も参考表示可能。役員借入の資本性部分は二重カウントしない。</p>
+<div class="tw"><table><thead><tr><th>年数</th><th>和京方針</th></tr></thead><tbody>
+<tr><td>≤15年</td><td><b>目標・良好</b></td></tr><tr><td>15～20年</td><td>許容・改善管理</td></tr><tr><td>&gt;20年</td><td><b>新規取得を原則停止し改善優先</b></td></tr>
+</tbody></table></div>
+<div class="source"><b>根拠：</b>中小機構「経営自己診断システム」が債務償還年数を正式指標として定義。20年等の閾値は銀行統一ではなく、和京の財務ガードレール。</div>
+</div></details>
+
+<details class="sec"><summary>ICR｜Interest Coverage Ratio</summary><div class="body">
+<div class="formula">ICR =（営業利益 + 受取利息・配当金）÷ 支払利息・割引料</div>
+<div class="tw"><table><thead><tr><th>ICR</th><th>社内参考</th></tr></thead><tbody>
+<tr><td>≥2.0</td><td>目標</td></tr><tr><td>1.5～2.0</td><td>注意</td></tr><tr><td>1.0～1.5</td><td>強い警戒</td></tr><tr><td>&lt;1.0</td><td>営業利益等で利息を賄えない</td></tr>
+</tbody></table></div>
+<p>単独Gateにはせず、債務償還年数・営業CF・現預金とセット。金利Stress時ICRも確認する。</p>
+<div class="source"><b>根拠：</b>中小機構がこの算式を採用。過去の和京資料にあった「EBITDA÷利息」はICRとは呼ばず、別の利息倍率として区別。</div>
+</div></details>
+
+<details class="sec"><summary>EBITDA / Debt-to-EBITDA</summary><div class="body">
+<div class="formula">簡易EBITDA = 営業利益 + 減価償却費</div>
+<div class="formula">Debt / EBITDA = 有利子負債 ÷ EBITDA</div>
+<p>減価償却の大きい不動産賃貸業で、会計利益とキャッシュ創出力を分けるための補助指標。固定Gateは置かない。</p>
+</div></details>
+
+<details class="sec"><summary>法人簡易DSCR・営業CF・純資産推移</summary><div class="body">
+<p><b>法人簡易DSCR：</b>法人返済原資÷年間元利返済。物件UW DSCRと同じ欄に混ぜない。</p>
+<p><b>営業CF：</b>当期利益が赤字でも減価償却により営業CFがプラスの場合がある。PLだけで判断しない。</p>
+<p><b>3期推移：</b>売上、営業利益、経常利益、当期利益、減価償却、営業CF、現預金、有利子負債、純資産、自己資本比率、支払利息、年間返済を並べる。</p>
+<div class="call green"><b>BS重視：</b>「今回買えるか」より「今回買った後も次を借りられるか」。</div>
+</div></details>
+
+<details class="sec"><summary>自由現預金｜資金ショートを防ぐ実弾</summary><div class="body">
+<p>BS現預金すべてではなく、運営・返済へ実際に使える資金。敷金返還、近々の納税、確定工事、拘束預金等は必要に応じ除外。</p>
+<h3>最低</h3><div class="formula">自由現預金 ≥ PGR月額 × 2か月 + 今後12か月以内の確定CapEx未手当額</div>
+<h3>目標</h3><div class="formula">自由現預金 ≥ PGR月額 × 3か月 + 今後12か月以内の確定CapEx未手当額</div>
+<div class="source"><b>根拠：</b>J-Net21は一般中小企業のキャッシュポジションについて最低月商1～2か月、できれば3か月を紹介。和京は不動産特有のCapExを追加する社内ルール。</div>
+</div></details>
+</section>
+
+<section id="longterm">
+<h2 class="st">9｜長期CF・金利・CapEx</h2>
+
+<details class="sec" open><summary>全融資期間CF｜絶対条件</summary><div class="body">
+<div class="call red"><b>絶対：</b>必要な修繕を実施しながら、元利返済を止めず、期末自由現預金がマイナスにならない。</div>
+<p>「毎年CF黒字」は要求しない。大規模修繕年の赤字はあり得る。重要なのは会社に十分な現金があり、資金ショートしないこと。</p>
+<div class="tw"><table><thead><tr><th>年度列</th><th>必須項目</th></tr></thead><tbody>
+<tr><td>収入</td><td>PGR、賃料下落、空室/滞納、EGI</td></tr>
+<tr><td>経費</td><td>固定OPEX、変動OPEX、総OPEX</td></tr>
+<tr><td>収益</td><td>UW NOI、NCF</td></tr>
+<tr><td>融資</td><td>金利、元金、利息、年間返済</td></tr>
+<tr><td>指標</td><td>UW DSCR、Debt Yield、LTV</td></tr>
+<tr><td>修繕</td><td>CapEx、CapEx準備残高</td></tr>
+<tr><td>資金</td><td>税前CF、期首・期末自由現預金</td></tr>
+<tr><td>残債</td><td>期末借入残高</td></tr>
+<tr><td>出口</td><td>想定売却価格、売却費、売却手取</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec"><summary>CapEx積立後CF｜平時の目標</summary><div class="body">
+<div class="formula">CapEx積立後CF = UW NOI − 年間元利返済 − 年間化CapEx準備額</div>
+<p><b>目標：0円以上。</b>既に十分な修繕準備資金がある場合等は個別説明可能。</p>
+</div></details>
+
+<details class="sec"><summary>金利Stress｜現在金利だけで買わない</summary><div class="body">
+<p>内部感応度分析として現在金利＋0.5％、＋1.0％、＋1.5％、＋2.0％等を試算。</p>
+<p>元利均等の場合は、新金利・残存期間で返済額を再計算。単純に残債×1％を現在返済へ足すだけにしない。</p>
+<div class="call amber"><b>法人全体：</b>変動金利は複数物件に同時に効くため、新規借入だけでなく既存変動借入にも金利Stressをかける。</div>
+</div></details>
+
+<details class="sec"><summary>大規模修繕計画</summary><div class="body">
+<p>取得時点で最低限、次の最終実施年・次回時期・概算費用を把握する。</p>
+<ul><li>屋根・防水</li><li>外壁・シーリング・鉄部</li><li>給排水・ポンプ・受水槽</li><li>給湯・空調等</li><li>消防設備</li><li>EV</li><li>共用電気・防犯・ネット等</li></ul>
+</div></details>
+</section>
+
+<section id="exit">
+<h2 class="st">10｜担保・出口・完済時築年数</h2>
+
+<details class="sec" open><summary>築年数そのものでは買わない判断をしない</summary><div class="body">
+<p>旧「木造40年、軽鉄40～45年、重量鉄骨45～50年、RC50年」等の目安は<b>取得Gateから廃止</b>。</p>
+<p>築年を見る理由を、融資期間・CapEx・担保・出口・将来競争力への影響に変更する。</p>
+</div></details>
+
+<details class="sec" open><summary>完済時築年数｜70年は社内標準目標</summary><div class="body">
+<div class="formula">完済時築年数 = 現在築年数 + 融資期間</div>
+<div class="tw"><table><thead><tr><th>完済時築年数</th><th>扱い</th></tr></thead><tbody>
+<tr><td>≤70年</td><td><b>標準目標</b></td></tr>
+<tr><td>&gt;70年</td><td>要精査・銀行事前確認</td></tr>
+<tr><td>&gt;70年でも具体的融資提示あり</td><td>修繕・Stress・出口が通れば取得可</td></tr>
+</tbody></table></div>
+<div class="call amber"><b>70年は銀行共通ルールではない。</b>銀行商品・構造・築年評価が異なるため、和京の警戒線としてのみ使用。</div>
+</div></details>
+
+<details class="sec"><summary>Exit Debt Coverage｜売却して残債を返せるか</summary><div class="body">
+<div class="formula">売却手取額 = 想定売却価格 − 売却費用</div>
+<div class="formula">Exit Debt Coverage = 売却手取額 ÷ 予定出口時残債</div>
+<p><b>出口成立最低：1.00以上。</b><br><b>目標：1.25以上。</b>1.25から売却手取が20％下落すると1.00となり、和京の20％防衛思想と整合する。</p>
+<p>5年・10年・15年・予定出口年で残債と売却手取を表示する。</p>
+</div></details>
+
+<details class="sec"><summary>出口価値の複数評価</summary><div class="body">
+<ul><li>市場売却価格</li><li>収益還元価格</li><li>積算価格</li><li>銀行評価</li><li>土地値</li></ul>
+<p>Cap Rate上昇（例：＋0.5％・＋1.0％）等の売価下落感応度も参考表示する。</p>
+</div></details>
+</section>
+
+<section id="dd">
+<h2 class="st">11｜法務・物理DD・災害</h2>
+
+<details class="sec" open><summary>法務Gate</summary><div class="body">
+<div class="tw"><table><thead><tr><th>項目</th><th>和京方針</th></tr></thead><tbody>
+<tr><td>再建築</td><td><b>可能であること＝絶対</b></td></tr>
+<tr><td>市街化調整区域</td><td>原則対象外。例外は再建築・用途継続・銀行融資・出口を個別稟議</td></tr>
+<tr><td>土砂</td><td>原則区域外。特別警戒区域はNG。警戒区域も原則見送り</td></tr>
+<tr><td>水害</td><td>回避推奨。浸水深・設備位置・保険・過去被害で個別</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec"><summary>法務・権利チェックリスト</summary><div class="body">
+<ul>
+<li>登記と現況の一致、未登記建物・未登記増築</li><li>建築確認・検査済証・既存不適格・違反建築</li>
+<li>接道・道路種別・セットバック・私道権利・通行掘削承諾</li><li>用途地域・建ぺい率・容積率・条例</li>
+<li>境界・越境・被越境・測量</li><li>借地・地役権・担保・差押・係争</li>
+<li>賃貸借契約・敷金承継・滞納・保証</li>
+</ul>
+</div></details>
+
+<details class="sec"><summary>建物・環境DD</summary><div class="body">
+<ul>
+<li>躯体・傾き・ひび割れ・雨漏り</li><li>外壁・屋根・防水</li>
+<li>給排水・ポンプ・受水槽</li><li>電気・消防・EV・機械設備</li>
+<li>シロアリ・腐朽</li><li>アスベスト・PCB・土壌汚染・埋設物</li>
+<li>擁壁・地盤・法面</li><li>耐震・地震リスク</li>
+</ul>
+<p>築年数だけで切らない代わりに、実物DDと長期修繕を強化する。</p>
+</div></details>
+</section>
+
+<section id="management">
+<h2 class="st">12｜取得後管理・LEVEL0～3</h2>
+
+<details class="sec" open><summary>取得時20％・保有中15％</summary><div class="body">
+<p><b>取得時：</b>20％空室Stressに耐えることが絶対。</p>
+<p><b>保有中：</b>通常管理では15％賃料消失耐性を継続確認し、基準割れ時に必要元本圧縮額を算定。</p>
+</div></details>
+
+<details class="sec" open><summary>LEVEL0～3</summary><div class="body">
+<div class="tw"><table><thead><tr><th>LEVEL</th><th>条件</th><th>対応</th></tr></thead><tbody>
+<tr><td>LEVEL0</td><td>15％耐性あり</td><td>通常運用・新規取得可</td></tr>
+<tr><td>LEVEL1</td><td>15％耐性割れ、復旧必要元本≤購入価格5％</td><td>元本圧縮、取得抑制、復旧</td></tr>
+<tr><td>LEVEL2</td><td>復旧必要元本&gt;購入価格5％</td><td>新規取得大幅抑制/停止、資産組換え・売却</td></tr>
+<tr><td>LEVEL3</td><td>LEVEL2でも復旧困難</td><td>対象売却、保有規模縮小、新規取得停止</td></tr>
+</tbody></table></div>
+<p>購入価格5％は銀行基準ではなく和京独自の危機管理ライン。参考として「復旧必要額÷現在残債」も表示すると良い。</p>
+</div></details>
+
+<details class="sec"><summary>月次・四半期・年次の運営</summary><div class="body">
+<h3>月次</h3><p>入居戸数、経済稼働率、契約賃料、実入金、滞納、修繕、返済、金利、現預金。</p>
+<h3>四半期</h3><p>UW NOI実績、DSCR、Debt Yield、15％耐性、募集期間、修繕、市場賃料。</p>
+<h3>年次</h3><p>全物件収支、全借入、純資産、自己資本、法人債務償還、ICR、現預金、長期CF、銀行報告。</p>
+</div></details>
+
+<details class="sec"><summary>滞納・修繕・保険・BCP</summary><div class="body">
+<p><b>滞納：</b>入金確認→即時連絡→書面催告→保証会社→必要に応じ法的対応。</p>
+<p><b>修繕：</b>緊急・短期・中期・長期に分け、発生してから資金調達する前提にしない。</p>
+<p><b>保険：</b>火災、地震、水災、施設賠償、免責、保険金額、満期を物件ごと確認。</p>
+<p><b>BCP：</b>事故・災害時の入居者連絡、業者、保険請求、資金、金融機関報告を決める。</p>
+</div></details>
+
+<details class="sec"><summary>ポートフォリオ管理｜将来フェーズ</summary><div class="body">
+<p>ユーザー方針どおり、ポートフォリオの細かな上限値は後から設計する。ただし将来の管理軸として以下を記録しておく。</p>
+<ul><li>エリア集中</li><li>構造・築年集中</li><li>物件用途集中</li><li>金融機関別借入</li><li>変動/固定金利比率</li><li>返済期限集中</li><li>賃料収入集中</li></ul>
+<p>現時点では<b>個別取得Gateではない。</b></p>
+</div></details>
+</section>
+
+<section id="banktext">
+<h2 class="st">13｜銀行説明用文章・審査ストーリー</h2>
+
+<details class="sec" open><summary>銀行員へそのまま使える「取得方針」</summary><div class="body">
+<div class="quote">
+当社では、表面利回りや単一の経費率のみを基準とした取得判断は行っておりません。<br><br>
+物件取得時には、年間元利返済額を満室想定年間賃料の50％以下とすることを自社の絶対的な借入基準とし、さらに空室・滞納・賃料低下等により満室想定年間賃料の20％が失われた場合でも、対象物件から生じる収益のみで元利返済を継続できることを必須条件としております。<br><br>
+通常運営経費については、満室想定年間賃料に対するOER30％以下を目標としておりますが、これを機械的な取得可否条件とはしておりません。経費率が30％を超える場合でも、年間返済負担が低く、20％収入減少後も返済が可能であれば取得対象とし、取得後の管理・保険・募集・修繕等を精査し、安全性を損なわない範囲で運営効率の改善を図ります。<br><br>
+一次審査後は、実際の契約賃料、周辺賃料、正常空室、入金実績、固定資産税、保険、管理費及び修繕費等からUnderwritten NOIを算定し、UW DSCR、Debt Yield、LTC及び金融機関評価によるLTVを確認します。<br><br>
+取得時点の単年度収支だけではなく、融資期間全体について賃料低下、空室、金利上昇、大規模修繕、残債及び現預金をシミュレーションし、必要な修繕を実施した場合でも資金ショートが発生しないことを確認します。<br><br>
+個別物件の収益性だけではなく法人全体の財務健全性を重視し、会計上の自己資本比率を開示した上で、長期間返済を予定していない代表者借入金等については資本性を別途明示し、実質自己資本比率25％以上を新規取得の最低基準、30％以上を目標として管理します。<br><br>
+取得後についても15％の賃料収入低下耐性を継続確認し、基準を割り込んだ場合には必要元本圧縮額を数値化し、その規模に応じて元本圧縮、新規取得抑制、資産組換え及び売却まで段階的に実施します。
+</div>
+</div></details>
+
+<details class="sec"><summary>銀行に見せる資料の順番</summary><div class="body">
+<ol>
+<li>経営サマリー・投資規律（20・30・50、自己資本）</li>
+<li>今回物件サマリー（価格・PGR・UW NOI・返済・DSCR・DY・LTC・LTV）</li>
+<li>Actual / UW / 20％Stress比較</li>
+<li>金利・複合Stress</li>
+<li>完済までの長期CF・自由現預金</li>
+<li>修繕計画・CapEx</li>
+<li>市場・賃料根拠</li>
+<li>担保・収益還元・積算・出口</li>
+<li>保有実績</li>
+<li>法人BS/PL/CF・自己資本・債務償還</li>
+<li>借入一覧</li>
+<li>中期取得計画・運営管理</li>
+</ol>
+</div></details>
+
+<details class="sec"><summary>銀行員から聞かれた時の短答</summary><div class="body">
+<p><b>Q. OER30％を超えたら買わない？</b><br>A. いいえ。30％は効率目標です。絶対基準は20％収入減でも返済できることと、返済比率50％以下です。</p>
+<p><b>Q. 築古は買わない？</b><br>A. 築年そのものでは切りません。融資期間、完済時築年、修繕、建物状態、出口をセットで判断します。</p>
+<p><b>Q. LTVを見ない？</b><br>A. 銀行評価として重要視します。ただし評価方法が金融機関で変わるため、自社購入Gateにはしていません。LTC・Debt Yield・Stressと併用します。</p>
+<p><b>Q. 役員借入を自己資本扱いする？</b><br>A. 会計数値はそのまま開示し、長期据置・劣後性等が明確な部分だけを社内の実質資本として別表示します。</p>
+</div></details>
+</section>
+
+<section id="master">
+<h2 class="st">14｜最終マスター一覧</h2>
+
+<details class="sec" open><summary>絶対Gate｜ここは点数で救済しない</summary><div class="body">
+<div class="tw"><table><thead><tr><th>項目</th><th>基準</th><th>備考</th></tr></thead><tbody>
+<tr><td>20％空室Core Stress CF</td><td><b>0円以上</b></td><td>PGR20％消失換算</td></tr>
+<tr><td>Core Stress DSCR</td><td><b>1.00以上</b></td><td>上と同じリスクの倍率表示</td></tr>
+<tr><td>返済比率</td><td><b>50％以下</b></td><td>和京独自借入規律</td></tr>
+<tr><td>再建築</td><td><b>可能</b></td><td>法務Gate</td></tr>
+<tr><td>全融資期間CF</td><td><b>資金ショートなし</b></td><td>必要修繕・返済を継続</td></tr>
+<tr><td>会計純資産</td><td><b>債務超過でない</b></td><td>法人Gate</td></tr>
+<tr><td>実質自己資本比率</td><td><b>25％以上</b></td><td>取得後ベース</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec" open><summary>目標・目安・警戒・参考｜全指標</summary><div class="body">
+<div class="tw"><table>
+<thead><tr><th>分類</th><th>指標</th><th>最終基準</th><th>性質</th></tr></thead>
+<tbody>
+<tr><td>収益</td><td>表面利回り</td><td>10％以上</td><td>目標</td></tr>
+<tr><td>収益</td><td>一次実質利回り</td><td>7％以上</td><td>目安</td></tr>
+<tr><td>収益</td><td>返済後利回り</td><td>3％以上</td><td>目安</td></tr>
+<tr><td>経費</td><td>OER（満室想定）</td><td>30％以下</td><td>目標・超過可</td></tr>
+<tr><td>派生</td><td>簡易NOI率</td><td>70％相当</td><td>表示</td></tr>
+<tr><td>派生</td><td>簡易DSCR</td><td>1.40相当</td><td>表示・診断</td></tr>
+<tr><td>派生</td><td>BER</td><td>80％以下相当</td><td>Stress説明用</td></tr>
+<tr><td>派生</td><td>満室返済後CF率</td><td>20％以上相当</td><td>表示</td></tr>
+<tr><td>通常</td><td>UW DSCR</td><td>1.30以上良好、1.20未満要精査</td><td>診断</td></tr>
+<tr><td>通常</td><td>UW返済後CF率</td><td>10％以上</td><td>目標</td></tr>
+<tr><td>長期</td><td>CapEx積立後CF</td><td>0円以上</td><td>目標</td></tr>
+<tr><td>残債</td><td>Debt Yield</td><td>6.7～7％以上</td><td>取得目標</td></tr>
+<tr><td>残債</td><td>Debt Yield</td><td>5％以下</td><td>原則見送り</td></tr>
+<tr><td>残債</td><td>Debt Yield</td><td>15％以上</td><td>保有中長期理想</td></tr>
+<tr><td>残債</td><td>NOI単純償還年数</td><td>約15年以下目安</td><td>DYの逆数</td></tr>
+<tr><td>救済</td><td>15年超</td><td>返済比率≤40％＋Core Stress DSCR≥1.25</td><td>救済審査</td></tr>
+<tr><td>借入</td><td>LTC</td><td>常時計算・固定上限なし</td><td>必須</td></tr>
+<tr><td>担保</td><td>LTV</td><td>銀行評価で算出</td><td>銀行参考・非Gate</td></tr>
+<tr><td>評価</td><td>収益還元価格</td><td>市場Cap Rateで比較</td><td>必須参考</td></tr>
+<tr><td>評価</td><td>積算価格</td><td>重視するが購入価格以上を絶対条件にしない</td><td>必須参考</td></tr>
+<tr><td>効率</td><td>CoC</td><td>固定基準なし</td><td>補助</td></tr>
+<tr><td>長期</td><td>IRR / NPV</td><td>固定基準なし</td><td>出口分析補助</td></tr>
+<tr><td>建物</td><td>築年数</td><td>単独Gateなし</td><td>―</td></tr>
+<tr><td>融資</td><td>完済時築年数</td><td>70年以下</td><td>標準目標</td></tr>
+<tr><td>融資</td><td>完済時築年70年超</td><td>銀行確認＋DD</td><td>条件付可</td></tr>
+<tr><td>流動性</td><td>自由現預金最低</td><td>PGR2か月＋12か月内未手当CapEx</td><td>最低</td></tr>
+<tr><td>流動性</td><td>自由現預金目標</td><td>PGR3か月＋12か月内未手当CapEx</td><td>目標</td></tr>
+<tr><td>法人</td><td>実質自己資本比率</td><td>25％以上</td><td>絶対</td></tr>
+<tr><td>法人</td><td>実質自己資本比率</td><td>30％以上</td><td>通常目標</td></tr>
+<tr><td>法人</td><td>会計自己資本比率</td><td>20％未満は強い警戒</td><td>警戒</td></tr>
+<tr><td>法人</td><td>債務償還年数</td><td>15年以下</td><td>目標</td></tr>
+<tr><td>法人</td><td>債務償還年数</td><td>20年超</td><td>新規取得原則停止</td></tr>
+<tr><td>法人</td><td>ICR</td><td>2.0以上</td><td>目標・補助</td></tr>
+<tr><td>法人</td><td>Debt / EBITDA</td><td>固定Gateなし</td><td>補助</td></tr>
+<tr><td>出口</td><td>Exit Debt Coverage</td><td>1.00以上</td><td>出口成立最低</td></tr>
+<tr><td>出口</td><td>Exit Debt Coverage</td><td>1.25以上</td><td>目標</td></tr>
+<tr><td>保有</td><td>15％賃料消失耐性</td><td>継続管理</td><td>管理基準</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec"><summary>重要度ランキング｜Gateと採点を分離</summary><div class="body">
+<p>重要度は「銀行がどれだけ見るか＋和京が事故を避ける効果」。ただしGateは点数化より上位。</p>
+<div class="tw"><table><thead><tr><th>順位</th><th>項目</th><th>位置付け</th></tr></thead><tbody>
+<tr><td>1</td><td><b>20％Core Stress / 全期間資金ショート</b></td><td>最上位Gate</td></tr>
+<tr><td>2</td><td><b>返済比率50％</b></td><td>自社絶対Gate</td></tr>
+<tr><td>3</td><td><b>UW NOI / UW DSCR</b></td><td>実態返済力</td></tr>
+<tr><td>4</td><td><b>Debt Yield</b></td><td>残債・融資期間依存を補完</td></tr>
+<tr><td>5</td><td><b>LTV・担保・出口</b></td><td>銀行回収可能性</td></tr>
+<tr><td>6</td><td><b>CapEx・融資期間</b></td><td>長期耐久</td></tr>
+<tr><td>7</td><td><b>実質自己資本・現預金</b></td><td>会社全体の継続融資力</td></tr>
+<tr><td>8</td><td>市場賃料・空室</td><td>NOIの根拠</td></tr>
+<tr><td>9</td><td>OER</td><td>運営効率</td></tr>
+<tr><td>10</td><td>表面/実質利回り・CoC等</td><td>投資効率・補助</td></tr>
+</tbody></table></div>
+</div></details>
+
+<details class="sec"><summary>未採用・固定閾値を置かないもの</summary><div class="body">
+<ul>
+<li>LTCの絶対上限</li><li>LTVの和京統一上限</li><li>Cap Rateの固定値</li><li>CoC固定値</li><li>IRR/NPV固定値</li><li>Debt/EBITDA固定上限</li><li>現況入居率の独立足切り</li><li>構造別築年上限</li>
+</ul>
+<p>「決まっていない」のではなく、<b>単一の固定閾値にしないと決めた項目</b>を含む。</p>
+</div></details>
+</section>
+
+<section id="sources">
+<h2 class="st">15｜根拠・出典・内部資料</h2>
+
+<details class="sec" open><summary>公的・一次情報</summary><div class="body">
+<ol>
+<li><b>金融庁｜投資用不動産向け融資に関するアンケート調査結果</b><br>
+<a href="https://www.fsa.go.jp/news/30/20190328.html" target="_blank" rel="noopener">金融庁公式ページ</a><br>
+対象物件CF、賃料・空室ストレス、長期収支、顧客属性、エビデンス確認の根拠。</li>
+
+<li><b>日本銀行｜地域金融機関の貸家業向け貸出と与信管理の課題（2016）</b><br>
+<a href="https://www.boj.or.jp/research/brp/fsr/data/fsrb160324.pdf" target="_blank" rel="noopener">日銀PDF</a><br>
+DSCR、LTV、入居率、家賃、修繕、ポートフォリオ分析、ストレスの根拠。</li>
+
+<li><b>日本銀行｜地域金融機関の不動産業向け貸出の現状（2024）</b><br>
+<a href="https://www.boj.or.jp/research/brp/fsr/fsrb240329b.htm" target="_blank" rel="noopener">日銀公式ページ</a><br>
+居住用賃貸融資のストレステスト、LTV等。</li>
+
+<li><b>国土交通省｜不動産鑑定評価関連資料</b><br>
+<a href="https://www.mlit.go.jp/kisha/kisha07/03/030402_.html" target="_blank" rel="noopener">国交省公式ページ</a><br>
+運営収益、運営費用、NOI、資本的支出、ER/建物DDの考え方。</li>
+
+<li><b>中小機構｜経営自己診断システム 個別指標一覧</b><br>
+<a href="https://k-sindan.smrj.go.jp/viewpoint/explanation" target="_blank" rel="noopener">中小機構公式</a><br>
+自己資本比率、ICR、債務償還年数、流動性指標の定義。</li>
+
+<li><b>J-Net21｜キャッシュポジションを高める</b><br>
+<a href="https://j-net21.smrj.go.jp/solution/handbook/finance/cash-position.html" target="_blank" rel="noopener">J-Net21</a><br>
+一般中小企業の月商1～2か月最低、できれば3か月という手元流動性の参考。</li>
+
+<li><b>金融庁｜資本性借入金の取扱い</b><br>
+<a href="https://www.fsa.go.jp/news/r1/ginkou/20200527.html" target="_blank" rel="noopener">金融庁公式</a><br>
+資本類似性は償還条件・金利設定・劣後性等の実態で判断する根拠。</li>
+
+<li><b>中小企業庁｜2026年版中小企業白書・中小企業実態基本調査</b><br>
+<a href="https://www.chusho.meti.go.jp/pamflet/hakusyo/2026/" target="_blank" rel="noopener">中小企業庁</a><br>
+業種別自己資本比率等の業界比較の参考。</li>
+</ol>
+</div></details>
+
+<details class="sec" open><summary>今回統合した和京スマイ内部資料</summary><div class="body">
+<ul>
+<li>「投資基準早見表.pdf」20ページ版</li>
+<li>「Bank_Financing_Metrics_RealEstate_2026-09-01.pptx」</li>
+<li>「和京スマイ_銀行融資用事業計画書_2026-08-31_実データ反映版.xlsx」</li>
+<li>「和京スマイ_銀行融資用事業計画書_マスターひな形_v2.xlsx」</li>
+<li>一棟判定ツール各版（ichito_checker / index）</li>
+<li>これまでの会話で確定・修正した20・30・50、Debt Yield、償還年数、自己資本、LEVEL管理等</li>
+</ul>
+<div class="call amber"><b>更新原則：</b>旧資料に残る「経費30％絶対」「構造別築年上限」「通常空室5％固定」等は、後発の今回決定で上書き。古い数値を混在させない。</div>
+</div></details>
+
+<details class="sec"><summary>根拠の読み方</summary><div class="body">
+<p><span class="badge abs">絶対</span> や <span class="badge target">目標</span> のうち、20％・30％・50％・Debt Yield7％等は多くが<b>和京スマイ独自の社内ルール</b>。公的資料が同じ数値を要求しているという意味ではない。</p>
+<p>公的資料は「銀行が何を見るか」「どの式が一般的か」「どんなリスクを審査するか」の根拠。和京の閾値は、その原理を踏まえて自社のリスク許容度に合わせて設定している。</p>
+</div></details>
+</section>
+
+
+<section id="audit">
+<h2 class="st">16｜完全収録監査</h2>
+<details class="sec" open><summary>このHTMLに収録した内容</summary><div class="body">
+<div class="tw"><table><thead><tr><th>領域</th><th>収録内容</th><th>状態</th></tr></thead><tbody>
+<tr><td>経営方針</td><td>銀行審査原理、BS重視、長期保有、取得後も次の融資につなげる方針</td><td><b>収録済</b></td></tr>
+<tr><td>絶対基準</td><td>20％空室Stress、返済比率50％、再建築、全期間資金ショート、実質自己資本25％、債務超過回避</td><td><b>収録済</b></td></tr>
+<tr><td>目標</td><td>OER30％、UW CF10％、表面10％、実質7％、返済後3％、DY6.7～7％、自己資本30％、現預金3か月、完済時築70年、Exit1.25</td><td><b>収録済</b></td></tr>
+<tr><td>派生指標</td><td>簡易DSCR1.40、BER80％、満室CF20％、簡易NOI70％、重複採点禁止</td><td><b>収録済</b></td></tr>
+<tr><td>本審査</td><td>PGR、EGI、OPEX、UW NOI、UW DSCR、NCF、CapEx、Actual/UW/Stress分離</td><td><b>収録済</b></td></tr>
+<tr><td>残債・担保</td><td>Debt Yield、NOI単純償還年数、15年超救済、LTC、LTV、担保余力、収益還元、積算</td><td><b>収録済</b></td></tr>
+<tr><td>投資効率</td><td>Cap Rate、CoC、IRR、NPV、表面・実質・返済後利回り</td><td><b>収録済</b></td></tr>
+<tr><td>法人財務</td><td>会計/実質自己資本、資本性役員借入、債務償還年数、ICR、EBITDA、Debt/EBITDA、営業CF、純資産推移</td><td><b>収録済</b></td></tr>
+<tr><td>流動性</td><td>自由現預金2か月最低・3か月目標＋12か月内CapEx</td><td><b>収録済</b></td></tr>
+<tr><td>融資期間</td><td>築年単独Gate廃止、完済時築70年を標準目標、70年超は銀行確認</td><td><b>収録済</b></td></tr>
+<tr><td>長期CF</td><td>完済までの賃料・空室・金利・修繕・残債・現預金、毎年黒字ではなく資金ショートなし</td><td><b>収録済</b></td></tr>
+<tr><td>出口</td><td>Exit Debt Coverage1.00最低/1.25目標、売却手取、Cap Rate感応度</td><td><b>収録済</b></td></tr>
+<tr><td>法務・DD</td><td>再建築、市街化調整、土砂、水害、接道、越境、未登記、遵法、建物・環境DD</td><td><b>収録済</b></td></tr>
+<tr><td>経費・取得費</td><td>年間OPEX完全項目、修繕4％、募集2％、一次概算、購入諸費用・工事・決済調整</td><td><b>収録済</b></td></tr>
+<tr><td>取得後管理</td><td>取得20％/保有15％、LEVEL0・LEVEL1・LEVEL2・LEVEL3、月次/四半期/年次、滞納・保険・BCP</td><td><b>収録済</b></td></tr>
+<tr><td>銀行説明</td><td>提出用長文、短答、資料の並び順</td><td><b>収録済</b></td></tr>
+<tr><td>資料運用</td><td>1円単位、実額優先、保存データ維持、版数・更新日・根拠管理</td><td><b>収録済</b></td></tr>
+<tr><td>将来フェーズ</td><td>ポートフォリオ集中管理は記録項目のみ収録し、細かな上限は後日決定</td><td><b>意図的に未固定</b></td></tr>
+</tbody></table></div>
+<div class="call green"><b>監査結果：</b>過去資料に残っていた旧基準は、後発の会話で明示的に修正されたものを優先した。特に「OER30％絶対」「構造別築年上限」「LTVを購入Gate」「通常空室率を一律固定」といった旧扱いは、今回の最終方針へ置き換えている。</div>
+</div></details>
+
+<details class="sec"><summary>公的財務診断で確認できる追加補助指標（採用Gateではない）</summary><div class="body">
+<p>中小機構の経営自己診断では、和京で主採用している自己資本比率・ICR・債務償還年数以外にも、次の安全性指標を確認できる。銀行提出の補足財務分析に使えるが、現時点で和京の絶対閾値は設定しない。</p>
+<div class="tw"><table><thead><tr><th>指標</th><th>代表式</th><th>用途</th></tr></thead><tbody>
+<tr><td>流動比率</td><td>流動資産÷流動負債</td><td>短期支払能力</td></tr>
+<tr><td>当座比率</td><td>当座資産÷流動負債</td><td>即時支払能力</td></tr>
+<tr><td>固定長期適合率</td><td>固定資産÷（固定負債＋純資産）</td><td>固定資産を長期資金で賄えているか</td></tr>
+<tr><td>手元現金預金比率</td><td>現金・預金÷売上高</td><td>手元流動性</td></tr>
+<tr><td>借入金月商倍率</td><td>借入金÷月商</td><td>売上規模に対する借入量</td></tr>
+<tr><td>借入金依存度</td><td>有利子負債÷総資産等</td><td>資産の借入依存</td></tr>
+<tr><td>預借率</td><td>現金・預金÷借入金</td><td>借入に対する現金余力</td></tr>
+</tbody></table></div>
+<p>これらは法人財務シートで将来追加できるが、主力は「実質自己資本・法人債務償還年数・自由現預金・ICR」とする。</p>
+</div></details>
+</section>
+
+<div class="panel">
+<div class="bigline">最終メッセージ</div>
+<p><b>和京スマイの中心基準は「20％空室になっても返済を止めない」こと。</b></p>
+<p>返済比率50％以下で借り過ぎを防ぎ、OER30％を目標に運営効率を改善する。経費が30％を超えても、それだけで良い物件を捨てない。UW NOIで実態を見て、Debt Yieldで残債を管理し、完済まで金利・修繕・現預金・出口を確認する。物件を買うたびにBSを壊さず、実質自己資本25％以上を守り、次の融資につなげる。</p>
+</div>
+
+<div class="footer">
+和京スマイ株式会社｜一棟収益不動産 投資・融資・財務管理基準 完全統合マスター<br>
+基準日：2026-09-02 ｜ FULL MOBILE HTML EDITION
+</div>
+</main>
+
+<script>
+const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
+const themeBtn=qs('#themeBtn'),fontBtn=qs('#fontBtn');
+if(localStorage.getItem('wakyo-policy-theme')==='dark') document.body.classList.add('dark');
+themeBtn.onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('wakyo-policy-theme',document.body.classList.contains('dark')?'dark':'light')};
+let fs=Number(localStorage.getItem('wakyo-policy-font')||16);
+document.body.style.fontSize=fs+'px';
+fontBtn.onclick=()=>{fs=fs>=19?15:fs+1;document.body.style.fontSize=fs+'px';localStorage.setItem('wakyo-policy-font',fs)};
+qs('#openAll').onclick=()=>qsa('details.sec').forEach(x=>x.open=true);
+qs('#closeAll').onclick=()=>qsa('details.sec').forEach(x=>x.open=false);
+const search=qs('#searchBox');
+search.addEventListener('input',()=>{
+ const q=search.value.trim().toLowerCase();
+ qsa('details.sec').forEach(d=>{
+   const hit=!q || d.innerText.toLowerCase().includes(q);
+   d.classList.toggle('hiddenBySearch',!hit);
+   if(q&&hit)d.open=true;
+ });
+ qsa('h2.st').forEach(h=>{
+   const next=[];let el=h.nextElementSibling;
+   while(el && !el.matches('h2.st')){if(el.matches('details.sec'))next.push(el);el=el.nextElementSibling}
+   if(next.length)h.classList.toggle('hiddenBySearch',q&&next.every(x=>x.classList.contains('hiddenBySearch')));
+ });
+});
+</script>
+</body>
+</html>

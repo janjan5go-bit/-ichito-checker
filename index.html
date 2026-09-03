@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="一棟判定"><meta name="theme-color" content="#f3f5f9"><title>一棟収益物件 判定ツール V10.3 Readable Analytics</title><style>
+
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="一棟判定" name="apple-mobile-web-app-title"/><meta content="#f3f5f9" name="theme-color"/><title>一棟収益物件 判定ツール V10.4 Foldable Analytics</title><style>
 :root{--bg:#f3f5f9;--card:#fff;--text:#111827;--muted:#697386;--line:#dde3ec;--blue:#2563eb;--blue-soft:#eef5ff;--green:#07833f;--green-soft:#eaf8f0;--amber:#a15c00;--amber-soft:#fff6df;--red:#c62828;--red-soft:#fff0f0;--purple:#6d3bd1;--purple-soft:#f4efff;--teal:#087e7a;--teal-soft:#e9f8f7;--orange:#b54d00;--orange-soft:#fff1e7}
 *{box-sizing:border-box}html{background:var(--bg);-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}main{max-width:760px;margin:0 auto;padding:12px 10px 92px}h1{font-size:21px;line-height:1.25;margin:3px 2px 2px;font-weight:950}.version{font-size:11px;color:var(--muted);font-weight:800}.lead{font-size:11px;color:var(--muted);margin:0 2px 8px;line-height:1.45}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:12px;margin:9px 0;box-shadow:0 1px 1px #1111}.section-head{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:950;margin-bottom:8px}.num{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-size:12px;color:#fff;background:#111827}.section-head .hint{margin-left:auto;font-size:10px;color:var(--muted);font-weight:750}.input-card .num{background:var(--blue)}.decision-card .num{background:var(--green)}.metrics-card .num{background:var(--purple)}.details-card .num{background:#475569}
 .small{font-size:10px;color:var(--muted);line-height:1.45}.muted{color:var(--muted)}.ok{color:var(--green)!important}.warn{color:var(--amber)!important}.ng{color:var(--red)!important}button{min-height:38px;border:1px solid #cbd4e0;border-radius:10px;padding:8px 11px;background:#fff;color:var(--text);font-size:13px;font-weight:850}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}button.danger{color:var(--red)}button:disabled{opacity:.45}.actions{display:flex;flex-wrap:wrap;gap:6px}input,select,textarea{width:100%;min-height:40px;margin-top:4px;border:1px solid #cbd4e0;border-radius:10px;background:#fff;color:var(--text);font-size:16px;padding:8px 9px}label{font-size:11px;font-weight:850;color:#344054}.input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.span2{grid-column:1/-1}@media(max-width:340px){.input-grid{grid-template-columns:1fr}}.linked{grid-column:1/-1;display:grid;grid-template-columns:1fr 28px 1fr;gap:6px;align-items:end;background:linear-gradient(135deg,var(--blue-soft),#fff);border:1px solid #cfe0ff;border-radius:12px;padding:9px}.linked-arrow{display:grid;place-items:center;height:40px;font-size:18px;color:var(--blue);font-weight:900}.linked.loan-link{background:linear-gradient(135deg,var(--orange-soft),#fff);border-color:#f4d2ba}.linked.loan-link .linked-arrow{color:var(--orange)}.source-badge{display:inline-block;font-size:9px;font-weight:850;border-radius:999px;padding:1px 6px;background:#eef1f5;color:#606a78}.source-badge.manual{background:var(--amber-soft);color:#875300}.source-badge.auto{background:var(--blue-soft);color:#194ea3}.source-badge.calc{background:var(--green-soft);color:#0a6b32}.source-badge.saved{background:var(--purple-soft);color:#6240a2}.error-box{display:none;background:var(--red-soft);color:#9d1d1d;border:1px solid #f0bcbc;border-radius:10px;padding:8px;font-size:11px;font-weight:800;margin-top:7px}.extract-box{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:8px}.extract-result{font-size:10px;line-height:1.45}
@@ -170,6 +171,30 @@ details.formula>summary{font-size:13.5px;line-height:1.25;padding:3px 0;font-wei
 .money-unit-note{font-size:10px;color:var(--muted);margin-top:4px}.preserve-note{margin-top:7px;padding:7px 9px;border-radius:9px;background:#eaf5ff;color:#24506a;font-size:10px;font-weight:700;line-height:1.45}
 @media(max-width:620px){.criteria-head{display:none}.criteria-row{grid-template-columns:38px 1fr 92px;grid-template-areas:"rank name judgement" "rank value value" "rank basis basis"}.criteria-row .rank{grid-area:rank}.criteria-row .name{grid-area:name}.criteria-row .value{grid-area:value;text-align:left;font-size:14px}.criteria-row .basis{grid-area:basis}.criteria-row .judgement{grid-area:judgement}.standard-fixed{grid-template-columns:1fr}}
 
+
+/* ===== V10.4 Top-level collapsible sections ===== */
+.top-section-fold{border:0;margin:0;padding:0}
+.top-section-summary{list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.top-section-summary::-webkit-details-marker{display:none}
+.top-section-summary .section-head{margin-bottom:0!important;padding:1px 0;align-items:center}
+.top-section-summary .section-head::after{content:"▼";display:grid;place-items:center;flex:0 0 auto;width:30px;height:30px;margin-left:7px;border-radius:9px;background:#eef2f7;color:#667085;font-size:14px;font-weight:950;transition:transform .16s ease,background .16s ease}
+.top-section-fold[open]>.top-section-summary .section-head::after{content:"▲";background:#e8eef8;color:#344054}
+.top-section-summary:active .section-head::after{transform:scale(.94)}
+.top-section-body{padding-top:12px}
+.top-section-fold:not([open])+.noop{display:none}
+.card:has(>.top-section-fold:not([open])){padding-bottom:12px}
+.card:has(>.top-section-fold:not([open])) .section-head{margin-bottom:0!important}
+.header-tools{flex-wrap:wrap;align-items:center}
+.fold-all-btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:7px 11px;border:1.5px solid #c7d0dc;border-radius:11px;background:#172033;color:#fff;font-size:13px;font-weight:900;box-shadow:0 1px 1px #1111}
+.fold-all-btn.secondary{background:#fff;color:#344054}
+.fold-all-btn:active{transform:scale(.98)}
+@media(max-width:560px){
+  .header-tools{justify-content:flex-start!important;gap:6px}
+  .browser-link{margin-right:auto}
+  .fold-all-btn{min-height:36px;padding:6px 9px;font-size:12px}
+  .top-section-summary .section-head::after{width:28px;height:28px}
+  .top-section-body{padding-top:10px}
+}
 </style>
 <style id="v83-final-nudge">
 /* Final V8.3 mobile readability tuning */
@@ -179,7 +204,6 @@ details.formula>summary{font-size:13.5px;line-height:1.25;padding:3px 0;font-wei
 @media(max-width:430px){.cost-name{font-size:18.5px}.cost-value{font-size:21px}.mode-badge{font-size:11.5px}}
 @media(max-width:360px){.cost-name{font-size:18px}.cost-value{font-size:21px}}
 </style>
-
 <style id="v84-readability">
 /* V8.4: key labels must be readable at a glance on iPhone.
    Keep supporting text/formula compact so page height does not balloon. */
@@ -214,7 +238,6 @@ details.formula>summary{font-size:12.5px!important;line-height:1.15!important;pa
   .quick-box .ql{font-size:14.5px!important}
 }
 </style>
-
 <style id="v85-browser-open">
 .header-tools{display:flex;justify-content:flex-end;gap:7px;margin:7px 2px 10px}
 .browser-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:7px 11px;border:1.5px solid #b9c8dd;border-radius:11px;background:#fff;color:#1858b8;text-decoration:none;font-size:14px;font-weight:900;box-shadow:0 1px 1px #1111}
@@ -222,7 +245,6 @@ details.formula>summary{font-size:12.5px!important;line-height:1.15!important;pa
 .browser-link .browser-icon{font-size:16px;line-height:1}
 @media(min-width:900px){main{max-width:920px}.header-tools{justify-content:flex-start}.browser-link{font-size:15px}}
 </style>
-
 <style id="v86-bank-finance">
 .bank-finance-box{margin-top:9px;padding:10px;border:1px solid #d9e1ec;border-radius:13px;background:#f8fafc}
 .bank-finance-title{font-size:14px;font-weight:950;color:#344054;margin:2px 0 7px}
@@ -270,7 +292,6 @@ details.formula>summary{font-size:12.5px!important;line-height:1.15!important;pa
 .inline-edit-note{font-size:10.8px;color:#697386;line-height:1.4;margin-top:5px}.open-company-settings{min-height:32px!important;font-size:11.5px!important;margin-top:5px;padding:5px 8px!important}
 @media(max-width:430px){.metric-guide{padding:7px}.metric-guide .guide-row,.term-body,.term-help>summary{font-size:11px}.bank-stat b{font-size:14px}.compact-bank-kpi .bank-subline{font-size:10.3px}}
 </style>
-
 <style id="v89-unified-important-metrics">
 /* V8.9: 重要な数字を同一トーンに統一。判定に応じてカード・数字・記号が連動 */
 .metric,.yield-pill,.mini-metric,.compact-bank-kpi{transition:background .18s ease,border-color .18s ease,box-shadow .18s ease}
@@ -310,7 +331,6 @@ details.formula>summary{font-size:12.5px!important;line-height:1.15!important;pa
   .compact-bank-kpi .bk-value{font-size:26px!important}
 }
 </style>
-
 <style id="v101-information-redesign">
 /* V10.1 - readability + information architecture */
 body{font-size:16px;line-height:1.55}
@@ -364,7 +384,6 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 @media(max-width:680px){.analytics-body{grid-template-columns:1fr}.analytics-summary{grid-template-columns:repeat(2,1fr)}.analytics-toolbar{align-items:stretch}.analytics-toolbar label{justify-content:space-between}.analytics-toolbar-note{max-width:none}.chart-shell{padding:5px}.analysis-table{font-size:8.5px}.table-scroll{max-height:360px}}
 
 </style>
-
 <style id="v103-readable-analytics">
 /* V10.3: mobile-first readability. Information is retained; density is reduced by vertical stacking. */
 .analytics-card{padding:15px!important}
@@ -446,424 +465,366 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 </style>
 </head><body>
 <main>
-  <h1>一棟収益物件 判定ツール <span class="version">V10.3 READABLE ANALYTICS</span></h1>
-  <div class="lead">和京スマイ基準・一棟収益物件専用。<b>絶対条件と目標値を分離</b>し、LTVは判定から除外。金額入力・表示は<b>1円単位</b>。V8.9以前の保存データ互換。月次・全融資期間のグラフ/表を大画面・大文字化し、Excel詳細出力も強化。</div>
-  <div class="header-tools"><a id="openBrowserLink" class="browser-link" href="#" onclick="event.preventDefault();window.open(location.href,'_blank')" rel="noopener"><span class="browser-icon">↗</span><span id="openBrowserText">Safariで開く</span></a></div>
+<h1>一棟収益物件 判定ツール <span class="version">V10.4 FOLDABLE</span></h1>
+<div class="lead">和京スマイ基準・一棟収益物件専用。<b>絶対条件と目標値を分離</b>し、LTVは判定から除外。金額入力・表示は<b>1円単位</b>。V8.9以前の保存データ互換。月次・全融資期間のグラフ/表を大画面・大文字化し、Excel詳細出力も強化。</div>
+<div class="header-tools"><a class="browser-link" href="#" id="openBrowserLink" onclick="event.preventDefault();window.open(location.href,'_blank')" rel="noopener"><span class="browser-icon">↗</span><span id="openBrowserText">Safariで開く</span></a><button class="fold-all-btn" id="collapseAllSections" type="button">全部閉じる</button><button class="fold-all-btn secondary" id="expandAllSections" type="button">全部開く</button></div>
+<section class="card input-card"><details class="top-section-fold" id="topFoldInput"><summary class="top-section-summary"><div class="section-head"><span class="num">1</span><span>入力</span><span class="hint">必要な時だけ開く</span></div></summary><div class="top-section-body" id="inputFold">
 
-  <section class="card input-card">
-    <div class="section-head"><span class="num">1</span><span>入力</span><span class="hint">必要な時だけ開く</span></div>
-    <details class="fold" id="inputFold">
-      <summary><span>物件・融資条件を入力</span><span class="small">物件・融資</span></summary>
-      <div class="input-grid">
-        <label>売買価格（円） <span class="source-badge" id="src-price">初期値</span><input id="price" type="number" min="0" step="1" value="5000"></label>
-        <label>構造 <span class="source-badge" id="src-structure">初期値</span><select id="structure"><option value="M">RC・SRC</option><option value="T">鉄骨・準耐火</option><option value="H">木造</option></select></label>
-        <div class="linked">
-          <label>満室想定年間賃料（円） <span class="source-badge" id="src-rent">初期値</span><input id="rent" type="number" min="0" step="1" value="500"></label>
-          <div class="linked-arrow">⇄</div>
-          <label>表面利回り（%） <span class="source-badge calc" id="src-listingYield">自動算出</span><input id="listingYield" type="number" min="0" step="0.01" value="10"></label>
-        </div>
-        <div class="linked loan-link">
-          <label>融資割合（%） <span class="source-badge" id="src-loanRatio">初期値</span><input id="loanRatio" type="number" min="0" max="120" step="0.1" value="90"></label>
-          <div class="linked-arrow">⇄</div>
-          <label>借入額（円） <span class="source-badge calc" id="src-loanOverride">自動算出</span><input id="loanOverride" type="number" min="0" step="1" value="4500"></label>
-        </div>
-        <label>金利（%）<input id="interest" type="number" min="0" max="20" step="0.01" value="3"></label>
-        <label>融資期間（年）<input id="years" type="number" min="1" max="50" step="1" value="25"></label>
-        <label>築年数（年）<input id="buildingAgeMain" type="number" min="0" step="0.1" placeholder="例：20"></label>
-        <label>市場査定・周辺相場の満室年間賃料（円・任意）<input id="marketAnnualRent" type="number" min="0" step="1" placeholder="未確認なら空欄"></label>
-        <label>再建築可否 <span class="rule-chip hard">絶対Gate</span><select id="rebuildable"><option value="">未確認</option><option value="yes">再建築可</option><option value="no">再建築不可</option></select></label>
-        <label>土砂災害区域 <span class="rule-chip hard">絶対Gate</span><select id="landslideRisk"><option value="">未確認</option><option value="outside">区域外</option><option value="yellow">警戒区域（イエロー）</option><option value="red">特別警戒区域（レッド）</option></select></label>
-        <label>水害区域 <span class="rule-chip target">推奨</span><select id="floodRisk"><option value="">未確認</option><option value="outside">区域外</option><option value="inside">浸水想定区域内</option></select></label>
-        <label>市街化調整区域<select id="urbanizationControl"><option value="">未確認</option><option value="outside">区域外</option><option value="inside">区域内（原則稟議）</option></select></label>
-        <label>担保参考額（円・任意）<input id="collateralValueReference" type="number" min="0" step="1" placeholder="銀行提示額・固定資産評価等"></label>
-        <label>出口想定年（年後）<input id="exitYear" type="number" min="1" max="50" step="1" value="10"></label>
-        <label>出口想定売却価格（円・任意）<input id="exitPrice" type="number" min="0" step="1" placeholder="未設定なら空欄"></label>
-        <label>出口売却費用率（%・任意）<input id="exitCostRate" type="number" min="0" max="30" step="0.1" value="0"></label>
-        <label class="span2">返済方法<select id="repayMethod"><option value="equal_payment">元利均等</option><option value="equal_principal">元金均等</option></select></label>
-      </div>
-      <div id="rentYieldError" class="error-box">⚠️ 年間家賃と表面利回りの両方が手入力されています。どちらか一方を削除してください。</div>
-      <div id="coreInputError" class="error-box"></div>
-      <div class="small" style="margin-top:5px">家賃か利回りの片方を入力すると、もう片方を自動計算。両方を手入力すると計算を止める。</div>
-      <div class="money-unit-note">金額はすべて円入力。表示・Excel出力も円。内部保存形式のみ旧版互換のため変換して保持する。</div>
-      <div class="preserve-note">🔒 保存互換：V8.9以前と同じ保存キーを維持。既存の保存物件・下書き・会社財務を削除せず読み込む。</div>
-      <details class="fold">
-        <summary><span>物件名・URL・現況</span><span class="small">自動抽出もここ</span></summary>
-        <div class="input-grid">
-          <label>物件名 <span class="source-badge" id="src-propertyName">未入力</span><input id="propertyName" placeholder="例：○○ハイツ"></label>
-          <label>現況年間賃料（円） <span class="source-badge" id="src-currentRent">未入力</span><input id="currentRent" type="number" min="0" step="1" placeholder="空欄可"></label>
-          <label class="span2">物件URL<input id="propertyUrl" type="url" placeholder="at home / SUUMO 等"></label>
-          <div class="actions span2"><button class="primary" id="autoExtractBtn" type="button">URLから自動入力</button><button id="openProperty" type="button">物件ページ</button></div>
-        </div>
-        <div class="extract-box"><div id="extractStatus" class="small">未実行</div><div id="extractResults"></div><details class="formula"><summary>URLで取れない時：本文を貼る</summary><textarea id="extractPaste" rows="5" placeholder="物件ページ本文を貼り付け"></textarea><button id="parsePastedBtn" type="button" style="margin-top:5px">本文から自動入力</button></details></div>
-      </details>
-      <details class="fold"><summary><span>銀行の返済額</span><span class="small">返済予定表があれば入力</span></summary><label>年間元利返済額（円）<input id="repayOverride" type="number" min="0" step="1" placeholder="空欄＝融資条件から自動計算"></label><div class="small">金融機関の端数処理・初回日割り等は商品ごとに異なるため、返済予定表がある場合は年間返済額を入れると最優先。</div></details>
-      <details class="fold"><summary><span>保険の精度を上げる</span><span class="small">分かれば入力</span></summary><label>建物の保険金額（円）<input id="insuredAmount" type="number" min="0" step="1" placeholder="空欄＝売価の60%で概算"></label></details>
-
-    </details>
-  </section>
-
-  <section class="card decision-card" id="decisionCard" data-grade="good">
-    <div class="section-head"><span class="num">2</span><span>判定</span><span class="hint">最上位は絶対条件4項目</span></div>
-    <div id="verdict" class="verdict">計算中...</div><div id="reason" class="result-reason"></div>
-
-    <div class="gate-title"><span>最上位｜購入Gate</span><span class="gate-count">4</span><span class="scope-badge property">物件単体</span></div>
-    <div class="statusbar">
-      <div id="statusStress" class="absolute-card">20%家賃消失耐性</div>
-      <div id="statusRepay" class="absolute-card">返済比率</div>
-      <div id="statusOpex" class="absolute-card">全融資期間CF</div>
-      <div id="statusYield" class="absolute-card">法務・災害Gate</div>
-    </div>
-    <div class="gate-rule-line"><b>ここが最優先。</b> 4項目のうち1つでもNGなら、表面利回りや目標指標が良くても購入Gateは通さない。未確認の法務・災害項目は「確認待ち」として購入確定しない。</div>
-    <div id="overallComment" class="comment"></div>
-
-    <div class="scope-summary">
-      <div class="scope-summary-title">指標を4つの箱に集約</div>
-      <div class="scope-chips">
-        <div class="scope-chip hard"><b>① 絶対条件</b><span>20%耐性・返済比率・全期間CF・法務Gate</span></div>
-        <div class="scope-chip property"><b>② 物件単体</b><span>DSCR・Debt Yield・OER・各種利回り・BER</span></div>
-        <div class="scope-chip company"><b>③ 会社財務</b><span>自己資本比率・債務償還年数・ICR</span></div>
-        <div class="scope-chip reference"><b>④ 参考・補助</b><span>LTC・金利ストレス・CAPEX・担保・出口など</span></div>
-      </div>
-    </div>
-
-    <div class="criteria-groups">
-      <details class="criteria-group">
-        <summary><span>① 絶対条件 4項目｜詳細</span><span class="group-meta" id="absoluteGroupSummary">—</span></summary>
-        <div class="indicator-list" id="absoluteCriteriaBody"></div>
-      </details>
-      <details class="criteria-group">
-        <summary><span>② 物件単体の主要指標</span><span class="group-meta" id="propertyGroupSummary">—</span></summary>
-        <div class="indicator-list" id="propertyCriteriaBody"></div>
-      </details>
-      <details class="criteria-group">
-        <summary><span>③ 会社全体の財務指標</span><span class="group-meta" id="companyGroupSummary">—</span></summary>
-        <div class="indicator-list" id="companyCriteriaBody"></div>
-      </details>
-      <details class="criteria-group">
-        <summary><span>④ 参考・補助指標</span><span class="group-meta" id="referenceGroupSummary">—</span></summary>
-        <div class="indicator-list" id="referenceCriteriaBody"></div>
-      </details>
-    </div>
-    <div id="criteriaBody" class="hidden"></div>
-  </section>
-
-  <section class="card metrics-card">
-    <div class="section-head"><span class="num">3</span><span>重要な数字</span><span class="hint">ここだけ見ても判断できる</span></div>
-    <div class="metrics-grid">
-      <div class="metric cash"><div class="metric-label">購入に必要な現金</div><div class="metric-value" id="cashNeededView">—</div><div class="metric-sub" id="cashBreakdown">頭金＋購入時費用＋決済調整</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCashNeeded"></div></details></div>
-      <div class="metric cf"><div class="metric-label">満室時 月CF</div><div class="metric-value" id="monthlyCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyCF"></div></details></div>
-      <div class="metric cf"><div class="metric-label">満室時 年CF</div><div class="metric-value" id="annualCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAnnualCF"></div></details></div>
-      <div class="metric stress"><div class="metric-label">20%減収時 年CF</div><div class="metric-value" id="stressCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaStressCF"></div></details></div>
-      <div class="metric noi-metric"><div class="metric-label">満室NOI（年）</div><div class="metric-value" id="noiAnnualView">—</div><div class="metric-sub">満室賃料 − 通常OPEX</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaNoiAnnual"></div></details></div>
-      <div class="metric debt-metric"><div class="metric-label">判定採用 月返済</div><div class="metric-value" id="monthlyDebtAnalyticsView">—</div><div class="metric-sub" id="monthlyDebtAnalyticsSub">融資条件から計算</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyDebtAnalytics"></div></details></div>
-      <div class="metric split-metric"><div class="metric-label">初月 元本 / 利息</div><div class="metric-value split-value" id="firstSplitView">—</div><div class="metric-sub" id="firstSplitSub">返済内訳</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaFirstSplit"></div></details></div>
-    </div>
-    <div class="yield-strip">
-      <div class="yield-pill"><div class="yl">表面利回り</div><div class="yv" id="grossYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaGrossYield"></div></details></div>
-      <div class="yield-pill"><div class="yl">実質利回り</div><div class="yv" id="netYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaNetYield"></div></details></div>
-      <div class="yield-pill after"><div class="yl">返済後利回り</div><div class="yv" id="afterDebtYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAfterDebtYield"></div></details></div>
-    </div>
-    <div class="mini-metrics"><div class="mini-metric"><span>自己資金利回り</span><b id="coc">—</b><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCoc"></div></details></div></div>
-
-    <details class="fold advanced-metrics"><summary><span>銀行査定・会社財務の高度な設定</span><span class="small">必要な時だけ開く</span></summary>
-    <div class="bank-kpi-grid compact-bank-grid">
-      <div class="bank-kpi compact-bank-kpi legacy-rdy-card">
-        <div class="bk-label">旧・グロス残債利回り（互換用）</div>
-        <div class="bk-value" id="residualDebtYieldView">—</div>
-        <div class="bk-status" id="residualDebtYieldStatus">借入に対する家賃の厚み</div>
-        <details class="bank-detail">
-          <summary>詳しく見る・基準</summary>
-          <div class="metric-guide">
-            <div class="guide-row"><b>一言でいうと：</b>今残っている借金に対して、この物件が年間いくら家賃を稼いでいるか。</div>
-            <div class="guide-row"><b>高い/低い：</b>高いほど良い。元金返済が進むほど通常は上がる。</div>
-            <div class="guide-row"><b>銀行が見る理由：</b>物件単体で借入が重すぎないか、将来の残債が安全に減るかをざっくり確認できる。</div>
-            <div class="guide-row"><b>基準：</b>15%以上＝強い目標、10〜15%＝良好、6〜10%＝注意、6%以下＝本の危険水域。5%以下は当社の購入NG候補。<span class="basis-tag">本準拠＋内部基準</span></div>
-            <div class="guide-row"><b>今回：</b><span id="rdyInterpretation">—</span></div>
-          </div>
-          <div class="bk-mini"><div>購入時<b id="rdy0">—</b></div><div>5年後<b id="rdy5">—</b></div><div>10年後<b id="rdy10">—</b></div><div>15年後<b id="rdy15">—</b></div></div>
-          <div class="formula-box" id="formulaResidualDebtYield"></div>
-          <details class="term-help"><summary>「残債」って何？</summary><div class="term-body">その時点でまだ返していないローン元金。利息ではなく、<b>残っている元本</b>のこと。</div></details>
-        </details>
-      </div>
-
-      <div class="bank-kpi compact-bank-kpi legacy-ltv-card">
-        <div class="bk-label">旧・推定評価LTV（互換用・非表示）</div>
-        <div class="bk-value" id="evalLtvView">—</div>
-        <div class="bk-status" id="evalLtvStatus">銀行評価の入力待ち</div>
-        <details class="bank-detail">
-          <summary>詳しく見る・編集</summary>
-          <div class="metric-guide">
-            <div class="guide-row"><b>一言でいうと：</b>銀行が見る物件価値に対して、借金が何％乗っているか。</div>
-            <div class="guide-row"><b>高い/低い：</b>低いほど良い。100%を超えると推定評価額より借金の方が大きい。</div>
-            <div class="guide-row"><b>銀行が見る理由：</b>担保を処分した時にどれくらい借金を回収できそうか、担保の余白があるかを見る。</div>
-            <div class="guide-row"><b>基準：</b>60%以下＝非常に強い、60〜80%＝強い、80〜90%＝注意、90〜100%＝余力薄い、100%超＝評価＜残債。<span class="basis-tag">銀行実務参考＋内部目標80%</span></div>
-            <div class="guide-row"><b>今回：</b><span id="evalLtvInterpretation">—</span></div>
-          </div>
-          <div class="bk-explain strong-line" id="collateralSurplusView">担保余力：—</div>
-          <div class="formula-box" id="formulaEvalLtv"></div>
-          <details class="term-help"><summary>「LTV」って何？</summary><div class="term-body"><b>Loan to Value</b>の略。借入残高÷物件評価額。ここでは売買価格ではなく、<b>推定銀行評価額</b>を分母にする。</div></details>
-          <details class="term-help"><summary>「担保余力」って何？</summary><div class="term-body">推定銀行評価額－借入額。プラスが大きいほど、評価額の中に借金で埋まっていない余白がある。</div></details>
-
-          <div class="bank-finance-box">
-            <div class="bank-finance-title">銀行評価の計算・編集</div>
-            <div class="bank-note">土地＝路線価×面積×掛目、建物＝再調達単価×延床面積×残存率。初期値は置くが、各項目はすべて編集できます。</div>
-            <div class="input-grid" style="margin-top:7px">
-              <label>路線価（千円/㎡）<input id="roadPriceK" type="number" min="0" step="1" placeholder="例：100"></label>
-              <label>土地面積（㎡）<input id="landArea" type="number" min="0" step="0.01" placeholder="例：300"></label>
-              <label>土地掛目（%）<input id="landFactor" type="number" min="0" max="150" step="1" value="70"></label>
-              <label>銀行評価用構造<select id="valuationStructure"><option value="WOOD">木造</option><option value="LIGHT">軽量鉄骨</option><option value="HEAVY">重量鉄骨</option><option value="RC" selected>RC</option><option value="SRC">SRC</option></select></label>
-              <label>延床面積（㎡）<input id="buildingArea" type="number" min="0" step="0.01" placeholder="例：400"></label>
-              <label>築年数（年）<input id="legacyBuildingAge" type="number" min="0" step="0.1" placeholder="例：10"></label>
-              <label>再調達単価（万円/㎡）<input id="replacementCost" type="number" min="0" step="0.1" value="33.8"></label>
-              <label>評価耐用年数（年）<input id="evalLife" type="number" min="1" step="1" value="47"></label>
-              <label class="span2">建物残存率（%・任意上書き）<input id="residualOverride" type="number" min="0" max="100" step="0.1" placeholder="空欄＝（耐用年数－築年数）÷耐用年数"></label>
-              <label class="span2">銀行評価額 実額（円・任意）<input id="bankEvalOverride" type="number" min="0" step="1" placeholder="銀行から実額が出たら入力＝推定値より優先"></label>
-            </div>
-            <div class="bank-auto-hint">再調達単価初期値：木造21.7 / 軽量鉄骨30.0 / 重量鉄骨36.0 / RC33.8 / SRC33.4 万円/㎡。全て編集可。銀行実評価額が出た場合は実額を最優先。</div>
-          </div>
-        </details>
-      </div>
-
-      <div class="bank-kpi compact-bank-kpi">
-        <div class="bk-label">詳細：会社 購入後債務償還年数</div>
-        <div class="bk-value" id="debtYearsView">—</div>
-        <div class="bk-status" id="debtYearsStatus">会社設定の入力待ち</div>
-        <details class="bank-detail">
-          <summary>詳しく見る・編集</summary>
-          <div class="metric-guide">
-            <div class="guide-row"><b>一言でいうと：</b>この物件を買った後、会社全体の実質的な銀行借入を、今の返済原資なら何年で返せるか。</div>
-            <div class="guide-row"><b>高い/低い：</b>短いほど良い。</div>
-            <div class="guide-row"><b>銀行が見る理由：</b>会社全体として借金が稼ぐ力に対して増えすぎていないか、次の融資余力が残るかを見る。</div>
-            <div class="guide-row"><b>基準：</b>15年以内＝健全、15〜20年＝注意、20年超＝購入条件見直し。<span class="basis-tag">融資戦略本準拠</span></div>
-            <div class="guide-row"><b>今回：</b><span id="debtYearsInterpretation">—</span></div>
-          </div>
-          <div class="bk-explain strong-line" id="debtYearsUpdate">基礎財務データ：—</div>
-          <div class="formula-box" id="formulaDebtYears"></div>
-          <details class="term-help"><summary>「返済原資」って何？</summary><div class="term-body">借金を返すために会社が1年間で生み出す力。この指標では<b>経常利益＋減価償却費－法人税等</b>で見る。</div></details>
-          <div class="bank-finance-box">
-            <div class="bank-finance-title">この物件を買った後の調整</div>
-            <div class="input-grid">
-              <label>購入後想定 現預金（円）<input id="postCashOverride" type="number" min="0" step="1" placeholder="空欄＝現在現預金－必要現金（最低0）"></label>
-              <label>この物件による法人税等増加（円/年）<input id="additionalTax" type="number" min="0" step="1" value="0"></label>
-              <label class="span2">初年度支払利息（円・任意上書き）<input id="firstYearInterestOverride" type="number" min="0" step="1" placeholder="空欄＝融資条件から自動計算"></label>
-            </div>
-            <div class="bank-note">購入後現預金は自動計算。役員借入などで手元資金を残す場合は実際に残す予定額へ上書き。</div>
-          </div>
-          <button type="button" class="open-company-settings">会社設定を開く</button>
-        </details>
-      </div>
-
-      <div class="bank-kpi compact-bank-kpi">
-        <div class="bk-label">詳細：会社 購入後ICR</div>
-        <div class="bk-value" id="icrView">—</div>
-        <div class="bk-status" id="icrStatus">会社設定の入力待ち</div>
-        <div class="bank-subline" id="icrStressLine">金利ストレス：—</div>
-        <details class="bank-detail">
-          <summary>詳しく見る・編集</summary>
-          <div class="metric-guide">
-            <div class="guide-row"><b>一言でいうと：</b>この物件を買った後、会社の営業利益で年間利息を何倍払えるか。</div>
-            <div class="guide-row"><b>高い/低い：</b>高いほど良い。1.0倍未満は営業利益等だけでは利息を賄えない。</div>
-            <div class="guide-row"><b>銀行が見る理由：</b>金利上昇や利益悪化が起きても利払いを続けられる会社かを見る。</div>
-            <div class="guide-row"><b>基準：</b>2.0倍以上＝健全、1.5〜2.0倍＝注意、1.0〜1.5倍＝危険寄り、1.0倍未満＝危険。金利＋1%等のストレス時も1.5倍以上を目標。<span class="basis-tag">融資戦略本準拠</span></div>
-            <div class="guide-row"><b>今回：</b><span id="icrInterpretation">—</span></div>
-          </div>
-          <div class="formula-box" id="formulaIcr"></div>
-          <details class="term-help"><summary>「ICR」って何？</summary><div class="term-body"><b>Interest Coverage Ratio</b>。営業利益＋受取利息・配当金を支払利息で割った利払い余力の指標。</div></details>
-          <div class="bank-finance-box">
-            <div class="bank-finance-title">この物件の減価償却</div>
-            <label>年間減価償却費（円/年）<input id="propertyDepreciation" type="number" min="0" step="1" placeholder="ICR計算に必要。決算・税務見込みから入力"></label>
-            <div class="bank-note">購入後営業利益＝現在営業利益＋銀行査定NOI－この物件の減価償却費。未入力なら購入後ICRは無理に推計しません。</div>
-          </div>
-          <button type="button" class="open-company-settings">会社設定を開く</button>
-        </details>
-      </div>
-
-      <div class="bank-kpi compact-bank-kpi">
-        <div class="bk-label">詳細：銀行ストレスDSCR</div>
-        <div class="bk-value" id="stressDscrView">—</div>
-        <div class="bk-status" id="stressDscrStatus">家賃↓＋金利↑の返済耐性</div>
-        <div class="bank-subline" id="normalDscrLine">通常DSCR：—</div>
-        <details class="bank-detail">
-          <summary>詳しく見る・編集</summary>
-          <div class="metric-guide">
-            <div class="guide-row"><b>一言でいうと：</b>家賃が落ちて金利が上がっても、物件の返済原資だけで年間返済を何倍払えるか。</div>
-            <div class="guide-row"><b>高い/低い：</b>高いほど良い。1.0倍未満はストレス時に物件の返済原資だけでは返済できない。</div>
-            <div class="guide-row"><b>銀行が見る理由：</b>今の満室・今の金利だけでなく、悪化した時にもローンが耐えられるかを見る。</div>
-            <div class="guide-row"><b>基準：</b>ストレスDSCR 1.20倍以上＝強い、1.15〜1.20＝良好、1.00〜1.15＝余力薄い、1.00未満＝返済原資不足。通常DSCRは1.25倍以上を銀行実務の強い参考線、1.40倍以上を内部目標。返済後損益分岐稼働率は75%以下＝強い、75〜80%＝良好、80〜85%＝注意、85%超＝高い、の内部目安。<span class="basis-tag">銀行実務参考＋内部基準</span></div>
-            <div class="guide-row"><b>今回：</b><span id="stressDscrInterpretation">—</span></div>
-          </div>
-          <div class="bank-stat-grid">
-            <div class="bank-stat"><span>通常DSCR</span><b id="normalDscrView">—</b></div>
-            <div class="bank-stat"><span>家賃↓のみ</span><b id="lossDscrView">—</b></div>
-            <div class="bank-stat"><span>金利↑のみ</span><b id="rateDscrView">—</b></div>
-            <div class="bank-stat"><span>家賃↓＋金利↑</span><b id="combinedDscrView">—</b></div>
-            <div class="bank-stat"><span>返済後損益分岐稼働率</span><b id="breakEvenBankView">—</b></div>
-            <div class="bank-stat"><span>銀行査定NCF</span><b id="bankNcfView">—</b></div>
-          </div>
-          <div class="formula-box" id="formulaStressDscr"></div>
-          <details class="term-help"><summary>「DSCR」って何？</summary><div class="term-body"><b>Debt Service Coverage Ratio</b>。年間の返済原資÷年間元利返済額。1.25倍なら、返済額の1.25倍の返済原資がある。</div></details>
-          <details class="term-help"><summary>「NCF」って何？</summary><div class="term-body"><b>Net Cash Flow</b>。銀行査定NOIから、大規模修繕・設備更新などに備える年間予備（CAPEX予備）をさらに引いた返済原資。</div></details>
-          <div class="bank-finance-box">
-            <div class="bank-finance-title">ストレス・NCF設定</div>
-            <div class="input-grid">
-              <label>金利上昇ストレス（+%）<input id="rateStressPct" type="number" min="0" max="10" step="0.1" value="1"></label>
-              <label>CAPEX予備（円/年）<input id="capexReserve" type="number" min="0" step="1" value="0"></label>
-            </div>
-            <div class="bank-note">家賃下落は「設定」の減収テスト（初期20%）を使用。CAPEX予備は日常修繕とは別の大規模修繕・設備交換用。分からなければ0のままでも計算するが、その分DSCRは甘くなる。</div>
-          </div>
-        </details>
-      </div>
-
-      <div class="bank-kpi compact-bank-kpi">
-        <div class="bk-label">詳細：Debt Yield</div>
-        <div class="bk-value" id="debtYieldView">—</div>
-        <div class="bk-status" id="debtYieldStatus">借入に対するNOIの厚み</div>
-        <div class="bank-subline" id="debtYieldSubline">銀行査定NOI：—</div>
-        <details class="bank-detail">
-          <summary>詳しく見る・編集</summary>
-          <div class="metric-guide">
-            <div class="guide-row"><b>一言でいうと：</b>銀行が貸す金額に対して、この物件が年間どれだけ実質的な賃貸利益（NOI）を生むか。</div>
-            <div class="guide-row"><b>高い/低い：</b>高いほど良い。金利や返済期間に左右されにくく、物件そのものの借入耐性を見やすい。</div>
-            <div class="guide-row"><b>銀行が見る理由：</b>融資条件を長くしてDSCRを良く見せても、借入額そのものが物件収益に対して大きすぎないか確認できる。</div>
-            <div class="guide-row"><b>基準：</b>15%以上＝長期目標、10〜15%＝評価しやすい、5〜10%＝弱め、5%以下＝回避目安。<span class="basis-tag">銀行監督・実融資データ参考</span></div>
-            <div class="guide-row"><b>今回：</b><span id="debtYieldInterpretation">—</span></div>
-          </div>
-          <div class="bank-stat-grid">
-            <div class="bank-stat"><span>銀行査定EGI</span><b id="bankEgiView">—</b></div>
-            <div class="bank-stat"><span>銀行査定NOI</span><b id="bankNoiView">—</b></div>
-            <div class="bank-stat"><span>採用家賃消失率</span><b id="normalVacancyUsedView">—</b></div>
-            <div class="bank-stat"><span>DY10%なら最大借入</span><b id="maxLoanDy10View">—</b></div>
-            <div class="bank-stat"><span>LTC</span><b id="ltcBankView">—</b></div>
-            <div class="bank-stat"><span>融資期間・初年度元金返済率</span><b id="repaymentPaceView">—</b></div>
-          </div>
-          <div class="formula-box" id="formulaDebtYield"></div>
-          <details class="term-help"><summary>「NOI」って何？</summary><div class="term-body"><b>Net Operating Income（純営業収益）</b>。この銀行指標では、満室家賃から通常の空室・滞納等を見込み、安定その他収入を足し、固定資産税・管理・保険・修繕など通常運営経費を引いた<b>銀行査定NOI</b>を使う。借入返済・利息・減価償却・法人税は引かない。</div></details>
-          <details class="term-help"><summary>「EGI」って何？</summary><div class="term-body"><b>Effective Gross Income（実効総収入）</b>。満室なら取れる家賃から、普通に起こる空室・滞納等を引き、継続的なその他収入を足した現実的な年間収入。</div></details>
-          <details class="term-help"><summary>「CAPEX」って何？</summary><div class="term-body">屋根・外壁・給湯器大量交換など、日常修繕とは別の<b>大規模修繕・長期設備更新</b>。ツールでは年間予備としてNCFから控除できる。</div></details>
-          <details class="term-help"><summary>「LTC」って何？</summary><div class="term-body"><b>Loan to Cost</b>。借入額÷総事業費。ここでは売買価格＋購入時費用を総事業費として計算。固定基準は置かず、総事業費に対する借入依存度の参考値として使う。</div></details>
-          <div class="bank-finance-box">
-            <div class="bank-finance-title">銀行査定NOIの設定</div>
-            <div class="input-grid">
-              <label>通常家賃消失率 最低値（%）<input id="normalVacancyMin" type="number" min="0" max="100" step="0.1" value="5"></label>
-              <label>安定その他収入（円/年）<input id="stableOtherIncome" type="number" min="0" step="1" value="0"></label>
-            </div>
-            <div class="bank-note">現況年間家賃が入力されている場合は、実績家賃消失率と上の最低値の<b>大きい方</b>を採用。20%ストレス時は5%に足すのではなく、20%へ置き換える（実績が20%超なら実績を優先）。駐車場等が満室年間家賃に既に含まれるなら、その他収入は0のまま。</div>
-          </div>
-        </details>
-      </div>
-    </div>
-    </details>
-  </section>
-
-
-  <section class="card analytics-card" id="monthlyAnalyticsSection">
-    <div class="section-head"><span class="num">4</span><span>月次・全融資期間分析</span><span class="hint">大文字・1指標ずつ</span></div>
-    <div class="analytics-lead"><b>月次化に意味がある物件収支・返済指標を、1項目ずつ「基準・意味・計算式 → グラフ → 表」の順で追う。</b><br>満室賃料・OPEXは年間入力を12等分して一定とし、返済は融資条件から月次償還表を作成する。したがって賃料・OPEXを将来予測しているわけではなく、<b>現在の前提を融資期間へ延長した返済耐性シミュレーション</b>として見る。</div>
-    <div class="analytics-toolbar">
-      <label>表示範囲<select id="analyticsRange"><option value="12">最初の12か月</option><option value="60">最初の5年</option><option value="all">全融資期間</option></select></label>
-      <div class="analytics-actions"><button type="button" id="openAllAnalytics">全部開く</button><button type="button" id="closeAllAnalytics">全部閉じる</button></div>
-      <div class="analytics-toolbar-note" id="analyticsModeNote">—</div>
-    </div>
-    <div class="analytics-summary" id="analyticsSummary"></div>
-
-    <div class="analytics-accordions">
-      <details class="analytics-fold"><summary><span><b>1</b>返済額・元本・利息・残債</span><span class="af-mini" id="afRepayMini">—</span></summary><div class="analytics-body"><div id="guideRepayment" class="metric-guide"></div><div id="chartRepayment" class="chart-box"></div><div id="tableRepayment" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>2</b>NOI 推移</span><span class="af-mini" id="afNoiMini">—</span></summary><div class="analytics-body"><div id="guideNoi" class="metric-guide"></div><div id="chartNoi" class="chart-box"></div><div id="tableNoi" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>3</b>通常CF 推移</span><span class="af-mini" id="afCfMini">—</span></summary><div class="analytics-body"><div id="guideCf" class="metric-guide"></div><div id="chartCf" class="chart-box"></div><div id="tableCf" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>4</b>20% Stress CF 推移</span><span class="af-mini" id="afStressCfMini">—</span></summary><div class="analytics-body"><div id="guideStressCf" class="metric-guide"></div><div id="chartStressCf" class="chart-box"></div><div id="tableStressCf" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>5</b>通常DSCR 推移</span><span class="af-mini" id="afDscrMini">—</span></summary><div class="analytics-body"><div id="guideDscr" class="metric-guide"></div><div id="chartDscr" class="chart-box"></div><div id="tableDscr" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>6</b>Stress DSCR 推移</span><span class="af-mini" id="afStressDscrMini">—</span></summary><div class="analytics-body"><div id="guideStressDscr" class="metric-guide"></div><div id="chartStressDscr" class="chart-box"></div><div id="tableStressDscr" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>7</b>返済比率 推移</span><span class="af-mini" id="afRepayRatioMini">—</span></summary><div class="analytics-body"><div id="guideRepayRatio" class="metric-guide"></div><div id="chartRepayRatio" class="chart-box"></div><div id="tableRepayRatio" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>8</b>OER 推移</span><span class="af-mini" id="afOerMini">—</span></summary><div class="analytics-body"><div id="guideOer" class="metric-guide"></div><div id="chartOer" class="chart-box"></div><div id="tableOer" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>9</b>BER 推移</span><span class="af-mini" id="afBerMini">—</span></summary><div class="analytics-body"><div id="guideBer" class="metric-guide"></div><div id="chartBer" class="chart-box"></div><div id="tableBer" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>10</b>残債Debt Yield 推移</span><span class="af-mini" id="afDebtYieldMini">—</span></summary><div class="analytics-body"><div id="guideDebtYield" class="metric-guide"></div><div id="chartDebtYield" class="chart-box"></div><div id="tableDebtYield" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>11</b>利回り 推移</span><span class="af-mini" id="afYieldMini">—</span></summary><div class="analytics-body"><div id="guideYield" class="metric-guide"></div><div id="chartYield" class="chart-box"></div><div id="tableYield" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>12</b>全融資期間 累計CF</span><span class="af-mini" id="afFullCfMini">—</span></summary><div class="analytics-body"><div id="guideFullCf" class="metric-guide"></div><div id="chartCumulativeCf" class="chart-box"></div><div id="tableCumulativeCf" class="table-box"></div></div></details>
-      <details class="analytics-fold"><summary><span><b>13</b>月次 全指標一覧</span><span class="af-mini">全データ</span></summary><div class="analytics-body full"><div id="guideAllMonthly" class="metric-guide"></div><div id="chartAllRatios" class="chart-box"></div><div id="tableAllMonthly" class="table-box wide"></div></div></details>
-    </div>
-  </section>
-
-  <section class="card details-card">
-    <div class="section-head"><span class="num">5</span><span>詳細</span><span class="hint mode-legend"><b>緑</b>=実額　<b>橙</b>=概算　灰=自動</span></div>
-    <div class="quick-summary">
-      <div class="quick-box expense"><div class="ql">年間経費</div><div class="qv" id="opexTotal">—</div><div class="qs">経費率 <span id="opexRatio">—</span></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaOpexTotal"></div></details></div>
-      <div class="quick-box cost"><div class="ql">購入時費用</div><div class="qv" id="acqTotal">—</div><div class="qs">決済調整は別</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAcqCost"></div></details></div>
-      <div class="quick-box loan"><div class="ql">月返済</div><div class="qv" id="monthlyDebt">—</div><div class="qs" id="monthlyDebtNote"></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyDebt"></div></details></div>
-      <div class="quick-box loan"><div class="ql">借入額</div><div class="qv" id="loanAmountView">—</div><div class="qs" id="ltvView">融資割合</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaLoan"></div></details></div>
-    </div>
-
-    <details class="fold subfold"><summary><span class="subfold-title"><i class="dot expense"></i>年間経費の内訳</span><span class="small">計算値の横で実額修正</span></summary>
-      <div class="cost-row"><div class="cost-name">管理費<span id="managementMode" class="mode-badge auto-mode">自動</span></div><div id="managementValue" class="cost-value">—</div><input id="managementOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="管理費の実額"><details class="formula"><summary>根拠</summary><div id="formulaManagement" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">固定資産税<span id="taxMode" class="mode-badge auto-mode">自動</span></div><div id="taxValue" class="cost-value">—</div><input id="taxOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="固定資産税の実額"><details class="formula"><summary>根拠</summary><div id="formulaTax" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">保険料<span id="insuranceMode" class="mode-badge auto-mode">自動</span></div><div id="insuranceValue" class="cost-value">—</div><input id="insuranceOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="保険料の実額"><details class="formula"><summary>根拠</summary><div id="formulaInsurance" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">共用部費<span id="commonMode" class="mode-badge auto-mode">自動</span></div><div id="commonValue" class="cost-value">—</div><input id="commonOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="共用部費の実額"><details class="formula"><summary>根拠</summary><div id="formulaCommon" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">修繕費<span id="repairMode" class="mode-badge auto-mode">自動</span></div><div id="repairValue" class="cost-value">—</div><input id="repairOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="修繕費の実額"><details class="formula"><summary>根拠</summary><div id="formulaRepair" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">募集費<span id="leasingMode" class="mode-badge auto-mode">自動</span></div><div id="leasingValue" class="cost-value">—</div><input id="leasingOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="募集費の実額"><details class="formula"><summary>根拠</summary><div id="formulaLeasing" class="formula-box"></div></details></div>
-      <div class="other-head"><b style="font-size:11px">その他経費</b><button id="addOpex" type="button">＋追加</button></div><div class="cost-tip">EV・ネット・浄化槽・ゴミ回収など。何件でも追加。</div><div id="customOpex"></div>
-      <div id="opexRows" class="hidden"></div>
-    </details>
-
-    <details class="fold subfold"><summary><span class="subfold-title"><i class="dot cost"></i>購入時費用の内訳</span><span class="small">計算値の横で実額修正</span></summary>
-      <div class="cost-row"><div class="cost-name">仲介手数料<span id="brokerMode" class="mode-badge auto-mode">自動</span></div><div id="brokerValue" class="cost-value">—</div><input id="brokerOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="仲介手数料の実額"><details class="formula"><summary>根拠</summary><div id="formulaBroker" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">登記費用<span id="registrationMode" class="mode-badge auto-mode">概算</span></div><div id="registrationValue" class="cost-value">—</div><input id="registrationOverride" class="cost-input" type="number" min="0" step="1" placeholder="合計実額" aria-label="登記費用の合計実額"><details class="formula"><summary>根拠・精度UP</summary><div id="formulaRegistration" class="formula-box"></div><div class="precision-box"><div class="precision-head">登記費用を「税金」と「報酬」に分けて精度を上げる</div><div class="precision-grid"><label>登録免許税 実額（円）<input id="registrationTaxOverride" type="number" min="0" step="1" placeholder="空欄＝概算"></label><label>司法書士報酬 実額（円）<input id="judicialOverride" type="number" min="0" step="1" placeholder="空欄＝概算"></label></div><div class="cost-tip">上の「合計実額」が入っている場合は合計実額を最優先。空欄なら、ここで入力した税金・報酬を合計に反映。</div></div></details></div>
-      <div class="cost-row"><div class="cost-name">印紙代<span id="stampMode" class="mode-badge auto-mode">自動</span></div><div id="stampValue" class="cost-value">—</div><input id="stampOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="印紙代の実額"><details class="formula"><summary>根拠</summary><div id="formulaStamp" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">銀行費用<span id="bankMode" class="mode-badge auto-mode">自動</span></div><div id="bankValue" class="cost-value">—</div><input id="bankOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="銀行費用の実額"><details class="formula"><summary>根拠</summary><div id="formulaBank" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">不動産取得税<span id="acqTaxMode" class="mode-badge auto-mode">自動</span></div><div id="acqTaxValue" class="cost-value">—</div><input id="acqTaxOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="不動産取得税の実額"><details class="formula"><summary>根拠</summary><div id="formulaAcqTax" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">固都税精算<span id="settleMode" class="mode-badge auto-mode">自動</span></div><div id="settleValue" class="cost-value">—</div><input id="settleOverride" class="cost-input" type="number" min="0" step="1" placeholder="実額" aria-label="固定資産税の精算の実額"><details class="formula"><summary>根拠</summary><div id="formulaSettle" class="formula-box"></div></details></div>
-      <div class="cost-row"><div class="cost-name">雑費<span id="miscMode" class="mode-badge auto-mode">自動</span></div><div id="miscValue" class="cost-value">—</div><input id="miscDefault" class="cost-input" type="number" min="0" step="1" value="2" placeholder="設定額（円）" aria-label="雑費の実額"><details class="formula"><summary>根拠</summary><div id="formulaMisc" class="formula-box"></div></details></div>
-      <div class="closing-row"><div><b style="font-size:11px">決済時の追加・戻り</b><div class="small">追加支出＋ / 敷金等の受取－</div></div><input id="closingAdjustment" type="number" step="1" value="0" aria-label="決済時の追加・戻り"></div>
-      <div class="other-head"><b style="font-size:11px">その他費用</b><button id="addAcq" type="button">＋追加</button></div><div id="customAcq"></div><div id="acqRows" class="hidden"></div>
-    </details>
-
-    <details class="fold subfold"><summary><span class="subfold-title"><i class="dot manage"></i>物件保存・比較</span><span class="small"><span id="savedCount">0件</span></span></summary>
-      <div class="quick-summary"><div class="quick-box"><div class="ql">保有＋契約済 年間家賃</div><div class="qv" id="securedRentTotal">0円</div></div><div class="quick-box"><div class="ql">目標まで残り</div><div class="qv" id="targetRemaining">3,000円</div></div></div>
-      <div class="input-grid"><label>物件の状態<select id="caseStage"><option>検討中</option><option>買付</option><option>契約済</option><option>保有</option><option>見送り</option></select></label><label>メモ<input id="propertyMemo" placeholder="値下げ余地など"></label></div><button class="primary" id="saveCase" type="button" style="margin-top:7px">この物件を保存</button><div id="savedCards"></div><div id="compareArea"></div>
-      <details class="formula"><summary>5年目標</summary><label>年間家賃目標（円）<input id="portfolioTarget" type="number" min="1" step="1" value="3000"></label><div class="progress" style="margin-top:6px"><div id="progressBar"></div></div><div id="progressText" class="small" style="margin-top:4px"></div></details>
-    </details>
-
-    <details class="fold subfold"><summary><span class="subfold-title"><i class="dot export"></i>Excel・保存</span><span class="small" id="saveState">自動保存</span></summary><div class="save-status"><div class="small">最終保存</div><div class="big" id="lastSaved">—</div></div><div class="actions" style="margin-top:7px"><button class="primary" id="exportExcel" type="button">Excel詳細出力（グラフ＋表）</button><button id="backupAll" type="button">バックアップ</button><button id="restoreBackupBtn" type="button">復元</button></div><input id="restoreFile" type="file" accept=".json,application/json" class="hidden"></details>
-
-    <details class="fold subfold" id="settingsFold"><summary><span class="subfold-title"><i class="dot setting"></i>設定</span><span class="small">会社設定もここ</span></summary>
-      <div class="standard-fixed">
-        <div><b>家賃消失 20% <span class="rule-chip hard">絶対</span></b><span>20%消失後CF≥0 / Stress DSCR≥1.00</span></div>
-        <div><b>返済比率 ≤50% <span class="rule-chip hard">絶対</span></b><span>年間元利返済÷満室想定年間賃料</span></div>
-        <div><b>OER（満室想定） ≤30% <span class="rule-chip target">目標</span></b><span>超過だけではNGにしない</span></div>
-        <div><b>通常DSCR ≥1.40 <span class="rule-chip target">目安</span></b><span>平常時の返済余力</span></div>
-      </div>
-      <input id="yieldMin" type="hidden" value="10"><input id="repayMax" type="hidden" value="50"><input id="opexMax" type="hidden" value="30"><input id="lossRate" type="hidden" value="20">
-
-      <details class="formula" id="companySettingsFold"><summary>会社財務設定（自己資本比率・債務償還年数・ICR用）</summary>
-        <div class="bank-finance-box" style="margin-top:6px">
-          <div class="bank-finance-title">会社財務設定</div>
-          <div class="bank-note">会社全体の数字。ここだけ別保存され、通常の「入力内容をリセット」では消えません。決算・試算表を更新した時に入れ替えてください。</div>
-          <div class="input-grid" style="margin-top:7px">
-            <label>総資産（円）<input id="companyTotalAssets" type="number" min="0" step="1" placeholder="貸借対照表"></label>
-            <label>純資産（円）<input id="companyNetAssets" type="number" step="1" placeholder="貸借対照表"></label>
-            <label>金融機関借入残高（円）<input id="companyBankDebt" type="number" min="0" step="1" placeholder="会社全体"></label>
-            <label>現預金（円）<input id="companyCash" type="number" min="0" step="1" placeholder="会社全体"></label>
-            <label>経常利益（円/年）<input id="companyOrdinaryProfit" type="number" step="1" placeholder="赤字はマイナス"></label>
-            <label>減価償却費（円/年）<input id="companyDepreciation" type="number" min="0" step="1"></label>
-            <label>法人税等（円/年）<input id="companyTaxes" type="number" min="0" step="1"></label>
-            <label>役員借入金（円・実質資本調整用）<input id="companyOfficerLoan" type="number" min="0" step="1" placeholder="償還年数は除外／実質自己資本には加算"></label>
-            <label>営業利益（円/年）<input id="companyOperatingProfit" type="number" step="1" placeholder="ICR用・赤字はマイナス"></label>
-            <label>受取利息・配当金（円/年）<input id="companyInterestIncome" type="number" min="0" step="1" value="0"></label>
-            <label>支払利息（円/年）<input id="companyInterestExpense" type="number" min="0" step="1" placeholder="ICR用"></label>
-            <label>財務データ更新日<input id="companyUpdatedDate" type="date"></label>
-          </div>
-          <div class="company-status"><span>会社設定は別保存・物件リセット対象外</span><b id="companySaveState">未保存</b></div>
-          <div class="company-actions"><button class="primary" id="saveCompanySettings" type="button">会社設定を保存</button><button class="danger" id="resetCompanySettings" type="button">会社設定を初期化</button></div>
-          <div class="bank-note">保存時、更新日が未編集なら当日へ自動更新。任意の日付を入れた場合はその日付を保持。会社設定の初期化だけは誤操作防止のため2回確認。</div>
-        </div>
-      </details>
-
-      <details class="formula"><summary>概算ルール</summary><div class="input-grid"><label>管理費 家賃%<input id="managementRate" type="number" step="0.1" value="8"></label><label>固定資産税 売価%<input id="taxRate" type="number" step="0.01" value="0.7"></label><label>共用部費 売価%<input id="commonRate" type="number" step="0.01" value="0.35"></label><label>修繕費 家賃%<input id="repairRate" type="number" step="0.1" value="4"></label><label>募集費 家賃%<input id="leasingRate" type="number" step="0.1" value="2"></label><label>保険建物額 売価%<input id="insuredPct" type="number" step="1" value="60"></label><label>RC保険料率 %<input id="insM" type="number" step="0.01" value="0.6"></label><label>鉄骨保険料率 %<input id="insT" type="number" step="0.01" value="0.8"></label><label>木造保険料率 %<input id="insH" type="number" step="0.01" value="1.3"></label><label>所有権移転 概算%<input id="ownershipRegRate" type="number" step="0.01" value="1"></label><label>抵当権設定 借入%<input id="mortgageRate" type="number" step="0.01" value="0.4"></label><label>取得税 概算%<input id="acqTaxRate" type="number" step="0.01" value="1.5"></label><label>固都税精算 概算%<input id="settleRate" type="number" step="0.01" value="0.35"></label><label>銀行費用 初期値（円）<input id="bankDefault" type="number" step="1" value="20"></label></div></details>
-      <button class="danger" id="resetAll" type="button" style="margin-top:7px">入力内容をリセット</button>
-      <div class="bank-note">このリセットは物件入力だけ。保存物件と会社財務設定は消しません。</div>
-    </details>
-  </section>
-  <div class="footnote">※税引前の一次判定。税金・登記・保険等は評価額や物件条件で変わるため、実額が分かれば各項目の入力欄で上書き。ローンは返済予定表がある場合、その実額を優先。</div>
+<div class="input-grid">
+<label>売買価格（円） <span class="source-badge" id="src-price">初期値</span><input id="price" min="0" step="1" type="number" value="5000"/></label>
+<label>構造 <span class="source-badge" id="src-structure">初期値</span><select id="structure"><option value="M">RC・SRC</option><option value="T">鉄骨・準耐火</option><option value="H">木造</option></select></label>
+<div class="linked">
+<label>満室想定年間賃料（円） <span class="source-badge" id="src-rent">初期値</span><input id="rent" min="0" step="1" type="number" value="500"/></label>
+<div class="linked-arrow">⇄</div>
+<label>表面利回り（%） <span class="source-badge calc" id="src-listingYield">自動算出</span><input id="listingYield" min="0" step="0.01" type="number" value="10"/></label>
+</div>
+<div class="linked loan-link">
+<label>融資割合（%） <span class="source-badge" id="src-loanRatio">初期値</span><input id="loanRatio" max="120" min="0" step="0.1" type="number" value="90"/></label>
+<div class="linked-arrow">⇄</div>
+<label>借入額（円） <span class="source-badge calc" id="src-loanOverride">自動算出</span><input id="loanOverride" min="0" step="1" type="number" value="4500"/></label>
+</div>
+<label>金利（%）<input id="interest" max="20" min="0" step="0.01" type="number" value="3"/></label>
+<label>融資期間（年）<input id="years" max="50" min="1" step="1" type="number" value="25"/></label>
+<label>築年数（年）<input id="buildingAgeMain" min="0" placeholder="例：20" step="0.1" type="number"/></label>
+<label>市場査定・周辺相場の満室年間賃料（円・任意）<input id="marketAnnualRent" min="0" placeholder="未確認なら空欄" step="1" type="number"/></label>
+<label>再建築可否 <span class="rule-chip hard">絶対Gate</span><select id="rebuildable"><option value="">未確認</option><option value="yes">再建築可</option><option value="no">再建築不可</option></select></label>
+<label>土砂災害区域 <span class="rule-chip hard">絶対Gate</span><select id="landslideRisk"><option value="">未確認</option><option value="outside">区域外</option><option value="yellow">警戒区域（イエロー）</option><option value="red">特別警戒区域（レッド）</option></select></label>
+<label>水害区域 <span class="rule-chip target">推奨</span><select id="floodRisk"><option value="">未確認</option><option value="outside">区域外</option><option value="inside">浸水想定区域内</option></select></label>
+<label>市街化調整区域<select id="urbanizationControl"><option value="">未確認</option><option value="outside">区域外</option><option value="inside">区域内（原則稟議）</option></select></label>
+<label>担保参考額（円・任意）<input id="collateralValueReference" min="0" placeholder="銀行提示額・固定資産評価等" step="1" type="number"/></label>
+<label>出口想定年（年後）<input id="exitYear" max="50" min="1" step="1" type="number" value="10"/></label>
+<label>出口想定売却価格（円・任意）<input id="exitPrice" min="0" placeholder="未設定なら空欄" step="1" type="number"/></label>
+<label>出口売却費用率（%・任意）<input id="exitCostRate" max="30" min="0" step="0.1" type="number" value="0"/></label>
+<label class="span2">返済方法<select id="repayMethod"><option value="equal_payment">元利均等</option><option value="equal_principal">元金均等</option></select></label>
+</div>
+<div class="error-box" id="rentYieldError">⚠️ 年間家賃と表面利回りの両方が手入力されています。どちらか一方を削除してください。</div>
+<div class="error-box" id="coreInputError"></div>
+<div class="small" style="margin-top:5px">家賃か利回りの片方を入力すると、もう片方を自動計算。両方を手入力すると計算を止める。</div>
+<div class="money-unit-note">金額はすべて円入力。表示・Excel出力も円。内部保存形式のみ旧版互換のため変換して保持する。</div>
+<div class="preserve-note">🔒 保存互換：V8.9以前と同じ保存キーを維持。既存の保存物件・下書き・会社財務を削除せず読み込む。</div>
+<details class="fold">
+<summary><span>物件名・URL・現況</span><span class="small">自動抽出もここ</span></summary>
+<div class="input-grid">
+<label>物件名 <span class="source-badge" id="src-propertyName">未入力</span><input id="propertyName" placeholder="例：○○ハイツ"/></label>
+<label>現況年間賃料（円） <span class="source-badge" id="src-currentRent">未入力</span><input id="currentRent" min="0" placeholder="空欄可" step="1" type="number"/></label>
+<label class="span2">物件URL<input id="propertyUrl" placeholder="at home / SUUMO 等" type="url"/></label>
+<div class="actions span2"><button class="primary" id="autoExtractBtn" type="button">URLから自動入力</button><button id="openProperty" type="button">物件ページ</button></div>
+</div>
+<div class="extract-box"><div class="small" id="extractStatus">未実行</div><div id="extractResults"></div><details class="formula"><summary>URLで取れない時：本文を貼る</summary><textarea id="extractPaste" placeholder="物件ページ本文を貼り付け" rows="5"></textarea><button id="parsePastedBtn" style="margin-top:5px" type="button">本文から自動入力</button></details></div>
+</details>
+<details class="fold"><summary><span>銀行の返済額</span><span class="small">返済予定表があれば入力</span></summary><label>年間元利返済額（円）<input id="repayOverride" min="0" placeholder="空欄＝融資条件から自動計算" step="1" type="number"/></label><div class="small">金融機関の端数処理・初回日割り等は商品ごとに異なるため、返済予定表がある場合は年間返済額を入れると最優先。</div></details>
+<details class="fold"><summary><span>保険の精度を上げる</span><span class="small">分かれば入力</span></summary><label>建物の保険金額（円）<input id="insuredAmount" min="0" placeholder="空欄＝売価の60%で概算" step="1" type="number"/></label></details>
+</div></details></section>
+<section class="card decision-card" data-grade="good" id="decisionCard"><details class="top-section-fold" id="topFoldDecision" open=""><summary class="top-section-summary"><div class="section-head"><span class="num">2</span><span>判定</span><span class="hint">最上位は絶対条件4項目</span></div></summary><div class="top-section-body"><div class="verdict" id="verdict">計算中...</div><div class="result-reason" id="reason"></div><div class="gate-title"><span>最上位｜購入Gate</span><span class="gate-count">4</span><span class="scope-badge property">物件単体</span></div><div class="statusbar">
+<div class="absolute-card" id="statusStress">20%家賃消失耐性</div>
+<div class="absolute-card" id="statusRepay">返済比率</div>
+<div class="absolute-card" id="statusOpex">全融資期間CF</div>
+<div class="absolute-card" id="statusYield">法務・災害Gate</div>
+</div><div class="gate-rule-line"><b>ここが最優先。</b> 4項目のうち1つでもNGなら、表面利回りや目標指標が良くても購入Gateは通さない。未確認の法務・災害項目は「確認待ち」として購入確定しない。</div><div class="comment" id="overallComment"></div><div class="scope-summary">
+<div class="scope-summary-title">指標を4つの箱に集約</div>
+<div class="scope-chips">
+<div class="scope-chip hard"><b>① 絶対条件</b><span>20%耐性・返済比率・全期間CF・法務Gate</span></div>
+<div class="scope-chip property"><b>② 物件単体</b><span>DSCR・Debt Yield・OER・各種利回り・BER</span></div>
+<div class="scope-chip company"><b>③ 会社財務</b><span>自己資本比率・債務償還年数・ICR</span></div>
+<div class="scope-chip reference"><b>④ 参考・補助</b><span>LTC・金利ストレス・CAPEX・担保・出口など</span></div>
+</div>
+</div><div class="criteria-groups">
+<details class="criteria-group">
+<summary><span>① 絶対条件 4項目｜詳細</span><span class="group-meta" id="absoluteGroupSummary">—</span></summary>
+<div class="indicator-list" id="absoluteCriteriaBody"></div>
+</details>
+<details class="criteria-group">
+<summary><span>② 物件単体の主要指標</span><span class="group-meta" id="propertyGroupSummary">—</span></summary>
+<div class="indicator-list" id="propertyCriteriaBody"></div>
+</details>
+<details class="criteria-group">
+<summary><span>③ 会社全体の財務指標</span><span class="group-meta" id="companyGroupSummary">—</span></summary>
+<div class="indicator-list" id="companyCriteriaBody"></div>
+</details>
+<details class="criteria-group">
+<summary><span>④ 参考・補助指標</span><span class="group-meta" id="referenceGroupSummary">—</span></summary>
+<div class="indicator-list" id="referenceCriteriaBody"></div>
+</details>
+</div><div class="hidden" id="criteriaBody"></div></div></details></section>
+<section class="card metrics-card"><details class="top-section-fold" id="topFoldMetrics" open=""><summary class="top-section-summary"><div class="section-head"><span class="num">3</span><span>重要な数字</span><span class="hint">ここだけ見ても判断できる</span></div></summary><div class="top-section-body"><div class="metrics-grid">
+<div class="metric cash"><div class="metric-label">購入に必要な現金</div><div class="metric-value" id="cashNeededView">—</div><div class="metric-sub" id="cashBreakdown">頭金＋購入時費用＋決済調整</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCashNeeded"></div></details></div>
+<div class="metric cf"><div class="metric-label">満室時 月CF</div><div class="metric-value" id="monthlyCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyCF"></div></details></div>
+<div class="metric cf"><div class="metric-label">満室時 年CF</div><div class="metric-value" id="annualCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAnnualCF"></div></details></div>
+<div class="metric stress"><div class="metric-label">20%減収時 年CF</div><div class="metric-value" id="stressCF">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaStressCF"></div></details></div>
+<div class="metric noi-metric"><div class="metric-label">満室NOI（年）</div><div class="metric-value" id="noiAnnualView">—</div><div class="metric-sub">満室賃料 − 通常OPEX</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaNoiAnnual"></div></details></div>
+<div class="metric debt-metric"><div class="metric-label">判定採用 月返済</div><div class="metric-value" id="monthlyDebtAnalyticsView">—</div><div class="metric-sub" id="monthlyDebtAnalyticsSub">融資条件から計算</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyDebtAnalytics"></div></details></div>
+<div class="metric split-metric"><div class="metric-label">初月 元本 / 利息</div><div class="metric-value split-value" id="firstSplitView">—</div><div class="metric-sub" id="firstSplitSub">返済内訳</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaFirstSplit"></div></details></div>
+</div><div class="yield-strip">
+<div class="yield-pill"><div class="yl">表面利回り</div><div class="yv" id="grossYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaGrossYield"></div></details></div>
+<div class="yield-pill"><div class="yl">実質利回り</div><div class="yv" id="netYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaNetYield"></div></details></div>
+<div class="yield-pill after"><div class="yl">返済後利回り</div><div class="yv" id="afterDebtYield">—</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAfterDebtYield"></div></details></div>
+</div><div class="mini-metrics"><div class="mini-metric"><span>自己資金利回り</span><b id="coc">—</b><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCoc"></div></details></div></div><details class="fold advanced-metrics"><summary><span>銀行査定・会社財務の高度な設定</span><span class="small">必要な時だけ開く</span></summary>
+<div class="bank-kpi-grid compact-bank-grid">
+<div class="bank-kpi compact-bank-kpi legacy-rdy-card">
+<div class="bk-label">旧・グロス残債利回り（互換用）</div>
+<div class="bk-value" id="residualDebtYieldView">—</div>
+<div class="bk-status" id="residualDebtYieldStatus">借入に対する家賃の厚み</div>
+<details class="bank-detail">
+<summary>詳しく見る・基準</summary>
+<div class="metric-guide">
+<div class="guide-row"><b>一言でいうと：</b>今残っている借金に対して、この物件が年間いくら家賃を稼いでいるか。</div>
+<div class="guide-row"><b>高い/低い：</b>高いほど良い。元金返済が進むほど通常は上がる。</div>
+<div class="guide-row"><b>銀行が見る理由：</b>物件単体で借入が重すぎないか、将来の残債が安全に減るかをざっくり確認できる。</div>
+<div class="guide-row"><b>基準：</b>15%以上＝強い目標、10〜15%＝良好、6〜10%＝注意、6%以下＝本の危険水域。5%以下は当社の購入NG候補。<span class="basis-tag">本準拠＋内部基準</span></div>
+<div class="guide-row"><b>今回：</b><span id="rdyInterpretation">—</span></div>
+</div>
+<div class="bk-mini"><div>購入時<b id="rdy0">—</b></div><div>5年後<b id="rdy5">—</b></div><div>10年後<b id="rdy10">—</b></div><div>15年後<b id="rdy15">—</b></div></div>
+<div class="formula-box" id="formulaResidualDebtYield"></div>
+<details class="term-help"><summary>「残債」って何？</summary><div class="term-body">その時点でまだ返していないローン元金。利息ではなく、<b>残っている元本</b>のこと。</div></details>
+</details>
+</div>
+<div class="bank-kpi compact-bank-kpi legacy-ltv-card">
+<div class="bk-label">旧・推定評価LTV（互換用・非表示）</div>
+<div class="bk-value" id="evalLtvView">—</div>
+<div class="bk-status" id="evalLtvStatus">銀行評価の入力待ち</div>
+<details class="bank-detail">
+<summary>詳しく見る・編集</summary>
+<div class="metric-guide">
+<div class="guide-row"><b>一言でいうと：</b>銀行が見る物件価値に対して、借金が何％乗っているか。</div>
+<div class="guide-row"><b>高い/低い：</b>低いほど良い。100%を超えると推定評価額より借金の方が大きい。</div>
+<div class="guide-row"><b>銀行が見る理由：</b>担保を処分した時にどれくらい借金を回収できそうか、担保の余白があるかを見る。</div>
+<div class="guide-row"><b>基準：</b>60%以下＝非常に強い、60〜80%＝強い、80〜90%＝注意、90〜100%＝余力薄い、100%超＝評価＜残債。<span class="basis-tag">銀行実務参考＋内部目標80%</span></div>
+<div class="guide-row"><b>今回：</b><span id="evalLtvInterpretation">—</span></div>
+</div>
+<div class="bk-explain strong-line" id="collateralSurplusView">担保余力：—</div>
+<div class="formula-box" id="formulaEvalLtv"></div>
+<details class="term-help"><summary>「LTV」って何？</summary><div class="term-body"><b>Loan to Value</b>の略。借入残高÷物件評価額。ここでは売買価格ではなく、<b>推定銀行評価額</b>を分母にする。</div></details>
+<details class="term-help"><summary>「担保余力」って何？</summary><div class="term-body">推定銀行評価額－借入額。プラスが大きいほど、評価額の中に借金で埋まっていない余白がある。</div></details>
+<div class="bank-finance-box">
+<div class="bank-finance-title">銀行評価の計算・編集</div>
+<div class="bank-note">土地＝路線価×面積×掛目、建物＝再調達単価×延床面積×残存率。初期値は置くが、各項目はすべて編集できます。</div>
+<div class="input-grid" style="margin-top:7px">
+<label>路線価（千円/㎡）<input id="roadPriceK" min="0" placeholder="例：100" step="1" type="number"/></label>
+<label>土地面積（㎡）<input id="landArea" min="0" placeholder="例：300" step="0.01" type="number"/></label>
+<label>土地掛目（%）<input id="landFactor" max="150" min="0" step="1" type="number" value="70"/></label>
+<label>銀行評価用構造<select id="valuationStructure"><option value="WOOD">木造</option><option value="LIGHT">軽量鉄骨</option><option value="HEAVY">重量鉄骨</option><option selected="" value="RC">RC</option><option value="SRC">SRC</option></select></label>
+<label>延床面積（㎡）<input id="buildingArea" min="0" placeholder="例：400" step="0.01" type="number"/></label>
+<label>築年数（年）<input id="legacyBuildingAge" min="0" placeholder="例：10" step="0.1" type="number"/></label>
+<label>再調達単価（万円/㎡）<input id="replacementCost" min="0" step="0.1" type="number" value="33.8"/></label>
+<label>評価耐用年数（年）<input id="evalLife" min="1" step="1" type="number" value="47"/></label>
+<label class="span2">建物残存率（%・任意上書き）<input id="residualOverride" max="100" min="0" placeholder="空欄＝（耐用年数－築年数）÷耐用年数" step="0.1" type="number"/></label>
+<label class="span2">銀行評価額 実額（円・任意）<input id="bankEvalOverride" min="0" placeholder="銀行から実額が出たら入力＝推定値より優先" step="1" type="number"/></label>
+</div>
+<div class="bank-auto-hint">再調達単価初期値：木造21.7 / 軽量鉄骨30.0 / 重量鉄骨36.0 / RC33.8 / SRC33.4 万円/㎡。全て編集可。銀行実評価額が出た場合は実額を最優先。</div>
+</div>
+</details>
+</div>
+<div class="bank-kpi compact-bank-kpi">
+<div class="bk-label">詳細：会社 購入後債務償還年数</div>
+<div class="bk-value" id="debtYearsView">—</div>
+<div class="bk-status" id="debtYearsStatus">会社設定の入力待ち</div>
+<details class="bank-detail">
+<summary>詳しく見る・編集</summary>
+<div class="metric-guide">
+<div class="guide-row"><b>一言でいうと：</b>この物件を買った後、会社全体の実質的な銀行借入を、今の返済原資なら何年で返せるか。</div>
+<div class="guide-row"><b>高い/低い：</b>短いほど良い。</div>
+<div class="guide-row"><b>銀行が見る理由：</b>会社全体として借金が稼ぐ力に対して増えすぎていないか、次の融資余力が残るかを見る。</div>
+<div class="guide-row"><b>基準：</b>15年以内＝健全、15〜20年＝注意、20年超＝購入条件見直し。<span class="basis-tag">融資戦略本準拠</span></div>
+<div class="guide-row"><b>今回：</b><span id="debtYearsInterpretation">—</span></div>
+</div>
+<div class="bk-explain strong-line" id="debtYearsUpdate">基礎財務データ：—</div>
+<div class="formula-box" id="formulaDebtYears"></div>
+<details class="term-help"><summary>「返済原資」って何？</summary><div class="term-body">借金を返すために会社が1年間で生み出す力。この指標では<b>経常利益＋減価償却費－法人税等</b>で見る。</div></details>
+<div class="bank-finance-box">
+<div class="bank-finance-title">この物件を買った後の調整</div>
+<div class="input-grid">
+<label>購入後想定 現預金（円）<input id="postCashOverride" min="0" placeholder="空欄＝現在現預金－必要現金（最低0）" step="1" type="number"/></label>
+<label>この物件による法人税等増加（円/年）<input id="additionalTax" min="0" step="1" type="number" value="0"/></label>
+<label class="span2">初年度支払利息（円・任意上書き）<input id="firstYearInterestOverride" min="0" placeholder="空欄＝融資条件から自動計算" step="1" type="number"/></label>
+</div>
+<div class="bank-note">購入後現預金は自動計算。役員借入などで手元資金を残す場合は実際に残す予定額へ上書き。</div>
+</div>
+<button class="open-company-settings" type="button">会社設定を開く</button>
+</details>
+</div>
+<div class="bank-kpi compact-bank-kpi">
+<div class="bk-label">詳細：会社 購入後ICR</div>
+<div class="bk-value" id="icrView">—</div>
+<div class="bk-status" id="icrStatus">会社設定の入力待ち</div>
+<div class="bank-subline" id="icrStressLine">金利ストレス：—</div>
+<details class="bank-detail">
+<summary>詳しく見る・編集</summary>
+<div class="metric-guide">
+<div class="guide-row"><b>一言でいうと：</b>この物件を買った後、会社の営業利益で年間利息を何倍払えるか。</div>
+<div class="guide-row"><b>高い/低い：</b>高いほど良い。1.0倍未満は営業利益等だけでは利息を賄えない。</div>
+<div class="guide-row"><b>銀行が見る理由：</b>金利上昇や利益悪化が起きても利払いを続けられる会社かを見る。</div>
+<div class="guide-row"><b>基準：</b>2.0倍以上＝健全、1.5〜2.0倍＝注意、1.0〜1.5倍＝危険寄り、1.0倍未満＝危険。金利＋1%等のストレス時も1.5倍以上を目標。<span class="basis-tag">融資戦略本準拠</span></div>
+<div class="guide-row"><b>今回：</b><span id="icrInterpretation">—</span></div>
+</div>
+<div class="formula-box" id="formulaIcr"></div>
+<details class="term-help"><summary>「ICR」って何？</summary><div class="term-body"><b>Interest Coverage Ratio</b>。営業利益＋受取利息・配当金を支払利息で割った利払い余力の指標。</div></details>
+<div class="bank-finance-box">
+<div class="bank-finance-title">この物件の減価償却</div>
+<label>年間減価償却費（円/年）<input id="propertyDepreciation" min="0" placeholder="ICR計算に必要。決算・税務見込みから入力" step="1" type="number"/></label>
+<div class="bank-note">購入後営業利益＝現在営業利益＋銀行査定NOI－この物件の減価償却費。未入力なら購入後ICRは無理に推計しません。</div>
+</div>
+<button class="open-company-settings" type="button">会社設定を開く</button>
+</details>
+</div>
+<div class="bank-kpi compact-bank-kpi">
+<div class="bk-label">詳細：銀行ストレスDSCR</div>
+<div class="bk-value" id="stressDscrView">—</div>
+<div class="bk-status" id="stressDscrStatus">家賃↓＋金利↑の返済耐性</div>
+<div class="bank-subline" id="normalDscrLine">通常DSCR：—</div>
+<details class="bank-detail">
+<summary>詳しく見る・編集</summary>
+<div class="metric-guide">
+<div class="guide-row"><b>一言でいうと：</b>家賃が落ちて金利が上がっても、物件の返済原資だけで年間返済を何倍払えるか。</div>
+<div class="guide-row"><b>高い/低い：</b>高いほど良い。1.0倍未満はストレス時に物件の返済原資だけでは返済できない。</div>
+<div class="guide-row"><b>銀行が見る理由：</b>今の満室・今の金利だけでなく、悪化した時にもローンが耐えられるかを見る。</div>
+<div class="guide-row"><b>基準：</b>ストレスDSCR 1.20倍以上＝強い、1.15〜1.20＝良好、1.00〜1.15＝余力薄い、1.00未満＝返済原資不足。通常DSCRは1.25倍以上を銀行実務の強い参考線、1.40倍以上を内部目標。返済後損益分岐稼働率は75%以下＝強い、75〜80%＝良好、80〜85%＝注意、85%超＝高い、の内部目安。<span class="basis-tag">銀行実務参考＋内部基準</span></div>
+<div class="guide-row"><b>今回：</b><span id="stressDscrInterpretation">—</span></div>
+</div>
+<div class="bank-stat-grid">
+<div class="bank-stat"><span>通常DSCR</span><b id="normalDscrView">—</b></div>
+<div class="bank-stat"><span>家賃↓のみ</span><b id="lossDscrView">—</b></div>
+<div class="bank-stat"><span>金利↑のみ</span><b id="rateDscrView">—</b></div>
+<div class="bank-stat"><span>家賃↓＋金利↑</span><b id="combinedDscrView">—</b></div>
+<div class="bank-stat"><span>返済後損益分岐稼働率</span><b id="breakEvenBankView">—</b></div>
+<div class="bank-stat"><span>銀行査定NCF</span><b id="bankNcfView">—</b></div>
+</div>
+<div class="formula-box" id="formulaStressDscr"></div>
+<details class="term-help"><summary>「DSCR」って何？</summary><div class="term-body"><b>Debt Service Coverage Ratio</b>。年間の返済原資÷年間元利返済額。1.25倍なら、返済額の1.25倍の返済原資がある。</div></details>
+<details class="term-help"><summary>「NCF」って何？</summary><div class="term-body"><b>Net Cash Flow</b>。銀行査定NOIから、大規模修繕・設備更新などに備える年間予備（CAPEX予備）をさらに引いた返済原資。</div></details>
+<div class="bank-finance-box">
+<div class="bank-finance-title">ストレス・NCF設定</div>
+<div class="input-grid">
+<label>金利上昇ストレス（+%）<input id="rateStressPct" max="10" min="0" step="0.1" type="number" value="1"/></label>
+<label>CAPEX予備（円/年）<input id="capexReserve" min="0" step="1" type="number" value="0"/></label>
+</div>
+<div class="bank-note">家賃下落は「設定」の減収テスト（初期20%）を使用。CAPEX予備は日常修繕とは別の大規模修繕・設備交換用。分からなければ0のままでも計算するが、その分DSCRは甘くなる。</div>
+</div>
+</details>
+</div>
+<div class="bank-kpi compact-bank-kpi">
+<div class="bk-label">詳細：Debt Yield</div>
+<div class="bk-value" id="debtYieldView">—</div>
+<div class="bk-status" id="debtYieldStatus">借入に対するNOIの厚み</div>
+<div class="bank-subline" id="debtYieldSubline">銀行査定NOI：—</div>
+<details class="bank-detail">
+<summary>詳しく見る・編集</summary>
+<div class="metric-guide">
+<div class="guide-row"><b>一言でいうと：</b>銀行が貸す金額に対して、この物件が年間どれだけ実質的な賃貸利益（NOI）を生むか。</div>
+<div class="guide-row"><b>高い/低い：</b>高いほど良い。金利や返済期間に左右されにくく、物件そのものの借入耐性を見やすい。</div>
+<div class="guide-row"><b>銀行が見る理由：</b>融資条件を長くしてDSCRを良く見せても、借入額そのものが物件収益に対して大きすぎないか確認できる。</div>
+<div class="guide-row"><b>基準：</b>15%以上＝長期目標、10〜15%＝評価しやすい、5〜10%＝弱め、5%以下＝回避目安。<span class="basis-tag">銀行監督・実融資データ参考</span></div>
+<div class="guide-row"><b>今回：</b><span id="debtYieldInterpretation">—</span></div>
+</div>
+<div class="bank-stat-grid">
+<div class="bank-stat"><span>銀行査定EGI</span><b id="bankEgiView">—</b></div>
+<div class="bank-stat"><span>銀行査定NOI</span><b id="bankNoiView">—</b></div>
+<div class="bank-stat"><span>採用家賃消失率</span><b id="normalVacancyUsedView">—</b></div>
+<div class="bank-stat"><span>DY10%なら最大借入</span><b id="maxLoanDy10View">—</b></div>
+<div class="bank-stat"><span>LTC</span><b id="ltcBankView">—</b></div>
+<div class="bank-stat"><span>融資期間・初年度元金返済率</span><b id="repaymentPaceView">—</b></div>
+</div>
+<div class="formula-box" id="formulaDebtYield"></div>
+<details class="term-help"><summary>「NOI」って何？</summary><div class="term-body"><b>Net Operating Income（純営業収益）</b>。この銀行指標では、満室家賃から通常の空室・滞納等を見込み、安定その他収入を足し、固定資産税・管理・保険・修繕など通常運営経費を引いた<b>銀行査定NOI</b>を使う。借入返済・利息・減価償却・法人税は引かない。</div></details>
+<details class="term-help"><summary>「EGI」って何？</summary><div class="term-body"><b>Effective Gross Income（実効総収入）</b>。満室なら取れる家賃から、普通に起こる空室・滞納等を引き、継続的なその他収入を足した現実的な年間収入。</div></details>
+<details class="term-help"><summary>「CAPEX」って何？</summary><div class="term-body">屋根・外壁・給湯器大量交換など、日常修繕とは別の<b>大規模修繕・長期設備更新</b>。ツールでは年間予備としてNCFから控除できる。</div></details>
+<details class="term-help"><summary>「LTC」って何？</summary><div class="term-body"><b>Loan to Cost</b>。借入額÷総事業費。ここでは売買価格＋購入時費用を総事業費として計算。固定基準は置かず、総事業費に対する借入依存度の参考値として使う。</div></details>
+<div class="bank-finance-box">
+<div class="bank-finance-title">銀行査定NOIの設定</div>
+<div class="input-grid">
+<label>通常家賃消失率 最低値（%）<input id="normalVacancyMin" max="100" min="0" step="0.1" type="number" value="5"/></label>
+<label>安定その他収入（円/年）<input id="stableOtherIncome" min="0" step="1" type="number" value="0"/></label>
+</div>
+<div class="bank-note">現況年間家賃が入力されている場合は、実績家賃消失率と上の最低値の<b>大きい方</b>を採用。20%ストレス時は5%に足すのではなく、20%へ置き換える（実績が20%超なら実績を優先）。駐車場等が満室年間家賃に既に含まれるなら、その他収入は0のまま。</div>
+</div>
+</details>
+</div>
+</div>
+</details></div></details></section>
+<section class="card analytics-card" id="monthlyAnalyticsSection"><details class="top-section-fold" id="topFoldAnalytics"><summary class="top-section-summary"><div class="section-head"><span class="num">4</span><span>月次・全融資期間分析</span><span class="hint">大文字・1指標ずつ</span></div></summary><div class="top-section-body"><div class="analytics-lead"><b>月次化に意味がある物件収支・返済指標を、1項目ずつ「基準・意味・計算式 → グラフ → 表」の順で追う。</b><br/>満室賃料・OPEXは年間入力を12等分して一定とし、返済は融資条件から月次償還表を作成する。したがって賃料・OPEXを将来予測しているわけではなく、<b>現在の前提を融資期間へ延長した返済耐性シミュレーション</b>として見る。</div><div class="analytics-toolbar">
+<label>表示範囲<select id="analyticsRange"><option value="12">最初の12か月</option><option value="60">最初の5年</option><option value="all">全融資期間</option></select></label>
+<div class="analytics-actions"><button id="openAllAnalytics" type="button">全部開く</button><button id="closeAllAnalytics" type="button">全部閉じる</button></div>
+<div class="analytics-toolbar-note" id="analyticsModeNote">—</div>
+</div><div class="analytics-summary" id="analyticsSummary"></div><div class="analytics-accordions">
+<details class="analytics-fold"><summary><span><b>1</b>返済額・元本・利息・残債</span><span class="af-mini" id="afRepayMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideRepayment"></div><div class="chart-box" id="chartRepayment"></div><div class="table-box" id="tableRepayment"></div></div></details>
+<details class="analytics-fold"><summary><span><b>2</b>NOI 推移</span><span class="af-mini" id="afNoiMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideNoi"></div><div class="chart-box" id="chartNoi"></div><div class="table-box" id="tableNoi"></div></div></details>
+<details class="analytics-fold"><summary><span><b>3</b>通常CF 推移</span><span class="af-mini" id="afCfMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideCf"></div><div class="chart-box" id="chartCf"></div><div class="table-box" id="tableCf"></div></div></details>
+<details class="analytics-fold"><summary><span><b>4</b>20% Stress CF 推移</span><span class="af-mini" id="afStressCfMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideStressCf"></div><div class="chart-box" id="chartStressCf"></div><div class="table-box" id="tableStressCf"></div></div></details>
+<details class="analytics-fold"><summary><span><b>5</b>通常DSCR 推移</span><span class="af-mini" id="afDscrMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideDscr"></div><div class="chart-box" id="chartDscr"></div><div class="table-box" id="tableDscr"></div></div></details>
+<details class="analytics-fold"><summary><span><b>6</b>Stress DSCR 推移</span><span class="af-mini" id="afStressDscrMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideStressDscr"></div><div class="chart-box" id="chartStressDscr"></div><div class="table-box" id="tableStressDscr"></div></div></details>
+<details class="analytics-fold"><summary><span><b>7</b>返済比率 推移</span><span class="af-mini" id="afRepayRatioMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideRepayRatio"></div><div class="chart-box" id="chartRepayRatio"></div><div class="table-box" id="tableRepayRatio"></div></div></details>
+<details class="analytics-fold"><summary><span><b>8</b>OER 推移</span><span class="af-mini" id="afOerMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideOer"></div><div class="chart-box" id="chartOer"></div><div class="table-box" id="tableOer"></div></div></details>
+<details class="analytics-fold"><summary><span><b>9</b>BER 推移</span><span class="af-mini" id="afBerMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideBer"></div><div class="chart-box" id="chartBer"></div><div class="table-box" id="tableBer"></div></div></details>
+<details class="analytics-fold"><summary><span><b>10</b>残債Debt Yield 推移</span><span class="af-mini" id="afDebtYieldMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideDebtYield"></div><div class="chart-box" id="chartDebtYield"></div><div class="table-box" id="tableDebtYield"></div></div></details>
+<details class="analytics-fold"><summary><span><b>11</b>利回り 推移</span><span class="af-mini" id="afYieldMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideYield"></div><div class="chart-box" id="chartYield"></div><div class="table-box" id="tableYield"></div></div></details>
+<details class="analytics-fold"><summary><span><b>12</b>全融資期間 累計CF</span><span class="af-mini" id="afFullCfMini">—</span></summary><div class="analytics-body"><div class="metric-guide" id="guideFullCf"></div><div class="chart-box" id="chartCumulativeCf"></div><div class="table-box" id="tableCumulativeCf"></div></div></details>
+<details class="analytics-fold"><summary><span><b>13</b>月次 全指標一覧</span><span class="af-mini">全データ</span></summary><div class="analytics-body full"><div class="metric-guide" id="guideAllMonthly"></div><div class="chart-box" id="chartAllRatios"></div><div class="table-box wide" id="tableAllMonthly"></div></div></details>
+</div></div></details></section>
+<section class="card details-card"><details class="top-section-fold" id="topFoldDetails"><summary class="top-section-summary"><div class="section-head"><span class="num">5</span><span>詳細</span><span class="hint mode-legend"><b>緑</b>=実額　<b>橙</b>=概算　灰=自動</span></div></summary><div class="top-section-body"><div class="quick-summary">
+<div class="quick-box expense"><div class="ql">年間経費</div><div class="qv" id="opexTotal">—</div><div class="qs">経費率 <span id="opexRatio">—</span></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaOpexTotal"></div></details></div>
+<div class="quick-box cost"><div class="ql">購入時費用</div><div class="qv" id="acqTotal">—</div><div class="qs">決済調整は別</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAcqCost"></div></details></div>
+<div class="quick-box loan"><div class="ql">月返済</div><div class="qv" id="monthlyDebt">—</div><div class="qs" id="monthlyDebtNote"></div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMonthlyDebt"></div></details></div>
+<div class="quick-box loan"><div class="ql">借入額</div><div class="qv" id="loanAmountView">—</div><div class="qs" id="ltvView">融資割合</div><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaLoan"></div></details></div>
+</div><details class="fold subfold"><summary><span class="subfold-title"><i class="dot expense"></i>年間経費の内訳</span><span class="small">計算値の横で実額修正</span></summary>
+<div class="cost-row"><div class="cost-name">管理費<span class="mode-badge auto-mode" id="managementMode">自動</span></div><div class="cost-value" id="managementValue">—</div><input aria-label="管理費の実額" class="cost-input" id="managementOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaManagement"></div></details></div>
+<div class="cost-row"><div class="cost-name">固定資産税<span class="mode-badge auto-mode" id="taxMode">自動</span></div><div class="cost-value" id="taxValue">—</div><input aria-label="固定資産税の実額" class="cost-input" id="taxOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaTax"></div></details></div>
+<div class="cost-row"><div class="cost-name">保険料<span class="mode-badge auto-mode" id="insuranceMode">自動</span></div><div class="cost-value" id="insuranceValue">—</div><input aria-label="保険料の実額" class="cost-input" id="insuranceOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaInsurance"></div></details></div>
+<div class="cost-row"><div class="cost-name">共用部費<span class="mode-badge auto-mode" id="commonMode">自動</span></div><div class="cost-value" id="commonValue">—</div><input aria-label="共用部費の実額" class="cost-input" id="commonOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaCommon"></div></details></div>
+<div class="cost-row"><div class="cost-name">修繕費<span class="mode-badge auto-mode" id="repairMode">自動</span></div><div class="cost-value" id="repairValue">—</div><input aria-label="修繕費の実額" class="cost-input" id="repairOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaRepair"></div></details></div>
+<div class="cost-row"><div class="cost-name">募集費<span class="mode-badge auto-mode" id="leasingMode">自動</span></div><div class="cost-value" id="leasingValue">—</div><input aria-label="募集費の実額" class="cost-input" id="leasingOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaLeasing"></div></details></div>
+<div class="other-head"><b style="font-size:11px">その他経費</b><button id="addOpex" type="button">＋追加</button></div><div class="cost-tip">EV・ネット・浄化槽・ゴミ回収など。何件でも追加。</div><div id="customOpex"></div>
+<div class="hidden" id="opexRows"></div>
+</details><details class="fold subfold"><summary><span class="subfold-title"><i class="dot cost"></i>購入時費用の内訳</span><span class="small">計算値の横で実額修正</span></summary>
+<div class="cost-row"><div class="cost-name">仲介手数料<span class="mode-badge auto-mode" id="brokerMode">自動</span></div><div class="cost-value" id="brokerValue">—</div><input aria-label="仲介手数料の実額" class="cost-input" id="brokerOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaBroker"></div></details></div>
+<div class="cost-row"><div class="cost-name">登記費用<span class="mode-badge auto-mode" id="registrationMode">概算</span></div><div class="cost-value" id="registrationValue">—</div><input aria-label="登記費用の合計実額" class="cost-input" id="registrationOverride" min="0" placeholder="合計実額" step="1" type="number"/><details class="formula"><summary>根拠・精度UP</summary><div class="formula-box" id="formulaRegistration"></div><div class="precision-box"><div class="precision-head">登記費用を「税金」と「報酬」に分けて精度を上げる</div><div class="precision-grid"><label>登録免許税 実額（円）<input id="registrationTaxOverride" min="0" placeholder="空欄＝概算" step="1" type="number"/></label><label>司法書士報酬 実額（円）<input id="judicialOverride" min="0" placeholder="空欄＝概算" step="1" type="number"/></label></div><div class="cost-tip">上の「合計実額」が入っている場合は合計実額を最優先。空欄なら、ここで入力した税金・報酬を合計に反映。</div></div></details></div>
+<div class="cost-row"><div class="cost-name">印紙代<span class="mode-badge auto-mode" id="stampMode">自動</span></div><div class="cost-value" id="stampValue">—</div><input aria-label="印紙代の実額" class="cost-input" id="stampOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaStamp"></div></details></div>
+<div class="cost-row"><div class="cost-name">銀行費用<span class="mode-badge auto-mode" id="bankMode">自動</span></div><div class="cost-value" id="bankValue">—</div><input aria-label="銀行費用の実額" class="cost-input" id="bankOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaBank"></div></details></div>
+<div class="cost-row"><div class="cost-name">不動産取得税<span class="mode-badge auto-mode" id="acqTaxMode">自動</span></div><div class="cost-value" id="acqTaxValue">—</div><input aria-label="不動産取得税の実額" class="cost-input" id="acqTaxOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaAcqTax"></div></details></div>
+<div class="cost-row"><div class="cost-name">固都税精算<span class="mode-badge auto-mode" id="settleMode">自動</span></div><div class="cost-value" id="settleValue">—</div><input aria-label="固定資産税の精算の実額" class="cost-input" id="settleOverride" min="0" placeholder="実額" step="1" type="number"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaSettle"></div></details></div>
+<div class="cost-row"><div class="cost-name">雑費<span class="mode-badge auto-mode" id="miscMode">自動</span></div><div class="cost-value" id="miscValue">—</div><input aria-label="雑費の実額" class="cost-input" id="miscDefault" min="0" placeholder="設定額（円）" step="1" type="number" value="2"/><details class="formula"><summary>根拠</summary><div class="formula-box" id="formulaMisc"></div></details></div>
+<div class="closing-row"><div><b style="font-size:11px">決済時の追加・戻り</b><div class="small">追加支出＋ / 敷金等の受取－</div></div><input aria-label="決済時の追加・戻り" id="closingAdjustment" step="1" type="number" value="0"/></div>
+<div class="other-head"><b style="font-size:11px">その他費用</b><button id="addAcq" type="button">＋追加</button></div><div id="customAcq"></div><div class="hidden" id="acqRows"></div>
+</details><details class="fold subfold"><summary><span class="subfold-title"><i class="dot manage"></i>物件保存・比較</span><span class="small"><span id="savedCount">0件</span></span></summary>
+<div class="quick-summary"><div class="quick-box"><div class="ql">保有＋契約済 年間家賃</div><div class="qv" id="securedRentTotal">0円</div></div><div class="quick-box"><div class="ql">目標まで残り</div><div class="qv" id="targetRemaining">3,000円</div></div></div>
+<div class="input-grid"><label>物件の状態<select id="caseStage"><option>検討中</option><option>買付</option><option>契約済</option><option>保有</option><option>見送り</option></select></label><label>メモ<input id="propertyMemo" placeholder="値下げ余地など"/></label></div><button class="primary" id="saveCase" style="margin-top:7px" type="button">この物件を保存</button><div id="savedCards"></div><div id="compareArea"></div>
+<details class="formula"><summary>5年目標</summary><label>年間家賃目標（円）<input id="portfolioTarget" min="1" step="1" type="number" value="3000"/></label><div class="progress" style="margin-top:6px"><div id="progressBar"></div></div><div class="small" id="progressText" style="margin-top:4px"></div></details>
+</details><details class="fold subfold"><summary><span class="subfold-title"><i class="dot export"></i>Excel・保存</span><span class="small" id="saveState">自動保存</span></summary><div class="save-status"><div class="small">最終保存</div><div class="big" id="lastSaved">—</div></div><div class="actions" style="margin-top:7px"><button class="primary" id="exportExcel" type="button">Excel詳細出力（グラフ＋表）</button><button id="backupAll" type="button">バックアップ</button><button id="restoreBackupBtn" type="button">復元</button></div><input accept=".json,application/json" class="hidden" id="restoreFile" type="file"/></details><details class="fold subfold" id="settingsFold"><summary><span class="subfold-title"><i class="dot setting"></i>設定</span><span class="small">会社設定もここ</span></summary>
+<div class="standard-fixed">
+<div><b>家賃消失 20% <span class="rule-chip hard">絶対</span></b><span>20%消失後CF≥0 / Stress DSCR≥1.00</span></div>
+<div><b>返済比率 ≤50% <span class="rule-chip hard">絶対</span></b><span>年間元利返済÷満室想定年間賃料</span></div>
+<div><b>OER（満室想定） ≤30% <span class="rule-chip target">目標</span></b><span>超過だけではNGにしない</span></div>
+<div><b>通常DSCR ≥1.40 <span class="rule-chip target">目安</span></b><span>平常時の返済余力</span></div>
+</div>
+<input id="yieldMin" type="hidden" value="10"/><input id="repayMax" type="hidden" value="50"/><input id="opexMax" type="hidden" value="30"/><input id="lossRate" type="hidden" value="20"/>
+<details class="formula" id="companySettingsFold"><summary>会社財務設定（自己資本比率・債務償還年数・ICR用）</summary>
+<div class="bank-finance-box" style="margin-top:6px">
+<div class="bank-finance-title">会社財務設定</div>
+<div class="bank-note">会社全体の数字。ここだけ別保存され、通常の「入力内容をリセット」では消えません。決算・試算表を更新した時に入れ替えてください。</div>
+<div class="input-grid" style="margin-top:7px">
+<label>総資産（円）<input id="companyTotalAssets" min="0" placeholder="貸借対照表" step="1" type="number"/></label>
+<label>純資産（円）<input id="companyNetAssets" placeholder="貸借対照表" step="1" type="number"/></label>
+<label>金融機関借入残高（円）<input id="companyBankDebt" min="0" placeholder="会社全体" step="1" type="number"/></label>
+<label>現預金（円）<input id="companyCash" min="0" placeholder="会社全体" step="1" type="number"/></label>
+<label>経常利益（円/年）<input id="companyOrdinaryProfit" placeholder="赤字はマイナス" step="1" type="number"/></label>
+<label>減価償却費（円/年）<input id="companyDepreciation" min="0" step="1" type="number"/></label>
+<label>法人税等（円/年）<input id="companyTaxes" min="0" step="1" type="number"/></label>
+<label>役員借入金（円・実質資本調整用）<input id="companyOfficerLoan" min="0" placeholder="償還年数は除外／実質自己資本には加算" step="1" type="number"/></label>
+<label>営業利益（円/年）<input id="companyOperatingProfit" placeholder="ICR用・赤字はマイナス" step="1" type="number"/></label>
+<label>受取利息・配当金（円/年）<input id="companyInterestIncome" min="0" step="1" type="number" value="0"/></label>
+<label>支払利息（円/年）<input id="companyInterestExpense" min="0" placeholder="ICR用" step="1" type="number"/></label>
+<label>財務データ更新日<input id="companyUpdatedDate" type="date"/></label>
+</div>
+<div class="company-status"><span>会社設定は別保存・物件リセット対象外</span><b id="companySaveState">未保存</b></div>
+<div class="company-actions"><button class="primary" id="saveCompanySettings" type="button">会社設定を保存</button><button class="danger" id="resetCompanySettings" type="button">会社設定を初期化</button></div>
+<div class="bank-note">保存時、更新日が未編集なら当日へ自動更新。任意の日付を入れた場合はその日付を保持。会社設定の初期化だけは誤操作防止のため2回確認。</div>
+</div>
+</details>
+<details class="formula"><summary>概算ルール</summary><div class="input-grid"><label>管理費 家賃%<input id="managementRate" step="0.1" type="number" value="8"/></label><label>固定資産税 売価%<input id="taxRate" step="0.01" type="number" value="0.7"/></label><label>共用部費 売価%<input id="commonRate" step="0.01" type="number" value="0.35"/></label><label>修繕費 家賃%<input id="repairRate" step="0.1" type="number" value="4"/></label><label>募集費 家賃%<input id="leasingRate" step="0.1" type="number" value="2"/></label><label>保険建物額 売価%<input id="insuredPct" step="1" type="number" value="60"/></label><label>RC保険料率 %<input id="insM" step="0.01" type="number" value="0.6"/></label><label>鉄骨保険料率 %<input id="insT" step="0.01" type="number" value="0.8"/></label><label>木造保険料率 %<input id="insH" step="0.01" type="number" value="1.3"/></label><label>所有権移転 概算%<input id="ownershipRegRate" step="0.01" type="number" value="1"/></label><label>抵当権設定 借入%<input id="mortgageRate" step="0.01" type="number" value="0.4"/></label><label>取得税 概算%<input id="acqTaxRate" step="0.01" type="number" value="1.5"/></label><label>固都税精算 概算%<input id="settleRate" step="0.01" type="number" value="0.35"/></label><label>銀行費用 初期値（円）<input id="bankDefault" step="1" type="number" value="20"/></label></div></details>
+<button class="danger" id="resetAll" style="margin-top:7px" type="button">入力内容をリセット</button>
+<div class="bank-note">このリセットは物件入力だけ。保存物件と会社財務設定は消しません。</div>
+</details></div></details></section>
+<div class="footnote">※税引前の一次判定。税金・登記・保険等は評価額や物件条件で変わるため、実額が分かれば各項目の入力欄で上書き。ローンは返済予定表がある場合、その実額を優先。</div>
 </main>
-<div class="sticky"><div class="sticky-item"><div class="sticky-label">判定</div><div class="sticky-verdict" id="stickyVerdict">—</div></div><div class="sticky-item"><div class="sticky-label">必要現金</div><div class="sticky-val" id="stickyCash">—</div></div><div class="sticky-item"><div class="sticky-label">月CF</div><div class="sticky-val" id="stickyMonthly">—</div></div><div class="sticky-item"><div class="sticky-label">20%CF</div><div class="sticky-val" id="stickyStress">—</div></div><button id="calcBtn" type="button" aria-label="電卓">🧮</button></div><div id="calcPanel"><div class="calc-display" id="calcDisplay">0</div><div class="calc-keys" id="calcKeys"></div></div>
+<div class="sticky"><div class="sticky-item"><div class="sticky-label">判定</div><div class="sticky-verdict" id="stickyVerdict">—</div></div><div class="sticky-item"><div class="sticky-label">必要現金</div><div class="sticky-val" id="stickyCash">—</div></div><div class="sticky-item"><div class="sticky-label">月CF</div><div class="sticky-val" id="stickyMonthly">—</div></div><div class="sticky-item"><div class="sticky-label">20%CF</div><div class="sticky-val" id="stickyStress">—</div></div><button aria-label="電卓" id="calcBtn" type="button">🧮</button></div><div id="calcPanel"><div class="calc-display" id="calcDisplay">0</div><div class="calc-keys" id="calcKeys"></div></div>
 <script>
 const $=id=>document.getElementById(id);
 const STORAGE_DRAFT="ichito_checker_v7_draft",STORAGE_CASES="ichito_checker_v7_cases",STORAGE_TARGET="ichito_checker_v7_target",STORAGE_COMPANY="ichito_checker_company_finance_v1";
@@ -1353,4 +1314,31 @@ let calcExpr="";function renderCalcKeys(){const keys=["C","←","÷","×","7","8
 
 function init(){normalizeInitialMoneyInputs();const ios=/iPhone|iPad|iPod/i.test(navigator.userAgent);const standalone=window.matchMedia?.("(display-mode: standalone)")?.matches||navigator.standalone===true;const bt=$("openBrowserText");if(bt)bt.textContent=ios?"Safariで開く":"新しいタブで開く";const bl=$("openBrowserLink");if(bl)bl.title=standalone?"通常のブラウザでこのサイトを開く":"このサイトを新しいタブで開く";loadCompany();if($("valuationStructure")){programmatic=true;$("valuationStructure").value=mapMainToValuation();applyValuationDefaults();programmatic=false}try{savedCases=JSON.parse(localStorage.getItem(STORAGE_CASES)||"[]")}catch{savedCases=[]}const target=localStorage.getItem(STORAGE_TARGET);if(target){$("portfolioTarget").value=String(inputStoredValue("portfolioTarget",target));$("portfolioTarget").dataset.yenReady="1"};let draft=null;try{draft=JSON.parse(localStorage.getItem(STORAGE_DRAFT)||"null")}catch{}if(draft)applySnapshot(draft);else{ensureStandardCustomRows();badges();syncRentYield("rent");syncLoanPair("price");calc()}ensureStandardCustomRows();customRender("opex");customRender("acq");renderCalcKeys();renderManagement()}
 tracked.forEach(id=>$(id).addEventListener("input",()=>{onTrackedInput(id);if(id==="structure"&&!valuationStructManual&&$("valuationStructure")){programmatic=true;$("valuationStructure").value=mapMainToValuation();applyValuationDefaults();programmatic=false;calc()}}));inputIds.filter(id=>!tracked.includes(id)).forEach(id=>{if(!$(id))return;$(id).addEventListener("input",()=>{if(id==="portfolioTarget")localStorage.setItem(STORAGE_TARGET,String(n("portfolioTarget")));calc()});$(id).addEventListener("change",calc)});if($("valuationStructure"))$("valuationStructure").addEventListener("change",()=>{valuationStructManual=true;applyValuationDefaults();calc()});companyFieldIds().forEach(id=>{if(!$(id))return;$(id).addEventListener("input",()=>{if(id==="companyUpdatedDate")companyDateManual=true;$("companySaveState").textContent="未保存の変更あり";calc()});$(id).addEventListener("change",()=>{if(id==="companyUpdatedDate")companyDateManual=true;calc()})});document.querySelectorAll(".open-company-settings").forEach(b=>b.onclick=()=>{if($("settingsFold"))$("settingsFold").open=true;if($("companySettingsFold"))$("companySettingsFold").open=true;$("companySettingsFold")?.scrollIntoView({behavior:"smooth",block:"center"})});$("saveCompanySettings").onclick=saveCompany;$("resetCompanySettings").onclick=clearCompany;$("autoExtractBtn").onclick=autoExtract;$("openProperty").onclick=()=>{const u=$("propertyUrl").value.trim();if(u)window.open(u,"_blank")};$("parsePastedBtn").onclick=()=>{const t=$("extractPaste").value.trim();if(!t)return alert("本文を貼ってな");applyExtract(parseListingText(t));$("extractStatus").textContent="貼った本文から自動入力しました。"};$("addOpex").onclick=()=>addCustom("opex");$("addAcq").onclick=()=>addCustom("acq");$("saveCase").onclick=saveCase;$("exportExcel").onclick=exportExcel;$("backupAll").onclick=backup;$("restoreBackupBtn").onclick=()=>$("restoreFile").click();$("restoreFile").onchange=e=>{if(e.target.files[0])restore(e.target.files[0])};$("resetAll").onclick=()=>{if(confirm("物件の入力内容を初期値に戻す？保存物件と会社財務設定は消しません。")){localStorage.removeItem(STORAGE_DRAFT);location.reload()}};$("calcBtn").onclick=()=>{$("calcPanel").style.display=$("calcPanel").style.display==="block"?"none":"block"};init();
+</script><script>
+/* ===== V10.4 top-level fold controller ===== */
+(function(){
+  const FOLD_IDS=['topFoldInput','topFoldDecision','topFoldMetrics','topFoldAnalytics','topFoldDetails'];
+  const FOLD_KEY='ichito_checker_v104_top_fold_state';
+  function folds(){return FOLD_IDS.map(id=>document.getElementById(id)).filter(Boolean)}
+  function saveFoldState(){
+    try{localStorage.setItem(FOLD_KEY,JSON.stringify(Object.fromEntries(folds().map(d=>[d.id,d.open]))))}catch(e){}
+  }
+  function restoreFoldState(){
+    try{
+      const raw=localStorage.getItem(FOLD_KEY);if(!raw)return;
+      const st=JSON.parse(raw)||{};
+      folds().forEach(d=>{if(typeof st[d.id]==='boolean')d.open=st[d.id]});
+    }catch(e){}
+  }
+  function setAll(open){folds().forEach(d=>d.open=open);saveFoldState()}
+  function initTopFolds(){
+    restoreFoldState();
+    folds().forEach(d=>d.addEventListener('toggle',saveFoldState));
+    const closeBtn=document.getElementById('collapseAllSections');
+    const openBtn=document.getElementById('expandAllSections');
+    if(closeBtn)closeBtn.addEventListener('click',()=>setAll(false));
+    if(openBtn)openBtn.addEventListener('click',()=>setAll(true));
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initTopFolds);else initTopFolds();
+})();
 </script></body></html>

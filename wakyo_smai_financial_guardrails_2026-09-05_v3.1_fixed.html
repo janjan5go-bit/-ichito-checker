@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="light" name="color-scheme"/>
+<title>和京スマイ株式会社｜会社財務指標・銀行説明基準書</title>
+<style>
+:root {
+  --navy:#10263c; --navy2:#173955; --ink:#15212b; --muted:#5f6b76; --bg:#f5f7fa; --card:#fff;
+  --line:#dfe5eb; --blue:#1d5f91; --teal:#0e766e; --gold:#9a6b00; --red:#b42318;
+  --green:#16784b; --amber:#a45b00; --purple:#6652a3; --shadow:0 10px 28px rgba(16,38,60,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.7}
+a{color:var(--blue);word-break:break-all}
+button,input{font:inherit}
+.wrap{max-width:1440px;margin:0 auto;padding:0 28px}
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:56px 0 46px;border-bottom:5px solid #b78a2f}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:32px;align-items:end}
+.kicker{font-size:15px;font-weight:800;letter-spacing:.12em;color:#d8e7f3;text-transform:uppercase}
+h1{font-size:clamp(34px,5vw,58px);line-height:1.15;margin:10px 0 14px;letter-spacing:-.02em}
+.hero p{font-size:22px;margin:0;max-width:920px;color:#edf5fa}
+.hero-meta{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:18px 20px}
+.hero-meta div{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid rgba(255,255,255,.15);padding:8px 0}
+.hero-meta div:last-child{border-bottom:0}
+.hero-meta span{color:#d9e6ef;font-size:14px}
+.hero-meta b{font-size:15px;text-align:right}
+.notice{margin:24px auto 0;background:#fff8e8;border-left:5px solid #b78a2f;color:#513f17;padding:16px 18px;border-radius:10px;font-weight:700}
+.sticky-tools{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.tool-inner{max-width:1440px;margin:auto;padding:10px 28px;display:flex;gap:10px;align-items:center;overflow:auto}
+.tool-inner a,.tool-inner button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--navy);padding:9px 13px;border-radius:999px;text-decoration:none;font-weight:750;font-size:14px;cursor:pointer}
+.tool-inner a:hover,.tool-inner button:hover{border-color:#9cb5c7;background:#f0f6fa}
+main{padding:34px 0 80px}
+section{scroll-margin-top:74px;margin:0 0 48px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:18px}
+.section-head h2{margin:0;font-size:32px;line-height:1.25;color:var(--navy)}
+.section-head p{margin:0;color:var(--muted);max-width:700px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:26px}
+.big-message{font-size:24px;font-weight:850;color:var(--navy);margin:0 0 8px}
+.grid-six{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:18px 0 24px}
+.dimension{background:#eef4f8;border:1px solid #d5e0e7;border-radius:14px;padding:14px;text-align:center;font-weight:800;color:var(--navy)}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.rank{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:30px;border-radius:999px;padding:0 11px;font-weight:900;font-size:14px}
+.rank-S{background:#fff1bf;color:#634700;border:1px solid #e1c35c}
+.rank-A{background:#dceeff;color:#0f4d79;border:1px solid #9fc9ea}
+.rank-B{background:#dff4ef;color:#0a5a53;border:1px solid #9bd2c9}
+.rank-C{background:#eef0f3;color:#4c5964;border:1px solid #cfd6dc}
+.rank-D{background:#e6e1ef;color:#554571;border:1px solid #c8bddb}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;min-width:900px;background:#fff}
+th{background:#eaf0f5;color:var(--navy);font-size:14px;text-align:left;padding:12px 14px;position:sticky;top:0}
+td{border-top:1px solid var(--line);padding:13px 14px;vertical-align:top}
+tr:hover td{background:#fbfcfd}
+.callout{border-left:5px solid var(--blue);background:#eef6fb;border-radius:10px;padding:17px 18px;margin:16px 0}
+.callout.warning{border-color:var(--amber);background:#fff7ea}
+.callout.danger{border-color:var(--red);background:#fff0ee}
+.callout h3,.callout h4{margin:0 0 6px}
+.callout p{margin:0}
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.principle{padding:18px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.principle b{display:block;color:var(--navy);margin-bottom:6px}
+.def-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.definition{border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px}
+.definition h3{margin:0 0 6px;color:var(--navy);font-size:22px}
+.definition p{margin:6px 0}
+.formula-mini{background:#f2f5f8;border:1px dashed #bdc9d2;border-radius:10px;padding:11px 13px;font-weight:800;color:#253c4f}
+.metric-controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.search{flex:1;min-width:260px;border:1px solid #cfd8df;border-radius:12px;padding:12px 14px;background:#fff}
+.filter-btn{border:1px solid #cfd8df;background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:800}
+.metric-card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 5px 18px rgba(16,38,60,.05);padding:24px;margin-bottom:18px}
+.metric-card[data-rank="S"]{border-top:5px solid #c89d31}
+.metric-card[data-rank="A"]{border-top:5px solid #4d92c7}
+.metric-card[data-rank="B"]{border-top:5px solid #4a9c90}
+.metric-card[data-rank="C"]{border-top:5px solid #9aa6af}
+.metric-card[data-rank="D"]{border-top:5px solid #81729a}
+.metric-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}
+.metric-title-wrap{display:flex;gap:13px;align-items:flex-start}
+.metric-no{font-size:13px;font-weight:850;color:var(--muted);letter-spacing:.08em}
+.metric-card h3{font-size:28px;line-height:1.25;margin:2px 0 0;color:var(--navy)}
+.classification{background:#f2f5f8;border:1px solid #dbe2e7;border-radius:999px;padding:7px 11px;font-size:13px;font-weight:800;white-space:nowrap}
+.metric-meta{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:18px 0}
+.metric-meta>div{background:#f7f9fb;border:1px solid #e2e7ec;border-radius:10px;padding:10px 11px}
+.metric-meta span{display:block;color:var(--muted);font-size:12px;font-weight:800}
+.metric-meta b{display:block;margin-top:3px;font-size:14px;line-height:1.45}
+.eyebrow{display:block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--blue);text-transform:uppercase;margin-bottom:4px}
+.essence{background:#f5f9fc;border-left:5px solid var(--blue);padding:15px 17px;border-radius:10px;margin:14px 0}
+.essence p{font-size:19px;font-weight:700;margin:0}
+.formula-box{background:#eef3f8;border:1px solid #d6e0e8;border-radius:12px;padding:14px 16px;margin:14px 0}
+.formula-line{font-weight:900;font-size:18px;color:#183349;padding:3px 0}
+.muted{color:var(--muted);font-weight:600}
+.threshold-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:14px}
+.threshold{border-radius:12px;padding:13px 14px;border:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+.threshold strong{font-size:18px}
+.threshold span{font-size:14px}
+.threshold.good{background:#eaf7f0;border-color:#a8d6bc;color:#0e5936}
+.threshold.ok{background:#eef6ff;border-color:#bad4ec;color:#174f77}
+.threshold.warn{background:#fff6e7;border-color:#e7c889;color:#794300}
+.threshold.danger{background:#fff0ee;border-color:#e7aaa4;color:#7b1c14}
+.threshold.neutral{background:#f4f6f8;color:#4d5963}
+.metric-details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.metric-details summary{cursor:pointer;font-weight:900;color:var(--blue);font-size:17px;padding:7px 0}
+.details-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+.detail-block{border:1px solid var(--line);border-radius:12px;padding:15px;background:#fbfcfd}
+.detail-block h4{margin:0 0 6px;color:var(--navy)}
+.detail-block p{margin:0}
+.current-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.stat-card h3{margin:0 0 8px;color:var(--navy)}
+.doc-list{columns:2;column-gap:28px}
+.doc-list li{margin:8px 0}
+.layer-list{display:grid;gap:12px;counter-reset:layer}
+.layer{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 18px 17px 72px;position:relative}
+.layer::before{counter-increment:layer;content:counter(layer);position:absolute;left:18px;top:16px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--navy);color:#fff;font-weight:900}
+.source-id{font-weight:900;color:var(--navy)}
+.dashboard-controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.dashboard-controls button{border:1px solid #cfd8df;background:#fff;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer}
+.input-cell{white-space:nowrap}
+.input-cell input{width:150px;border:1px solid #bfcbd4;border-radius:9px;padding:8px 10px;text-align:right;font-weight:800;background:#fff}
+.input-cell span{margin-left:6px;color:var(--muted)}
+.live-status{display:inline-block;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:900}
+.live-status.good{background:#dff3e8;color:#0d5d37}
+.live-status.ok{background:#e5f1fb;color:#225c83}
+.live-status.warn{background:#fff0d7;color:#7b4700}
+.live-status.danger{background:#ffe0dd;color:#8a2017}
+.live-status.neutral{background:#eceff2;color:#59636c}
+footer{background:#0e2133;color:#d9e5ed;padding:30px 0;font-size:14px}
+footer b{color:#fff}
+.hidden{display:none!important}
+@media(max-width:1050px){
+ .hero-grid,.current-grid{grid-template-columns:1fr}
+ .grid-six{grid-template-columns:repeat(3,1fr)}
+ .metric-meta{grid-template-columns:repeat(2,1fr)}
+ .def-grid,.principles{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+ body{font-size:17px}
+ .wrap{padding:0 16px}
+ .hero{padding:38px 0 32px}
+ .hero p{font-size:19px}
+ .hero-meta{padding:14px}
+ .tool-inner{padding:9px 16px}
+ .section-head{display:block}
+ .section-head h2{font-size:27px;margin-bottom:6px}
+ .panel,.metric-card{padding:18px}
+ .grid-six{grid-template-columns:repeat(2,1fr)}
+ .metric-head{display:block}
+ .classification{display:inline-block;margin-top:12px}
+ .metric-card h3{font-size:24px}
+ .metric-meta{grid-template-columns:1fr}
+ .details-body{grid-template-columns:1fr}
+ .doc-list{columns:1}
+ .formula-line{font-size:16px}
+}
+
+/* --- v2: 最終サマリーをその場で展開できるモバイル向けアコーディオン --- */
+.summary-guide{margin:14px 0 18px;padding:14px 16px;border-radius:12px;background:#eef6fb;border:1px solid #cfe0ec;color:#183b55;font-weight:800}
+.summary-guide small{display:block;margin-top:4px;color:var(--muted);font-weight:650}
+.summary-accordions{display:grid;gap:12px;margin-top:18px}
+.summary-accordion{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 3px 12px rgba(16,38,60,.04)}
+.summary-accordion[data-rank="S"]{border-left:6px solid #c89d31}
+.summary-accordion[data-rank="A"]{border-left:6px solid #4d92c7}
+.summary-accordion[data-rank="B"]{border-left:6px solid #4a9c90}
+.summary-accordion[data-rank="C"]{border-left:6px solid #9aa6af}
+.summary-accordion[data-rank="D"]{border-left:6px solid #81729a}
+.summary-accordion>summary{list-style:none;cursor:pointer;padding:18px 18px 17px;display:grid;grid-template-columns:minmax(0,1fr) 34px;gap:12px;align-items:center;user-select:none}
+.summary-accordion>summary::-webkit-details-marker{display:none}
+.summary-accordion>summary:hover{background:#fbfcfd}
+.summary-accordion[open]>summary{background:#f7fafc;border-bottom:1px solid var(--line)}
+.summary-row-main{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:flex-start;min-width:0}
+.summary-main-copy{min-width:0}
+.summary-name{font-size:23px;line-height:1.35;font-weight:900;color:var(--navy);letter-spacing:-.01em;overflow-wrap:anywhere}
+.summary-badges{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.judgement-badge,.source-class-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 9px;font-size:12px;line-height:1.3;font-weight:900;border:1px solid transparent}
+.judgement-badge.absolute{background:#ffe3df;color:#8c2017;border-color:#e8aaa4}
+.judgement-badge.guide{background:#e8f2fb;color:#1a577f;border-color:#bdd6ea}
+.judgement-badge.alert{background:#fff0d4;color:#7a4800;border-color:#e3c17a}
+.judgement-badge.reference{background:#eef0f3;color:#52606b;border-color:#d1d7dc}
+.judgement-badge.display{background:#ebe7f2;color:#5a4b75;border-color:#cec4dc}
+.source-class-badge{background:#fff;color:#5b6770;border-color:#d7dee4;font-weight:800}
+.summary-standard{margin-top:10px;padding:10px 12px;border-radius:10px;background:#f6f8fa;border:1px solid #e2e7eb;color:#263b4d;line-height:1.55}
+.summary-standard span{display:block;font-size:11px;color:#66737d;font-weight:900;letter-spacing:.08em;margin-bottom:2px}
+.summary-standard strong{display:block;font-size:16px;overflow-wrap:anywhere}
+.summary-chevron{width:30px;height:30px;border-radius:50%;border:1px solid #cbd5dd;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:0;transition:transform .2s ease}
+.summary-chevron::before{content:"＋";font-size:22px;font-weight:700;line-height:1}
+.summary-accordion[open] .summary-chevron{transform:rotate(45deg)}
+.summary-detail-shell{padding:20px 22px 24px;background:#fff}
+.summary-detail-shell>.detail-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.summary-detail-shell>.detail-title strong{font-size:18px;color:var(--navy)}
+.summary-detail-shell .metric-meta{margin-top:12px}
+.summary-detail-shell .details-body{margin-top:14px}
+.summary-jump{display:inline-flex;margin-top:14px;padding:8px 11px;border-radius:9px;background:#eef4f8;text-decoration:none;font-weight:850;font-size:14px}
+.summary-source-note{margin:0 0 12px;padding:11px 13px;border-radius:10px;background:#fff8e8;border-left:4px solid #b78a2f;color:#59451c;font-size:14px;font-weight:700}
+@media(max-width:650px){
+  .panel{padding:18px 14px}
+  .summary-accordions{gap:10px}
+  .summary-accordion>summary{padding:16px 12px 15px;grid-template-columns:minmax(0,1fr) 30px;gap:7px}
+  .summary-row-main{grid-template-columns:46px minmax(0,1fr);gap:10px}
+  .summary-row-main .rank{min-width:44px;height:34px;font-size:16px;padding:0 8px}
+  .summary-name{font-size:21px;line-height:1.38}
+  .summary-standard{margin-top:9px;padding:9px 10px}
+  .summary-standard strong{font-size:16px;line-height:1.55}
+  .judgement-badge,.source-class-badge{font-size:12px;padding:4px 8px}
+  .summary-chevron{width:28px;height:28px}
+  .summary-detail-shell{padding:16px 12px 20px}
+  .summary-detail-shell .metric-meta{grid-template-columns:1fr}
+  .summary-detail-shell .threshold-grid{grid-template-columns:1fr}
+  .summary-detail-shell .details-body{grid-template-columns:1fr}
+  .summary-detail-shell .formula-line{font-size:16px;line-height:1.55}
+  .grid-six{grid-template-columns:repeat(2,1fr)}
+}
+
+@media print{
+ .sticky-tools,.metric-controls,.dashboard-controls{display:none!important}
+ body{background:#fff;font-size:12px}
+ .hero{padding:20px 0;background:#fff;color:#000;border-bottom:2px solid #000}
+ .hero p,.hero-meta span{color:#333}
+ .panel,.metric-card{box-shadow:none;break-inside:avoid}
+ details{display:block}
+ details>summary{display:none}
+ details>.details-body{display:grid!important}
+}
+
+
+.summary-actions,.section-accordion-actions{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 16px}
+.summary-actions button,.section-accordion-actions button{border:1px solid #cfd8df;background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;font-weight:850;color:var(--navy)}
+.case-study{margin-top:16px;border:1px solid #d9e3ea;border-radius:12px;background:#fff}
+.case-study summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:900;color:var(--navy);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.case-study summary::-webkit-details-marker{display:none}
+.case-study summary::after{content:"＋";font-size:22px;line-height:1;font-weight:700;color:var(--blue)}
+.case-study[open] summary{border-bottom:1px solid var(--line);background:#f8fbfd}
+.case-study[open] summary::after{content:"×";font-size:20px}
+.case-study-body{padding:14px}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.case-item{border:1px solid #e1e7ec;border-radius:12px;padding:13px;background:#fbfcfd}
+.case-item strong{display:block;margin-bottom:6px;color:var(--navy);font-size:15px;line-height:1.45}
+.case-item p{margin:0;color:#253848;line-height:1.7;font-size:15px}
+.case-note{margin-top:10px;padding:11px 12px;border-left:4px solid #b78a2f;background:#fff8e8;border-radius:10px;color:#5b481f;font-size:14px;font-weight:700}
+@media(max-width:650px){
+  .summary-actions,.section-accordion-actions{gap:8px}
+  .summary-actions button,.section-accordion-actions button{width:100%;padding:11px 12px}
+  .case-grid{grid-template-columns:1fr}
+  .case-item p{font-size:14px}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="kicker">WAKYO SMAI / CORPORATE FINANCIAL GUARDRAILS</div>
+<h1>会社財務指標・銀行説明基準書</h1>
+<p>一棟収益物件を買い続けるための法人財務ガードレール</p>
+<div class="notice">この基準は「銀行共通の公式合格ライン」ではない。一般指標・公的資料・貸家業同業データを踏まえた<strong>和京スマイ独自の社内ガードレール</strong>として運用する。</div>
+</div>
+<div class="hero-meta">
+<div><span>Version</span><b>3.1</b></div>
+<div><span>基準日</span><b>2026年9月5日</b></div>
+<div><span>対象</span><b>法人全体の財務のみ</b></div>
+<div><span>対象外</span><b>物件単体の取得指標は原則対象外</b></div>
+</div>
+</div>
+</header>
+<nav aria-label="ページ内ナビゲーション" class="sticky-tools">
+<div class="tool-inner">
+<a href="#summary">最終サマリー</a>
+<a href="#principles">運用原則</a>
+<a href="#definitions">共通定義</a>
+<a href="#metrics">全指標</a>
+<a href="#current">現状値</a>
+<a href="#officer-loan">役員借入</a>
+<a href="#rejected">不採用・上書き</a>
+<a href="#bank">銀行説明</a>
+<a href="#sources">出典</a>
+<a href="#dashboard">ダッシュボード</a>
+<button id="openAll" type="button">折りたたみを全部開く</button>
+<button id="closeAll" type="button">全部閉じる</button>
+</div>
+</nav>
+<main>
+<div class="wrap">
+<section id="summary">
+<div class="section-head">
+<div><h2>0｜最終サマリー</h2><p>銀行に強い法人を作りながら、取得スピードを止めない。</p></div>
+</div>
+<div class="panel">
+<p class="big-message">1つの指標だけで融資可否を判断しない。</p>
+<p>和京の会社財務は「BSの厚み」「借金総量」「年間返済力」「ストレス耐性」「手元現金」「資産収益力」を重ねて見る。</p>
+<div class="grid-six">
+<div class="dimension">BSの厚み</div><div class="dimension">借金総量</div><div class="dimension">年間返済力</div>
+<div class="dimension">ストレス耐性</div><div class="dimension">手元現金</div><div class="dimension">資産収益力</div>
+</div>
+<div class="legend">
+<span><span class="rank rank-S">S</span> 取得・銀行説明の中核／絶対線を含む</span>
+<span><span class="rank rank-A">A</span> 主要目標</span>
+<span><span class="rank rank-B">B</span> ウォッチ・補助</span>
+<span><span class="rank rank-C">C</span> 参考値</span>
+<span><span class="rank rank-D">D</span> 表示のみ</span>
+</div>
+<p class="muted">※この優先順位は和京の内部優先順位であり、金融機関の公式ウェイトではない。</p>
+<div class="summary-guide">各指標をタップすると、<strong>この場所でそのまま詳細を展開</strong>できる。折りたたんだ状態でも「ランク・絶対/目安/参考・原文区分・基準概要」が見える。<small>横スクロールは不要。スマホでは1指標ずつ縦に確認できる。</small></div><div class="summary-actions"><button id="summaryOpenAll" type="button">最終サマリーを全部開く</button><button id="summaryCloseAll" type="button">最終サマリーを全部閉じる</button></div><div class="summary-accordions" id="summaryAccordions"><details class="summary-accordion" data-rank="S" data-target="metric-2-1"><summary><div class="summary-row-main"><span class="rank rank-S">S</span><div class="summary-main-copy"><div class="summary-name">実質自己資本比率</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：目標</span></div><div class="summary-standard"><span>基準概要</span><strong>25%以上（30%以上は保守運営水準、20%未満は取得再検討）</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>じっしつ・じこしほんひりつ</b></div>
+<div><span>和訳・意味</span><b>保守的な実勢評価に基づく自己資本の厚み</b></div>
+<div><span>一般指標か</span><b>一般的な「実態財務」概念を和京用に定式化</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会社の資産を帳簿価額ではなく保守的な実勢価値で見直したうえで、負債を全部引いても、総資産の何％が自分の資本として残るかを見る。買い続ける不動産会社のBS体力を表す最重要指標。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">実質自己資本比率 ＝ 実質純資産額 ÷ 保守的実勢総資産額 × 100</div><div class="formula-line">実質純資産額 ＝ 保守的実勢評価後の資産総額 － 全負債（役員借入金も原則負債）</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>30%以上</strong><span>保守運営水準。取得拡大型から財務保守へ寄せる段階ではここを目指す。</span></div><div class="threshold good"><strong>25%以上</strong><span>目標水準。</span></div><div class="threshold warn"><strong>20%以上25%未満</strong><span>成長・財務調整水準。目標未達だが即取得停止ではない。</span></div><div class="threshold danger"><strong>20%未満</strong><span>取得再検討水準。追加取得より財務調整を優先するか精査。</span></div><div class="threshold danger"><strong>実質純資産 0円以下</strong><span>強ウォッチ。資本性役員借入を調整しても0円以下なら最終レッドライン。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>25%を決めた理由</h4><p>貸家業BASTの簿記上自己資本比率は黒字企業中位26.7%、黒字平均29.6%（R8.7 和京資料）。同一指標ではないため単純比較はできないが、借入拡大期の内部目標を25%、保守運営段階を30%とするのは、同業黒字企業の財務厚みと取得余力の折衷として合理的と判断。25%は「銀行公式下限」ではない。</p></div><div class="detail-block"><h4>他指標との関連</h4><p>金融機関借入 EBITDA倍率・全社DSCRが「返す力」を見るのに対し、本指標は「損失を受け止めるBSの厚み」を見る。保有不動産の含み損益・資産健全性は独立KPIにせず、本指標へ反映する。</p></div><div class="detail-block"><h4>銀行目線・注意点</h4><p>銀行は簿記上自己資本比率をまず見るため、実質自己資本だけを提出しない。必ず簿記上→実勢評価→資本性調整の順に調整根拠を示す。</p></div></div></div><a class="summary-jump" href="#metric-2-1">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜24%まで低下した</strong><p>保守的実勢評価を入れると実質自己資本比率が24%。まだ即停止ではないが、目標25%未達なので「取得はできても、次の1件で20%台前半へ落ちるか」を精査する段階。頭金追加・取得額圧縮・利益蓄積を優先。</p></div><div class="case-item"><strong>ケース2｜18%まで落ちた</strong><p>20%未満は取得再検討水準。追加取得を急ぐより、BSの厚みを戻す方が先。売却損・評価減・追加借入でさらに悪化しやすく、銀行説明でも防御力不足に見られやすい。</p></div><div class="case-item"><strong>ケース3｜実質純資産が0円近辺</strong><p>比率だけでなく実質純資産額そのものも要確認。0円以下に近づくなら、資産価格下振れに耐える余地が薄く、資本性調整後まで含めた説明が必須。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="S" data-target="metric-2-2"><summary><div class="summary-row-main"><span class="rank rank-S">S</span><div class="summary-main-copy"><div class="summary-name">資本性調整後実質純資産</div><div class="summary-badges"><span class="judgement-badge absolute">絶対</span><span class="source-class-badge">原文区分：絶対線</span></div><div class="summary-standard"><span>基準概要</span><strong>資本性調整後でも0円以下なら原則新規取得停止</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><p class="summary-source-note">最終サマリーでは「資本性調整後実質純資産」を絶対線として表示。詳細章2-2では、その調整を自己資本比率まで含めて説明している。</p><div class="metric-meta">
+<div><span>呼び方</span><b>しほんせい・ちょうせいご・じっしつ・じこしほんひりつ</b></div>
+<div><span>和訳・意味</span><b>資本性の高い役員借入を考慮した実態自己資本比率</b></div>
+<div><span>一般指標か</span><b>一般的な資本性借入金の考え方を和京の役員借入へ適用</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>実質自己資本に、返済圧力が低く資本に近い性質を持つ役員借入金のうち「資本性調整対象」と認められる部分を加えた補足指標。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">資本性調整後実質自己資本比率 ＝（実質純資産額 ＋ 資本性調整対象役員借入金）÷ 保守的実勢総資産額 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold danger"><strong>絶対ライン</strong><span>資本性調整後実質純資産額が0円以下なら、実質的な債務超過と判断し、原則として新規取得停止。実質純資産が0円以下でも、資本性調整後がプラスなら「強ウォッチ・銀行説明必須」であり、機械的に即停止とはしない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>役員借入の資本性条件</h4><p>原則5年超の長期性・長期据置／期限一括等。<br/>金融機関借入の返済を優先し、他債権に先んじて回収しない。<br/>会社の赤字・資金繰り悪化時に役員が返済を要求しない。<br/>会社が厳しいときに負担を増やさない金利設計（無利息または業績悪化時の負担軽減等を検討）。<br/>短期的な出し入れ資金ではなく、条件を契約・覚書等で書面化。</p></div><div class="detail-block"><h4>重要</h4><p>短期役員借入金を「長期役員借入金」という勘定科目へ振り替えただけでは資本性ありとはしない。最終的に銀行がどこまで資本とみなすかは金融機関判断。</p></div></div></div><a class="summary-jump" href="#metric-2-2">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜実質純資産はマイナス、でも資本性調整後はプラス</strong><p>実質純資産が▲200万円でも、5年超・劣後・返済猶予等の条件を満たす役員借入500万円があれば、資本性調整後はプラスにできる。この場合は即停止ではなく「強ウォッチ＋銀行説明必須」。</p></div><div class="case-item"><strong>ケース2｜資本性調整後でも0円以下</strong><p>役員借入を調整しても資本性調整後実質純資産が0円以下なら、実質的な債務超過として原則新規取得停止。形式だけ長期借入に振り替えても救済にはならない。</p></div><div class="case-item"><strong>ケース3｜短期の出し入れ資金を資本扱いしようとした</strong><p>直前に入れてすぐ引き上げられる資金や、返済請求され得る資金は資本性として弱い。書面・条件・実態が伴わないと、銀行には資本と見てもらえない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="S" data-target="metric-2-8"><summary><div class="summary-row-main"><span class="rank rank-S">S</span><div class="summary-main-copy"><div class="summary-name">金融機関借入 EBITDA倍率</div><div class="summary-badges"><span class="judgement-badge alert">目安＋レッド</span><span class="source-class-badge">原文区分：目標＋レッド</span></div><div class="summary-standard"><span>基準概要</span><strong>15倍以内目標／15-18成長許容／18-20警戒／20超レッド</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>きんゆうきかん・かりいれ・いーびっとでぃーえー・ばいりつ</b></div>
+<div><span>和訳・意味</span><b>金融機関借入金が年間EBITDAの何年分あるか</b></div>
+<div><span>一般指標か</span><b>一般の有利子負債/EBITDA倍率を和京用に分子調整した独自運用</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>銀行からの借入総額が、減価償却前の本業の稼ぐ力の何年分あるか。10倍なら「年間EBITDAの10年分」という意味。実際の完済年数ではない。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">金融機関借入 EBITDA倍率 ＝ 金融機関借入残高 ÷ 簡易EBITDA</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>15倍以内</strong><span>目標水準。</span></div><div class="threshold ok"><strong>15倍超18倍以下</strong><span>成長許容水準。</span></div><div class="threshold warn"><strong>18倍超20倍以下</strong><span>警戒・財務調整水準。</span></div><div class="threshold danger"><strong>20倍超</strong><span>レッドライン。原則新規取得停止。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>役員借入の扱い</h4><p>和京の主要指標では役員借入金を分子から除外し、金融機関借入のみを見る。したがって一般の「有利子負債/EBITDA倍率」「グロス・レバレッジ・レシオ」と完全同一ではない。銀行説明時は定義を必ず明記する。</p></div><div class="detail-block"><h4>決めた理由</h4><p>金融庁は有利子負債/EBITDA倍率を「借入総額返済余裕度」として例示しており、借入を増やす成長企業で負債増加とEBITDA成長を見る考え方は銀行実務に整合。一方、和京は役員資金と銀行借入を区別したいので分子を金融機関借入に限定。貸家業BAST黒字企業平均の「短期＋長期借入÷営業利益＋減価償却」の概算は約10.5倍で、15倍目標は成長余地を持たせた社内基準。なおBAST分子は和京の銀行借入限定定義と完全一致しないため、10.5倍はクロスチェックであり公式ベンチマークではない。</p></div><div class="detail-block"><h4>DSCRとの関係</h4><p>EBITDA倍率は借金の「総量」を見る。DSCRは毎年の「元利返済額」を見る。同じ借入額でも融資期間が短ければDSCRは悪化するため、両方必要。</p></div></div></div><a class="summary-jump" href="#metric-2-8">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜14倍</strong><p>目標水準内。借金総量としてはまだ管理可能。次の取得で何倍まで上がるかを先に試算したい。</p></div><div class="case-item"><strong>ケース2｜19倍</strong><p>18倍超20倍以下は警戒・財務調整水準。毎年返せていても、借金総量が重くなってきたサイン。新規取得よりEBITDAの底上げや頭金調整を優先。</p></div><div class="case-item"><strong>ケース3｜22倍</strong><p>20倍超でレッドライン。原則新規取得停止。役員借入を分子から除外してもこの水準なら、銀行借入自体が重すぎる。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="S" data-target="metric-2-10"><summary><div class="summary-row-main"><span class="rank rank-S">S</span><div class="summary-main-copy"><div class="summary-name">全社DSCR</div><div class="summary-badges"><span class="judgement-badge alert">目安＋レッド</span><span class="source-class-badge">原文区分：目標＋レッド</span></div><div class="summary-standard"><span>基準概要</span><strong>1.20以上目標／1.10-1.20成長許容／1.00-1.10警戒／1.00未満レッド</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>ぜんしゃ・でぃーえすしーあーる</b></div>
+<div><span>和訳・意味</span><b>Debt Service Coverage Ratio／全社債務返済余裕率</b></div>
+<div><span>一般指標か</span><b>一般指標を法人全体に適用</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会社全体が1年間に生み出す返済原資で、全金融機関借入の元本＋利息を何倍払えるか。ICRと違い「元本」まで含むため、実際の返済能力に近い。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">全社DSCR ＝ 平常化CFADS ÷ 年間元利返済額</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>1.20倍以上</strong><span>目標水準。</span></div><div class="threshold ok"><strong>1.10倍以上1.20倍未満</strong><span>成長許容水準。</span></div><div class="threshold warn"><strong>1.00倍以上1.10倍未満</strong><span>警戒水準。</span></div><div class="threshold danger"><strong>1.00倍未満</strong><span>レッドライン。原則新規取得停止。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>平常化のルール</h4><p>実績DSCRと取得後平常化DSCRを分ける。新規物件購入代金や取得諸費用などの成長投資を平常化CFADSから機械的に引かない。新規物件が12か月稼働した前提で収益・経費・法人共通費を反映する。</p></div><div class="detail-block"><h4>物件単体との整合</h4><p>物件単体は通常DSCR1.40倍目標、20%Stress DSCR1.00倍以上を絶対条件。会社全体は物件の分散・共通経費・全借入を合算するため、通常1.20倍目標とする。</p></div><div class="detail-block"><h4>根拠の位置付け</h4><p>日銀の貸家業向け金融機関調査では、DSCRを入口審査に使う先が多く、最低水準として1.0倍以上を置く先が多い。金融庁も2026年のコベナンツ例で会社単体・連結DSCRを財務制限条項の例として扱う。ただし1.20倍は和京の内部目標であり、日本の銀行共通公式値ではない。</p></div></div></div><a class="summary-jump" href="#metric-2-10">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜全社DSCR 1.25倍</strong><p>目標1.20以上をクリア。年間の元利返済に対する返済余力としては良好。</p></div><div class="case-item"><strong>ケース2｜1.05倍</strong><p>警戒水準。返済は回っていても余白が薄く、空室・修繕・金利上昇で1.00を割り込みやすい。</p></div><div class="case-item"><strong>ケース3｜0.95倍</strong><p>レッドライン。年間返済額を平常化CFADSで賄えていないため、原則新規取得停止。借り換え・返済期間・賃料改善・経費是正を検討。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="S" data-target="metric-2-11"><summary><div class="summary-row-main"><span class="rank rank-S">S</span><div class="summary-main-copy"><div class="summary-name">全社Stress DSCR</div><div class="summary-badges"><span class="judgement-badge absolute">絶対</span><span class="source-class-badge">原文区分：絶対線</span></div><div class="summary-standard"><span>基準概要</span><strong>全社CFADSに10%総合Stress後も1.00以上必須</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>ぜんしゃ・すとれす・でぃーえすしーあーる</b></div>
+<div><span>和訳・意味</span><b>総合ストレス後の全社債務返済余裕率</b></div>
+<div><span>一般指標か</span><b>一般的なストレステスト思想を和京用に数値化</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>空室・賃料下落・滞納・経費増・修繕増・金利上昇等の複合悪化を、平常化CFADSの10%毀損として一括換算し、悪化時にも元利返済を維持できるかを見る。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">全社Stress DSCR ＝（平常化CFADS × 90%）÷ 年間元利返済額</div>
+</div><div class="threshold-grid">
+<div class="threshold danger"><strong>1.00倍以上 必須</strong><span>10%総合Stressをかけた後でも1.00倍以上を必須。1.00倍未満になる新規取得は原則行わない。目標1.10や1.20等は置かない。「割らないための防波堤」に限定する。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>10%の意味</h4><p>賃料だけを10%下げるのではなく、空室・賃料下落・滞納・経費増・修繕増・金利上昇その他の悪化を、管理上「返済原資10%毀損」に一括換算する。個別の金利Stressを別Gateにしない。</p></div><div class="detail-block"><h4>なぜ20%ではないか</h4><p>物件単体では20%Stressを採用しているが、会社全体に20%を一律負荷すると通常DSCR1.20の会社でも0.96まで落ちるため、取得拡大型法人には重すぎる。会社全体はポートフォリオ分散を考慮して10%を通常Stress、物件単体は20%という役割分担。銀行共通の10%ルールではない。</p></div><div class="detail-block"><h4>銀行実務との整合</h4><p>日本銀行の2023年度調査では、居住用賃貸業向けでストレステスト実施先が地域銀行約97%、信用金庫約79%。内容は賃料収入下落シナリオが地域銀行約93%、信用金庫約99%、金利上昇が約76%／78%。つまりストレス検証自体は銀行実務に強く整合するが、具体的な10%は和京内部値。</p></div></div></div><a class="summary-jump" href="#metric-2-11">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜Stress後1.08倍</strong><p>10%総合Stress後でも1.00以上を維持。防波堤としてはクリア。</p></div><div class="case-item"><strong>ケース2｜通常1.12倍でもStress後0.99倍</strong><p>通常は一見耐えていても、Stress後に1.00を割るなら絶対線未達。こういう案件は「平時は回るが悪化に弱い」。</p></div><div class="case-item"><strong>ケース3｜物件単体20%Stressと混同した</strong><p>会社全体は10%総合Stress、物件単体は20%Stress。役割が違うため、そのまま同じラインで比較しない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="A" data-target="metric-2-4"><summary><div class="summary-row-main"><span class="rank rank-A">A</span><div class="summary-main-copy"><div class="summary-name">手元流動性カバー月数</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：目標</span></div><div class="summary-standard"><span>基準概要</span><strong>6か月以上。単独レッドラインは置かない</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>てもと・りゅうどうせい・かばーげっすう</b></div>
+<div><span>和訳・意味</span><b>手元現金で通常支出と返済を何か月耐えられるか</b></div>
+<div><span>一般指標か</span><b>和京の管理指標（一般的な手元流動性概念を月数化）</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>通常の返済と現金支出を、手元の現預金だけで何か月耐えられるかを見る資金繰り耐久指標。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">手元流動性カバー月数 ＝ 現預金 ÷ 1か月あたり通常現金支出</div><div class="formula-line">1か月あたり通常現金支出 ＝（年間元本返済＋年間利息＋通常の現金運営支出）÷ 12</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>6か月以上</strong><span>目標。</span></div><div class="threshold warn"><strong>6か月未満</strong><span>即取得停止とはしない。別の1か月・3か月レッドラインは作らない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>含めないもの</h4><p>物件購入代金、取得諸費用、大規模な成長投資等の一過性支出は通常支出から除外。物件単体で既に通常修繕等を織り込んでいる場合は二重計上しない。</p></div><div class="detail-block"><h4>理由</h4><p>銀行共通の「6か月」という公式基準はない。和京が借入を増やしながら一棟を買い続けるための内部安全余力として採用。流動比率より実際の資金繰り耐久性が直感的。</p></div></div></div><a class="summary-jump" href="#metric-2-4">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜8か月ある</strong><p>通常支出と返済を8か月耐えられるなら、目標6か月超で安全余力あり。新規取得後に何か月まで下がるかを併せて見る。</p></div><div class="case-item"><strong>ケース2｜3.5か月しかない</strong><p>即停止ではないが、頭金・修繕・税金支払いが重なると資金繰りが細くなる。新規取得を進めるなら、取得後の現金残高を再計算したうえで補充余力を確認。</p></div><div class="case-item"><strong>ケース3｜購入代金まで通常支出に入れてしまった</strong><p>この指標は一過性の成長投資を除外する。購入代金や取得諸費用を常時支出に混ぜると、耐久力を必要以上に悪く見誤る。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="A" data-target="metric-2-6"><summary><div class="summary-row-main"><span class="rank rank-A">A</span><div class="summary-main-copy"><div class="summary-name">ROA</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：目標</span></div><div class="summary-standard"><span>基準概要</span><strong>2%以上</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>あーる・おー・えー</b></div>
+<div><span>和訳・意味</span><b>Return on Assets／総資産利益率</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会社が保有する総資産に対して、会計上どれだけ利益を生んでいるか。不動産賃貸業は資産を大量に持つ「資産活用型」なので銀行目線でも意味がある。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">ROA ＝（営業利益 ＋ 受取利息・配当金）÷ 総資産 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>2%以上</strong><span>目標。取得年度は通期利益がPLに乗らないため、取得後通期稼働ベースでも併記する。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>理由</h4><p>金融庁の不動産業分析ではROAはリーマン期・コロナ期でも2%程度を維持し、不動産賃貸・管理業は変動が比較的小さい。和京の3期決算に掲載された貸家業BAST黒字平均からの概算は約2.66%。</p></div><div class="detail-block"><h4>関連</h4><p>減価償却が大きい和京ではROAだけで収益力を決めず、減価償却前ROAをセットで見る。</p></div></div></div><a class="summary-jump" href="#metric-2-6">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜ROA 2.4%</strong><p>総資産に対して会計利益が出ており、目標2%以上をクリア。取得後通期ベースでも維持できるか確認したい。</p></div><div class="case-item"><strong>ケース2｜ROA 0.7%</strong><p>資産は積み上がっているのに利益が薄い状態。新規取得直後でPL未反映なら一時的要因かもしれないが、通期化後も低いなら資産収益力が弱い。</p></div><div class="case-item"><strong>ケース3｜ROAが赤字</strong><p>取得年度の一過性費用や大きい減価償却の影響もあり得るため、即断しない。減価償却前ROAやDSCRとセットで見る。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="A" data-target="metric-2-7"><summary><div class="summary-row-main"><span class="rank rank-A">A</span><div class="summary-main-copy"><div class="summary-name">減価償却前ROA</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：目標</span></div><div class="summary-standard"><span>基準概要</span><strong>5%以上</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>げんかしょうきゃくまえ・あーるおーえー</b></div>
+<div><span>和訳・意味</span><b>減価償却前総資産利益率</b></div>
+<div><span>一般指標か</span><b>和京の補正指標（一般ROAを不動産賃貸向けに補正）</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>4年償却等の大きな非現金費用でROAが過度に悪く見えるのを補正し、資産に対する減価償却前の稼ぐ力を見る。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">減価償却前ROA ＝（営業利益＋受取利息・配当金＋減価償却費）÷ 総資産 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>5%以上</strong><span>目標。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>理由</h4><p>貸家業BAST黒字平均の公開されている基礎数値から概算すると約5.50%。ROA2%と同時に見ることで「会計利益」と「償却前収益力」の両方を管理できる。</p></div></div></div><a class="summary-jump" href="#metric-2-7">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜ROAは1.2%だが減価償却前ROAは5.8%</strong><p>会計上の償却負担で見え方が悪いだけで、償却前の稼ぐ力は目標5%以上をクリア。和京らしい不動産賃貸業の実態に近い見方。</p></div><div class="case-item"><strong>ケース2｜減価償却前ROAも3.5%</strong><p>会計処理の見え方の問題ではなく、償却前でも収益力が弱い。賃料水準、空室、経費構造、共通費を見直すサイン。</p></div><div class="case-item"><strong>ケース3｜ROAだけで弱いと判断した</strong><p>4年償却等が大きいとROAは過度に低く見える。ROA単独ではなく、必ず減価償却前ROAを併記する。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="A" data-target="metric-2-9"><summary><div class="summary-row-main"><span class="rank rank-A">A</span><div class="summary-main-copy"><div class="summary-name">自由現金・資本性役員借入考慮後債務償還年数</div><div class="summary-badges"><span class="judgement-badge alert">目安＋停止線</span><span class="source-class-badge">原文区分：補助目標</span></div><div class="summary-standard"><span>基準概要</span><strong>15年以下良好／15-20許容・改善／20超は原則取得停止</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>じゆうげんきん・しほんせいやくいんかりいれ・こうりょご・さいむしょうかんねんすう</b></div>
+<div><span>和訳・意味</span><b>実際の返済圧力を調整した社内債務償還年数</b></div>
+<div><span>一般指標か</span><b>和京独自の社内管理指標</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>帳簿上の借金全部を同じ重さで見ず、「返済圧力の低い資本性役員借入」と「本当に返済へ使える自由現金」を調整した後、残る実質返済負担がEBITDAの何年分かを見る。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">（有利子負債 － 資本性調整対象役員借入金 － 自由現金）÷ EBITDA</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>15年以下</strong><span>目標・良好。</span></div><div class="threshold ok"><strong>15年超20年以下</strong><span>許容・改善管理。</span></div><div class="threshold danger"><strong>20年超</strong><span>新規取得を原則停止し、改善を優先。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>役員借入を重く見る理由</h4><p>和京では、自由現金よりも「長期・劣後で返済圧力が低い役員借入」の存在をより重要な実態調整として扱う方針。ただし資本性条件を満たす部分だけを控除し、短期的な役員資金は控除しない。</p></div><div class="detail-block"><h4>金融機関借入 EBITDA倍率との関係</h4><p>金融機関借入 EBITDA倍率は現金を控除しない「グロス」の主要指標。本指標は自由現金と資本性役員借入を考慮する社内補助指標。銀行員には、まず一般に理解しやすい標準的なEBITDAレバレッジを示し、その後に調整版として説明する。</p></div></div></div><a class="summary-jump" href="#metric-2-9">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜13年</strong><p>良好水準。自由現金と資本性役員借入を考慮しても、実質返済負担は重すぎない。</p></div><div class="case-item"><strong>ケース2｜17年</strong><p>許容だが改善管理ゾーン。今後の取得で20年を超えないか、自由現金の減少も踏まえて管理する。</p></div><div class="case-item"><strong>ケース3｜23年</strong><p>20年超で原則取得停止。見かけの現預金や短期役員資金を甘く入れていないか再点検しつつ、改善が先。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="B" data-target="metric-2-12"><summary><div class="summary-row-main"><span class="rank rank-B">B</span><div class="summary-main-copy"><div class="summary-name">減価償却前ICR</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：ウォッチ</span></div><div class="summary-standard"><span>基準概要</span><strong>2.0以上通常／1.0-2.0ウォッチ／1.0未満強警戒</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>げんかしょうきゃくまえ・あいしーあーる</b></div>
+<div><span>和訳・意味</span><b>減価償却前利息返済余力倍率</b></div>
+<div><span>一般指標か</span><b>ICRを和京の償却負担に合わせて補正した管理指標</b></div>
+<div><span>優先度／ランク</span><b>B</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>減価償却を足し戻した利益等で、年間支払利息を何倍カバーできるかを見る。元本は含まない。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">減価償却前ICR ＝（営業利益＋減価償却費＋受取利息・配当金）÷ 支払利息</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>2.0倍以上</strong><span>通常。</span></div><div class="threshold warn"><strong>1.0倍以上2.0倍未満</strong><span>ウォッチ。</span></div><div class="threshold danger"><strong>1.0倍未満</strong><span>強警戒。</span></div><div class="threshold neutral"><strong>単独Gateなし</strong><span>単独では新規取得停止条件にしない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>理由</h4><p>1.0倍は減価償却前の利益等で利息をカバーできる最低境界。2.0倍は「優良」ではなく、ここまで落ちたら利息負担を確認する社内ウォッチ境界。貸家業BAST黒字平均の基礎数値から同式を概算すると約8.2倍であり、2倍は下限寄り。</p></div><div class="detail-block"><h4>他指標との関連</h4><p>元本を含まないため、全社DSCRより優先度は低い。金融機関借入 EBITDA倍率・DSCR・Stress DSCRの補助として使う。</p></div></div></div><a class="summary-jump" href="#metric-2-12">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜2.6倍</strong><p>通常水準。減価償却前の利益等で利息は十分カバーできている。</p></div><div class="case-item"><strong>ケース2｜1.4倍</strong><p>ウォッチ水準。元本返済まで含めるDSCRが大丈夫でも、利息負担が重くなっていないか確認したい。</p></div><div class="case-item"><strong>ケース3｜0.8倍</strong><p>強警戒。減価償却前でも利息を賄えておらず、金利負担の重さが目立つ。単独停止指標ではないが、DSCRやEBITDA倍率も悪ければ危険度が高い。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="B" data-target="metric-2-14"><summary><div class="summary-row-main"><span class="rank rank-B">B</span><div class="summary-main-copy"><div class="summary-name">固定長期適合率</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：ウォッチ</span></div><div class="summary-standard"><span>基準概要</span><strong>100%以下を目安。超えたら期間ミスマッチの原因確認</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>こてい・ちょうき・てきごうりつ</b></div>
+<div><span>和訳・意味</span><b>固定資産を長期安定資金で賄えているか</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>B</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>土地・建物のような長期保有資産を、短期借入・流動負債のような「すぐ返す資金」で恒常的に持っていないかを見る期間ミスマッチ指標。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">固定長期適合率 ＝ 固定・繰延資産 ÷（自己資本＋固定負債）× 100</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>100%以下</strong><span>目安。</span></div><div class="threshold warn"><strong>100%超</strong><span>原因確認。ただし独立した取得停止Gateにはしない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>貸家業の比較</h4><p>R8.7 和京資料の貸家業BASTは優良89.8%、黒字平均94.4%、黒字中位94.7%。</p></div><div class="detail-block"><h4>役員借入の歪み</h4><p>和京R8.7は帳簿上156.1%だが、短期借入金約989.7万円が実態として役員借入。これが実質長期資金として適切に長期負債へ整理された仮定では概算約96.3%まで下がる。会計科目の振替は実態と契約が長期である場合に限る。</p></div></div></div><a class="summary-jump" href="#metric-2-14">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜96%</strong><p>100%以下の目安内。固定資産を長期安定資金で賄えている形。</p></div><div class="case-item"><strong>ケース2｜115%</strong><p>100%超なので原因確認。長期保有資産を短期借入や流動負債で持っていないか、期間ミスマッチを疑う。</p></div><div class="case-item"><strong>ケース3｜156%だが短期役員借入が多い</strong><p>帳簿上は悪く見えても、実態が長期役員資金なら整理後は改善する可能性がある。ただし、会計科目の振替だけでは足りず、契約・実態が前提。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="B" data-target="metric-2-15"><summary><div class="summary-row-main"><span class="rank rank-B">B</span><div class="summary-main-copy"><div class="summary-name">経常利益</div><div class="summary-badges"><span class="judgement-badge guide">目安</span><span class="source-class-badge">原文区分：ウォッチ</span></div><div class="summary-standard"><span>基準概要</span><strong>平常化ベース黒字が望ましい。赤字単独で取得停止しない</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>けいじょうりえき</b></div>
+<div><span>和訳・意味</span><b>本業利益に営業外損益を加えた通常活動の会計利益</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>B</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>継続黒字を目指すが、「経常赤字＝新規取得禁止」にはしない。不動産取得年度の一過性費用や大きな減価償却で会計利益が赤字でも、返済原資がプラスの場合がある。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line muted">算式の固定表示なし</div>
+</div><div class="threshold-grid">
+<div class="threshold good"><strong>平常化ベース黒字</strong><span>望ましい。</span></div><div class="threshold warn"><strong>赤字</strong><span>単独で取得停止しない。原因分解が必要。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>赤字時の確認</h4><p>赤字原因を分解し、減価償却前ROA、減価償却前ICR、全社DSCR、Stress DSCR、金融機関借入 EBITDA倍率、実質自己資本を併せて判断する。</p></div></div></div><a class="summary-jump" href="#metric-2-15">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜経常赤字だがDSCRは1.25倍</strong><p>取得年度の一過性費用や大きな減価償却が原因なら、即停止ではない。赤字の中身を分解して説明する。</p></div><div class="case-item"><strong>ケース2｜経常赤字でDSCRも0.98倍</strong><p>会計利益も返済余力も弱い状態。これは「赤字だからダメ」ではなく、他の主要指標まで崩れているのが問題。</p></div><div class="case-item"><strong>ケース3｜黒字なら安心とした</strong><p>黒字でも借金総量やStress耐性が悪ければ安全とは言えない。経常利益はウォッチ指標。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="C" data-target="metric-2-3"><summary><div class="summary-row-main"><span class="rank rank-C">C</span><div class="summary-main-copy"><div class="summary-name">簿記上自己資本比率</div><div class="summary-badges"><span class="judgement-badge reference">参考</span><span class="source-class-badge">原文区分：参考</span></div><div class="summary-standard"><span>基準概要</span><strong>基準なし。銀行の第一印象として数値をそのまま開示</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>ぼきじょう・じこしほんひりつ</b></div>
+<div><span>和訳・意味</span><b>決算書にそのまま出る自己資本比率</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>銀行が決算書を開いた瞬間に見えるBSの自己資本比率。会社の第一印象として意味はあるが、役員借入の多い和京ではこれだけを目標KPIにすると実態を誤認しやすい。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">簿記上自己資本比率 ＝ 簿記上純資産 ÷ 簿記上総資産 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold neutral"><strong>基準なし</strong><span>数値は必ず表示するが、25%・20%等の独自目標／警戒ラインを付けない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>和京の最終方針</h4><p>役員が会社へ長期安定資金を追加しただけで簿記上比率が悪化するため、「強ウォッチ」等の自己評価を付けて銀行への印象を自ら悪化させない。</p></div><div class="detail-block"><h4>銀行への出し方</h4><p>簿記上比率を隠さず、「簿記上→実質→資本性調整後」のリコンシリエーション（調整表）で説明する。</p></div></div></div><a class="summary-jump" href="#metric-2-3">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜簿記上比率が14.2%で見た目が悪い</strong><p>月次BSでは低く見えても、役員借入の性質や実勢評価を加味すると印象が変わる可能性がある。ここで独自の「危険」ラベルを付けるより、簿記上→実質→資本性調整後の順に説明する方がよい。</p></div><div class="case-item"><strong>ケース2｜役員資金を入れたら比率が下がった</strong><p>会計上は負債なので、長期安定資金を追加しても簿記上自己資本比率だけ見れば悪化することがある。だからこの指標単独でダメ判定しない。</p></div><div class="case-item"><strong>ケース3｜簿記上比率だけで買付可否を決めた</strong><p>和京の方針では誤判定リスクが高い。第一印象としては出すが、取得判断の主役は実質自己資本比率・DSCR・EBITDA倍率。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="C" data-target="metric-2-16"><summary><div class="summary-row-main"><span class="rank rank-C">C</span><div class="summary-main-copy"><div class="summary-name">現預金比率</div><div class="summary-badges"><span class="judgement-badge reference">参考</span><span class="source-class-badge">原文区分：参考</span></div><div class="summary-standard"><span>基準概要</span><strong>基準なし</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>げんよきん・ひりつ</b></div>
+<div><span>和訳・意味</span><b>Cash Ratio to Assets／総資産に占める現預金割合</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>総資産に占める現金・預金の割合を見る。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">現預金比率 ＝ 現金・預金 ÷ 総資産 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold neutral"><strong>固定目標なし</strong><span>短期耐久力は手元流動性カバー月数で直接見る。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>和京の方針</h4><p>金融庁分析では不動産賃貸・管理業は安定賃料の特性から現預金比率が低位であることが目立つため、業種横断の一律基準は置かない。</p></div></div></div><a class="summary-jump" href="#metric-2-16">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜現預金比率が低い</strong><p>不動産賃貸・管理業では低位になりやすい。比率単独で悪いとは言えず、手元流動性カバー月数で耐久力を確認する。</p></div><div class="case-item"><strong>ケース2｜取得直後で現預金比率が急低下</strong><p>頭金や諸費用の支出で比率が下がるのは自然。ただし、取得後に何か月分耐えられるかまで見ないと危ない。</p></div><div class="case-item"><strong>ケース3｜比率が高いから安心した</strong><p>現預金比率が高くても、返済負担が重い・自由現金が薄い・今後の投資予定が大きいなら安心はできない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="C" data-target="metric-2-17"><summary><div class="summary-row-main"><span class="rank rank-C">C</span><div class="summary-main-copy"><div class="summary-name">金融機関借入比率</div><div class="summary-badges"><span class="judgement-badge reference">参考</span><span class="source-class-badge">原文区分：参考</span></div><div class="summary-standard"><span>基準概要</span><strong>基準なし</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>きんゆうきかん・かりいれ・ひりつ</b></div>
+<div><span>和訳・意味</span><b>総資産に対する金融機関借入の割合</b></div>
+<div><span>一般指標か</span><b>一般の負債比率を和京用に分子調整</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>総資産に対して、金融機関からの借入残高がどの程度あるかを見る。和京では役員借入金を除外する。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">簿価金融機関借入比率 ＝ 金融機関借入残高 ÷ 簿価総資産 × 100</div><div class="formula-line">実質金融機関借入比率 ＝ 金融機関借入残高 ÷ 保守的実勢総資産 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold neutral"><strong>参考表示のみ</strong><span>借入量の良し悪しは、より返済力に直結する金融機関借入 EBITDA倍率と全社DSCRを優先する。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>役員借入の扱い</h4><p>和京のこの指標では役員借入金を除外する。金融庁分析の「負債比率」は短期＋長期借入÷総資産等であり、和京の定義と同一ではない。</p></div></div></div><a class="summary-jump" href="#metric-2-17">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜47.5%</strong><p>総資産に対する銀行借入の参考値として把握するのは有効。ただし良し悪しの判定は、まずEBITDA倍率と全社DSCR。</p></div><div class="case-item"><strong>ケース2｜借入比率80%</strong><p>数字だけ見ると高いが、物件評価や収益力次第で一概に危険とは言えない。ここだけで取得停止判断しない。</p></div><div class="case-item"><strong>ケース3｜役員借入まで同列に足した</strong><p>和京の定義では役員借入を除外する。一般の負債比率と同じ意味ではないため、銀行説明では定義を明記する。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="C" data-target="metric-2-18"><summary><div class="summary-row-main"><span class="rank rank-C">C</span><div class="summary-main-copy"><div class="summary-name">平均借入金利</div><div class="summary-badges"><span class="judgement-badge reference">参考</span><span class="source-class-badge">原文区分：参考</span></div><div class="summary-standard"><span>基準概要</span><strong>基準なし</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>へいきん・かりいれ・きんり</b></div>
+<div><span>和訳・意味</span><b>金融機関借入の平均調達コスト</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>金融機関借入の平均調達コストを把握するための参考値。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">平均借入金利 ＝ 年間支払利息 ÷ 期中平均金融機関借入残高 × 100</div>
+</div><div class="threshold-grid">
+<div class="threshold neutral"><strong>基準なし</strong><span>借入期間、固定／変動、担保、金融機関等で合理的に変わるため、単独で取得可否を決めない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>関連</h4><p>利率が上がれば全社DSCRが悪化する。和京では金利Stressを独立Gateにせず、10%総合Stressへ包括する。</p></div></div></div><a class="summary-jump" href="#metric-2-18">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜平均借入金利1.8%</strong><p>調達コストとしては低め。とはいえ単独では良否を決めず、DSCRへの影響を見る。</p></div><div class="case-item"><strong>ケース2｜平均借入金利3.2%へ上昇</strong><p>金利上昇で支払利息が増えると、全社DSCRやICRが圧迫される。借換え余地や固定・変動の構成も確認。</p></div><div class="case-item"><strong>ケース3｜金利だけで案件可否を決めた</strong><p>借入期間、返済額、CF、Stress耐性を無視すると誤る。和京では金利Stressを独立Gateにせず、10%総合Stressへ包括する。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="C" data-target="metric-2-13"><summary><div class="summary-row-main"><span class="rank rank-C">C</span><div class="summary-main-copy"><div class="summary-name">通常ICR</div><div class="summary-badges"><span class="judgement-badge reference">参考</span><span class="source-class-badge">原文区分：参考</span></div><div class="summary-standard"><span>基準概要</span><strong>基準なし</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>あいしーあーる</b></div>
+<div><span>和訳・意味</span><b>Interest Coverage Ratio／利息返済余裕率</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会計利益ベースで利息をどの程度賄えているかを見る参考値。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">ICR ＝（営業利益＋受取利息・配当金）÷ 支払利息</div>
+</div><div class="threshold-grid">
+<div class="threshold neutral"><strong>固定目標なし</strong><span>数値は出すが固定目標は置かない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>和京の方針</h4><p>4年償却等で営業利益が大きく下がると、現金創出力に比べ極端に悪く見えるため。</p></div><div class="detail-block"><h4>判断</h4><p>1.0倍未満は会計利益ベースでは利息を賄えていないことを示すが、取得停止はICR単独で決めず、減価償却前ICR・全社DSCR・EBITDA倍率を優先。</p></div></div></div><a class="summary-jump" href="#metric-2-13">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜通常ICRがマイナス</strong><p>会計利益ベースでは利息を賄えていない見え方。だが不動産賃貸業では償却の影響が強く、これだけで取得停止判断はしない。</p></div><div class="case-item"><strong>ケース2｜通常ICR 1.3倍</strong><p>参考としては悪くないが、主役は減価償却前ICR・全社DSCR・金融機関借入 EBITDA倍率。</p></div><div class="case-item"><strong>ケース3｜通常ICRだけ良く見せた</strong><p>償却負担や元本返済が見えないため、銀行説明では補助指標として扱う。主要判定に格上げしない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details><details class="summary-accordion" data-rank="D" data-target="metric-2-19"><summary><div class="summary-row-main"><span class="rank rank-D">D</span><div class="summary-main-copy"><div class="summary-name">通常の債務償還年数</div><div class="summary-badges"><span class="judgement-badge display">表示のみ</span><span class="source-class-badge">原文区分：表示のみ</span></div><div class="summary-standard"><span>基準概要</span><strong>数値表示はするが、判定・参考には使わない</strong></div></div></div><span aria-hidden="true" class="summary-chevron"></span></summary><div class="summary-detail-shell"><div class="detail-title"><strong>詳細・計算式・判定基準・銀行説明上の注意</strong></div><div class="metric-meta">
+<div><span>呼び方</span><b>さいむ・しょうかん・ねんすう</b></div>
+<div><span>和訳・意味</span><b>Debt Repayment Period／借入を返済原資で何年分か</b></div>
+<div><span>一般指標か</span><b>日本の中小企業金融で一般的。ただし算式差が大きい</b></div>
+<div><span>優先度／ランク</span><b>D</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div><div class="essence">
+<span class="eyebrow">要するに</span>
+<p>借入残高を、経常利益＋減価償却費－税等の簡易キャッシュフローで何年かけて返せるかを見る。金融機関・公的診断で分子の現預金控除や分母の税・利益定義に差がある。</p>
+</div><div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">代表例：（借入金 － 現預金等）÷（経常利益＋減価償却費－法人税等）</div>
+</div><div class="threshold-grid">
+<div class="threshold neutral"><strong>表示のみ</strong><span>数値表示してよいが、評価・参考・取得Gateには使わない。</span></div>
+</div><div><span class="eyebrow">説明・根拠・運用上の注意</span><div class="details-body"><div class="detail-block"><h4>和京の最終方針</h4><p>減価償却を既に足し戻す算式が多く、別に「減価償却前債務償還年数」を作る必要もない。借金総量の主要評価は金融機関借入 EBITDA倍率、実際の毎年返済力は全社DSCRで見る。</p></div><div class="detail-block"><h4>旧版との変更</h4><p>旧版の社内資料には15年以下目標・20年超停止等を「法人債務償還年数」へ直接適用した記載があるが、現在は通常債務償還年数を表示のみへ変更。その15年／20年の管理思想は、別途「自由現金・資本性役員借入考慮後債務償還年数」に統合している。</p></div></div></div><a class="summary-jump" href="#metric-2-19">全指標欄の元項目へ移動 →</a><details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜9年</strong><p>数値として表示する分には分かりやすい。一般的には良好に見えやすい。</p></div><div class="case-item"><strong>ケース2｜25年</strong><p>長く見えても、それだけで即NGとはしない。和京では表示のみで、主要評価は金融機関借入 EBITDA倍率と全社DSCRに寄せている。</p></div><div class="case-item"><strong>ケース3｜通常債務償還年数を主役に戻した</strong><p>旧版では15年目標・20年超停止の思想があったが、最終版では別指標（自由現金・資本性役員借入考慮後債務償還年数）へ統合済み。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></div></details></div>
+</div>
+</section>
+<section id="principles">
+<div class="section-head"><div><h2>0-1｜最重要の運用原則</h2><p>数字の見方を誤らないための、全指標共通ルール。</p></div></div>
+<div class="principles">
+<div class="principle"><b>①「現状実績」と「取得後通期稼働ベース」を分ける</b>取得年度は資産・借入だけ先にBSへ入り、新規物件の利益が通期でPLに乗らない。単純な決算値だけで取得可否を判定しない。</div>
+<div class="principle"><b>② 会社全体CFで費用を二重控除しない</b>物件単体で既に織り込んでいる通常修繕・設備更新・運営費は、会社全体のCFで二重控除しない。会社全体指標は各物件の平常化CFを積み上げて計算する。</div>
+<div class="principle"><b>③ 役員借入は原則「負債」</b>長期・劣後・返済猶予等の実態がある部分だけ「資本性調整対象」として別表示し、銀行が資本と認めるかは最終的に金融機関判断。</div>
+<div class="principle"><b>④ 簿価を隠さず、調整過程を透明化</b>簿記上数値 → 実勢評価調整 → 資本性調整、の順に示す。一般指標の定義と和京独自の分子・基準値も混同しない。特に「金融機関借入 EBITDA倍率」は一般的な有利子負債/EBITDA倍率を和京用にカスタマイズした指標。</div>
+</div>
+</section>
+<section id="definitions">
+<div class="section-head"><div><h2>1｜計算の共通定義</h2><p>以降の指標で繰り返し使う分母・キャッシュフロー・ストレスの定義。</p></div></div>
+<div class="def-grid">
+<div class="definition">
+<h3>EBITDA（いーびっとでぃーえー）</h3>
+<p><strong>利払い・税引き・減価償却前利益</strong></p>
+<p>和京の簡易計算では「営業利益＋減価償却費」。不動産賃貸業では減価償却が大きく、会計利益だけでは現金創出力が見えにくいため、借入総量や利払い余力の補助分母として使う。EBITDAは現金残高そのものではない。</p>
+<div class="formula-mini">簡易EBITDA ＝ 営業利益 ＋ 減価償却費</div>
+</div>
+<div class="definition">
+<h3>CFADS（しーふぁっず）</h3>
+<p><strong>債務返済可能キャッシュフロー</strong></p>
+<p>全社DSCRの分子。全保有物件の元利返済前の平常化キャッシュフローを合算し、法人共通の継続的現金支出・現金税金等を反映した「元本＋利息の返済に回せる金額」。物件単体ですでに反映した費用を会社側で二重控除しない。</p>
+<div class="formula-mini">平常化CFADS ＝ 全物件の元利返済前平常化CF合計 － 法人共通の継続現金支出 － 現金税金等</div>
+</div>
+<div class="definition">
+<h3>自由現金（自由現預金）</h3>
+<p><strong>Free / Unrestricted Cash</strong></p>
+<p>BS現預金のうち、実際に運営・返済へ自由に回せる部分。敷金返還相当、近い納税、既に使途が確定した工事資金、拘束預金等は必要に応じて除く。</p>
+<p>旧版の「PGR月額2か月最低・3か月目標＋12か月CapEx」は独立基準として使用せず、「手元流動性カバー月数6か月目標」に統合。自由現金の概念自体は、調整後債務償還年数の分子調整に残す。</p>
+</div>
+<div class="definition">
+<h3>全社Stress（総合ストレス）</h3>
+<p>金利だけを個別に固定する方式ではなく、空室・賃料下落・滞納・経費増・修繕増・金利上昇等の複合悪化を「平常化CFADSの10%毀損」に一括換算する和京の会社全体ストレス。</p>
+<p><strong>銀行共通の10%ルールではない。</strong> 物件単体20%Stressとは役割が異なる。</p>
+<div class="formula-mini">Stress CFADS ＝ 平常化CFADS × 90%</div>
+</div>
+</div>
+</section>
+<section id="metrics">
+<div class="section-head"><div><h2>2｜会社財務KPI 全19指標</h2><p>式・基準は常時表示。詳しい説明・根拠・運用上の注意は折りたたみ式。</p></div></div>
+<div class="metric-controls">
+<input class="search" id="metricSearch" placeholder="指標名・意味・分類で検索" type="search"/>
+<button class="filter-btn" data-filter="ALL">すべて</button>
+<button class="filter-btn" data-filter="S">Sのみ</button>
+<button class="filter-btn" data-filter="A">Aのみ</button>
+<button class="filter-btn" data-filter="B">Bのみ</button>
+<button class="filter-btn" data-filter="C">Cのみ</button>
+<button class="filter-btn" data-filter="D">Dのみ</button>
+</div><div class="section-accordion-actions"><button id="metricsOpenAll" type="button">全指標の説明を全部開く</button><button id="metricsCloseAll" type="button">全指標の説明を全部閉じる</button></div>
+<article class="metric-card" data-rank="S" data-search="実質自己資本比率 保守的な実勢評価に基づく自己資本の厚み 一般的な「実態財務」概念を和京用に定式化 目標管理＋取得再検討ライン" id="metric-2-1">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-S">S</span>
+<div>
+<div class="metric-no">2-1</div>
+<h3>実質自己資本比率</h3>
+</div>
+</div>
+<span class="classification">目標管理＋取得再検討ライン</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>じっしつ・じこしほんひりつ</b></div>
+<div><span>和訳・意味</span><b>保守的な実勢評価に基づく自己資本の厚み</b></div>
+<div><span>一般指標か</span><b>一般的な「実態財務」概念を和京用に定式化</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会社の資産を帳簿価額ではなく保守的な実勢価値で見直したうえで、負債を全部引いても、総資産の何％が自分の資本として残るかを見る。買い続ける不動産会社のBS体力を表す最重要指標。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">実質自己資本比率 ＝ 実質純資産額 ÷ 保守的実勢総資産額 × 100</div><div class="formula-line">実質純資産額 ＝ 保守的実勢評価後の資産総額 － 全負債（役員借入金も原則負債）</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>30%以上</strong><span>保守運営水準。取得拡大型から財務保守へ寄せる段階ではここを目指す。</span></div><div class="threshold good"><strong>25%以上</strong><span>目標水準。</span></div><div class="threshold warn"><strong>20%以上25%未満</strong><span>成長・財務調整水準。目標未達だが即取得停止ではない。</span></div><div class="threshold danger"><strong>20%未満</strong><span>取得再検討水準。追加取得より財務調整を優先するか精査。</span></div><div class="threshold danger"><strong>実質純資産 0円以下</strong><span>強ウォッチ。資本性役員借入を調整しても0円以下なら最終レッドライン。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>25%を決めた理由</h4><p>貸家業BASTの簿記上自己資本比率は黒字企業中位26.7%、黒字平均29.6%（R8.7 和京資料）。同一指標ではないため単純比較はできないが、借入拡大期の内部目標を25%、保守運営段階を30%とするのは、同業黒字企業の財務厚みと取得余力の折衷として合理的と判断。25%は「銀行公式下限」ではない。</p></div><div class="detail-block"><h4>他指標との関連</h4><p>金融機関借入 EBITDA倍率・全社DSCRが「返す力」を見るのに対し、本指標は「損失を受け止めるBSの厚み」を見る。保有不動産の含み損益・資産健全性は独立KPIにせず、本指標へ反映する。</p></div><div class="detail-block"><h4>銀行目線・注意点</h4><p>銀行は簿記上自己資本比率をまず見るため、実質自己資本だけを提出しない。必ず簿記上→実勢評価→資本性調整の順に調整根拠を示す。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜24%まで低下した</strong><p>保守的実勢評価を入れると実質自己資本比率が24%。まだ即停止ではないが、目標25%未達なので「取得はできても、次の1件で20%台前半へ落ちるか」を精査する段階。頭金追加・取得額圧縮・利益蓄積を優先。</p></div><div class="case-item"><strong>ケース2｜18%まで落ちた</strong><p>20%未満は取得再検討水準。追加取得を急ぐより、BSの厚みを戻す方が先。売却損・評価減・追加借入でさらに悪化しやすく、銀行説明でも防御力不足に見られやすい。</p></div><div class="case-item"><strong>ケース3｜実質純資産が0円近辺</strong><p>比率だけでなく実質純資産額そのものも要確認。0円以下に近づくなら、資産価格下振れに耐える余地が薄く、資本性調整後まで含めた説明が必須。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="S" data-search="資本性調整後実質自己資本比率 資本性の高い役員借入を考慮した実態自己資本比率 一般的な資本性借入金の考え方を和京の役員借入へ適用 銀行説明・最終債務超過判定" id="metric-2-2">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-S">S</span>
+<div>
+<div class="metric-no">2-2</div>
+<h3>資本性調整後実質自己資本比率</h3>
+</div>
+</div>
+<span class="classification">銀行説明・最終債務超過判定</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>しほんせい・ちょうせいご・じっしつ・じこしほんひりつ</b></div>
+<div><span>和訳・意味</span><b>資本性の高い役員借入を考慮した実態自己資本比率</b></div>
+<div><span>一般指標か</span><b>一般的な資本性借入金の考え方を和京の役員借入へ適用</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>実質自己資本に、返済圧力が低く資本に近い性質を持つ役員借入金のうち「資本性調整対象」と認められる部分を加えた補足指標。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">資本性調整後実質自己資本比率 ＝（実質純資産額 ＋ 資本性調整対象役員借入金）÷ 保守的実勢総資産額 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold danger"><strong>絶対ライン</strong><span>資本性調整後実質純資産額が0円以下なら、実質的な債務超過と判断し、原則として新規取得停止。実質純資産が0円以下でも、資本性調整後がプラスなら「強ウォッチ・銀行説明必須」であり、機械的に即停止とはしない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>役員借入の資本性条件</h4><p>原則5年超の長期性・長期据置／期限一括等。<br/>金融機関借入の返済を優先し、他債権に先んじて回収しない。<br/>会社の赤字・資金繰り悪化時に役員が返済を要求しない。<br/>会社が厳しいときに負担を増やさない金利設計（無利息または業績悪化時の負担軽減等を検討）。<br/>短期的な出し入れ資金ではなく、条件を契約・覚書等で書面化。</p></div><div class="detail-block"><h4>重要</h4><p>短期役員借入金を「長期役員借入金」という勘定科目へ振り替えただけでは資本性ありとはしない。最終的に銀行がどこまで資本とみなすかは金融機関判断。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜実質純資産はマイナス、でも資本性調整後はプラス</strong><p>実質純資産が▲200万円でも、5年超・劣後・返済猶予等の条件を満たす役員借入500万円があれば、資本性調整後はプラスにできる。この場合は即停止ではなく「強ウォッチ＋銀行説明必須」。</p></div><div class="case-item"><strong>ケース2｜資本性調整後でも0円以下</strong><p>役員借入を調整しても資本性調整後実質純資産が0円以下なら、実質的な債務超過として原則新規取得停止。形式だけ長期借入に振り替えても救済にはならない。</p></div><div class="case-item"><strong>ケース3｜短期の出し入れ資金を資本扱いしようとした</strong><p>直前に入れてすぐ引き上げられる資金や、返済請求され得る資金は資本性として弱い。書面・条件・実態が伴わないと、銀行には資本と見てもらえない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="C" data-search="簿記上自己資本比率 決算書にそのまま出る自己資本比率 一般指標 参考値（基準なし）" id="metric-2-3">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-C">C</span>
+<div>
+<div class="metric-no">2-3</div>
+<h3>簿記上自己資本比率</h3>
+</div>
+</div>
+<span class="classification">参考値（基準なし）</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>ぼきじょう・じこしほんひりつ</b></div>
+<div><span>和訳・意味</span><b>決算書にそのまま出る自己資本比率</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>銀行が決算書を開いた瞬間に見えるBSの自己資本比率。会社の第一印象として意味はあるが、役員借入の多い和京ではこれだけを目標KPIにすると実態を誤認しやすい。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">簿記上自己資本比率 ＝ 簿記上純資産 ÷ 簿記上総資産 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>基準なし</strong><span>数値は必ず表示するが、25%・20%等の独自目標／警戒ラインを付けない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>和京の最終方針</h4><p>役員が会社へ長期安定資金を追加しただけで簿記上比率が悪化するため、「強ウォッチ」等の自己評価を付けて銀行への印象を自ら悪化させない。</p></div><div class="detail-block"><h4>銀行への出し方</h4><p>簿記上比率を隠さず、「簿記上→実質→資本性調整後」のリコンシリエーション（調整表）で説明する。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜簿記上比率が14.2%で見た目が悪い</strong><p>月次BSでは低く見えても、役員借入の性質や実勢評価を加味すると印象が変わる可能性がある。ここで独自の「危険」ラベルを付けるより、簿記上→実質→資本性調整後の順に説明する方がよい。</p></div><div class="case-item"><strong>ケース2｜役員資金を入れたら比率が下がった</strong><p>会計上は負債なので、長期安定資金を追加しても簿記上自己資本比率だけ見れば悪化することがある。だからこの指標単独でダメ判定しない。</p></div><div class="case-item"><strong>ケース3｜簿記上比率だけで買付可否を決めた</strong><p>和京の方針では誤判定リスクが高い。第一印象としては出すが、取得判断の主役は実質自己資本比率・DSCR・EBITDA倍率。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="A" data-search="手元流動性カバー月数 手元現金で通常支出と返済を何か月耐えられるか 和京の管理指標（一般的な手元流動性概念を月数化） 目標管理" id="metric-2-4">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-A">A</span>
+<div>
+<div class="metric-no">2-4</div>
+<h3>手元流動性カバー月数</h3>
+</div>
+</div>
+<span class="classification">目標管理</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>てもと・りゅうどうせい・かばーげっすう</b></div>
+<div><span>和訳・意味</span><b>手元現金で通常支出と返済を何か月耐えられるか</b></div>
+<div><span>一般指標か</span><b>和京の管理指標（一般的な手元流動性概念を月数化）</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>通常の返済と現金支出を、手元の現預金だけで何か月耐えられるかを見る資金繰り耐久指標。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">手元流動性カバー月数 ＝ 現預金 ÷ 1か月あたり通常現金支出</div><div class="formula-line">1か月あたり通常現金支出 ＝（年間元本返済＋年間利息＋通常の現金運営支出）÷ 12</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>6か月以上</strong><span>目標。</span></div><div class="threshold warn"><strong>6か月未満</strong><span>即取得停止とはしない。別の1か月・3か月レッドラインは作らない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>含めないもの</h4><p>物件購入代金、取得諸費用、大規模な成長投資等の一過性支出は通常支出から除外。物件単体で既に通常修繕等を織り込んでいる場合は二重計上しない。</p></div><div class="detail-block"><h4>理由</h4><p>銀行共通の「6か月」という公式基準はない。和京が借入を増やしながら一棟を買い続けるための内部安全余力として採用。流動比率より実際の資金繰り耐久性が直感的。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜8か月ある</strong><p>通常支出と返済を8か月耐えられるなら、目標6か月超で安全余力あり。新規取得後に何か月まで下がるかを併せて見る。</p></div><div class="case-item"><strong>ケース2｜3.5か月しかない</strong><p>即停止ではないが、頭金・修繕・税金支払いが重なると資金繰りが細くなる。新規取得を進めるなら、取得後の現金残高を再計算したうえで補充余力を確認。</p></div><div class="case-item"><strong>ケース3｜購入代金まで通常支出に入れてしまった</strong><p>この指標は一過性の成長投資を除外する。購入代金や取得諸費用を常時支出に混ぜると、耐久力を必要以上に悪く見誤る。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="C" data-search="自由現金（自由現預金） 用途拘束のない実際に使える現預金 一般概念を和京用に定義 単独基準なし・調整指標の分子で使用" id="metric-2-5">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-C">C</span>
+<div>
+<div class="metric-no">2-5</div>
+<h3>自由現金（自由現預金）</h3>
+</div>
+</div>
+<span class="classification">単独基準なし・調整指標の分子で使用</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>じゆうげんきん／ふりー・きゃっしゅ</b></div>
+<div><span>和訳・意味</span><b>用途拘束のない実際に使える現預金</b></div>
+<div><span>一般指標か</span><b>一般概念を和京用に定義</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>BS現預金のうち、実際に運営・返済へ自由に回せる部分。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">自由現金 ＝ 会計現預金 － 実質的に拘束・使途確定している現預金</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>単独基準なし</strong><span>調整後債務償還年数の分子調整に使用。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>主な控除候補</h4><p>敷金返還相当、近々の納税資金、確定工事・確定支払に充当する資金、拘束預金等。何を拘束とするかは実態に応じて明細化する。</p></div><div class="detail-block"><h4>最新ルールとの関係</h4><p>旧版の「2か月最低・3か月目標＋12か月CapEx」は独立基準としては廃止／上書き。本書では「手元流動性カバー月数6か月目標」が流動性KPI。自由現金は「自由現金・資本性役員借入考慮後債務償還年数」に使う調整項目として残す。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜現預金1,000万円でも自由現金は600万円</strong><p>敷金返還見合い200万円、近い納税150万円、確定工事250万円があれば、全部は自由に使えない。手元現金が多く見えても、返済へ本当に回せる金額は別。</p></div><div class="case-item"><strong>ケース2｜自由現金を多く見積もりすぎた</strong><p>本来拘束すべき資金まで控除せずに計算すると、調整後債務償還年数が良く見えすぎる。資金使途を明細で分けるのが前提。</p></div><div class="case-item"><strong>ケース3｜自由現金が薄いのに安心していた</strong><p>会計上現預金残高があっても、自由現金が薄ければ実質的な防御力は弱い。特に税金・工事予定が近いときは要注意。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="A" data-search="roa return on assets／総資産利益率 一般指標 目標管理" id="metric-2-6">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-A">A</span>
+<div>
+<div class="metric-no">2-6</div>
+<h3>ROA</h3>
+</div>
+</div>
+<span class="classification">目標管理</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>あーる・おー・えー</b></div>
+<div><span>和訳・意味</span><b>Return on Assets／総資産利益率</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会社が保有する総資産に対して、会計上どれだけ利益を生んでいるか。不動産賃貸業は資産を大量に持つ「資産活用型」なので銀行目線でも意味がある。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">ROA ＝（営業利益 ＋ 受取利息・配当金）÷ 総資産 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>2%以上</strong><span>目標。取得年度は通期利益がPLに乗らないため、取得後通期稼働ベースでも併記する。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>理由</h4><p>金融庁の不動産業分析ではROAはリーマン期・コロナ期でも2%程度を維持し、不動産賃貸・管理業は変動が比較的小さい。和京の3期決算に掲載された貸家業BAST黒字平均からの概算は約2.66%。</p></div><div class="detail-block"><h4>関連</h4><p>減価償却が大きい和京ではROAだけで収益力を決めず、減価償却前ROAをセットで見る。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜ROA 2.4%</strong><p>総資産に対して会計利益が出ており、目標2%以上をクリア。取得後通期ベースでも維持できるか確認したい。</p></div><div class="case-item"><strong>ケース2｜ROA 0.7%</strong><p>資産は積み上がっているのに利益が薄い状態。新規取得直後でPL未反映なら一時的要因かもしれないが、通期化後も低いなら資産収益力が弱い。</p></div><div class="case-item"><strong>ケース3｜ROAが赤字</strong><p>取得年度の一過性費用や大きい減価償却の影響もあり得るため、即断しない。減価償却前ROAやDSCRとセットで見る。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="A" data-search="減価償却前roa 減価償却前総資産利益率 和京の補正指標（一般roaを不動産賃貸向けに補正） 目標管理" id="metric-2-7">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-A">A</span>
+<div>
+<div class="metric-no">2-7</div>
+<h3>減価償却前ROA</h3>
+</div>
+</div>
+<span class="classification">目標管理</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>げんかしょうきゃくまえ・あーるおーえー</b></div>
+<div><span>和訳・意味</span><b>減価償却前総資産利益率</b></div>
+<div><span>一般指標か</span><b>和京の補正指標（一般ROAを不動産賃貸向けに補正）</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>4年償却等の大きな非現金費用でROAが過度に悪く見えるのを補正し、資産に対する減価償却前の稼ぐ力を見る。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">減価償却前ROA ＝（営業利益＋受取利息・配当金＋減価償却費）÷ 総資産 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>5%以上</strong><span>目標。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>理由</h4><p>貸家業BAST黒字平均の公開されている基礎数値から概算すると約5.50%。ROA2%と同時に見ることで「会計利益」と「償却前収益力」の両方を管理できる。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜ROAは1.2%だが減価償却前ROAは5.8%</strong><p>会計上の償却負担で見え方が悪いだけで、償却前の稼ぐ力は目標5%以上をクリア。和京らしい不動産賃貸業の実態に近い見方。</p></div><div class="case-item"><strong>ケース2｜減価償却前ROAも3.5%</strong><p>会計処理の見え方の問題ではなく、償却前でも収益力が弱い。賃料水準、空室、経費構造、共通費を見直すサイン。</p></div><div class="case-item"><strong>ケース3｜ROAだけで弱いと判断した</strong><p>4年償却等が大きいとROAは過度に低く見える。ROA単独ではなく、必ず減価償却前ROAを併記する。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="S" data-search="金融機関借入 ebitda倍率 金融機関借入金が年間ebitdaの何年分あるか 一般の有利子負債/ebitda倍率を和京用に分子調整した独自運用 主要目標＋レッドライン" id="metric-2-8">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-S">S</span>
+<div>
+<div class="metric-no">2-8</div>
+<h3>金融機関借入 EBITDA倍率</h3>
+</div>
+</div>
+<span class="classification">主要目標＋レッドライン</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>きんゆうきかん・かりいれ・いーびっとでぃーえー・ばいりつ</b></div>
+<div><span>和訳・意味</span><b>金融機関借入金が年間EBITDAの何年分あるか</b></div>
+<div><span>一般指標か</span><b>一般の有利子負債/EBITDA倍率を和京用に分子調整した独自運用</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>銀行からの借入総額が、減価償却前の本業の稼ぐ力の何年分あるか。10倍なら「年間EBITDAの10年分」という意味。実際の完済年数ではない。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">金融機関借入 EBITDA倍率 ＝ 金融機関借入残高 ÷ 簡易EBITDA</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>15倍以内</strong><span>目標水準。</span></div><div class="threshold ok"><strong>15倍超18倍以下</strong><span>成長許容水準。</span></div><div class="threshold warn"><strong>18倍超20倍以下</strong><span>警戒・財務調整水準。</span></div><div class="threshold danger"><strong>20倍超</strong><span>レッドライン。原則新規取得停止。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>役員借入の扱い</h4><p>和京の主要指標では役員借入金を分子から除外し、金融機関借入のみを見る。したがって一般の「有利子負債/EBITDA倍率」「グロス・レバレッジ・レシオ」と完全同一ではない。銀行説明時は定義を必ず明記する。</p></div><div class="detail-block"><h4>決めた理由</h4><p>金融庁は有利子負債/EBITDA倍率を「借入総額返済余裕度」として例示しており、借入を増やす成長企業で負債増加とEBITDA成長を見る考え方は銀行実務に整合。一方、和京は役員資金と銀行借入を区別したいので分子を金融機関借入に限定。貸家業BAST黒字企業平均の「短期＋長期借入÷営業利益＋減価償却」の概算は約10.5倍で、15倍目標は成長余地を持たせた社内基準。なおBAST分子は和京の銀行借入限定定義と完全一致しないため、10.5倍はクロスチェックであり公式ベンチマークではない。</p></div><div class="detail-block"><h4>DSCRとの関係</h4><p>EBITDA倍率は借金の「総量」を見る。DSCRは毎年の「元利返済額」を見る。同じ借入額でも融資期間が短ければDSCRは悪化するため、両方必要。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜14倍</strong><p>目標水準内。借金総量としてはまだ管理可能。次の取得で何倍まで上がるかを先に試算したい。</p></div><div class="case-item"><strong>ケース2｜19倍</strong><p>18倍超20倍以下は警戒・財務調整水準。毎年返せていても、借金総量が重くなってきたサイン。新規取得よりEBITDAの底上げや頭金調整を優先。</p></div><div class="case-item"><strong>ケース3｜22倍</strong><p>20倍超でレッドライン。原則新規取得停止。役員借入を分子から除外してもこの水準なら、銀行借入自体が重すぎる。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="A" data-search="自由現金・資本性役員借入考慮後債務償還年数 実際の返済圧力を調整した社内債務償還年数 和京独自の社内管理指標 補助目標＋停止ライン" id="metric-2-9">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-A">A</span>
+<div>
+<div class="metric-no">2-9</div>
+<h3>自由現金・資本性役員借入考慮後債務償還年数</h3>
+</div>
+</div>
+<span class="classification">補助目標＋停止ライン</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>じゆうげんきん・しほんせいやくいんかりいれ・こうりょご・さいむしょうかんねんすう</b></div>
+<div><span>和訳・意味</span><b>実際の返済圧力を調整した社内債務償還年数</b></div>
+<div><span>一般指標か</span><b>和京独自の社内管理指標</b></div>
+<div><span>優先度／ランク</span><b>A</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>帳簿上の借金全部を同じ重さで見ず、「返済圧力の低い資本性役員借入」と「本当に返済へ使える自由現金」を調整した後、残る実質返済負担がEBITDAの何年分かを見る。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">（有利子負債 － 資本性調整対象役員借入金 － 自由現金）÷ EBITDA</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>15年以下</strong><span>目標・良好。</span></div><div class="threshold ok"><strong>15年超20年以下</strong><span>許容・改善管理。</span></div><div class="threshold danger"><strong>20年超</strong><span>新規取得を原則停止し、改善を優先。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>役員借入を重く見る理由</h4><p>和京では、自由現金よりも「長期・劣後で返済圧力が低い役員借入」の存在をより重要な実態調整として扱う方針。ただし資本性条件を満たす部分だけを控除し、短期的な役員資金は控除しない。</p></div><div class="detail-block"><h4>金融機関借入 EBITDA倍率との関係</h4><p>金融機関借入 EBITDA倍率は現金を控除しない「グロス」の主要指標。本指標は自由現金と資本性役員借入を考慮する社内補助指標。銀行員には、まず一般に理解しやすい標準的なEBITDAレバレッジを示し、その後に調整版として説明する。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜13年</strong><p>良好水準。自由現金と資本性役員借入を考慮しても、実質返済負担は重すぎない。</p></div><div class="case-item"><strong>ケース2｜17年</strong><p>許容だが改善管理ゾーン。今後の取得で20年を超えないか、自由現金の減少も踏まえて管理する。</p></div><div class="case-item"><strong>ケース3｜23年</strong><p>20年超で原則取得停止。見かけの現預金や短期役員資金を甘く入れていないか再点検しつつ、改善が先。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="S" data-search="全社dscr debt service coverage ratio／全社債務返済余裕率 一般指標を法人全体に適用 主要目標＋レッドライン" id="metric-2-10">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-S">S</span>
+<div>
+<div class="metric-no">2-10</div>
+<h3>全社DSCR</h3>
+</div>
+</div>
+<span class="classification">主要目標＋レッドライン</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>ぜんしゃ・でぃーえすしーあーる</b></div>
+<div><span>和訳・意味</span><b>Debt Service Coverage Ratio／全社債務返済余裕率</b></div>
+<div><span>一般指標か</span><b>一般指標を法人全体に適用</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会社全体が1年間に生み出す返済原資で、全金融機関借入の元本＋利息を何倍払えるか。ICRと違い「元本」まで含むため、実際の返済能力に近い。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">全社DSCR ＝ 平常化CFADS ÷ 年間元利返済額</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>1.20倍以上</strong><span>目標水準。</span></div><div class="threshold ok"><strong>1.10倍以上1.20倍未満</strong><span>成長許容水準。</span></div><div class="threshold warn"><strong>1.00倍以上1.10倍未満</strong><span>警戒水準。</span></div><div class="threshold danger"><strong>1.00倍未満</strong><span>レッドライン。原則新規取得停止。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>平常化のルール</h4><p>実績DSCRと取得後平常化DSCRを分ける。新規物件購入代金や取得諸費用などの成長投資を平常化CFADSから機械的に引かない。新規物件が12か月稼働した前提で収益・経費・法人共通費を反映する。</p></div><div class="detail-block"><h4>物件単体との整合</h4><p>物件単体は通常DSCR1.40倍目標、20%Stress DSCR1.00倍以上を絶対条件。会社全体は物件の分散・共通経費・全借入を合算するため、通常1.20倍目標とする。</p></div><div class="detail-block"><h4>根拠の位置付け</h4><p>日銀の貸家業向け金融機関調査では、DSCRを入口審査に使う先が多く、最低水準として1.0倍以上を置く先が多い。金融庁も2026年のコベナンツ例で会社単体・連結DSCRを財務制限条項の例として扱う。ただし1.20倍は和京の内部目標であり、日本の銀行共通公式値ではない。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜全社DSCR 1.25倍</strong><p>目標1.20以上をクリア。年間の元利返済に対する返済余力としては良好。</p></div><div class="case-item"><strong>ケース2｜1.05倍</strong><p>警戒水準。返済は回っていても余白が薄く、空室・修繕・金利上昇で1.00を割り込みやすい。</p></div><div class="case-item"><strong>ケース3｜0.95倍</strong><p>レッドライン。年間返済額を平常化CFADSで賄えていないため、原則新規取得停止。借り換え・返済期間・賃料改善・経費是正を検討。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="S" data-search="全社stress dscr 総合ストレス後の全社債務返済余裕率 一般的なストレステスト思想を和京用に数値化 絶対基準のみ（目標値は置かない）" id="metric-2-11">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-S">S</span>
+<div>
+<div class="metric-no">2-11</div>
+<h3>全社Stress DSCR</h3>
+</div>
+</div>
+<span class="classification">絶対基準のみ（目標値は置かない）</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>ぜんしゃ・すとれす・でぃーえすしーあーる</b></div>
+<div><span>和訳・意味</span><b>総合ストレス後の全社債務返済余裕率</b></div>
+<div><span>一般指標か</span><b>一般的なストレステスト思想を和京用に数値化</b></div>
+<div><span>優先度／ランク</span><b>S</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>空室・賃料下落・滞納・経費増・修繕増・金利上昇等の複合悪化を、平常化CFADSの10%毀損として一括換算し、悪化時にも元利返済を維持できるかを見る。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">全社Stress DSCR ＝（平常化CFADS × 90%）÷ 年間元利返済額</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold danger"><strong>1.00倍以上 必須</strong><span>10%総合Stressをかけた後でも1.00倍以上を必須。1.00倍未満になる新規取得は原則行わない。目標1.10や1.20等は置かない。「割らないための防波堤」に限定する。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>10%の意味</h4><p>賃料だけを10%下げるのではなく、空室・賃料下落・滞納・経費増・修繕増・金利上昇その他の悪化を、管理上「返済原資10%毀損」に一括換算する。個別の金利Stressを別Gateにしない。</p></div><div class="detail-block"><h4>なぜ20%ではないか</h4><p>物件単体では20%Stressを採用しているが、会社全体に20%を一律負荷すると通常DSCR1.20の会社でも0.96まで落ちるため、取得拡大型法人には重すぎる。会社全体はポートフォリオ分散を考慮して10%を通常Stress、物件単体は20%という役割分担。銀行共通の10%ルールではない。</p></div><div class="detail-block"><h4>銀行実務との整合</h4><p>日本銀行の2023年度調査では、居住用賃貸業向けでストレステスト実施先が地域銀行約97%、信用金庫約79%。内容は賃料収入下落シナリオが地域銀行約93%、信用金庫約99%、金利上昇が約76%／78%。つまりストレス検証自体は銀行実務に強く整合するが、具体的な10%は和京内部値。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜Stress後1.08倍</strong><p>10%総合Stress後でも1.00以上を維持。防波堤としてはクリア。</p></div><div class="case-item"><strong>ケース2｜通常1.12倍でもStress後0.99倍</strong><p>通常は一見耐えていても、Stress後に1.00を割るなら絶対線未達。こういう案件は「平時は回るが悪化に弱い」。</p></div><div class="case-item"><strong>ケース3｜物件単体20%Stressと混同した</strong><p>会社全体は10%総合Stress、物件単体は20%Stress。役割が違うため、そのまま同じラインで比較しない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="B" data-search="減価償却前icr（管理呼称：ebitda icr） 減価償却前利息返済余力倍率 icrを和京の償却負担に合わせて補正した管理指標 ウォッチ" id="metric-2-12">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-B">B</span>
+<div>
+<div class="metric-no">2-12</div>
+<h3>減価償却前ICR（管理呼称：EBITDA ICR）</h3>
+</div>
+</div>
+<span class="classification">ウォッチ</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>げんかしょうきゃくまえ・あいしーあーる</b></div>
+<div><span>和訳・意味</span><b>減価償却前利息返済余力倍率</b></div>
+<div><span>一般指標か</span><b>ICRを和京の償却負担に合わせて補正した管理指標</b></div>
+<div><span>優先度／ランク</span><b>B</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>減価償却を足し戻した利益等で、年間支払利息を何倍カバーできるかを見る。元本は含まない。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">減価償却前ICR ＝（営業利益＋減価償却費＋受取利息・配当金）÷ 支払利息</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>2.0倍以上</strong><span>通常。</span></div><div class="threshold warn"><strong>1.0倍以上2.0倍未満</strong><span>ウォッチ。</span></div><div class="threshold danger"><strong>1.0倍未満</strong><span>強警戒。</span></div><div class="threshold neutral"><strong>単独Gateなし</strong><span>単独では新規取得停止条件にしない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>理由</h4><p>1.0倍は減価償却前の利益等で利息をカバーできる最低境界。2.0倍は「優良」ではなく、ここまで落ちたら利息負担を確認する社内ウォッチ境界。貸家業BAST黒字平均の基礎数値から同式を概算すると約8.2倍であり、2倍は下限寄り。</p></div><div class="detail-block"><h4>他指標との関連</h4><p>元本を含まないため、全社DSCRより優先度は低い。金融機関借入 EBITDA倍率・DSCR・Stress DSCRの補助として使う。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜2.6倍</strong><p>通常水準。減価償却前の利益等で利息は十分カバーできている。</p></div><div class="case-item"><strong>ケース2｜1.4倍</strong><p>ウォッチ水準。元本返済まで含めるDSCRが大丈夫でも、利息負担が重くなっていないか確認したい。</p></div><div class="case-item"><strong>ケース3｜0.8倍</strong><p>強警戒。減価償却前でも利息を賄えておらず、金利負担の重さが目立つ。単独停止指標ではないが、DSCRやEBITDA倍率も悪ければ危険度が高い。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="C" data-search="通常icr interest coverage ratio／利息返済余裕率 一般指標 参考値" id="metric-2-13">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-C">C</span>
+<div>
+<div class="metric-no">2-13</div>
+<h3>通常ICR</h3>
+</div>
+</div>
+<span class="classification">参考値</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>あいしーあーる</b></div>
+<div><span>和訳・意味</span><b>Interest Coverage Ratio／利息返済余裕率</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>会計利益ベースで利息をどの程度賄えているかを見る参考値。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">ICR ＝（営業利益＋受取利息・配当金）÷ 支払利息</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>固定目標なし</strong><span>数値は出すが固定目標は置かない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>和京の方針</h4><p>4年償却等で営業利益が大きく下がると、現金創出力に比べ極端に悪く見えるため。</p></div><div class="detail-block"><h4>判断</h4><p>1.0倍未満は会計利益ベースでは利息を賄えていないことを示すが、取得停止はICR単独で決めず、減価償却前ICR・全社DSCR・EBITDA倍率を優先。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜通常ICRがマイナス</strong><p>会計利益ベースでは利息を賄えていない見え方。だが不動産賃貸業では償却の影響が強く、これだけで取得停止判断はしない。</p></div><div class="case-item"><strong>ケース2｜通常ICR 1.3倍</strong><p>参考としては悪くないが、主役は減価償却前ICR・全社DSCR・金融機関借入 EBITDA倍率。</p></div><div class="case-item"><strong>ケース3｜通常ICRだけ良く見せた</strong><p>償却負担や元本返済が見えないため、銀行説明では補助指標として扱う。主要判定に格上げしない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="B" data-search="固定長期適合率 固定資産を長期安定資金で賄えているか 一般指標 ウォッチ" id="metric-2-14">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-B">B</span>
+<div>
+<div class="metric-no">2-14</div>
+<h3>固定長期適合率</h3>
+</div>
+</div>
+<span class="classification">ウォッチ</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>こてい・ちょうき・てきごうりつ</b></div>
+<div><span>和訳・意味</span><b>固定資産を長期安定資金で賄えているか</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>B</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>土地・建物のような長期保有資産を、短期借入・流動負債のような「すぐ返す資金」で恒常的に持っていないかを見る期間ミスマッチ指標。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">固定長期適合率 ＝ 固定・繰延資産 ÷（自己資本＋固定負債）× 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>100%以下</strong><span>目安。</span></div><div class="threshold warn"><strong>100%超</strong><span>原因確認。ただし独立した取得停止Gateにはしない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>貸家業の比較</h4><p>R8.7 和京資料の貸家業BASTは優良89.8%、黒字平均94.4%、黒字中位94.7%。</p></div><div class="detail-block"><h4>役員借入の歪み</h4><p>和京R8.7は帳簿上156.1%だが、短期借入金約989.7万円が実態として役員借入。これが実質長期資金として適切に長期負債へ整理された仮定では概算約96.3%まで下がる。会計科目の振替は実態と契約が長期である場合に限る。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜96%</strong><p>100%以下の目安内。固定資産を長期安定資金で賄えている形。</p></div><div class="case-item"><strong>ケース2｜115%</strong><p>100%超なので原因確認。長期保有資産を短期借入や流動負債で持っていないか、期間ミスマッチを疑う。</p></div><div class="case-item"><strong>ケース3｜156%だが短期役員借入が多い</strong><p>帳簿上は悪く見えても、実態が長期役員資金なら整理後は改善する可能性がある。ただし、会計科目の振替だけでは足りず、契約・実態が前提。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="B" data-search="経常利益 本業利益に営業外損益を加えた通常活動の会計利益 一般指標 ウォッチ（黒字が望ましい）" id="metric-2-15">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-B">B</span>
+<div>
+<div class="metric-no">2-15</div>
+<h3>経常利益</h3>
+</div>
+</div>
+<span class="classification">ウォッチ（黒字が望ましい）</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>けいじょうりえき</b></div>
+<div><span>和訳・意味</span><b>本業利益に営業外損益を加えた通常活動の会計利益</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>B</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>継続黒字を目指すが、「経常赤字＝新規取得禁止」にはしない。不動産取得年度の一過性費用や大きな減価償却で会計利益が赤字でも、返済原資がプラスの場合がある。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line muted">算式の固定表示なし</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold good"><strong>平常化ベース黒字</strong><span>望ましい。</span></div><div class="threshold warn"><strong>赤字</strong><span>単独で取得停止しない。原因分解が必要。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>赤字時の確認</h4><p>赤字原因を分解し、減価償却前ROA、減価償却前ICR、全社DSCR、Stress DSCR、金融機関借入 EBITDA倍率、実質自己資本を併せて判断する。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜経常赤字だがDSCRは1.25倍</strong><p>取得年度の一過性費用や大きな減価償却が原因なら、即停止ではない。赤字の中身を分解して説明する。</p></div><div class="case-item"><strong>ケース2｜経常赤字でDSCRも0.98倍</strong><p>会計利益も返済余力も弱い状態。これは「赤字だからダメ」ではなく、他の主要指標まで崩れているのが問題。</p></div><div class="case-item"><strong>ケース3｜黒字なら安心とした</strong><p>黒字でも借金総量やStress耐性が悪ければ安全とは言えない。経常利益はウォッチ指標。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="C" data-search="現預金比率 cash ratio to assets／総資産に占める現預金割合 一般指標 参考値" id="metric-2-16">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-C">C</span>
+<div>
+<div class="metric-no">2-16</div>
+<h3>現預金比率</h3>
+</div>
+</div>
+<span class="classification">参考値</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>げんよきん・ひりつ</b></div>
+<div><span>和訳・意味</span><b>Cash Ratio to Assets／総資産に占める現預金割合</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>総資産に占める現金・預金の割合を見る。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">現預金比率 ＝ 現金・預金 ÷ 総資産 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>固定目標なし</strong><span>短期耐久力は手元流動性カバー月数で直接見る。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>和京の方針</h4><p>金融庁分析では不動産賃貸・管理業は安定賃料の特性から現預金比率が低位であることが目立つため、業種横断の一律基準は置かない。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜現預金比率が低い</strong><p>不動産賃貸・管理業では低位になりやすい。比率単独で悪いとは言えず、手元流動性カバー月数で耐久力を確認する。</p></div><div class="case-item"><strong>ケース2｜取得直後で現預金比率が急低下</strong><p>頭金や諸費用の支出で比率が下がるのは自然。ただし、取得後に何か月分耐えられるかまで見ないと危ない。</p></div><div class="case-item"><strong>ケース3｜比率が高いから安心した</strong><p>現預金比率が高くても、返済負担が重い・自由現金が薄い・今後の投資予定が大きいなら安心はできない。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="C" data-search="金融機関借入比率 総資産に対する金融機関借入の割合 一般の負債比率を和京用に分子調整 参考値" id="metric-2-17">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-C">C</span>
+<div>
+<div class="metric-no">2-17</div>
+<h3>金融機関借入比率</h3>
+</div>
+</div>
+<span class="classification">参考値</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>きんゆうきかん・かりいれ・ひりつ</b></div>
+<div><span>和訳・意味</span><b>総資産に対する金融機関借入の割合</b></div>
+<div><span>一般指標か</span><b>一般の負債比率を和京用に分子調整</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>総資産に対して、金融機関からの借入残高がどの程度あるかを見る。和京では役員借入金を除外する。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">簿価金融機関借入比率 ＝ 金融機関借入残高 ÷ 簿価総資産 × 100</div><div class="formula-line">実質金融機関借入比率 ＝ 金融機関借入残高 ÷ 保守的実勢総資産 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>参考表示のみ</strong><span>借入量の良し悪しは、より返済力に直結する金融機関借入 EBITDA倍率と全社DSCRを優先する。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>役員借入の扱い</h4><p>和京のこの指標では役員借入金を除外する。金融庁分析の「負債比率」は短期＋長期借入÷総資産等であり、和京の定義と同一ではない。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜47.5%</strong><p>総資産に対する銀行借入の参考値として把握するのは有効。ただし良し悪しの判定は、まずEBITDA倍率と全社DSCR。</p></div><div class="case-item"><strong>ケース2｜借入比率80%</strong><p>数字だけ見ると高いが、物件評価や収益力次第で一概に危険とは言えない。ここだけで取得停止判断しない。</p></div><div class="case-item"><strong>ケース3｜役員借入まで同列に足した</strong><p>和京の定義では役員借入を除外する。一般の負債比率と同じ意味ではないため、銀行説明では定義を明記する。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="C" data-search="平均借入金利 金融機関借入の平均調達コスト 一般指標 参考値" id="metric-2-18">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-C">C</span>
+<div>
+<div class="metric-no">2-18</div>
+<h3>平均借入金利</h3>
+</div>
+</div>
+<span class="classification">参考値</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>へいきん・かりいれ・きんり</b></div>
+<div><span>和訳・意味</span><b>金融機関借入の平均調達コスト</b></div>
+<div><span>一般指標か</span><b>一般指標</b></div>
+<div><span>優先度／ランク</span><b>C</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>金融機関借入の平均調達コストを把握するための参考値。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">平均借入金利 ＝ 年間支払利息 ÷ 期中平均金融機関借入残高 × 100</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>基準なし</strong><span>借入期間、固定／変動、担保、金融機関等で合理的に変わるため、単独で取得可否を決めない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>関連</h4><p>利率が上がれば全社DSCRが悪化する。和京では金利Stressを独立Gateにせず、10%総合Stressへ包括する。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜平均借入金利1.8%</strong><p>調達コストとしては低め。とはいえ単独では良否を決めず、DSCRへの影響を見る。</p></div><div class="case-item"><strong>ケース2｜平均借入金利3.2%へ上昇</strong><p>金利上昇で支払利息が増えると、全社DSCRやICRが圧迫される。借換え余地や固定・変動の構成も確認。</p></div><div class="case-item"><strong>ケース3｜金利だけで案件可否を決めた</strong><p>借入期間、返済額、CF、Stress耐性を無視すると誤る。和京では金利Stressを独立Gateにせず、10%総合Stressへ包括する。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+<article class="metric-card" data-rank="D" data-search="通常の債務償還年数 debt repayment period／借入を返済原資で何年分か 日本の中小企業金融で一般的。ただし算式差が大きい 表示のみ" id="metric-2-19">
+<div class="metric-head">
+<div class="metric-title-wrap">
+<span class="rank rank-D">D</span>
+<div>
+<div class="metric-no">2-19</div>
+<h3>通常の債務償還年数</h3>
+</div>
+</div>
+<span class="classification">表示のみ</span>
+</div>
+<div class="metric-meta">
+<div><span>呼び方</span><b>さいむ・しょうかん・ねんすう</b></div>
+<div><span>和訳・意味</span><b>Debt Repayment Period／借入を返済原資で何年分か</b></div>
+<div><span>一般指標か</span><b>日本の中小企業金融で一般的。ただし算式差が大きい</b></div>
+<div><span>優先度／ランク</span><b>D</b></div>
+<div><span>銀行向け位置付け</span><b>本書の「銀行目線・注意点」および第6章の説明構造に従う</b></div>
+</div>
+<div class="essence">
+<span class="eyebrow">要するに</span>
+<p>借入残高を、経常利益＋減価償却費－税等の簡易キャッシュフローで何年かけて返せるかを見る。金融機関・公的診断で分子の現預金控除や分母の税・利益定義に差がある。</p>
+</div>
+<div class="formula-box">
+<span class="eyebrow">計算式</span>
+<div class="formula-line">代表例：（借入金 － 現預金等）÷（経常利益＋減価償却費－法人税等）</div>
+</div>
+<div class="threshold-grid">
+<div class="threshold neutral"><strong>表示のみ</strong><span>数値表示してよいが、評価・参考・取得Gateには使わない。</span></div>
+</div>
+<details class="metric-details">
+<summary>説明・根拠・運用上の注意を開く</summary>
+<div class="details-body"><div class="detail-block"><h4>和京の最終方針</h4><p>減価償却を既に足し戻す算式が多く、別に「減価償却前債務償還年数」を作る必要もない。借金総量の主要評価は金融機関借入 EBITDA倍率、実際の毎年返済力は全社DSCRで見る。</p></div><div class="detail-block"><h4>旧版との変更</h4><p>旧版の社内資料には15年以下目標・20年超停止等を「法人債務償還年数」へ直接適用した記載があるが、現在は通常債務償還年数を表示のみへ変更。その15年／20年の管理思想は、別途「自由現金・資本性役員借入考慮後債務償還年数」に統合している。</p></div></div>
+<details class="case-study"><summary>ケーススタディ｜こうなると危ない・どう読むか</summary><div class="case-study-body"><div class="case-grid"><div class="case-item"><strong>ケース1｜9年</strong><p>数値として表示する分には分かりやすい。一般的には良好に見えやすい。</p></div><div class="case-item"><strong>ケース2｜25年</strong><p>長く見えても、それだけで即NGとはしない。和京では表示のみで、主要評価は金融機関借入 EBITDA倍率と全社DSCRに寄せている。</p></div><div class="case-item"><strong>ケース3｜通常債務償還年数を主役に戻した</strong><p>旧版では15年目標・20年超停止の思想があったが、最終版では別指標（自由現金・資本性役員借入考慮後債務償還年数）へ統合済み。</p></div></div><div class="case-note">※ケースは本書の基準の読み方をイメージ化した例。実際の取得判断では、単独指標ではなく、S→A→B→C/Dの順で重ねて確認する。</div></div></details></details>
+</article>
+</section>
+<section id="current">
+<div class="section-head"><div><h2>3｜和京スマイの現状値</h2><p>基礎資料から確認できる範囲。時点整合を最優先。</p></div></div>
+<div class="callout danger">
+<h3>重要：時点不一致の倍率を正式値にしない</h3>
+<p>取得直後の新規借入と旧決算のEBITDAを混ぜて倍率を作ると時系列が不一致になる。「決算時点の確定値」「R8.7月次BS」「参考計算」を明確に分ける。新規物件の通期収益を反映した平常化後数値は別途更新する。</p>
+</div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>時点</th><th>総資産</th><th>負債</th><th>純資産</th><th>簿記上自己資本比率</th></tr></thead>
+<tbody>
+<tr><td><strong>1期末</strong></td><td>8,065,950円</td><td>1,169,652円</td><td>6,896,298円</td><td>85.5%</td></tr>
+<tr><td><strong>2期末 2025-05-31</strong></td><td>15,929,078円</td><td>10,550,589円</td><td>5,378,489円</td><td>33.8%</td></tr>
+<tr><td><strong>3期末 2026-05-31</strong></td><td>18,148,516円</td><td>14,042,706円</td><td>4,105,810円</td><td>22.6%</td></tr>
+<tr><td><strong>R8.7 2026-07-31</strong></td><td>25,869千円</td><td>22,191千円</td><td>3,677千円</td><td>14.2%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="current-grid" style="margin-top:16px">
+<div class="stat-card">
+<h3>3期の収益系参考計算</h3>
+<div class="table-wrap">
+<table style="min-width:640px">
+<thead><tr><th>指標</th><th>参考値</th><th>注意</th></tr></thead>
+<tbody>
+<tr><td>ROA</td><td><strong>約 -5.59%</strong></td><td>営業損失の影響。</td></tr>
+<tr><td>減価償却前ROA</td><td><strong>約 4.03%</strong></td><td>目標5%に未達。</td></tr>
+<tr><td>通常ICR</td><td><strong>約 -5.41倍</strong></td><td>会計利益ベースではマイナス。参考値。</td></tr>
+<tr><td>減価償却前ICR</td><td><strong>約 3.89倍</strong></td><td>2倍ウォッチ境界は上回る。</td></tr>
+<tr><td>簡易EBITDA</td><td><strong>727,934円</strong></td><td>営業利益▲1,017,817円＋減価償却1,745,751円。</td></tr>
+<tr><td>3期末 金融機関借入 EBITDA倍率</td><td><strong>約 9.13倍</strong></td><td>3期末銀行借入6,643,453円÷3期EBITDA。時点整合あり。</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="stat-card">
+<h3>R8.7 借入構成</h3>
+<p><strong>短期借入金 9,897千円</strong>は実態として役員借入金、<strong>長期借入金等 12,276千円</strong>は金融機関借入として管理。</p>
+<p>よって和京の金融機関借入比率は概算<strong>47.5%</strong>（12,276÷25,869）。</p>
+<div class="callout warning">
+<p>新規物件の通期EBITDAが3期PLに入っていないため、12,276千円を3期EBITDA 727,934円で割った<strong>16.86倍</strong>は「時系列不一致の参考値」であり、正式な現状倍率として使わない。</p>
+</div>
+<h3>固定長期適合率</h3>
+<p>R8.7帳簿値<strong>156.1%</strong>。短期役員借入9,897千円が実質長期資金として適切に固定負債へ整理された仮定では概算<strong>96.3%</strong>。会計処理を先に決めるものではなく、契約・返済実態が長期である場合に税理士と整理する。</p>
+</div>
+</div>
+</section>
+<section id="officer-loan">
+<div class="section-head"><div><h2>4｜役員借入金の資本性・書面化ルール</h2><p>資本性調整後の数値を恣意的にしないための「計算・証拠ルール」。</p></div></div>
+<div class="panel">
+<div class="callout">
+<h3>日常運用</h3>
+<p>スポット借入の都度、契約書を量産する必要はない。銀行振込＋帳簿（役員借入金補助元帳）で日付・借入額・返済額・残高を追える状態にする。</p>
+</div>
+<h3>正式書面は後日作成することで決定済み</h3>
+<ul class="doc-list">
+<li>役員借入金基本契約書（包括契約）</li>
+<li>締結時の既存役員借入金残高明細</li>
+<li>必要な株主総会議事録または取締役会議事録</li>
+<li>毎期の役員借入金明細表（帳簿から作成）</li>
+<li>毎期末の役員借入金残高確認書</li>
+</ul>
+<div class="current-grid" style="margin-top:18px">
+<div class="stat-card"><h3>期末運用</h3><p>期末に帳簿から明細と残高をまとめる。残高確認書は原契約の条件変更ではなく、期末残高の確認に徹する。</p></div>
+<div class="stat-card"><h3>契約時の重要条件</h3><p>各追加借入を長期・劣後的に扱いたい場合、基本契約で長期性、銀行借入優先、業績悪化時返済猶予、金利負担、書面化を明確にする。</p></div>
+</div>
+<div class="callout warning">
+<h3>金融庁の資本性判断</h3>
+<p>資本性借入金の判断は「償還条件・金利設定・劣後性」等の実態で行われ、債権者が個人であること自体は排除要因ではない。</p>
+</div>
+<p><strong>後日作業：</strong>実際の契約書・残高確認書・承認議事録等の文案は後で正式作成する。本書では財務ルールだけ確定。</p>
+</div>
+</section>
+<section id="rejected">
+<div class="section-head"><div><h2>5｜不採用・格下げしたKPI</h2><p>「入れなかった理由」も残し、後で指標が増殖しないようにする。</p></div></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>指標</th><th>最終扱い</th><th>理由</th></tr></thead>
+<tbody>
+<tr><td>流動比率</td><td>不採用</td><td>役員借入金が短期表示されると大きく歪み、手元流動性カバー月数の方が実務的。</td></tr>
+<tr><td>当座比率</td><td>不採用</td><td>同上。貸家業では現預金中心であり、和京には直接性が低い。</td></tr>
+<tr><td>長短借入構成比</td><td>不採用</td><td>長期保有不動産を短期銀行借入で恒常保有しない方針。期間ミスマッチは固定長期適合率で確認。</td></tr>
+<tr><td>保有不動産の含み損益率</td><td>独立KPI不採用</td><td>保守的実勢評価を実質純資産・実質自己資本比率へ反映するため二重判定になる。</td></tr>
+<tr><td>会社全体の独立CapEx比率</td><td>不採用</td><td>通常修繕・維持更新は物件単体側で網羅し、会社全体CFへ積み上げる。再控除すると二重計上。成長CapExは案件投資として別管理。</td></tr>
+<tr><td>ROE</td><td>不採用</td><td>借入拡大型不動産会社では自己資本が小さいほど見かけ上高くなる等、銀行向け財務健全性の主役にしにくい。</td></tr>
+<tr><td>D/Eレシオ</td><td>不採用</td><td>借入総量は金融機関借入 EBITDA倍率、BS厚みは実質自己資本比率でより直接的に管理。</td></tr>
+<tr><td>FCCR</td><td>不採用</td><td>全社DSCR・Stress DSCR・手元流動性で必要な固定支払余力をより直接的に確認できる。</td></tr>
+<tr><td>借入金月商倍率・預借率</td><td>不採用</td><td>貸家業で売上規模との単純比較は優先度が低く、既存の返済力指標と重複。</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section-head" style="margin-top:30px"><div><h2 style="font-size:26px">5-1｜旧版・過去案からの上書き事項</h2></div></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>論点</th><th>旧案</th><th>本書の最終版</th></tr></thead>
+<tbody>
+<tr><td>実質自己資本比率</td><td>25%絶対下限・30%目標</td><td>25%目標、30%保守運営、20-25財務調整、20%未満取得再検討。</td></tr>
+<tr><td>簿記上自己資本比率</td><td>20%未満強警戒等</td><td>参考値のみ。独自基準なし。</td></tr>
+<tr><td>自由現預金</td><td>2か月最低・3か月目標＋12か月CapEx</td><td>独立の2/3か月基準は使わず、手元流動性カバー月数6か月目標へ。自由現金の概念は調整後債務償還年数に残す。</td></tr>
+<tr><td>通常債務償還年数</td><td>15年目標・20年超停止を直接適用</td><td>通常値は表示のみ。15/20年管理は自由現金・資本性役員借入考慮後の社内指標へ統合。</td></tr>
+<tr><td>通常ICR</td><td>2倍等の固定目標案</td><td>通常ICRは参考。減価償却前ICRを2倍ウォッチ。</td></tr>
+<tr><td>Debt/EBITDA</td><td>固定Gateなし</td><td>金融機関借入 EBITDA倍率として15/18/20倍の主要基準。</td></tr>
+<tr><td>全社Stress</td><td>旧案に15%等</td><td>総合10%Stress、Stress DSCR 1.00以上を絶対基準。</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="bank">
+<div class="section-head"><div><h2>6｜銀行へ説明するときの構造</h2><p>「簿価を隠さず、調整を順番に積み上げる」が基本。</p></div></div>
+<div class="layer-list">
+<div class="layer"><strong>第1層：簿記上数値をそのまま開示</strong><br/>簿記上自己資本比率、純資産、借入一覧、平均金利等。</div>
+<div class="layer"><strong>第2層：保守的実勢評価</strong><br/>保有不動産等を保守的に実勢評価し、実質純資産・実質自己資本比率を示す。</div>
+<div class="layer"><strong>第3層：資本性調整</strong><br/>資本性条件を満たす役員借入を別表示し、資本性調整後実質自己資本を示す。銀行判断であることを明記。</div>
+<div class="layer"><strong>第4層：借金総量・返済力・ストレス耐性</strong><br/>金融機関借入 EBITDA倍率で借金総量、全社DSCRで毎年の元利返済力、全社Stress DSCRで悪化時の耐性を示す。</div>
+<div class="layer"><strong>第5層：資産収益力・現金耐久力</strong><br/>ROA・減価償却前ROAで資産収益力、手元流動性6か月で現金耐久力を示す。</div>
+</div>
+<div class="callout">
+<h3>弱点は隠さない</h3>
+<p>赤字・低い簿記上自己資本等の弱点は隠さず、原因と調整根拠、取得後平常化数値まで一体で説明する。</p>
+</div>
+<div class="callout danger">
+<h3>銀行向けの禁止表現</h3>
+<p>「銀行基準で25%」「銀行は20倍まで貸す」「10%Stressが銀行公式」等とは言わない。銀行ごとの内部格付・スコアリング・担保評価・審査閾値は非公開。和京の数値は、公開されている銀行実務・貸家業同業データを踏まえた社内ガードレールとして説明する。</p>
+</div>
+</section>
+<section id="sources">
+<div class="section-head"><div><h2>7｜根拠資料・出典</h2><p>公的資料・同業データ・社内資料を分けて記録。</p></div></div>
+<div class="table-wrap">
+<table>
+<thead><tr><th>ID</th><th>資料</th><th>本書での利用</th><th>URL／所在</th></tr></thead>
+<tbody><tr><td><span class="source-id">S1</span></td><td><strong>金融庁「地域銀行の不動産業向け融資に関する分析」(2024)</strong></td><td>不動産業のROA、支払金利、負債比率、現預金比率。不動産賃貸・管理業はROA変動が小さく現預金比率が低位。</td><td><a href="https://www.fsa.go.jp/common/about/kaikaku/fsaanalyticalnotes/20240702/01.pdf" rel="noopener" target="_blank">https://www.fsa.go.jp/common/about/kaikaku/fsaanalyticalnotes/20240702/01.pdf</a></td></tr><tr><td><span class="source-id">S2</span></td><td><strong>金融庁「貸付特約書の書式例（コベナンツの規定例）」(2026)</strong></td><td>借入総額返済余裕度（有利子負債/EBITDA倍率）、DSCRを財務制限条項の例として定義。</td><td><a href="https://www.fsa.go.jp/news/r7/sonota/20260311/01.pdf" rel="noopener" target="_blank">https://www.fsa.go.jp/news/r7/sonota/20260311/01.pdf</a></td></tr><tr><td><span class="source-id">S3</span></td><td><strong>日本銀行「地域金融機関の貸家業向け貸出と与信管理の課題」(2016)</strong></td><td>DSCRの活用、最低1.0倍以上とする先が多いこと、修繕費・大規模修繕・税・保険、収入減・金利上昇Stress。</td><td><a href="https://www.boj.or.jp/research/brp/fsr/data/fsrb160324.pdf" rel="noopener" target="_blank">https://www.boj.or.jp/research/brp/fsr/data/fsrb160324.pdf</a></td></tr><tr><td><span class="source-id">S4</span></td><td><strong>日本銀行「地域金融機関の不動産業向け貸出の現状」(2024)</strong></td><td>居住用賃貸業向けStress実施割合、賃料下落・金利上昇Stress、ポートフォリオ分析。</td><td><a href="https://www.boj.or.jp/research/brp/fsr/data/fsrb240329b.pdf" rel="noopener" target="_blank">https://www.boj.or.jp/research/brp/fsr/data/fsrb240329b.pdf</a></td></tr><tr><td><span class="source-id">S5</span></td><td><strong>金融庁「投資用不動産向け融資に関するアンケート調査結果」(2019)</strong></td><td>一棟物は物件CFを主な返済原資とし、耐用年数・融資期間の整合、Stressを勘案した完済までの収支シミュレーションを重視。</td><td><a href="https://www.fsa.go.jp/news/30/20190328_summary.PDF" rel="noopener" target="_blank">https://www.fsa.go.jp/news/30/20190328_summary.PDF</a></td></tr><tr><td><span class="source-id">S6</span></td><td><strong>金融庁「資本性借入金の取扱いの明確化」(2020)</strong></td><td>資本類似性は償還条件・金利設定・劣後性で判断。債権者が個人でも対象になり得る。</td><td><a href="https://www.fsa.go.jp/news/r1/ginkou/20200527.html" rel="noopener" target="_blank">https://www.fsa.go.jp/news/r1/ginkou/20200527.html</a></td></tr><tr><td><span class="source-id">S7</span></td><td><strong>TKC「令和8年版 TKC経営指標（BAST）」ニュースリリース (2026)</strong></td><td>262,244社、1,201業種、363金融機関等が融資審査等で利用。</td><td><a href="https://www.tkc.jp/news/2026/20260608/" rel="noopener" target="_blank">https://www.tkc.jp/news/2026/20260608/</a></td></tr><tr><td><span class="source-id">I1</span></td><td><strong>和京スマイ株式会社 3期決算書</strong></td><td>3期BS/PL、減価償却費、貸家業BAST黒字企業の基礎数値。</td><td>会話添付：2026年5月31日決算</td></tr><tr><td><span class="source-id">I2</span></td><td><strong>R8.7 要約貸借対照表</strong></td><td>2026年7月31日BS、貸家業6921の自己資本比率・固定長期適合率比較。</td><td>会話添付：2026年7月31日</td></tr><tr><td><span class="source-id">I3</span></td><td><strong>旧版 wakyo_smai_investment_credit_policy_FINAL_FULL.html</strong></td><td>過去の確定案・用語集。今回の打合せで上書きされた項目は本書の「旧版からの上書き事項」に明示。</td><td>ChatGPT Library</td></tr></tbody>
+</table>
+</div>
+<div class="panel" style="margin-top:18px">
+<h3>7-1｜本書の信頼性に関する注意</h3>
+<ul>
+<li>公開資料から確認できるのは「銀行が何を見るか」「どの指標を使うか」「貸家業の同業値」までであり、各銀行の内部格付ウェイト・足切り基準は原則非公開。</li>
+<li>したがって、本書では「公的・一般定義」「貸家業の実データ」「和京の内部基準」を区別して記載した。</li>
+<li>TKC BASTの同業平均は銀行の合格ラインではない。和京の決算書に掲載された貸家業データを、内部基準の現実性を検証する比較材料として使用。</li>
+<li>今後、金融機関から実際の審査フィードバック・コベナンツ・財務条件を得た場合は、その銀行固有情報を別レイヤーとして追記し、本書の一般基準と混同しない。</li>
+</ul>
+</div>
+</section>
+<section id="dashboard">
+<div class="section-head"><div><h2>付録A｜1ページ運用ダッシュボード</h2><p>原本の入力欄をWeb化。入力値はこの端末のブラウザ内だけに保存できる。</p></div></div>
+<div class="panel">
+<div class="dashboard-controls">
+<button id="saveDash" type="button">入力値を保存</button>
+<button id="loadDash" type="button">保存値を読込</button>
+<button id="clearDash" type="button">入力をクリア</button>
+<button onclick="window.print()" type="button">印刷</button>
+</div>
+<div class="table-wrap">
+<table id="dashboardTable">
+<thead><tr><th>指標</th><th>当月／取得後</th><th>和京基準</th><th>自動表示</th></tr></thead>
+<tbody><tr data-key="equity">
+<td><strong>実質自己資本比率</strong></td>
+<td class="input-cell"><input aria-label="実質自己資本比率" data-key="equity" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>25%以上目標／20%未満取得再検討</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="adjustedNet">
+<td><strong>資本性調整後実質純資産</strong></td>
+<td class="input-cell"><input aria-label="資本性調整後実質純資産" data-key="adjustedNet" data-unit="円" inputmode="decimal"/><span>円</span></td>
+<td>0円以下＝原則取得停止</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="liquidity">
+<td><strong>手元流動性カバー月数</strong></td>
+<td class="input-cell"><input aria-label="手元流動性カバー月数" data-key="liquidity" data-unit="か月" inputmode="decimal"/><span>か月</span></td>
+<td>6か月以上目標</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="roa">
+<td><strong>ROA</strong></td>
+<td class="input-cell"><input aria-label="ROA" data-key="roa" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>2%以上目標</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="roaPreDep">
+<td><strong>減価償却前ROA</strong></td>
+<td class="input-cell"><input aria-label="減価償却前ROA" data-key="roaPreDep" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>5%以上目標</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="debtEbitda">
+<td><strong>金融機関借入 EBITDA倍率</strong></td>
+<td class="input-cell"><input aria-label="金融機関借入 EBITDA倍率" data-key="debtEbitda" data-unit="倍" inputmode="decimal"/><span>倍</span></td>
+<td>15以内目標／18超警戒／20超レッド</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="repayYears">
+<td><strong>自由現金・資本性役員借入考慮後債務償還年数</strong></td>
+<td class="input-cell"><input aria-label="自由現金・資本性役員借入考慮後債務償還年数" data-key="repayYears" data-unit="年" inputmode="decimal"/><span>年</span></td>
+<td>15以下良好／15-20改善／20超停止</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="dscr">
+<td><strong>全社DSCR</strong></td>
+<td class="input-cell"><input aria-label="全社DSCR" data-key="dscr" data-unit="倍" inputmode="decimal"/><span>倍</span></td>
+<td>1.20以上目標／1.00未満レッド</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="stressDscr">
+<td><strong>全社Stress DSCR（10%）</strong></td>
+<td class="input-cell"><input aria-label="全社Stress DSCR（10%）" data-key="stressDscr" data-unit="倍" inputmode="decimal"/><span>倍</span></td>
+<td>1.00以上絶対</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="icrPreDep">
+<td><strong>減価償却前ICR</strong></td>
+<td class="input-cell"><input aria-label="減価償却前ICR" data-key="icrPreDep" data-unit="倍" inputmode="decimal"/><span>倍</span></td>
+<td>2以上通常／1-2ウォッチ／1未満強警戒</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="fixedLong">
+<td><strong>固定長期適合率</strong></td>
+<td class="input-cell"><input aria-label="固定長期適合率" data-key="fixedLong" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>100%以下目安</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="ordinaryProfit">
+<td><strong>経常利益</strong></td>
+<td class="input-cell"><input aria-label="経常利益" data-key="ordinaryProfit" data-unit="円" inputmode="decimal"/><span>円</span></td>
+<td>黒字が望ましい／単独Gateなし</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="bookEquity">
+<td><strong>簿記上自己資本比率</strong></td>
+<td class="input-cell"><input aria-label="簿記上自己資本比率" data-key="bookEquity" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>参考値・基準なし</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="cashRatio">
+<td><strong>現預金比率</strong></td>
+<td class="input-cell"><input aria-label="現預金比率" data-key="cashRatio" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>参考値</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="bankDebtRatio">
+<td><strong>金融機関借入比率</strong></td>
+<td class="input-cell"><input aria-label="金融機関借入比率" data-key="bankDebtRatio" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>参考値</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="avgRate">
+<td><strong>平均借入金利</strong></td>
+<td class="input-cell"><input aria-label="平均借入金利" data-key="avgRate" data-unit="%" inputmode="decimal"/><span>%</span></td>
+<td>参考値</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="icr">
+<td><strong>通常ICR</strong></td>
+<td class="input-cell"><input aria-label="通常ICR" data-key="icr" data-unit="倍" inputmode="decimal"/><span>倍</span></td>
+<td>参考値</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr><tr data-key="debtRepay">
+<td><strong>通常債務償還年数</strong></td>
+<td class="input-cell"><input aria-label="通常債務償還年数" data-key="debtRepay" data-unit="年" inputmode="decimal"/><span>年</span></td>
+<td>表示のみ</td>
+<td><span class="live-status neutral">未入力</span></td>
+</tr></tbody>
+</table>
+</div>
+<p class="muted" style="margin-bottom:0">※自動表示は本書の和京基準を機械的に当てはめた補助表示。単独Gateなし・参考値・表示のみの指標は、その性質を優先する。</p>
+</div>
+</section>
+</div>
+</main>
+<footer>
+<div class="wrap">
+<b>和京スマイ株式会社｜会社財務指標・銀行説明基準書</b><br/>
+    Version 3.1 / 基準日 2026年9月5日 / 法人全体の財務ガードレール
+  </div>
+</footer>
+<script>
+(() => {
+  const details = [...document.querySelectorAll('.metric-details')];
+  const summaryAccordions = [...document.querySelectorAll('.summary-accordion')];
+  document.getElementById('openAll').addEventListener('click',()=>{details.forEach(d=>d.open=true);summaryAccordions.forEach(d=>d.open=true);});
+  document.getElementById('closeAll').addEventListener('click',()=>{details.forEach(d=>d.open=false);summaryAccordions.forEach(d=>d.open=false);});
+  document.getElementById('summaryOpenAll')?.addEventListener('click',()=>{summaryAccordions.forEach(d=>d.open=true);});
+  document.getElementById('summaryCloseAll')?.addEventListener('click',()=>{summaryAccordions.forEach(d=>d.open=false);});
+  document.getElementById('metricsOpenAll')?.addEventListener('click',()=>{details.forEach(d=>d.open=true);});
+  document.getElementById('metricsCloseAll')?.addEventListener('click',()=>{details.forEach(d=>d.open=false);});
+
+  const cards=[...document.querySelectorAll('.metric-card')];
+  const search=document.getElementById('metricSearch');
+  let rankFilter='ALL';
+  function applyFilter(){
+    const q=search.value.trim().toLowerCase();
+    cards.forEach(c=>{
+      const hitText=!q || c.dataset.search.includes(q) || c.innerText.toLowerCase().includes(q);
+      const hitRank=rankFilter==='ALL' || c.dataset.rank===rankFilter;
+      c.classList.toggle('hidden', !(hitText && hitRank));
+    });
+  }
+  search.addEventListener('input',applyFilter);
+  document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{
+    rankFilter=b.dataset.filter; applyFilter();
+  }));
+
+  const dashInputs=[...document.querySelectorAll('#dashboardTable input')];
+  const status=(key,v)=>{
+    if(Number.isNaN(v)) return ['neutral','未入力'];
+    switch(key){
+      case 'equity': return v>=30?['good','保守運営水準']:v>=25?['good','目標']:v>=20?['warn','財務調整']:['danger','取得再検討'];
+      case 'adjustedNet': return v<=0?['danger','原則取得停止']:['good','プラス'];
+      case 'liquidity': return v>=6?['good','目標']:['warn','目標未達'];
+      case 'roa': return v>=2?['good','目標']:['warn','目標未達'];
+      case 'roaPreDep': return v>=5?['good','目標']:['warn','目標未達'];
+      case 'debtEbitda': return v<=15?['good','目標']:v<=18?['ok','成長許容']:v<=20?['warn','警戒']:['danger','レッド'];
+      case 'repayYears': return v<=15?['good','良好']:v<=20?['warn','改善管理']:['danger','原則停止'];
+      case 'dscr': return v>=1.2?['good','目標']:v>=1.1?['ok','成長許容']:v>=1.0?['warn','警戒']:['danger','レッド'];
+      case 'stressDscr': return v>=1.0?['good','絶対線クリア']:['danger','絶対線未達'];
+      case 'icrPreDep': return v>=2?['good','通常']:v>=1?['warn','ウォッチ']:['danger','強警戒'];
+      case 'fixedLong': return v<=100?['good','目安内']:['warn','原因確認'];
+      case 'ordinaryProfit': return v>=0?['good','黒字']:['warn','赤字・原因確認'];
+      default: return ['neutral','参考／表示のみ'];
+    }
+  };
+  function refreshDash(input){
+    const row=input.closest('tr'), badge=row.querySelector('.live-status');
+    const raw=input.value.replace(/,/g,'').trim();
+    const v=raw===''?NaN:Number(raw);
+    const [cls,label]=status(input.dataset.key,v);
+    badge.className='live-status '+cls; badge.textContent=label;
+  }
+  dashInputs.forEach(i=>i.addEventListener('input',()=>refreshDash(i)));
+  document.getElementById('saveDash').addEventListener('click',()=>{
+    const data={}; dashInputs.forEach(i=>data[i.dataset.key]=i.value);
+    localStorage.setItem('wakyo-fin-dashboard-v1',JSON.stringify(data));
+    alert('このブラウザ内に保存した。');
+  });
+  document.getElementById('loadDash').addEventListener('click',()=>{
+    const data=JSON.parse(localStorage.getItem('wakyo-fin-dashboard-v1')||'{}');
+    dashInputs.forEach(i=>{i.value=data[i.dataset.key]??'';refreshDash(i);});
+  });
+  document.getElementById('clearDash').addEventListener('click',()=>{
+    dashInputs.forEach(i=>{i.value='';refreshDash(i);});
+  });
+})();
+</script>
+</body>
+</html>

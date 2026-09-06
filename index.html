@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="一棟判定" name="apple-mobile-web-app-title"/><meta content="#f3f5f9" name="theme-color"/><title>一棟収益物件 判定ツール V10.4 Foldable Analytics</title><style>
+<html lang="ja"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="一棟判定" name="apple-mobile-web-app-title"/><meta content="#f3f5f9" name="theme-color"/><title>一棟収益物件 判定ツール V10.5 Foldable Analytics</title><style>
 :root{--bg:#f3f5f9;--card:#fff;--text:#111827;--muted:#697386;--line:#dde3ec;--blue:#2563eb;--blue-soft:#eef5ff;--green:#07833f;--green-soft:#eaf8f0;--amber:#a15c00;--amber-soft:#fff6df;--red:#c62828;--red-soft:#fff0f0;--purple:#6d3bd1;--purple-soft:#f4efff;--teal:#087e7a;--teal-soft:#e9f8f7;--orange:#b54d00;--orange-soft:#fff1e7}
 *{box-sizing:border-box}html{background:var(--bg);-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif}main{max-width:760px;margin:0 auto;padding:12px 10px 92px}h1{font-size:21px;line-height:1.25;margin:3px 2px 2px;font-weight:950}.version{font-size:11px;color:var(--muted);font-weight:800}.lead{font-size:11px;color:var(--muted);margin:0 2px 8px;line-height:1.45}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:12px;margin:9px 0;box-shadow:0 1px 1px #1111}.section-head{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:950;margin-bottom:8px}.num{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;font-size:12px;color:#fff;background:#111827}.section-head .hint{margin-left:auto;font-size:10px;color:var(--muted);font-weight:750}.input-card .num{background:var(--blue)}.decision-card .num{background:var(--green)}.metrics-card .num{background:var(--purple)}.details-card .num{background:#475569}
 .small{font-size:10px;color:var(--muted);line-height:1.45}.muted{color:var(--muted)}.ok{color:var(--green)!important}.warn{color:var(--amber)!important}.ng{color:var(--red)!important}button{min-height:38px;border:1px solid #cbd4e0;border-radius:10px;padding:8px 11px;background:#fff;color:var(--text);font-size:13px;font-weight:850}button.primary{background:var(--blue);color:#fff;border-color:var(--blue)}button.danger{color:var(--red)}button:disabled{opacity:.45}.actions{display:flex;flex-wrap:wrap;gap:6px}input,select,textarea{width:100%;min-height:40px;margin-top:4px;border:1px solid #cbd4e0;border-radius:10px;background:#fff;color:var(--text);font-size:16px;padding:8px 9px}label{font-size:11px;font-weight:850;color:#344054}.input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.span2{grid-column:1/-1}@media(max-width:340px){.input-grid{grid-template-columns:1fr}}.linked{grid-column:1/-1;display:grid;grid-template-columns:1fr 28px 1fr;gap:6px;align-items:end;background:linear-gradient(135deg,var(--blue-soft),#fff);border:1px solid #cfe0ff;border-radius:12px;padding:9px}.linked-arrow{display:grid;place-items:center;height:40px;font-size:18px;color:var(--blue);font-weight:900}.linked.loan-link{background:linear-gradient(135deg,var(--orange-soft),#fff);border-color:#f4d2ba}.linked.loan-link .linked-arrow{color:var(--orange)}.source-badge{display:inline-block;font-size:9px;font-weight:850;border-radius:999px;padding:1px 6px;background:#eef1f5;color:#606a78}.source-badge.manual{background:var(--amber-soft);color:#875300}.source-badge.auto{background:var(--blue-soft);color:#194ea3}.source-badge.calc{background:var(--green-soft);color:#0a6b32}.source-badge.saved{background:var(--purple-soft);color:#6240a2}.error-box{display:none;background:var(--red-soft);color:#9d1d1d;border:1px solid #f0bcbc;border-radius:10px;padding:8px;font-size:11px;font-weight:800;margin-top:7px}.extract-box{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:8px;margin-top:8px}.extract-result{font-size:10px;line-height:1.45}
@@ -465,8 +465,8 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 </style>
 </head><body>
 <main>
-<h1>一棟収益物件 判定ツール <span class="version">V10.4 FOLDABLE</span></h1>
-<div class="lead">和京スマイ基準・一棟収益物件専用。<b>絶対条件と目標値を分離</b>し、LTVは判定から除外。金額入力・表示は<b>1円単位</b>。V8.9以前の保存データ互換。月次・全融資期間のグラフ/表を大画面・大文字化し、Excel詳細出力も強化。</div>
+<h1>一棟収益物件 判定ツール <span class="version">V10.5 FOLDABLE</span></h1>
+<div class="lead">和京スマイ基準・一棟収益物件専用。<b>物件単体44指標＋会社財務19指標</b>を2026-09-05基準書に再同期。絶対Gateと目標・参考を分離し、LTVは固定Gateにしない。金額は<b>1円単位</b>。V8.9以前の保存キーを維持し、0・分母0・極端値でも計算全体を停止させない。</div>
 <div class="header-tools"><a class="browser-link" href="#" id="openBrowserLink" onclick="event.preventDefault();window.open(location.href,'_blank')" rel="noopener"><span class="browser-icon">↗</span><span id="openBrowserText">Safariで開く</span></a><button class="fold-all-btn" id="collapseAllSections" type="button">全部閉じる</button><button class="fold-all-btn secondary" id="expandAllSections" type="button">全部開く</button></div>
 <section class="card input-card"><details class="top-section-fold" id="topFoldInput"><summary class="top-section-summary"><div class="section-head"><span class="num">1</span><span>入力</span><span class="hint">必要な時だけ開く</span></div></summary><div class="top-section-body" id="inputFold">
 
@@ -494,9 +494,38 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 <label>担保参考額（円・任意）<input id="collateralValueReference" min="0" placeholder="銀行提示額・固定資産評価等" step="1" type="number"/></label>
 <label>出口想定年（年後）<input id="exitYear" max="50" min="1" step="1" type="number" value="10"/></label>
 <label>出口想定売却価格（円・任意）<input id="exitPrice" min="0" placeholder="未設定なら空欄" step="1" type="number"/></label>
-<label>出口売却費用率（%・任意）<input id="exitCostRate" max="30" min="0" step="0.1" type="number" value="0"/></label>
+<label>出口売却費用率（%・任意）<input id="exitCostRate" max="100" min="0" step="0.1" type="number" value="5"/></label>
 <label class="span2">返済方法<select id="repayMethod"><option value="equal_payment">元利均等</option><option value="equal_principal">元金均等</option></select></label>
 </div>
+
+<details class="fold" id="pdf44InputFold"><summary><span>PDF 44指標｜補完入力</span><span class="small">必要項目だけ入力</span></summary>
+<div class="bank-note">既存入力で計算できない指標だけを補完。空欄は「未確認」として残し、勝手な0扱いで合格させない。</div>
+<div class="input-grid" style="margin-top:7px">
+<label>総戸数<input id="totalUnits" min="0" step="1" type="number" placeholder="物理稼働率用"/></label>
+<label>入居戸数<input id="occupiedUnits" min="0" step="1" type="number" placeholder="物理稼働率用"/></label>
+<label>採用 Cap Rate（%）<input id="currentCapRate" min="0" step="0.01" type="number" placeholder="市場根拠で入力"/></label>
+<label>出口 Cap Rate（%）<input id="exitCapRate" min="0" step="0.01" type="number" placeholder="評価時点の市場根拠"/></label>
+<label>出口時 UW NOI（円/年）<input id="exitNoiOverride" min="0" step="1" type="number" placeholder="空欄なら現時点UW NOI参考"/></label>
+<label>将来土地価値（円）<input id="futureLandValue" min="0" step="1" type="number" placeholder="出口比較用"/></label>
+<label>解体費（円）<input id="demolitionCost" min="0" step="1" type="number" value="0"/></label>
+<label>退去・明渡費（円）<input id="vacateCost" min="0" step="1" type="number" value="0"/></label>
+<label>再開発・その他売却費（円）<input id="redevelopmentCost" min="0" step="1" type="number" value="0"/></label>
+<label>既存CapEx積立現金（円）<input id="capexOpeningReserve" min="0" step="1" type="number" value="0"/></label>
+<label>市区町村/行政区 可住地人口密度<input id="municipalityDensity" min="0" step="0.1" type="number" placeholder="人/km²"/></label>
+<label>町丁目/大字 人口密度<input id="localDensity" min="0" step="0.1" type="number" placeholder="人/km²"/></label>
+<label>未登記増築 面積（㎡）<input id="unregisteredArea" min="0" step="0.01" type="number"/></label>
+<label>未登記増築 再調達単価（円/㎡）<input id="unregisteredReplacementCost" min="0" step="1" type="number"/></label>
+<label>未登記増築 築年（年）<input id="unregisteredAge" min="0" step="0.1" type="number"/></label>
+<label>未登記増築 評価期間（年）<input id="unregisteredLife" min="0" step="0.1" type="number"/></label>
+<label>未登記増築の確認状況<select id="unregisteredLegal"><option value="">未確認</option><option value="confirmed">面積・時期・適法性を確認</option><option value="unknown">確認不能/適法性不明</option></select></label>
+<label>15%耐性 LEVEL3確認<select id="level3Manual"><option value="no">通常判定</option><option value="yes">LEVEL2対策後も復旧困難</option></select></label>
+</div>
+<details class="formula"><summary>CapEx計画（最大8件）</summary>
+<div class="bank-note">PDFどおり「いつ・いくら」で入力。実施までの残月数で必要積立額を表示し、全期間CFでは実施月に支出として反映。</div>
+<div class="capex-plan-grid">
+<div class="capex-plan-row"><input id="capexName1" placeholder="項目1 例:外壁"/><input id="capexYear1" min="0" step="0.1" type="number" placeholder="1年後"/><input id="capexAmount1" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName2" placeholder="項目2 例:外壁"/><input id="capexYear2" min="0" step="0.1" type="number" placeholder="2年後"/><input id="capexAmount2" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName3" placeholder="項目3 例:外壁"/><input id="capexYear3" min="0" step="0.1" type="number" placeholder="3年後"/><input id="capexAmount3" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName4" placeholder="項目4 例:外壁"/><input id="capexYear4" min="0" step="0.1" type="number" placeholder="4年後"/><input id="capexAmount4" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName5" placeholder="項目5 例:外壁"/><input id="capexYear5" min="0" step="0.1" type="number" placeholder="5年後"/><input id="capexAmount5" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName6" placeholder="項目6 例:外壁"/><input id="capexYear6" min="0" step="0.1" type="number" placeholder="6年後"/><input id="capexAmount6" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName7" placeholder="項目7 例:外壁"/><input id="capexYear7" min="0" step="0.1" type="number" placeholder="7年後"/><input id="capexAmount7" min="0" step="1" type="number" placeholder="工事費（円）"/></div><div class="capex-plan-row"><input id="capexName8" placeholder="項目8 例:外壁"/><input id="capexYear8" min="0" step="0.1" type="number" placeholder="8年後"/><input id="capexAmount8" min="0" step="1" type="number" placeholder="工事費（円）"/></div>
+</div></details>
+</details>
 <div class="error-box" id="rentYieldError">⚠️ 年間家賃と表面利回りの両方が手入力されています。どちらか一方を削除してください。</div>
 <div class="error-box" id="coreInputError"></div>
 <div class="small" style="margin-top:5px">家賃か利回りの片方を入力すると、もう片方を自動計算。両方を手入力すると計算を止める。</div>
@@ -515,30 +544,32 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 <details class="fold"><summary><span>銀行の返済額</span><span class="small">返済予定表があれば入力</span></summary><label>年間元利返済額（円）<input id="repayOverride" min="0" placeholder="空欄＝融資条件から自動計算" step="1" type="number"/></label><div class="small">金融機関の端数処理・初回日割り等は商品ごとに異なるため、返済予定表がある場合は年間返済額を入れると最優先。</div></details>
 <details class="fold"><summary><span>保険の精度を上げる</span><span class="small">分かれば入力</span></summary><label>建物の保険金額（円）<input id="insuredAmount" min="0" placeholder="空欄＝売価の60%で概算" step="1" type="number"/></label></details>
 </div></details></section>
-<section class="card decision-card" data-grade="good" id="decisionCard"><details class="top-section-fold" id="topFoldDecision" open=""><summary class="top-section-summary"><div class="section-head"><span class="num">2</span><span>判定</span><span class="hint">最上位は絶対条件4項目</span></div></summary><div class="top-section-body"><div class="verdict" id="verdict">計算中...</div><div class="result-reason" id="reason"></div><div class="gate-title"><span>最上位｜購入Gate</span><span class="gate-count">4</span><span class="scope-badge property">物件単体</span></div><div class="statusbar">
+<section class="card decision-card" data-grade="good" id="decisionCard"><details class="top-section-fold" id="topFoldDecision" open=""><summary class="top-section-summary"><div class="section-head"><span class="num">2</span><span>判定</span><span class="hint">最上位は購入Gate 6概念</span></div></summary><div class="top-section-body"><div class="verdict" id="verdict">計算中...</div><div class="result-reason" id="reason"></div><div class="gate-title"><span>最上位｜購入Gate</span><span class="gate-count">6</span><span class="scope-badge property">物件単体</span></div><div class="statusbar">
 <div class="absolute-card" id="statusStress">20%家賃消失耐性</div>
 <div class="absolute-card" id="statusRepay">返済比率</div>
 <div class="absolute-card" id="statusOpex">全融資期間CF</div>
-<div class="absolute-card" id="statusYield">法務・災害Gate</div>
-</div><div class="gate-rule-line"><b>ここが最優先。</b> 4項目のうち1つでもNGなら、表面利回りや目標指標が良くても購入Gateは通さない。未確認の法務・災害項目は「確認待ち」として購入確定しない。</div><div class="comment" id="overallComment"></div><div class="scope-summary">
+<div class="absolute-card" id="statusYield">再建築性</div>
+<div class="absolute-card" id="statusLandslide">土砂災害</div>
+<div class="absolute-card" id="statusExit">出口返済余力</div>
+</div><div class="gate-rule-line"><b>ここが最優先。</b> 6概念のうち1つでもNGなら、目標・参考指標が良くても購入Gateは通さない。未確認の法務・災害・出口は「確認待ち」とし、確認待ちは合格扱いにしない。</div><div class="comment" id="overallComment"></div><div class="scope-summary">
 <div class="scope-summary-title">指標を4つの箱に集約</div>
 <div class="scope-chips">
-<div class="scope-chip hard"><b>① 絶対条件</b><span>20%耐性・返済比率・全期間CF・法務Gate</span></div>
-<div class="scope-chip property"><b>② 物件単体</b><span>DSCR・Debt Yield・OER・各種利回り・BER</span></div>
-<div class="scope-chip company"><b>③ 会社財務</b><span>自己資本比率・債務償還年数・ICR</span></div>
-<div class="scope-chip reference"><b>④ 参考・補助</b><span>LTC・金利ストレス・CAPEX・担保・出口など</span></div>
+<div class="scope-chip hard"><b>① 絶対条件</b><span>6 Gate概念／PDF上7指標</span></div>
+<div class="scope-chip property"><b>② 物件単体</b><span>残り37指標。重複表示なし</span></div>
+<div class="scope-chip company"><b>③ 会社財務</b><span>全19指標・現状→取得後</span></div>
+<div class="scope-chip reference"><b>④ 監査・補助</b><span>暫定値・計算前提・0入力監査</span></div>
 </div>
 </div><div class="criteria-groups">
 <details class="criteria-group">
-<summary><span>① 絶対条件 4項目｜詳細</span><span class="group-meta" id="absoluteGroupSummary">—</span></summary>
+<summary><span>① 絶対条件 6 Gate概念｜詳細</span><span class="group-meta" id="absoluteGroupSummary">—</span></summary>
 <div class="indicator-list" id="absoluteCriteriaBody"></div>
 </details>
 <details class="criteria-group">
-<summary><span>② 物件単体の主要指標</span><span class="group-meta" id="propertyGroupSummary">—</span></summary>
+<summary><span>② 物件単体｜残り37指標</span><span class="group-meta" id="propertyGroupSummary">—</span></summary>
 <div class="indicator-list" id="propertyCriteriaBody"></div>
 </details>
 <details class="criteria-group">
-<summary><span>③ 会社全体の財務指標</span><span class="group-meta" id="companyGroupSummary">—</span></summary>
+<summary><span>③ 会社全体｜全19指標</span><span class="group-meta" id="companyGroupSummary">—</span></summary>
 <div class="indicator-list" id="companyCriteriaBody"></div>
 </details>
 <details class="criteria-group">
@@ -795,7 +826,7 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 <div><b>通常DSCR ≥1.40 <span class="rule-chip target">目安</span></b><span>平常時の返済余力</span></div>
 </div>
 <input id="yieldMin" type="hidden" value="10"/><input id="repayMax" type="hidden" value="50"/><input id="opexMax" type="hidden" value="30"/><input id="lossRate" type="hidden" value="20"/>
-<details class="formula" id="companySettingsFold"><summary>会社財務設定（自己資本比率・債務償還年数・ICR用）</summary>
+<details class="formula" id="companySettingsFold"><summary>会社財務設定（基準書2.1｜全19指標）</summary>
 <div class="bank-finance-box" style="margin-top:6px">
 <div class="bank-finance-title">会社財務設定</div>
 <div class="bank-note">会社全体の数字。ここだけ別保存され、通常の「入力内容をリセット」では消えません。決算・試算表を更新した時に入れ替えてください。</div>
@@ -807,11 +838,51 @@ details.formula>summary{font-size:14px!important;padding:6px 0!important}.formul
 <label>経常利益（円/年）<input id="companyOrdinaryProfit" placeholder="赤字はマイナス" step="1" type="number"/></label>
 <label>減価償却費（円/年）<input id="companyDepreciation" min="0" step="1" type="number"/></label>
 <label>法人税等（円/年）<input id="companyTaxes" min="0" step="1" type="number"/></label>
-<label>役員借入金（円・実質資本調整用）<input id="companyOfficerLoan" min="0" placeholder="償還年数は除外／実質自己資本には加算" step="1" type="number"/></label>
+<label>役員借入金（円・和京実質自己資本では全額加算）<input id="companyOfficerLoan" min="0" placeholder="会計上は負債。別指標へは条件別反映" step="1" type="number"/></label>
 <label>営業利益（円/年）<input id="companyOperatingProfit" placeholder="ICR用・赤字はマイナス" step="1" type="number"/></label>
 <label>受取利息・配当金（円/年）<input id="companyInterestIncome" min="0" step="1" type="number" value="0"/></label>
 <label>支払利息（円/年）<input id="companyInterestExpense" min="0" placeholder="ICR用" step="1" type="number"/></label>
 <label>財務データ更新日<input id="companyUpdatedDate" type="date"/></label>
+</div>
+
+<div class="bank-finance-title" style="margin-top:12px">基準書2.1｜追加入力（現状）</div>
+<div class="bank-note">空欄は既存BS/PLから安全に導出できる項目だけ補完。銀行認定・資本性・固定長期性は別入力し、役員借入全額を他指標へ機械流用しない。</div>
+<div class="input-grid" style="margin-top:7px">
+<label>保守的実勢総資産（円）<input id="companyConservativeAssets" min="0" step="1" type="number" placeholder="空欄＝総資産を暫定使用"/></label>
+<label>全負債（円）<input id="companyTotalLiabilities" min="0" step="1" type="number" placeholder="空欄＝総資産－純資産"/></label>
+<label>銀行認定可能な資本性役員借入（円）<input id="companyBankRecognizedOfficerLoan" min="0" step="1" type="number" value="0"/></label>
+<label>債務償還年数の資本性調整対象役員借入（円）<input id="companyCapitalAdjOfficerLoan" min="0" step="1" type="number" value="0"/></label>
+<label>実質長期安定役員借入（円）<input id="companyStableOfficerLoan" min="0" step="1" type="number" value="0"/></label>
+<label>その他借入残高（円）<input id="companyOtherDebt" min="0" step="1" type="number" value="0"/></label>
+<label>固定・繰延資産（円）<input id="companyFixedAssets" min="0" step="1" type="number"/></label>
+<label>固定負債（円）<input id="companyFixedLiabilities" min="0" step="1" type="number"/></label>
+<label>拘束預金（円）<input id="companyRestrictedCash" min="0" step="1" type="number" value="0"/></label>
+<label>敷金返還相当（円）<input id="companyDepositRefund" min="0" step="1" type="number" value="0"/></label>
+<label>近い納税予定（円）<input id="companyNearTax" min="0" step="1" type="number" value="0"/></label>
+<label>確定工事・確定支払資金（円）<input id="companyCommittedPayments" min="0" step="1" type="number" value="0"/></label>
+<label>年間金融機関 元本返済（円）<input id="companyAnnualPrincipalRepayment" min="0" step="1" type="number"/></label>
+<label>法人共通 継続現金支出（円/年）<input id="companyCorporateCashOutflow" min="0" step="1" type="number" value="0"/></label>
+<label>現金税金等（円/年）<input id="companyCashTaxes" min="0" step="1" type="number" value="0"/></label>
+<label>全物件 元利返済前平常化CF合計（円/年）<input id="companyPropertyPreDebtCF" step="1" type="number"/></label>
+<label>期中平均 金融機関借入残高（円）<input id="companyAverageBankDebt" min="0" step="1" type="number" placeholder="空欄＝期末残高を参考使用"/></label>
+</div>
+<div class="bank-finance-title" style="margin-top:12px">取得後12か月｜任意上書き</div>
+<div class="bank-note">空欄なら本物件の取得を現状値へ自動加算した平常化概算。決算予測がある項目だけ上書き可能。</div>
+<div class="input-grid" style="margin-top:7px">
+<label>取得後 総資産（円）<input id="companyPostTotalAssets" min="0" step="1" type="number"/></label>
+<label>取得後 保守的実勢総資産（円）<input id="companyPostConservativeAssets" min="0" step="1" type="number"/></label>
+<label>取得後 全負債（円）<input id="companyPostTotalLiabilities" min="0" step="1" type="number"/></label>
+<label>取得後 純資産（円）<input id="companyPostNetAssets" step="1" type="number"/></label>
+<label>取得後 金融機関借入残高（円）<input id="companyPostBankDebt" min="0" step="1" type="number"/></label>
+<label>取得後 現預金（円）<input id="companyPostCash" step="1" type="number"/></label>
+<label>取得後 営業利益（円/年）<input id="companyPostOperatingProfit" step="1" type="number"/></label>
+<label>取得後 減価償却費（円/年）<input id="companyPostDepreciation" min="0" step="1" type="number"/></label>
+<label>取得後 支払利息（円/年）<input id="companyPostInterestExpense" min="0" step="1" type="number"/></label>
+<label>取得後 年間元本返済（円）<input id="companyPostAnnualPrincipalRepayment" min="0" step="1" type="number"/></label>
+<label>取得後 全物件元利返済前CF（円/年）<input id="companyPostPropertyPreDebtCF" step="1" type="number"/></label>
+<label>取得後 固定・繰延資産（円）<input id="companyPostFixedAssets" min="0" step="1" type="number"/></label>
+<label>取得後 固定負債（円）<input id="companyPostFixedLiabilities" min="0" step="1" type="number"/></label>
+<label>取得後 期中平均銀行借入（円）<input id="companyPostAverageBankDebt" min="0" step="1" type="number"/></label>
 </div>
 <div class="company-status"><span>会社設定は別保存・物件リセット対象外</span><b id="companySaveState">未保存</b></div>
 <div class="company-actions"><button class="primary" id="saveCompanySettings" type="button">会社設定を保存</button><button class="danger" id="resetCompanySettings" type="button">会社設定を初期化</button></div>
@@ -1341,4 +1412,270 @@ tracked.forEach(id=>$(id).addEventListener("input",()=>{onTrackedInput(id);if(id
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initTopFolds);else initTopFolds();
 })();
-</script></body></html>
+</script><style id="v105PatchStyle">
+/* V10.5 PDF 2.1 synchronization patch — keeps the original product/UI */
+.statusbar{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+@media(min-width:720px){.statusbar{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+.capex-plan-grid{display:grid;gap:7px;margin-top:8px}.capex-plan-row{display:grid;grid-template-columns:1.35fr .7fr 1fr;gap:6px}.capex-plan-row input{min-width:0}
+.pdf-audit{border:1px solid #d8e2ec;background:#f7fafc;border-radius:12px;padding:10px;font-size:11px;line-height:1.65;color:#42526a}.pdf-audit b{color:#17263a}
+.metric-card .calc-undefined{color:#8a5700}.metric-card .calc-infinity{color:#176b36}
+@media(max-width:620px){.capex-plan-row{grid-template-columns:1fr}.statusbar{grid-template-columns:1fr 1fr!important}}
+</style>
+<script>
+/* ===== V10.5: 2026-09-05 property 44 + company 19, same index.html ===== */
+(function(){
+'use strict';
+const V105='10.5';
+const PROP_GATE_NOS=new Set([11,13,14,25,40,41,42]);
+const extraPropertyIds=[
+ 'totalUnits','occupiedUnits','currentCapRate','exitCapRate','exitNoiOverride','futureLandValue','demolitionCost','vacateCost','redevelopmentCost','capexOpeningReserve','municipalityDensity','localDensity','unregisteredArea','unregisteredReplacementCost','unregisteredAge','unregisteredLife','unregisteredLegal','level3Manual',
+ ...Array.from({length:8},(_,i)=>'capexName'+(i+1)),...Array.from({length:8},(_,i)=>'capexYear'+(i+1)),...Array.from({length:8},(_,i)=>'capexAmount'+(i+1))
+];
+const extraCompanyIds=[
+ 'companyConservativeAssets','companyTotalLiabilities','companyBankRecognizedOfficerLoan','companyCapitalAdjOfficerLoan','companyStableOfficerLoan','companyOtherDebt','companyFixedAssets','companyFixedLiabilities','companyRestrictedCash','companyDepositRefund','companyNearTax','companyCommittedPayments','companyAnnualPrincipalRepayment','companyCorporateCashOutflow','companyCashTaxes','companyPropertyPreDebtCF','companyAverageBankDebt',
+ 'companyPostTotalAssets','companyPostConservativeAssets','companyPostTotalLiabilities','companyPostNetAssets','companyPostBankDebt','companyPostCash','companyPostOperatingProfit','companyPostDepreciation','companyPostInterestExpense','companyPostAnnualPrincipalRepayment','companyPostPropertyPreDebtCF','companyPostFixedAssets','companyPostFixedLiabilities','companyPostAverageBankDebt'
+];
+const extraMoneyIds=[
+ 'exitNoiOverride','futureLandValue','demolitionCost','vacateCost','redevelopmentCost','capexOpeningReserve','unregisteredReplacementCost',...Array.from({length:8},(_,i)=>'capexAmount'+(i+1)),...extraCompanyIds.filter(x=>!['companyUpdatedDate'].includes(x))
+];
+extraMoneyIds.forEach(id=>MONEY_INPUT_IDS.add(id));
+[...extraPropertyIds,...extraCompanyIds].forEach(id=>{if(!inputIds.includes(id))inputIds.push(id)});
+// New, unsaved tool defaults: PDF marks 5% sale cost as provisional anchor.
+const exitCostEl=$('exitCostRate');if(exitCostEl && exitCostEl.dataset.v105Default!=='1'){if(exitCostEl.value==='0' && !localStorage.getItem(STORAGE_DRAFT))exitCostEl.value='5';exitCostEl.dataset.v105Default='1'}
+
+function fin(v){return typeof v==='number'&&Number.isFinite(v)}
+function sdiv(a,b){a=Number(a);b=Number(b);if(Number.isNaN(a)||Number.isNaN(b))return NaN;if(b===0){if(a===0)return NaN;return a>0?Infinity:-Infinity}return a/b}
+function pctX(v){if(v===Infinity)return '∞';if(v===-Infinity)return '−∞';if(!fin(v))return '定義不能';return v.toLocaleString('ja-JP',{maximumFractionDigits:2})+'%'}
+function timesX(v){if(v===Infinity)return '∞';if(v===-Infinity)return '−∞';if(!fin(v))return '定義不能';return v.toLocaleString('ja-JP',{maximumFractionDigits:2})+'倍'}
+function yearsX(v){if(v===Infinity)return '∞年';if(v===-Infinity)return '−∞年';if(!fin(v))return '定義不能';return v.toLocaleString('ja-JP',{maximumFractionDigits:2})+'年'}
+function moneyX(v){if(v===Infinity)return '∞';if(v===-Infinity)return '−∞';if(!fin(v))return '定義不能';return money(v)}
+function statusTone(s){return /NG|停止|レッド|弱い|強警戒|取得再検討/.test(s)?'fail':/注意|警戒|未達|要確認|確認待ち|許容|ウォッチ|暫定/.test(s)?'warn':/OK|良好|目標|強い|通常|合格|保守/.test(s)?'pass':'neutral'}
+function valOr(v,fallback=0){return v===null||Number.isNaN(v)?fallback:v}
+function has(id){return $(id)&&String($(id).value??'').trim()!==''}
+
+// 0 is a valid number. Range ceilings are warnings/interpretation, not JS-stopping errors.
+hasRentYieldConflict=function(){
+ if(!(fieldSources.rent==='manual'&&fieldSources.listingYield==='manual'))return false;
+ if($('rent').value===''||$('listingYield').value==='')return false;
+ const p=n('price'),r=n('rent'),y=n('listingYield');
+ if(p===0)return !(r===0||y===0); // 0/0 is allowed and shown as undefined rather than crashing.
+ const expected=p*y/100;return Math.abs(r-expected)>Math.max(.0001,Math.abs(expected)*1e-8);
+};
+validateInputs=function(){
+ const errs=[];
+ const nonneg=['price','rent','listingYield','loanRatio','interest','years','currentRent','loanOverride','repayOverride','insuredAmount','normalVacancyMin','stableOtherIncome','rateStressPct','capexReserve','roadPriceK','landArea','landFactor','buildingArea','buildingAgeMain','replacementCost','evalLife','residualOverride','bankEvalOverride','additionalTax','firstYearInterestOverride','managementOverride','taxOverride','insuranceOverride','commonOverride','repairOverride','leasingOverride','brokerOverride','registrationOverride','registrationTaxOverride','judicialOverride','stampOverride','bankOverride','acqTaxOverride','settleOverride','yieldMin','repayMax','opexMax','managementRate','taxRate','commonRate','repairRate','leasingRate','insuredPct','insM','insT','insH','ownershipRegRate','mortgageRate','acqTaxRate','settleRate','bankDefault','miscDefault','marketAnnualRent','collateralValueReference','exitYear','exitPrice','exitCostRate','totalUnits','occupiedUnits','currentCapRate','exitCapRate','exitNoiOverride','futureLandValue','demolitionCost','vacateCost','redevelopmentCost','capexOpeningReserve','municipalityDensity','localDensity','unregisteredArea','unregisteredReplacementCost','unregisteredAge','unregisteredLife',...Array.from({length:8},(_,i)=>'capexYear'+(i+1)),...Array.from({length:8},(_,i)=>'capexAmount'+(i+1))];
+ for(const id of nonneg){const v=rawNum(id);if(v!==null&&(Number.isNaN(v)||v<0)){const label=$(id)?.closest?.('label')?.childNodes?.[0]?.textContent?.trim()||id;errs.push(label+'は0以上')}}
+ const pctIds=['normalVacancyMin','exitCostRate'];for(const id of pctIds){const v=rawNum(id);if(v!==null&&v>100)errs.push(($(id)?.closest('label')?.childNodes?.[0]?.textContent?.trim()||id)+'は100%以下')}
+ if(customOpex.some(x=>!Number.isFinite(Number(x.amount))||Number(x.amount)<0))errs.push('その他経費は有限の0以上の数値');
+ if(customAcq.some(x=>!Number.isFinite(Number(x.amount))||Number(x.amount)<0))errs.push('その他費用は有限の0以上の数値');
+ return errs;
+};
+
+// Closed-form loan math: zero term/rate and large terms do not throw or create NaN chains.
+schedule=function(principal,ratePct,years,method){
+ let P=Number(principal),rp=Number(ratePct),Y=Number(years);P=fin(P)?Math.max(0,P):0;rp=fin(rp)?Math.max(0,rp):0;Y=fin(Y)?Math.max(0,Y):0;
+ let N=Math.round(Y*12);if(P===0)return{month1:0,month12:0,firstYearPay:0,firstYearInterest:0,firstYearPrincipal:0,endYear1:0,totalPay:0,totalInterest:0};
+ if(N<=0)return{month1:P,month12:0,firstYearPay:P,firstYearInterest:0,firstYearPrincipal:P,endYear1:0,totalPay:P,totalInterest:0};
+ const r=rp/100/12,k=Math.min(12,N);let firstPay=0,firstInt=0,firstPrin=0,month1=0,month12=0;
+ if(method==='equal_principal'){
+   const pp=P/N;for(let m=1;m<=k;m++){const bal=P-pp*(m-1),it=bal*r,pay=(m===N?bal:pp)+it;if(m===1)month1=pay;if(m===12)month12=pay;firstPay+=pay;firstInt+=it;firstPrin+=m===N?bal:pp}
+   const totalInterest=r*P*(N+1)/2,totalPay=P+totalInterest;return{month1,month12,firstYearPay:firstPay,firstYearInterest:firstInt,firstYearPrincipal:firstPrin,endYear1:Math.max(0,P-firstPrin),totalPay,totalInterest};
+ }
+ const A=r===0?P/N:(r>0&&N*Math.log1p(r)>700?P*r:P*r/(1-Math.exp(-N*Math.log1p(r))));
+ for(let m=1;m<=k;m++){const bal=r===0?P*(1-(m-1)/N):P*Math.pow(1+r,m-1)-A*(Math.pow(1+r,m-1)-1)/r;const it=Math.max(0,bal)*r;const pay=m===N?Math.max(0,bal)+it:A;const pp=Math.max(0,pay-it);if(m===1)month1=pay;if(m===12)month12=pay;firstPay+=pay;firstInt+=it;firstPrin+=pp}
+ const totalPay=A*N,totalInterest=Math.max(0,totalPay-P);return{month1,month12,firstYearPay:firstPay,firstYearInterest:firstInt,firstYearPrincipal:Math.min(P,firstPrin),endYear1:Math.max(0,P-firstPrin),totalPay,totalInterest};
+};
+balanceAfterYears=function(principal,ratePct,years,method,afterYears){
+ const P=Math.max(0,Number(principal)||0),Y=Math.max(0,Number(years)||0),t=Math.max(0,Number(afterYears)||0),N=Math.round(Y*12),m=Math.min(N,Math.round(t*12));if(P===0)return 0;if(N<=0)return m<=0?P:0;if(m<=0)return P;if(m>=N)return 0;const r=Math.max(0,Number(ratePct)||0)/100/12;
+ if(method==='equal_principal')return Math.max(0,P*(1-m/N));if(r===0)return Math.max(0,P*(1-m/N));const A=(N*Math.log1p(r)>700)?P*r:P*r/(1-Math.exp(-N*Math.log1p(r)));const pow=Math.exp(Math.min(700,m*Math.log1p(r)));return Math.max(0,P*pow-A*(pow-1)/r);
+};
+
+const oldCompanyCore=['companyTotalAssets','companyNetAssets','companyBankDebt','companyCash','companyOrdinaryProfit','companyDepreciation','companyTaxes','companyOfficerLoan','companyOperatingProfit','companyInterestIncome','companyInterestExpense','companyUpdatedDate'];
+companyFieldIds=function(){return [...oldCompanyCore,...extraCompanyIds]};
+function readCompanyRaw(){
+ const g=id=>rawNum(id);return{
+  totalAssets:g('companyTotalAssets'),netAssets:g('companyNetAssets'),bankDebt:g('companyBankDebt'),cash:g('companyCash'),ordinary:g('companyOrdinaryProfit'),depreciation:g('companyDepreciation'),taxes:g('companyTaxes'),officerLoan:g('companyOfficerLoan'),operating:g('companyOperatingProfit'),interestIncome:g('companyInterestIncome'),interestExpense:g('companyInterestExpense'),updatedDate:$('companyUpdatedDate')?.value||'',
+  conservativeAssets:g('companyConservativeAssets'),totalLiabilities:g('companyTotalLiabilities'),bankRecognizedOfficerLoan:g('companyBankRecognizedOfficerLoan'),capitalAdjOfficerLoan:g('companyCapitalAdjOfficerLoan'),stableOfficerLoan:g('companyStableOfficerLoan'),otherDebt:g('companyOtherDebt'),fixedAssets:g('companyFixedAssets'),fixedLiabilities:g('companyFixedLiabilities'),restrictedCash:g('companyRestrictedCash'),depositRefund:g('companyDepositRefund'),nearTax:g('companyNearTax'),committedPayments:g('companyCommittedPayments'),annualPrincipal:g('companyAnnualPrincipalRepayment'),corporateCashOutflow:g('companyCorporateCashOutflow'),cashTaxes:g('companyCashTaxes'),propertyPreDebtCF:g('companyPropertyPreDebtCF'),averageBankDebt:g('companyAverageBankDebt'),
+  postTotalAssets:g('companyPostTotalAssets'),postConservativeAssets:g('companyPostConservativeAssets'),postTotalLiabilities:g('companyPostTotalLiabilities'),postNetAssets:g('companyPostNetAssets'),postBankDebt:g('companyPostBankDebt'),postCash:g('companyPostCash'),postOperating:g('companyPostOperatingProfit'),postDepreciation:g('companyPostDepreciation'),postInterestExpense:g('companyPostInterestExpense'),postAnnualPrincipal:g('companyPostAnnualPrincipalRepayment'),postPropertyPreDebtCF:g('companyPostPropertyPreDebtCF'),postFixedAssets:g('companyPostFixedAssets'),postFixedLiabilities:g('companyPostFixedLiabilities'),postAverageBankDebt:g('companyPostAverageBankDebt')
+ }}
+getCompanyData=function(){const d=readCompanyRaw();d.complete=[d.bankDebt,d.cash,d.ordinary,d.depreciation,d.taxes].every(fin);d.completeICR=[d.operating,d.interestIncome,d.interestExpense].every(fin);return d};
+saveCompany=function(){
+ const d=readCompanyRaw(),errs=[];const allowNeg=new Set(['netAssets','ordinary','operating','postNetAssets','postOperating','postCash','propertyPreDebtCF','postPropertyPreDebtCF']);
+ for(const [k,v] of Object.entries(d)){if(k==='updatedDate'||v===null||Number.isNaN(v))continue;if(!allowNeg.has(k)&&v<0)errs.push(k)}
+ if(errs.length){alert('会社財務の資産・負債・支出系項目は0以上で入力してな');return}
+ if(!companyDateManual&&$('companyUpdatedDate')){$('companyUpdatedDate').value=todayISO();d.updatedDate=$('companyUpdatedDate').value}
+ localStorage.setItem(STORAGE_COMPANY,JSON.stringify(d));companyDateManual=false;if($('companySaveState'))$('companySaveState').textContent='保存済み '+(d.updatedDate||'');calc();
+};
+loadCompany=function(){
+ let d=null;try{d=JSON.parse(localStorage.getItem(STORAGE_COMPANY)||'null')}catch{}if(!d)return;
+ const map={companyTotalAssets:d.totalAssets,companyNetAssets:d.netAssets,companyBankDebt:d.bankDebt,companyCash:d.cash,companyOrdinaryProfit:d.ordinary,companyDepreciation:d.depreciation,companyTaxes:d.taxes,companyOfficerLoan:d.officerLoan,companyOperatingProfit:d.operating,companyInterestIncome:d.interestIncome,companyInterestExpense:d.interestExpense,companyUpdatedDate:d.updatedDate,
+ companyConservativeAssets:d.conservativeAssets,companyTotalLiabilities:d.totalLiabilities,companyBankRecognizedOfficerLoan:d.bankRecognizedOfficerLoan,companyCapitalAdjOfficerLoan:d.capitalAdjOfficerLoan,companyStableOfficerLoan:d.stableOfficerLoan,companyOtherDebt:d.otherDebt,companyFixedAssets:d.fixedAssets,companyFixedLiabilities:d.fixedLiabilities,companyRestrictedCash:d.restrictedCash,companyDepositRefund:d.depositRefund,companyNearTax:d.nearTax,companyCommittedPayments:d.committedPayments,companyAnnualPrincipalRepayment:d.annualPrincipal,companyCorporateCashOutflow:d.corporateCashOutflow,companyCashTaxes:d.cashTaxes,companyPropertyPreDebtCF:d.propertyPreDebtCF,companyAverageBankDebt:d.averageBankDebt,
+ companyPostTotalAssets:d.postTotalAssets,companyPostConservativeAssets:d.postConservativeAssets,companyPostTotalLiabilities:d.postTotalLiabilities,companyPostNetAssets:d.postNetAssets,companyPostBankDebt:d.postBankDebt,companyPostCash:d.postCash,companyPostOperatingProfit:d.postOperating,companyPostDepreciation:d.postDepreciation,companyPostInterestExpense:d.postInterestExpense,companyPostAnnualPrincipalRepayment:d.postAnnualPrincipal,companyPostPropertyPreDebtCF:d.postPropertyPreDebtCF,companyPostFixedAssets:d.postFixedAssets,companyPostFixedLiabilities:d.postFixedLiabilities,companyPostAverageBankDebt:d.postAverageBankDebt};
+ programmatic=true;for(const [id,v] of Object.entries(map)){if($(id)&&v!==null&&v!==undefined){$(id).value=isMoneyInput(id)&&id!=='companyUpdatedDate'?String(manToYen(v)):String(v);if(isMoneyInput(id))$(id).dataset.yenReady='1'}}programmatic=false;if($('companySaveState'))$('companySaveState').textContent='保存済み '+(d.updatedDate||'');
+};
+clearCompany=function(){if(!confirm('会社財務設定を初期化する？通常の物件リセットとは別操作です。'))return;if(!confirm('本当に会社設定だけを消しますか？'))return;localStorage.removeItem(STORAGE_COMPANY);programmatic=true;companyFieldIds().forEach(id=>{if($(id))$(id).value=''});programmatic=false;companyDateManual=false;if($('companySaveState'))$('companySaveState').textContent='未保存';calc()};
+
+function capexPlans(){const out=[];for(let i=1;i<=8;i++){const name=$('capexName'+i)?.value.trim()||('CapEx'+i),year=rawNum('capexYear'+i),amount=rawNum('capexAmount'+i);if(year!==null&&amount!==null&&fin(year)&&fin(amount))out.push({name,year,month:Math.max(0,Math.round(year*12)),amount})}return out}
+function fullTermCF(c,m){
+ const plans=capexPlans(),opening=valOr(rawNum('capexOpeningReserve'),0),N=Math.max(0,Math.round(Math.max(0,c.years)*12)),maxMonths=Math.min(N,12000),r=Math.max(0,c.interest)/100/12,P=Math.max(0,c.loan);let bal=P,cum=opening,min=opening,minMonthly=Infinity;const legacyMonthly=plans.length?0:Math.max(0,c.capexReserve||0)/12;const events=new Map();for(const p of plans){if(p.month<=maxMonths)events.set(p.month,(events.get(p.month)||0)+p.amount)}
+ const constant=N>0&&c.method==='equal_payment'?(r===0?P/N:(N*Math.log1p(r)>700?P*r:P*r/(1-Math.exp(-N*Math.log1p(r))))):0,fixed=N>0?P/N:0,override=opt('repayOverride');
+ const immediateSpend=events.get(0)||0;if(immediateSpend){cum-=immediateSpend;min=Math.min(min,cum)}
+ if(N===0){const immediateDebt=P;cum-=immediateDebt;min=Math.min(min,cum);return{min,ending:cum,minMonthly:-immediateDebt,plans,opening,limited:false}}
+ for(let month=1;month<=maxMonths;month++){const interest=bal*r;let pay=0,pp=0;if(P>0){if(c.method==='equal_principal'){pp=month===N?bal:Math.min(bal,fixed);pay=pp+interest}else{pay=month===N?bal+interest:constant;pp=Math.min(bal,Math.max(0,pay-interest))}}bal=Math.max(0,bal-pp);const metricPay=override!==null&&month<=12?c.annualDebt/12:pay,free=m.uwNoi/12-metricPay-legacyMonthly-(events.get(month)||0);cum+=free;minMonthly=Math.min(minMonthly,free);min=Math.min(min,cum)}
+ return{min,ending:cum,minMonthly:minMonthly===Infinity?0:minMonthly,plans,opening,limited:N>12000,simMonths:maxMonths,totalMonths:N}
+}
+function propertyModel(c){
+ const pgr=c.rent,stable=c.stableOtherIncome||0,obs=fin(c.observedVacancyRate)?Math.max(0,c.observedVacancyRate):0,normalLossRate=Math.max(5,obs),normalLoss=pgr*normalLossRate/100,egi=pgr-normalLoss+stable,uwNoi=egi-c.opex,uwNoiRate=sdiv(uwNoi,pgr)*100,gross=sdiv(pgr,c.price)*100,noiYield=sdiv(uwNoi,c.price)*100;
+ const totalU=rawNum('totalUnits'),occU=rawNum('occupiedUnits'),physicalOcc=totalU===null||occU===null?NaN:sdiv(occU,totalU)*100,econOcc=c.currentRent===null?NaN:sdiv(c.currentRent,pgr)*100;
+ const debt=c.annualDebt,repayRatio=sdiv(debt,pgr)*100,uwDscr=debt===0?(uwNoi>=0?Infinity:-Infinity):sdiv(uwNoi,debt),stressLossRate=Math.max(20,obs),stressIncome=pgr*(1-stressLossRate/100),stressNoi=stressIncome-c.opex,stressDscr=debt===0?(stressNoi>=0?Infinity:-Infinity):sdiv(stressNoi,debt),stressCF=stressNoi-debt,afterCF=uwNoi-debt,cfRate=sdiv(afterCF,pgr)*100,afterDebtYield=sdiv(afterCF,c.totalInvestment)*100,oer=sdiv(c.opex,pgr)*100,ber=oer+repayRatio,debtYield=c.loan===0?(uwNoi>=0?Infinity:-Infinity):sdiv(uwNoi,c.loan)*100,noiYears=uwNoi===0?(c.loan>0?Infinity:NaN):sdiv(c.loan,uwNoi),ltc=sdiv(c.loan,c.totalInvestment)*100;
+ const adoptedVal=fin(c.bankEval)?c.bankEval:(rawNum('collateralValueReference')??NaN),ltv=sdiv(c.loan,adoptedVal)*100,ncf=uwNoi-(c.capexReserve||0),capPlans=capexPlans(),capexMonthlyNeed=capPlans.reduce((sum,p)=>sum+(p.month>0?p.amount/p.month:p.amount),0),full=fullTermCF(c,{uwNoi});
+ const residual15=c.loan===0?Infinity:sdiv(pgr,c.loan)*100,targetDebt=pgr>0?pgr/.15:0,needReduce=Math.max(0,c.loan-targetDebt),needPct=sdiv(needReduce,c.price)*100;let level=residual15>=15?'LEVEL0':needPct<=5?'LEVEL1':'LEVEL2';if($('level3Manual')?.value==='yes'&&level!=='LEVEL0')level='LEVEL3';
+ const land=fin(c.landValue)?c.landValue:NaN,bld=fin(c.buildingValue)?c.buildingValue:NaN,summation=fin(land)&&fin(bld)?land+bld:NaN,cap=rawNum('currentCapRate'),incomeValue=cap!==null&&cap>0?sdiv(uwNoi,cap/100):NaN,municipalityDensity=rawNum('municipalityDensity'),localDensity=rawNum('localDensity');
+ const collSum=fin(summation)?summation*.70:NaN,collIncome=fin(incomeValue)?incomeValue*.70:NaN,collSurplusSum=fin(collSum)?collSum-c.loan:NaN,collSurplusIncome=fin(collIncome)?collIncome-c.loan:NaN;
+ const exitYear=valOr(rawNum('exitYear'),0),exitCap=rawNum('exitCapRate'),exitNoi=rawNum('exitNoiOverride')??uwNoi,continuance=exitCap!==null&&exitCap>0?sdiv(exitNoi,exitCap/100):NaN,futureLand=rawNum('futureLandValue'),landRedevelop=futureLand===null?NaN:futureLand-valOr(rawNum('demolitionCost'),0)-valOr(rawNum('vacateCost'),0)-valOr(rawNum('redevelopmentCost'),0),manualExit=rawNum('exitPrice');let salePrice=manualExit!==null?manualExit:(fin(continuance)&&fin(landRedevelop)?Math.max(continuance,landRedevelop):fin(continuance)?continuance:fin(landRedevelop)?landRedevelop:NaN);const saleCostRate=valOr(rawNum('exitCostRate'),5),saleNet=fin(salePrice)?salePrice*(1-saleCostRate/100):NaN,exitBal=balanceAfterYears(c.loan,c.interest,c.years,c.method,exitYear),exitRatio=exitBal===0?Infinity:sdiv(saleNet,exitBal);
+ const ua=rawNum('unregisteredArea'),uc=rawNum('unregisteredReplacementCost'),uage=rawNum('unregisteredAge'),ulife=rawNum('unregisteredLife'),ulegal=$('unregisteredLegal')?.value||'',ures=(ulife!==null&&ulife>0&&uage!==null)?Math.max(0,Math.min(1,(ulife-uage)/ulife)):NaN,unregVal=ulegal==='confirmed'&&[ua,uc,ures].every(fin)?ua*uc/10000*ures:NaN;
+ return{pgr,stable,obs,normalLossRate,normalLoss,egi,uwNoi,uwNoiRate,gross,noiYield,totalU,occU,physicalOcc,econOcc,debt,repayRatio,uwDscr,stressLossRate,stressIncome,stressNoi,stressDscr,stressCF,afterCF,cfRate,afterDebtYield,oer,ber,debtYield,noiYears,ltc,adoptedVal,ltv,ncf,capPlans,capexMonthlyNeed,full,residual15,targetDebt,needReduce,needPct,level,land,bld,summation,cap,incomeValue,municipalityDensity,localDensity,collSum,collIncome,collSurplusSum,collSurplusIncome,exitYear,exitCap,exitNoi,continuance,futureLand,landRedevelop,salePrice,saleCostRate,saleNet,exitBal,exitRatio,ulegal,ures,unregVal};
+}
+function companyScenario(raw,c,pm,post){
+ const baseTotal=raw.totalAssets,baseNet=raw.netAssets,baseCons=raw.conservativeAssets??baseTotal,baseLiab=raw.totalLiabilities??(fin(baseTotal)&&fin(baseNet)?baseTotal-baseNet:null),propDep=rawNum('propertyDepreciation')??0,firstInt=c.firstYearInterestUsed||c.sch?.firstYearInterest||0,firstPrin=c.sch?.firstYearPrincipal||0,consProp=fin(c.bankEval)?Math.min(c.totalInvestment,c.bankEval):c.price;
+ let d={};
+ if(!post){d={totalAssets:baseTotal,netAssets:baseNet,conservativeAssets:baseCons,totalLiabilities:baseLiab,bankDebt:raw.bankDebt,cash:raw.cash,ordinary:raw.ordinary,depreciation:raw.depreciation,officerLoan:raw.officerLoan,operating:raw.operating,interestIncome:raw.interestIncome,interestExpense:raw.interestExpense,bankRecognizedOfficerLoan:raw.bankRecognizedOfficerLoan??0,capitalAdjOfficerLoan:raw.capitalAdjOfficerLoan??0,stableOfficerLoan:raw.stableOfficerLoan??0,otherDebt:raw.otherDebt??0,fixedAssets:raw.fixedAssets,fixedLiabilities:raw.fixedLiabilities,restrictedCash:raw.restrictedCash??0,depositRefund:raw.depositRefund??0,nearTax:raw.nearTax??0,committedPayments:raw.committedPayments??0,annualPrincipal:raw.annualPrincipal,corporateCashOutflow:raw.corporateCashOutflow??0,cashTaxes:raw.cashTaxes??0,propertyPreDebtCF:raw.propertyPreDebtCF,averageBankDebt:raw.averageBankDebt??raw.bankDebt};}
+ else{d={
+  totalAssets:raw.postTotalAssets??(fin(baseTotal)?baseTotal+c.loan:null),netAssets:raw.postNetAssets??baseNet,conservativeAssets:raw.postConservativeAssets??(fin(baseCons)&&fin(raw.cash)?baseCons-c.cashNeeded+consProp:null),totalLiabilities:raw.postTotalLiabilities??(fin(baseLiab)?baseLiab+c.loan:null),bankDebt:raw.postBankDebt??(fin(raw.bankDebt)?raw.bankDebt+c.loan:null),cash:raw.postCash??(fin(raw.cash)?raw.cash-c.cashNeeded:null),ordinary:fin(raw.ordinary)?raw.ordinary+pm.uwNoi-propDep-firstInt:null,depreciation:raw.postDepreciation??(fin(raw.depreciation)?raw.depreciation+propDep:null),officerLoan:raw.officerLoan,operating:raw.postOperating??(fin(raw.operating)?raw.operating+pm.uwNoi-propDep:null),interestIncome:raw.interestIncome,interestExpense:raw.postInterestExpense??(fin(raw.interestExpense)?raw.interestExpense+firstInt:null),bankRecognizedOfficerLoan:raw.bankRecognizedOfficerLoan??0,capitalAdjOfficerLoan:raw.capitalAdjOfficerLoan??0,stableOfficerLoan:raw.stableOfficerLoan??0,otherDebt:raw.otherDebt??0,fixedAssets:raw.postFixedAssets??(fin(raw.fixedAssets)?raw.fixedAssets+c.totalInvestment:null),fixedLiabilities:raw.postFixedLiabilities??(fin(raw.fixedLiabilities)?raw.fixedLiabilities+c.loan:null),restrictedCash:raw.restrictedCash??0,depositRefund:raw.depositRefund??0,nearTax:raw.nearTax??0,committedPayments:raw.committedPayments??0,annualPrincipal:raw.postAnnualPrincipal??(fin(raw.annualPrincipal)?raw.annualPrincipal+firstPrin:null),corporateCashOutflow:raw.corporateCashOutflow??0,cashTaxes:(raw.cashTaxes??0)+(rawNum('additionalTax')??0),propertyPreDebtCF:raw.postPropertyPreDebtCF??(fin(raw.propertyPreDebtCF)?raw.propertyPreDebtCF+pm.uwNoi:null),averageBankDebt:raw.postAverageBankDebt??(fin(raw.averageBankDebt??raw.bankDebt)?(raw.averageBankDebt??raw.bankDebt)+(c.loan+(c.sch?.endYear1||0))/2:null)
+ }}
+ const ebitda=fin(d.operating)&&fin(d.depreciation)?d.operating+d.depreciation:NaN,freeCash=fin(d.cash)?d.cash-d.restrictedCash-d.depositRefund-d.nearTax-d.committedPayments:NaN,cfads=fin(d.propertyPreDebtCF)?d.propertyPreDebtCF-d.corporateCashOutflow-d.cashTaxes:NaN,debtService=fin(d.annualPrincipal)&&fin(d.interestExpense)?d.annualPrincipal+d.interestExpense:NaN,realEq=fin(d.conservativeAssets)&&fin(d.totalLiabilities)&&fin(d.officerLoan)?d.conservativeAssets-d.totalLiabilities+d.officerLoan:NaN,realEqRatio=sdiv(realEq,d.conservativeAssets)*100,bankEq=fin(d.conservativeAssets)&&fin(d.totalLiabilities)?d.conservativeAssets-d.totalLiabilities+d.bankRecognizedOfficerLoan:NaN,bankEqRatio=sdiv(bankEq,d.conservativeAssets)*100,bookEqRatio=sdiv(d.netAssets,d.totalAssets)*100,monthlyOut=fin(debtService)?(debtService+d.corporateCashOutflow+d.cashTaxes)/12:NaN,liquidity=sdiv(freeCash,monthlyOut),roa=fin(d.operating)&&fin(d.interestIncome)?sdiv(d.operating+d.interestIncome,d.totalAssets)*100:NaN,preRoa=fin(d.operating)&&fin(d.interestIncome)&&fin(d.depreciation)?sdiv(d.operating+d.interestIncome+d.depreciation,d.totalAssets)*100:NaN,bankEbitda=!fin(ebitda)?NaN:((d.bankDebt??0)>0&&ebitda<=0?Infinity:sdiv(d.bankDebt,ebitda)),adjDebt=fin(d.bankDebt)&&fin(d.officerLoan)&&fin(d.otherDebt)&&fin(freeCash)?Math.max(d.bankDebt+d.officerLoan+d.otherDebt-d.capitalAdjOfficerLoan-freeCash,0):NaN,adjDebtYears=!fin(ebitda)||!fin(adjDebt)?NaN:(adjDebt>0&&ebitda<=0?Infinity:sdiv(adjDebt,ebitda)),dscr=sdiv(cfads,debtService),stressDscr=sdiv(cfads*.9,debtService),preIcr=fin(d.operating)&&fin(d.depreciation)&&fin(d.interestIncome)?sdiv(d.operating+d.depreciation+d.interestIncome,d.interestExpense):NaN,icr=fin(d.operating)&&fin(d.interestIncome)?sdiv(d.operating+d.interestIncome,d.interestExpense):NaN,fixedBook=fin(d.fixedAssets)&&fin(d.netAssets)&&fin(d.fixedLiabilities)&&(d.netAssets+d.fixedLiabilities)>0?sdiv(d.fixedAssets,d.netAssets+d.fixedLiabilities)*100:NaN,fixedReal=fin(d.fixedAssets)&&fin(d.netAssets)&&fin(d.fixedLiabilities)&&(d.netAssets+d.fixedLiabilities+d.stableOfficerLoan)>0?sdiv(d.fixedAssets,d.netAssets+d.fixedLiabilities+d.stableOfficerLoan)*100:NaN,cashRatio=sdiv(d.cash,d.totalAssets)*100,bankDebtBook=sdiv(d.bankDebt,d.totalAssets)*100,bankDebtReal=sdiv(d.bankDebt,d.conservativeAssets)*100,avgRate=sdiv(d.interestExpense,d.averageBankDebt)*100,normalCF=fin(d.ordinary)&&fin(d.depreciation)?d.ordinary+d.depreciation-(raw.taxes??0):NaN,normalDebtBase=Math.max(0,(d.bankDebt??0)+(d.officerLoan??0)+(d.otherDebt??0)-(d.cash??0)),normalDebtYears=normalDebtBase>0&&normalCF<=0?Infinity:sdiv(normalDebtBase,normalCF);
+ return{...d,ebitda,freeCash,cfads,debtService,realEq,realEqRatio,bankEq,bankEqRatio,bookEqRatio,monthlyOut,liquidity,roa,preRoa,bankEbitda,adjDebt,adjDebtYears,dscr,stressDscr,preIcr,icr,fixedBook,fixedReal,cashRatio,bankDebtBook,bankDebtReal,avgRate,normalDebtYears};
+}
+function companyModels(c,pm){const raw=readCompanyRaw();return{raw,current:companyScenario(raw,c,pm,false),post:companyScenario(raw,c,pm,true)}}
+function pair(a,b,formatter){return formatter(a)+' → '+formatter(b)}
+function companyStatus(i,v){switch(i){case 1:return !fin(v.realEq)?'要入力':v.realEq<=0?'原則取得停止':v.realEqRatio>=30?'保守運営':v.realEqRatio>=25?'目標達成':v.realEqRatio>=20?'財務調整':'取得再検討';case 4:return !fin(v.liquidity)?'要入力':v.liquidity>=6?'目標達成':'目標未達';case 5:return !fin(v.roa)?'要入力':v.roa>=2?'目標達成':'目標未達';case 6:return !fin(v.preRoa)?'要入力':v.preRoa>=5?'目標達成':'目標未達';case 7:return !fin(v.bankEbitda)?'要入力':v.bankEbitda<=15?'目標内':v.bankEbitda<=18?'成長許容':v.bankEbitda<=20?'警戒':'レッド・停止';case 8:return !fin(v.adjDebtYears)?'要入力':v.adjDebtYears<=15?'良好':v.adjDebtYears<=20?'許容・改善':'原則取得停止';case 9:return !fin(v.dscr)?'要入力':v.dscr>=1.2?'目標':v.dscr>=1.1?'成長許容':v.dscr>=1?'警戒':'レッド・停止';case 10:return !fin(v.stressDscr)?'要入力':v.stressDscr>=1?'必須クリア':'原則取得停止';case 11:return !fin(v.preIcr)?'要入力':v.preIcr>=2?'通常':v.preIcr>=1?'ウォッチ':'強警戒';case 13:return !fin(v.fixedBook)?'要入力':v.fixedBook<=100?'目安内':'超過・確認';case 14:return !fin(v.fixedReal)?'要入力':v.fixedReal<=100?'目安内':'超過・確認';case 15:return !fin(v.ordinary)?'要入力':v.ordinary>=0?'黒字':'赤字・併用判断';default:return '参考'}}
+
+function mk(o){return indicatorAccordion({rank:String(o.rank),title:o.title,scope:o.scope||'property',rule:o.rule||'ref',value:o.value,status:o.status||'参考',tone:o.tone||statusTone(o.status||''),threshold:o.threshold||'固定Gateなし',meaning:o.meaning||'',reading:o.reading||'',formula:o.formula||'',deep:o.deep||''})}
+function propertyRows(c,m){
+ const age=rawNum('buildingAgeMain'),complete=age===null?NaN:age+c.years,capStatus=m.cap===null?'要入力':'暫定・市場根拠優先',popVal=(m.municipalityDensity===null&&m.localDensity===null)?'未入力':((m.municipalityDensity??'—')+' / '+(m.localDensity??'—')+' 人/km²');
+ const arr=[
+ {rank:1,title:'PGR（満室想定年間賃料）',value:moneyX(m.pgr),status:'基礎',threshold:'固定閾値なし',meaning:'正常な満室状態の年間賃料。全収益・Stress計算の出発点。',formula:'本ツールの既存「満室想定年間賃料」をPGRとして採用',deep:'継続的その他収入は既存入力との二重計上を避け、EGIで別加算する。'},
+ {rank:2,title:'通常空室等損失率',value:pctX(m.normalLossRate),status:m.normalLossRate>5?'実態悪化反映':'標準5%',threshold:'標準5%。実態が悪ければ上方修正',meaning:'通常運営で失う空室・滞納・募集期間等。',formula:'max(5%, 現況の実際損失率)'},
+ {rank:3,title:'EGI（実効総収入）',value:moneyX(m.egi),status:'参考',meaning:'通常損失控除後の実効収入。',formula:'PGR－通常損失＋継続的その他収入'},
+ {rank:4,title:'和京 OER（PGR基準運営経費率）',value:pctX(m.oer),status:fin(m.oer)?(m.oer<=30?'目標内':m.oer>=40?'高コスト要精査':'目標超過'):'定義不能',threshold:'30%以下目標。超過だけでNGにしない',meaning:'PGRに対する正常化OPEX。',formula:'正常化OPEX÷PGR×100'},
+ {rank:5,title:'UW NOI（審査用純営業収益）',value:moneyX(m.uwNoi),status:'主要',meaning:'融資条件に依存しない正常化後の返済前収益力。',formula:'PGR－通常損失＋継続的その他収入－正常化OPEX'},
+ {rank:6,title:'UW NOI率',value:pctX(m.uwNoiRate),status:fin(m.uwNoiRate)&&m.uwNoiRate>=65?'目標内':'目標未達',threshold:'65%以上目標・非Gate',meaning:'PGRの何%がUW NOIとして残るか。',formula:'UW NOI÷PGR×100'},
+ {rank:7,title:'表面利回り',value:pctX(m.gross),status:fin(m.gross)&&m.gross>=10?'目標内':'目標未達',threshold:'10%以上目標・非Gate',meaning:'購入価格に対するPGR。',formula:'PGR÷購入価格×100'},
+ {rank:8,title:'NOI Yield（NOI利回り）',value:pctX(m.noiYield),status:'参考',threshold:'固定Gateなし',meaning:'購入価格に対するUW NOI。',formula:'UW NOI÷購入価格×100'},
+ {rank:9,title:'稼働率',value:(fin(m.physicalOcc)?'物理 '+pctX(m.physicalOcc):'物理 未入力')+' / '+(fin(m.econOcc)?'経済 '+pctX(m.econOcc):'経済 未入力'),status:'参考',threshold:'独立Gateなし',meaning:'戸数ベースと収入ベースの稼働率。',formula:'物理=入居戸数÷総戸数 / 経済=実効賃料収入÷PGR'},
+ {rank:10,title:'年間元利返済額',value:moneyX(m.debt),status:'入力/融資条件',meaning:'1年間の元本＋利息。',formula:'12か月の元金返済＋支払利息'},
+ {rank:12,title:'UW DSCR（通常時債務返済余裕率）',value:timesX(m.uwDscr),status:!fin(m.uwDscr)?(m.uwDscr===Infinity?'無借入':'定義不能'):m.uwDscr>=1.4?'目標級':m.uwDscr>=1.3?'良好':m.uwDscr>=1.2?'注意':'要精査',threshold:'1.40以上目標級 / 1.30-1.39良好 / 1.20-1.29注意 / <1.20要精査。非Gate',meaning:'UW NOIが年間元利返済を何倍カバーするか。',formula:'UW NOI÷年間元利返済'},
+ {rank:15,title:'返済後CF',value:moneyX(m.afterCF),status:m.afterCF>=0?'プラス':'マイナス',threshold:'プラス望ましい・単独Gateなし',meaning:'通常時の税引前・大規模修繕前手残り。',formula:'UW NOI－年間元利返済'},
+ {rank:16,title:'UW返済後CF率',value:pctX(m.cfRate),status:fin(m.cfRate)?(m.cfRate>=15?'強い':m.cfRate>=10?'目標':m.cfRate>=5?'注意':'余力薄い'):'定義不能',threshold:'15%以上強い / 10%以上目標 / 5-10注意 / <5薄い。参考・非Gate',meaning:'PGRのうち返済後に残る割合。',formula:'(UW NOI－年間元利返済)÷PGR×100'},
+ {rank:17,title:'返済後利回り',value:pctX(m.afterDebtYield),status:'参考',threshold:'固定Gateなし。旧3%は非Gate',meaning:'総取得費に対する通常時返済後CF。',formula:'年間返済後CF÷総取得費×100'},
+ {rank:18,title:'BER（損益分岐比率）',value:pctX(m.ber),status:fin(m.ber)&&m.ber<=80?'20%Stress相当':'参考',threshold:'80%以下相当＝簡易20%Stress。独立Gateなし',meaning:'PGRのうちOPEX＋返済で必要な割合。',formula:'和京OER＋返済比率'},
+ {rank:19,title:'Debt Yield（借入額に対するNOI利回り）',value:pctX(m.debtYield),status:m.debtYield===Infinity?'無借入':!fin(m.debtYield)?'定義不能':m.debtYield>=6.5?'良好':m.debtYield>=5.5?'標準・許容':m.debtYield>=5?'要確認':'弱い',threshold:'≥6.5良好 / 5.5-6.5標準・許容 / 5.0-5.5要確認 / <5弱い。非Gate',meaning:'金利・期間に依存しない借入元本の重さ。',formula:'UW NOI÷借入残高×100'},
+ {rank:20,title:'NOI単純償還年数',value:yearsX(m.noiYears),status:'参考',threshold:'Debt Yieldの逆数・独立採点禁止',meaning:'UW NOIで借入元本が何年分か。',formula:'借入残高÷UW NOI'},
+ {rank:21,title:'LTC（総取得費に対する借入比率）',value:pctX(m.ltc),status:'参考',threshold:'固定上限なし',meaning:'総取得費を何%借入で賄うか。',formula:'借入額÷総取得費×100'},
+ {rank:22,title:'LTV（担保価値に対する借入比率）',value:fin(m.adoptedVal)?pctX(m.ltv):'採用評価額未入力',status:'銀行参考',threshold:'和京固定上限なし',meaning:'採用評価額に対する借入割合。',formula:'借入額÷採用評価額×100'},
+ {rank:23,title:'NCF（正味キャッシュフロー）',value:moneyX(m.ncf),status:'参考',threshold:'固定Gateなし',meaning:'UW NOIから長期CapEx準備等を控除した返済前CF。',formula:'UW NOI－年間化CapEx準備額'},
+ {rank:24,title:'CapEx（大規模修繕・設備更新費）',value:m.capPlans.length?(m.capPlans.length+'件 / 必要積立目安 '+moneyX(m.capexMonthlyNeed)+'/月'):(c.capexReserve>0?'年額予備 '+moneyX(c.capexReserve):'計画未入力'),status:m.capPlans.length?'項目別反映':'要確認',threshold:'固定率なし。「いつ・いくら」で設定',meaning:'大規模修繕を通常OPEXと分離。',formula:'各項目月額必要積立＝工事費÷実施予定までの残月数'},
+ {rank:26,title:'15%耐性 LEVEL0-3',value:m.level+' / 必要元本圧縮 '+moneyX(m.needReduce),status:m.level,threshold:'L0=15%耐性あり / L1=必要圧縮≤買価5% / L2=>5% / L3=対策後も復旧困難',meaning:'取得後の早期是正管理。取得時Gateではない。',formula:'15%耐性へ復旧する必要元本圧縮額を算定し買価比でLEVEL判定'},
+ {rank:27,title:'土地評価',value:fin(m.land)?moneyX(m.land):'要入力',status:'主要',threshold:'複数資料で採用額決定',meaning:'路線価、公示・基準地価、取引事例等を比較。',formula:'固定単一式なし。現在ツールの土地評価入力/推計を表示'},
+ {rank:28,title:'建物基礎評価額',value:fin(m.bld)?moneyX(m.bld):'要入力',status:'主要',threshold:'原価法系・固定合否なし',meaning:'再調達原価を基礎に経過を反映。',formula:'採用再調達単価×延床面積×残存率'},
+ {rank:29,title:'和京積算評価額',value:fin(m.summation)?moneyX(m.summation):'要入力',status:'主要',threshold:'積算≥購入価格を絶対条件にしない',meaning:'土地＋建物の資産性評価。',formula:'採用土地評価額＋建物基礎評価額'},
+ {rank:30,title:'収益還元価格',value:fin(m.incomeValue)?moneyX(m.incomeValue):'Cap Rate未入力',status:'主要',threshold:'市場根拠Cap Rateを使用・購入価格以上をGateにしない',meaning:'通常UW NOIを市場Cap Rateで資本還元。',formula:'UW NOI÷採用Cap Rate'},
+ {rank:31,title:'Cap Rate（還元利回り）',value:m.cap===null?'未入力':pctX(m.cap),status:capStatus,threshold:'4.50-5.50%5段階は暫定・要再承認。市場根拠優先',meaning:'UW NOIを市場価値へ変換する市場利回り。',formula:'案件ごとに市場根拠を手動採用'},
+ {rank:32,title:'人口集積度（Cap Rate補助）',value:popVal,status:'参考',threshold:'現行スコア境界は参考・最終集約式未FIX',meaning:'人口密度をCap Rateの補助要素として保存。',formula:'市区町村/行政区＋町丁目/大字人口密度を参考表示'},
+ {rank:33,title:'和京想定担保評価額',value:(fin(m.collSum)?'積算70% '+moneyX(m.collSum):'積算未算定')+' / '+(fin(m.collIncome)?'収益70% '+moneyX(m.collIncome):'収益未算定'),status:'暫定・要再承認',threshold:'現行資料の双方70%は銀行参考。融資上限ではない',meaning:'価値を処分リスク等で保守化した内部保全額。',formula:'積算評価×70% / 収益還元価格×70%（暫定）'},
+ {rank:34,title:'担保不足額 / 余力',value:(fin(m.collSurplusSum)?'積算 '+moneyX(m.collSurplusSum):'—')+' / '+(fin(m.collSurplusIncome)?'収益 '+moneyX(m.collSurplusIncome):'—'),status:'参考',threshold:'不足=自動NGではない',meaning:'想定担保評価額と希望借入の差額。',formula:'想定担保評価額－希望借入額'},
+ {rank:35,title:'出口 Cap Rate',value:m.exitCap===null?'未入力':pctX(m.exitCap),status:'市場根拠優先',threshold:'固定上乗せ表は参考Stress・要再承認',meaning:'将来の収益価値算定に使う還元利回り。',formula:'評価時点の市場根拠から再採用'},
+ {rank:36,title:'継続利用価値',value:fin(m.continuance)?moneyX(m.continuance):'出口Cap Rate未入力',status:'主要',meaning:'将来も賃貸物件として使う収益価値。',formula:'評価時点の想定UW NOI÷出口Cap Rate'},
+ {rank:37,title:'土地・再開発価値',value:fin(m.landRedevelop)?moneyX(m.landRedevelop):'将来土地価値未入力',status:'主要',meaning:'土地利用・売却側のネット価値。',formula:'将来土地価値－解体費－退去/明渡費－再開発/売却費'},
+ {rank:38,title:'売却費用率',value:pctX(m.saleCostRate),status:'暫定・実見積優先',threshold:'現行5%は暫定・要再承認',meaning:'想定売却価格から控除する関連費用。',formula:'実見積優先。簡便前提時＝想定売却価格×5%'},
+ {rank:39,title:'売却手取額',value:fin(m.saleNet)?moneyX(m.saleNet):'出口価値未入力',status:'主要',meaning:'残債返済へ回せるネット売却額。',formula:'想定売却価格－売却費用'},
+ {rank:43,title:'構造・築年数',value:(age===null?'築年未入力':'築'+age+'年')+' / '+(fin(complete)?'完済時築'+complete.toFixed(1)+'年':'—'),status:'参考',threshold:'木造40年程度/軽量40-45/重量45-50/RC50程度は目安。固定NGなし',meaning:'構造・築年・修繕・融資期間・出口を総合確認。',formula:'完済時築年＝現在築年数＋融資期間'},
+ {rank:44,title:'未登記増築の評価',value:fin(m.unregVal)?moneyX(m.unregVal):(m.ulegal==='unknown'?'コア評価へ加算しない':'未確認'),status:fin(m.unregVal)?'条件付き加算':m.ulegal==='unknown'?'加算しない':'要確認',threshold:'面積・時期・適法性を十分確認できる場合のみ条件付き加算',meaning:'未登記部分を一律0にも通常建物同等にも扱わない。',formula:'再調達単価×確認面積×増築時期別残存率'}
+ ];return arr;
+}
+function gateRows(c,m){
+ const stressKnown=m.pgr!==0||m.debt!==0||c.opex!==0,stressPass=stressKnown&&m.stressCF>=0&&(m.stressDscr>=1||m.stressDscr===Infinity),repayKnown=m.pgr!==0,repayPass=repayKnown&&m.repayRatio<=50,fullPass=m.full.min>=0,rebuild=$('rebuildable')?.value||'',landslide=$('landslideRisk')?.value||'',exitKnown=m.exitBal===0||fin(m.saleNet),exitPass=m.exitBal===0||(fin(m.exitRatio)&&m.exitRatio>=1);
+ return[
+ {rank:'13',title:'20%家賃消失 Stress',value:moneyX(m.stressCF),status:!stressKnown?'確認待ち':stressPass?'OK':'NG',threshold:'Stress CF≥0 かつ Stress DSCR≥1.00',meaning:'PGR20%消失（現況が悪ければ悪い方）後も返済できるか。',formula:'Stress収入=PGR×(1－max(20%,現況損失率)); Stress CF=Stress NOI－年間返済'},
+ {rank:'14',title:'20%Stress DSCR',value:timesX(m.stressDscr),status:!stressKnown?'確認待ち':stressPass?'OK':'NG',threshold:'1.00以上絶対',meaning:'20%家賃消失後の返済原資が元利返済を何倍カバーするか。',formula:'Stress NOI÷年間元利返済'},
+ {rank:'11',title:'返済比率',value:pctX(m.repayRatio),status:!repayKnown?'確認待ち':repayPass?'OK':'NG',threshold:'50%以下絶対',meaning:'PGRの何%が元利返済へ固定されるか。',formula:'年間元利返済÷PGR×100'},
+ {rank:'25',title:'CapEx積立後CF / 全期間資金ショート',value:'最低累計 '+moneyX(m.full.min),status:fullPass?'OK':'NG',threshold:'完済まで最低累計CF≥0',meaning:'返済・CapEx実施を反映し完済まで資金ショートしないか。',formula:'月次返済後CFを累積し、計画CapExを実施月に控除。既存積立は開始残高へ加算'},
+ {rank:'41',title:'再建築性',value:rebuild==='yes'?'再建築可能':rebuild==='no'?'再建築不可':'未確認',status:rebuild==='yes'?'OK':rebuild==='no'?'NG':'確認待ち',threshold:'再建築可能',meaning:'将来合法的に再建築できるか。',formula:'数式なし。役所・道路・接道資料で確認'},
+ {rank:'42',title:'土砂災害リスク',value:landslide==='outside'?'区域外':landslide==='red'?'特別警戒区域':landslide==='yellow'?'警戒区域':'未確認',status:landslide==='outside'?'OK':landslide?'NG':'確認待ち',threshold:'警戒・特別警戒区域外',meaning:'土砂災害警戒区域等への該当。',formula:'数式なし。都道府県ハザードマップ等で確認'},
+ {rank:'40',title:'出口返済余力倍率',value:m.exitBal===0?'無借入':timesX(m.exitRatio),status:!exitKnown?'確認待ち':exitPass?'OK':'NG',threshold:'1.20以上目標 / 1.10-1.20許容 / 1.00-1.10要確認 / 1.00未満NG',meaning:'売却手取でその時点の残債を完済できるか。',formula:'売却手取額÷その時点の残債'}
+ ]
+}
+function companyRows(c,m,cm){const a=cm.current,b=cm.post;const defs=[
+ [1,'和京実質自己資本比率 / 額',pair(a.realEqRatio,b.realEqRatio,pctX)+' / '+pair(a.realEq,b.realEq,moneyX),'25%以上目標 / 30%以上保守 / 20-25財務調整 / <20取得再検討。額≤0原則停止','保守的実勢総資産－全負債＋役員借入金。比率=同額÷保守的実勢総資産×100'],
+ [2,'銀行認定ベース実質自己資本比率',pair(a.bankEqRatio,b.bankEqRatio,pctX),'参考・銀行判断','保守的実勢総資産－全負債＋銀行認定可能な資本性役員借入 / 同総資産'],
+ [3,'簿記上自己資本比率',pair(a.bookEqRatio,b.bookEqRatio,pctX),'参考・独自閾値なし','簿記上純資産÷簿記上総資産×100'],
+ [4,'手元流動性カバー月数',pair(a.liquidity,b.liquidity,x=>fin(x)?x.toFixed(2)+'か月':x===Infinity?'∞か月':'定義不能'),'自由現金ベース6か月以上目標・単独レッドなし','自由現金÷1か月通常現金支出'],
+ [5,'ROA（総資産利益率）',pair(a.roa,b.roa,pctX),'2%以上目標','(営業利益＋受取利息・配当金)÷総資産×100'],
+ [6,'減価償却前ROA',pair(a.preRoa,b.preRoa,pctX),'5%以上目標','(営業利益＋受取利息・配当金＋減価償却費)÷総資産×100'],
+ [7,'金融機関借入 EBITDA倍率',pair(a.bankEbitda,b.bankEbitda,timesX),'≤15目標 / 15-18成長許容 / 18-20警戒 / >20レッド・原則停止','金融機関借入残高÷(営業利益＋減価償却費)'],
+ [8,'和京調整後債務償還年数',pair(a.adjDebtYears,b.adjDebtYears,yearsX),'≤15良好 / 15-20許容・改善 / >20原則停止','max(金融機関借入＋役員借入＋その他借入－資本性調整対象役員借入－自由現金,0)÷EBITDA'],
+ [9,'全社DSCR（全社債務返済余裕率）',pair(a.dscr,b.dscr,timesX),'≥1.20目標 / 1.10-1.20成長許容 / 1.00-1.10警戒 / <1.00レッド・停止','平常化CFADS÷年間金融機関元利返済額'],
+ [10,'全社Stress DSCR',pair(a.stressDscr,b.stressDscr,timesX),'CFADS10%毀損後も1.00以上必須','(平常化CFADS×90%)÷年間金融機関元利返済額'],
+ [11,'減価償却前ICR（利息返済余力倍率）',pair(a.preIcr,b.preIcr,timesX),'≥2.0通常 / 1.0-2.0ウォッチ / <1.0強警戒','(営業利益＋減価償却費＋受取利息・配当金)÷支払利息'],
+ [12,'通常ICR',pair(a.icr,b.icr,timesX),'参考・固定目標なし','(営業利益＋受取利息・配当金)÷支払利息'],
+ [13,'固定長期適合率（簿価）',pair(a.fixedBook,b.fixedBook,pctX),'100%以下目安・非Gate','固定・繰延資産÷(簿記上自己資本＋固定負債)×100'],
+ [14,'固定長期適合率（和京実質）',pair(a.fixedReal,b.fixedReal,pctX),'100%以下目安・簿価版と併記','固定・繰延資産÷(簿記上自己資本＋固定負債＋実質長期安定役員借入)×100'],
+ [15,'経常利益',pair(a.ordinary,b.ordinary,moneyX),'平常化黒字が望ましい・単独Gateなし','決算書の経常利益（必要に応じ一過性を正常化）'],
+ [16,'現預金比率',pair(a.cashRatio,b.cashRatio,pctX),'参考・固定目標なし','現金・預金÷総資産×100'],
+ [17,'金融機関借入比率',('簿価 '+pair(a.bankDebtBook,b.bankDebtBook,pctX)+' / 実質 '+pair(a.bankDebtReal,b.bankDebtReal,pctX)),'参考・固定上限なし','簿価=金融機関借入÷簿価総資産 / 実質=金融機関借入÷保守的実勢総資産'],
+ [18,'平均借入金利',pair(a.avgRate,b.avgRate,pctX),'参考・固定基準なし','年間金融機関支払利息÷期中平均金融機関借入残高×100'],
+ [19,'通常の債務償還年数',pair(a.normalDebtYears,b.normalDebtYears,yearsX),'表示のみ・定義差大','代表例：(借入金－現預金等)÷(経常利益＋減価償却費－法人税等)']
+ ];
+ return defs.map(d=>{const st=companyStatus(d[0],b);return{rank:d[0],title:d[1],value:d[2],status:st,threshold:d[3],meaning:'現状値 → 取得後12か月平常化を比較。',formula:d[4],scope:'company'}})
+}
+
+function applyTopGateStatus(id,title,value,basis,note,status){const e=$(id);if(!e)return;e.className='absolute-card '+(status==='OK'?'pass':status==='NG'?'fail':'warn');e.innerHTML='<div class="abs-top"><b>'+esc(title)+'</b><span class="abs-badge">'+esc(status)+'</span></div><div class="abs-value">'+esc(value)+'</div><div class="abs-basis">'+esc(basis)+'</div><div class="abs-note">'+esc(note)+'</div>'}
+function renderV105(c){
+ const m=propertyModel(c),cm=companyModels(c,m),gates=gateRows(c,m),remaining=propertyRows(c,m),companies=companyRows(c,m,cm);c.v105Property=m;c.v105Company=cm;
+ // Correct the legacy state so monthly/Excel/summary use PDF definitions.
+ c.noi=m.uwNoi;c.netYield=m.noiYield;c.cf=m.afterCF;c.afterDebtYield=m.afterDebtYield;c.gross=m.gross;c.rr=m.repayRatio;c.or=m.oer;c.normalDscr=m.uwDscr;c.debtYield=m.debtYield;c.stressCF=m.stressCF;
+ const concept=[
+  {id:'statusStress',title:'20%家賃消失耐性',rows:gates.filter(x=>x.rank==='13'||x.rank==='14')},
+  {id:'statusRepay',title:'返済比率',rows:gates.filter(x=>x.rank==='11')},
+  {id:'statusOpex',title:'全融資期間CF',rows:gates.filter(x=>x.rank==='25')},
+  {id:'statusYield',title:'再建築性',rows:gates.filter(x=>x.rank==='41')},
+  {id:'statusLandslide',title:'土砂災害',rows:gates.filter(x=>x.rank==='42')},
+  {id:'statusExit',title:'出口返済余力',rows:gates.filter(x=>x.rank==='40')}
+ ];
+ let fails=0,waits=0;for(const x of concept){const sts=x.rows.map(r=>r.status);const st=sts.includes('NG')?'NG':sts.some(v=>v==='確認待ち')?'確認待ち':'OK';if(st==='NG')fails++;if(st==='確認待ち')waits++;const first=x.rows[0];applyTopGateStatus(x.id,x.title,x.rows.map(r=>r.value).join(' / '),first.threshold,x.rows.map(r=>r.meaning).join(' '),st)}
+ const grade=fails?'bad':waits?'warn':'good';financeOniState={grade,hardFails:fails,targetMisses:remaining.filter(r=>/未達|弱い|要精査/.test(r.status)).length,...m,postAdjustedEq:cm.post.realEqRatio,postAccountingEq:cm.post.bookEqRatio};
+ $('decisionCard').dataset.grade=grade;$('verdict').className='verdict '+(fails?'ng':waits?'warn':'ok');$('verdict').textContent=fails?'❌ 購入Gate NG '+fails+'件':waits?'⚠️ 数値Gate通過・確認待ち '+waits+'件':'✅ 購入Gate 6/6クリア';$('reason').textContent=fails?'絶対GateにNGあり。目標・参考指標では救済しない。':waits?'未確認Gateを埋めるまで購入確定しない。':'物件単体の絶対Gateをすべて通過。会社財務・目標・参考指標を次に確認。';
+ $('absoluteGroupSummary').textContent=(fails?fails+' NG':waits?waits+' 確認待ち':'全クリア')+' / PDF 7指標';$('propertyGroupSummary').textContent='37指標';$('companyGroupSummary').textContent='19指標';$('referenceGroupSummary').textContent='計算監査';
+ $('absoluteCriteriaBody').innerHTML=gates.map(x=>mk({...x,rule:'hard'})).join('');$('propertyCriteriaBody').innerHTML=remaining.map(x=>mk(x)).join('');$('companyCriteriaBody').innerHTML=companies.map(x=>mk(x)).join('');
+ $('referenceCriteriaBody').innerHTML='<div class="pdf-audit"><b>計算監査メモ</b><br>・物件44指標は、Gate側7指標＋物件側37指標＝44。重複表示しない。<br>・会社財務は19指標を1回だけ表示。役員借入は「会計／和京内部／銀行認定／返済圧力」の用途を分離。<br>・0÷0は「定義不能」、正数÷0は「∞」。0自体を入力エラーにしない。<br>・Cap Rate 5段階、担保70%、出口固定上乗せ、売却費5%、再調達単価初期値は基準書どおり「暫定・要再承認」でGate化しない。'+(m.full.limited?'<br>・融資期間が1000年を超えるため月次全期間展開は最初の1000年まで表示制限。返済式自体は入力期間で計算。':'')+'</div>';
+ // Important-number cards switch from old full-rent NOI to UW NOI.
+ const noiLabel=$('noiAnnualView')?.closest('.metric')?.querySelector('.metric-label');if(noiLabel)noiLabel.textContent='UW NOI（年）';if($('noiAnnualView'))$('noiAnnualView').textContent=moneyX(m.uwNoi);const noiSub=$('noiAnnualView')?.closest('.metric')?.querySelector('.metric-sub');if(noiSub)noiSub.textContent='通常損失＋正常化OPEX反映';if($('formulaNoiAnnual'))$('formulaNoiAnnual').innerHTML=fbox('PGR－通常損失＋継続的その他収入－正常化OPEX',moneyX(m.pgr)+'－'+moneyX(m.normalLoss)+'＋'+moneyX(m.stable)+'－'+moneyX(c.opex)+'＝'+moneyX(m.uwNoi));
+ if($('monthlyCF'))$('monthlyCF').textContent=moneyX(m.afterCF/12);if($('annualCF'))$('annualCF').textContent=moneyX(m.afterCF);if($('stressCF')){$('stressCF').textContent=moneyX(m.stressCF);$('stressCF').className='metric-value '+(m.stressCF>=0?'ok':'ng')}if($('grossYield'))$('grossYield').textContent=pctX(m.gross);if($('netYield'))$('netYield').textContent=pctX(m.noiYield);if($('afterDebtYield'))$('afterDebtYield').textContent=pctX(m.afterDebtYield);
+ if($('stickyVerdict'))$('stickyVerdict').textContent=$('verdict').textContent;if($('stickyMonthly'))$('stickyMonthly').textContent=moneyX(m.afterCF/12);if($('stickyStress')){$('stickyStress').textContent=moneyX(m.stressCF);$('stickyStress').className='sticky-val '+(m.stressCF>=0?'ok':'ng')}
+ if($('formulaMonthlyCF'))$('formulaMonthlyCF').innerHTML=fbox('(UW NOI－年間元利返済)÷12','('+moneyX(m.uwNoi)+'－'+moneyX(m.debt)+')÷12＝'+moneyX(m.afterCF/12));if($('formulaAnnualCF'))$('formulaAnnualCF').innerHTML=fbox('UW NOI－年間元利返済',moneyX(m.uwNoi)+'－'+moneyX(m.debt)+'＝'+moneyX(m.afterCF));if($('formulaStressCF'))$('formulaStressCF').innerHTML=fbox('Stress NOI－年間元利返済',moneyX(m.stressNoi)+'－'+moneyX(m.debt)+'＝'+moneyX(m.stressCF),'通常損失5%へ20%を足さず、20%へ置換。現況損失が20%超なら悪い方。');if($('formulaNetYield'))$('formulaNetYield').innerHTML=fbox('UW NOI÷購入価格×100',moneyX(m.uwNoi)+'÷'+moneyX(c.price)+'×100＝'+pctX(m.noiYield));
+ $('overallComment').textContent=fails?'購入Gate NGあり。PDFのSランクは他の長所で機械的に救済しない。':waits?'数値Gateは通過。未確認の再建築・土砂・出口を埋めてから最終判断。':'絶対Gateクリア。次に会社財務19指標とA/B/C指標を確認。';
+}
+
+// Original wrapper already calls enhanceFinanceOni dynamically; replace only the renderer.
+enhanceFinanceOni=function(){if(calcState)renderV105(calcState)};
+
+// Monthly analytics: use UW NOI (normal vacancy included) and Core Stress; display is bounded for pathological terms.
+amortizationDetailSeries=function(principal,ratePct,years,method){const P=Math.max(0,Number(principal)||0),Y=Math.max(0,Number(years)||0),N0=Math.round(Y*12),N=Math.min(N0,12000),r=Math.max(0,Number(ratePct)||0)/100/12;let bal=P,out=[];if(N0<=0)return[];const A=method==='equal_payment'?(r===0?P/N0:(N0*Math.log1p(r)>700?P*r:P*r/(1-Math.exp(-N0*Math.log1p(r))))):0,fixed=P/N0;for(let m=1;m<=N;m++){const startBal=bal,it=startBal*r;let pp,pay;if(method==='equal_principal'){pp=m===N0?startBal:Math.min(startBal,fixed);pay=pp+it}else{pay=m===N0?startBal+it:A;pp=Math.min(startBal,Math.max(0,pay-it))}bal=Math.max(0,startBal-pp);out.push({m,startBal,payment:pay,principal:pp,interest:it,balance:bal,principalRatio:pay>0?pp/pay*100:0,interestRatio:pay>0?it/pay*100:0})}return out};
+buildMonthlyAnalytics=function(c){const pm=c.v105Property||propertyModel(c),loanSeries=amortizationDetailSeries(c.loan,c.interest,c.years,c.method),gross=pm.pgr/12,opex=c.opex/12,noi=pm.uwNoi/12,stressNoi=pm.stressNoi/12,override=opt('repayOverride'),events=new Map();for(const p of pm.capPlans||[]){if(p.month>0)events.set(p.month,(events.get(p.month)||0)+p.amount)}let cumNormal=valOr(rawNum('capexOpeningReserve'),0),cumStress=cumNormal,cumStressCapex=cumNormal;return loanSeries.map(x=>{const metricPayment=override!==null&&x.m<=12?c.annualDebt/12:x.payment,normalCF=noi-metricPayment,stressCF=stressNoi-metricPayment,capexEvent=events.get(x.m)||0,stressCapexCF=stressCF-capexEvent;cumNormal+=normalCF;cumStress+=stressCF;cumStressCapex+=stressCapexCF;return{...x,metricPayment,gross,opex,noi,stressIncome:pm.stressIncome/12,stressNoi,capex:capexEvent,normalCF,stressCF,metricStressCapexCF:stressCapexCF,stressCapexCF,cumNormal,cumStress,cumStressCapex,dscr:metricPayment===0?(noi>=0?Infinity:-Infinity):sdiv(noi,metricPayment),stressDscr:metricPayment===0?(stressNoi>=0?Infinity:-Infinity):sdiv(stressNoi,metricPayment),repayRatio:sdiv(metricPayment,gross)*100,oer:sdiv(opex,gross)*100,ber:(pm.oer+pm.repayRatio),residualDy:x.startBal===0?Infinity:sdiv(pm.uwNoi,x.startBal)*100,grossYield:pm.gross,noiYield:pm.noiYield,afterDebtYield:pm.afterDebtYield}})};
+
+// Excel all-indicator sheet: no old threshold leakage.
+excelIndicatorRows=function(s,f){const pm=s.v105Property||propertyModel(s),cm=s.v105Company||companyModels(s,pm),g=gateRows(s,pm),pr=propertyRows(s,pm),co=companyRows(s,pm,cm),toRow=(section,x)=>[section,Number(x.rank)||0,x.title,x.value,x.rule==='hard'?'絶対Gate':x.scope==='company'?'会社財務':x.threshold?.includes('目標')?'目標':'参考',x.status,x.threshold,x.meaning,x.formula,'2026-09-05基準書同期'];return[...g.map(x=>toRow('絶対条件',x)),...pr.map(x=>toRow('物件単体',x)),...co.map(x=>toRow('会社財務',x))]};
+
+// Update saved summary with corrected values without breaking old schemas.
+const oldSnapshotV105=snapshot;snapshot=function(){const out=oldSnapshotV105();if(out&&calcState?.v105Property){const m=calcState.v105Property;out.version=10.5;out.summary={...out.summary,annualCF:m.afterCF,monthlyCF:m.afterCF/12,stressCF:m.stressCF,gross:m.gross,afterDebtYield:m.afterDebtYield,debtYield:m.debtYield,uwNoi:m.uwNoi,uwDscr:m.uwDscr,fullTermMin:m.full.min,exitRepaymentRatio:m.exitRatio};}return out};
+
+// Attach new fields after the original V10.4 init, keep old storage keys/data.
+[...extraPropertyIds,...extraCompanyIds].forEach(id=>{const e=$(id);if(!e||e.dataset.v105Bound==='1')return;e.dataset.v105Bound='1';e.addEventListener('input',()=>{if(id==='companyUpdatedDate')companyDateManual=true;if(id.startsWith('company')&&$('companySaveState'))$('companySaveState').textContent='未保存の変更あり';calc()});e.addEventListener('change',()=>calc())});
+if($('saveCompanySettings'))$('saveCompanySettings').onclick=saveCompany;if($('resetCompanySettings'))$('resetCompanySettings').onclick=clearCompany;
+loadCompany();
+// Recalculate once with new formulas and renderer.
+calc();
+})();
+</script>
+
+</body></html>
